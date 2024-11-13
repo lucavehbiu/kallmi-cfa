@@ -1,34 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Suspense, lazy } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 
-function App() {
-  const [count, setCount] = useState(0)
+// Lazy-loaded landing page
+const LandingPage = lazy(() => import('./components/LandingPage'))
 
+// Simple loading component (we'll make it elegant)
+const LoadingScreen = () => (
+  <div className="h-screen w-screen flex items-center justify-center bg-stone-900">
+    <div className="text-stone-100 font-cormorant text-3xl tracking-[0.25em] animate-pulse">
+      KALLMI ESTATE
+    </div>
+  </div>
+)
+
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Router>
+      <AnimatePresence mode="wait">
+        <Suspense fallback={<LoadingScreen />}>
+          <Routes>
+            <Route path="/*" element={<LandingPage />} />
+          </Routes>
+        </Suspense>
+      </AnimatePresence>
+    </Router>
   )
 }
 
