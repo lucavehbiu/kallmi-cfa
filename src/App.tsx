@@ -1,6 +1,8 @@
 import { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 // Lazy-loaded landing page
 const LandingPage = lazy(() => import('./components/LandingPage'))
@@ -17,13 +19,19 @@ const LoadingScreen = () => (
 const App: React.FC = () => {
   return (
     <Router>
-      <AnimatePresence mode="wait">
-        <Suspense fallback={<LoadingScreen />}>
-          <Routes>
-            <Route path="/*" element={<LandingPage />} />
-          </Routes>
-        </Suspense>
-      </AnimatePresence>
+      <div className="min-h-screen w-full overflow-x-hidden">
+        <Header />
+        <AnimatePresence mode="wait">
+          <Suspense fallback={<LoadingScreen />}>
+            <main className="w-full">
+              <Routes>
+                <Route path="/*" element={<LandingPage />} />
+              </Routes>
+            </main>
+          </Suspense>
+        </AnimatePresence>
+        <Footer />
+      </div>
     </Router>
   )
 }
