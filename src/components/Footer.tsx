@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="space-y-4 sm:space-y-6 text-center sm:text-left">
             <h3 className="font-cormorant text-2xl tracking-wider">KALLMI ESTATE</h3>
             <p className="text-sm text-white/70 leading-relaxed max-w-xs mx-auto sm:mx-0">
-              Crafting exceptional olive oil from the pristine shores of Albania since 1923.
+              Crafting exceptional olive oil from the pristine shores of Albania since 2005.
             </p>
           </div>
 
@@ -27,10 +27,10 @@ const Footer = () => {
             <h4 className="font-cormorant text-xl mb-4">Visit Us</h4>
             <address className="text-white/70 not-italic">
               Kallmi Estate<br />
-              Coastal Road 23<br />
+              Rruga Currila, 2001<br />
               Durrës, Albania<br />
-              <a href="tel:+355123456789" className="hover:text-[#8B7355] transition-colors">
-                +355 123 456 789
+              <a href="tel:+355682450851" className="hover:text-[#8B7355] transition-colors">
+                +355 68 24 50 851
               </a>
             </address>
           </div>
