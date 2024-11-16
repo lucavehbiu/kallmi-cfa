@@ -33,7 +33,7 @@ const LandingPage: React.FC = () => {
               Liquid gold from the sun-kissed shores of Albania
             </p>
             <a
-              href="#"
+              href="/shop"
               className="group inline-block px-8 py-4 bg-[#8B7355]/90 hover:bg-[#8B7355]
                          transition-all duration-300 rounded-md text-white border border-white/20
                          hover:border-white/40 backdrop-blur-sm hover:shadow-xl
@@ -126,22 +126,22 @@ const LandingPage: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* WhatsApp button - Enhanced with better animations and accessibility */}
+      {/* WhatsApp button - Fixed z-index and animation issues */}
       <motion.a
         href="https://wa.me/355682450851"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] p-4 rounded-full shadow-lg
-                   hover:shadow-2xl transition-all duration-300 group relative
+        className="fixed bottom-6 right-6 z-[100] bg-[#25D366] p-4 rounded-full shadow-lg
+                   hover:shadow-2xl transition-all duration-300 group
                    hover:bg-[#1ea952] focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 1 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 }}
+        transition={{ duration: 0.3 }}
         aria-label="Chat with us on WhatsApp"
       >
-        <span className="absolute inset-0 rounded-full animate-ping bg-[#25D366] opacity-75"></span>
+        <span className="absolute -inset-1 rounded-full animate-ping bg-[#25D366] opacity-40"></span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

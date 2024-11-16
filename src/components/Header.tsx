@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,30 +35,38 @@ const Header = () => {
             </button>
 
             <div className="hidden md:flex space-x-16 flex-1 justify-start">
-              {['Shop', 'Our Story'].map((item) => (
-                <motion.a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
+              <motion.div
+                whileHover={{ y: -2 }}
+              >
+                <Link
+                  to="/shop"
                   className={`font-cormorant text-lg ${
                     isScrolled ? 'text-gray-800' : 'text-white'
                   } hover:text-[#8B7355] transition-colors`}
-                  whileHover={{ y: -2 }}
                 >
-                  {item}
-                </motion.a>
-              ))}
+                  Shop
+                </Link>
+              </motion.div>
+              <motion.a
+                href="#our-story"
+                className={`font-cormorant text-lg ${
+                  isScrolled ? 'text-gray-800' : 'text-white'
+                } hover:text-[#8B7355] transition-colors`}
+                whileHover={{ y: -2 }}
+              >
+                Our Story
+              </motion.a>
             </div>
 
-            <motion.a
-              href="/"
+            <Link
+              to="/"
               className="text-2xl sm:text-3xl font-cormorant tracking-[0.3em] sm:tracking-[0.5em] text-center whitespace-nowrap"
-              whileHover={{ scale: 1.05 }}
             >
               KALLMI
-            </motion.a>
+            </Link>
 
             <div className="hidden md:flex space-x-16 flex-1 justify-end">
-              {['Process', 'Contact'].map((item) => (
+              {['Process'].map((item) => (
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase().replace(' ', '-')}`}
@@ -69,6 +78,16 @@ const Header = () => {
                   {item}
                 </motion.a>
               ))}
+              <motion.div whileHover={{ y: -2 }}>
+                <Link
+                  to="/contact"
+                  className={`font-cormorant text-lg ${
+                    isScrolled ? 'text-gray-800' : 'text-white'
+                  } hover:text-[#8B7355] transition-colors`}
+                >
+                  Contact
+                </Link>
+              </motion.div>
             </div>
           </nav>
         </div>
@@ -83,7 +102,16 @@ const Header = () => {
             className="fixed inset-0 z-40 bg-black/95 pt-24"
           >
             <nav className="flex flex-col items-center space-y-8 p-8">
-              {['Shop', 'Our Story', 'Process', 'Contact'].map((item) => (
+              <motion.div whileHover={{ x: 10 }}>
+                <Link
+                  to="/shop"
+                  className="font-cormorant text-2xl text-white hover:text-[#8B7355] transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Shop
+                </Link>
+              </motion.div>
+              {['Our Story', 'Process'].map((item) => (
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase().replace(' ', '-')}`}
@@ -94,6 +122,15 @@ const Header = () => {
                   {item}
                 </motion.a>
               ))}
+              <motion.div whileHover={{ x: 10 }}>
+                <Link
+                  to="/contact"
+                  className="font-cormorant text-2xl text-white hover:text-[#8B7355] transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Contact
+                </Link>
+              </motion.div>
             </nav>
           </motion.div>
         )}

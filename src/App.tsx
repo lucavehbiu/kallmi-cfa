@@ -6,7 +6,8 @@ import Footer from './components/Footer'
 
 // Lazy-loaded landing page
 const LandingPage = lazy(() => import('./components/LandingPage'))
-
+const Shop = lazy(() => import('./components/Shop'))
+const Contact = lazy(() => import('./components/Contact'))
 // Simple loading component (we'll make it elegant)
 const LoadingScreen = () => (
   <div className="h-screen w-screen flex items-center justify-center bg-stone-900">
@@ -26,6 +27,8 @@ const App: React.FC = () => {
             <main className="w-full">
               <Routes>
                 <Route path="/*" element={<LandingPage />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/contact" element={<Contact />} />
               </Routes>
             </main>
           </Suspense>
