@@ -1,15 +1,24 @@
 'use client'
 
+console.log('Loading LandingPage.tsx module')
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { AnimateDiv, AnimateButton } from './motion/MotionWrapper'
-import { LandingHero } from './sections'
+import LandingHero from './sections/LandingHero'
 import { features, tastingNotes, certifications, pressReviews } from '@/data/content'
+import { useEffect } from 'react'
 
 export default function LandingPage() {
+  console.log('LandingPage component rendering')
+
+  useEffect(() => {
+    console.log('LandingPage component mounted')
+    return () => console.log('LandingPage component unmounting')
+  }, [])
+
   return (
     <div className="font-cormorant text-gray-800 overflow-hidden">
-      {/* Hero Section */}
       <LandingHero />
 
       {/* Features Section */}

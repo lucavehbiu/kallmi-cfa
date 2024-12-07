@@ -3,18 +3,20 @@ import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
 import { LoadingSpinner } from '@/components/ui'
 
-const Header = dynamic(() => import('@/components/Header'), {
-  ssr: true,
-  loading: () => <LoadingSpinner variant="header" />
+console.log('Loading page.tsx module')
+
+const Header = dynamic(() => {
+  console.log('Loading Header dynamically')
+  return import('@/components/Header')
 })
 
-const Footer = dynamic(() => import('@/components/Footer'), {
-  ssr: true,
-  loading: () => <LoadingSpinner variant="header" />
+const Footer = dynamic(() => {
+  console.log('Loading Footer dynamically')
+  return import('@/components/Footer')
 })
 
 const LandingPage = dynamic(() => import('@/components/LandingPage'), {
-  ssr: true,
+  ssr: false,
   loading: () => <LoadingSpinner />
 })
 
@@ -30,8 +32,9 @@ export const metadata: Metadata = {
 }
 
 export default function HomePage() {
+  console.log('Rendering HomePage component')
   return (
-    <main className="min-h-screen w-full overflow-x-hidden">
+    <>
       <Suspense fallback={<LoadingSpinner variant="header" />}>
         <Header />
       </Suspense>
@@ -43,6 +46,6 @@ export default function HomePage() {
       <Suspense fallback={<LoadingSpinner variant="header" />}>
         <Footer />
       </Suspense>
-    </main>
+    </>
   )
 }
