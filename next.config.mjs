@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'kallmi.com',
+        hostname: 'kallmibukur.al',
       },
     ],
     formats: ['image/avif', 'image/webp'],
