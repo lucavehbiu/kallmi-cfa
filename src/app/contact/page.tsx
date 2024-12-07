@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 
-const Contact = dynamic(() => import('@/components/Contact'), {
+const Contact = dynamic(() => import('@/components/sections/Contact'), {
   loading: () => <ContactLoading />
 })
 

@@ -3,60 +3,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { AnimateDiv, AnimateButton } from './motion/MotionWrapper'
+import { LandingHero } from './sections'
 
 export default function LandingPage() {
   return (
     <div className="font-cormorant text-gray-800 overflow-hidden">
       {/* Hero Section */}
-      <section className="relative h-[90vh] sm:h-screen w-full">
-        <div className="absolute inset-0">
-          <AnimateDiv
-            className="relative w-full h-full"
-            animation="fade"
-            duration={1.2}
-          >
-            <Image
-              src="/images/hero-3rd.webp"
-              alt="Olive grove at sunset"
-              className="object-cover"
-              fill
-              priority
-              quality={90}
-              sizes="100vw"
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMjU1LC0yMi4xODY6Oj03MS85RkVHSnBwcHp6eXp4eXl5eXl5eXn/2wBDARUXFyAeIBogHh4gIiEgMSEhISEhMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTH/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 backdrop-blur-[2px]" />
-          </AnimateDiv>
-        </div>
-
-        <div className="relative flex items-center justify-center h-full text-center text-white px-4">
-          <AnimateDiv
-            className="max-w-3xl"
-            animation="slide-up"
-            duration={1.2}
-          >
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-light tracking-[0.15em] sm:tracking-[0.25em] mb-4 sm:mb-6
-                         transform hover:scale-105 transition-transform duration-500 drop-shadow-2xl">
-              KALLMI ESTATE
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl italic mb-8 sm:mb-12 opacity-90">
-              Liquid gold from the sun-kissed shores of Albania
-            </p>
-            <Link
-              href="/shop"
-              className="group inline-block px-8 py-4 bg-[#8B7355]/90 hover:bg-[#8B7355]
-                         transition-all duration-300 rounded-md text-white border border-white/20
-                         hover:border-white/40 backdrop-blur-sm hover:shadow-xl
-                         transform hover:-translate-y-1"
-            >
-              <span className="group-hover:tracking-wider transition-all duration-300">
-                Experience Our Heritage
-              </span>
-            </Link>
-          </AnimateDiv>
-        </div>
-      </section>
+      <LandingHero />
 
       {/* Features Section */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white">
