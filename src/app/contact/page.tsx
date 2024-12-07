@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 
-const Contact = dynamic(() => import('@/components/sections/Contact'), {
+const ContactSection = dynamic(() => import('@/components/sections/Contact'), {
   loading: () => <ContactLoading />
 })
 
@@ -28,7 +28,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <Suspense fallback={<ContactLoading />}>
-      <Contact />
+      <ContactSection />
     </Suspense>
   )
 }
