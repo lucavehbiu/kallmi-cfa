@@ -1,5 +1,7 @@
 import { Cormorant } from 'next/font/google'
 import type { Metadata } from 'next'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
 import './globals.css'
 
 const cormorant = Cormorant({
@@ -38,7 +40,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={cormorant.variable}>
       <body className="min-h-screen bg-stone-50">
-        {children}
+        <Header />
+        <main className="pt-16">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   )

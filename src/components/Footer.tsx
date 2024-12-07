@@ -1,6 +1,6 @@
-import { AnimateButton } from './motion/MotionWrapper'
+import Link from 'next/link'
 
-const Footer = () => {
+export function Footer() {
   return (
     <footer className="bg-[#1C1C1C] text-white/90 py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -15,11 +15,15 @@ const Footer = () => {
           <div className="text-center sm:text-left">
             <h4 className="font-cormorant text-xl mb-4">Quick Links</h4>
             <ul className="space-y-3 text-white/70">
-              {['Shop', 'Our Story', 'Process', 'Contact'].map((item) => (
-                <li key={item} className="transition-all duration-200 hover:translate-x-1 hover:text-[#8B7355]">
-                  <a href={`#${item.toLowerCase()}`}>{item}</a>
-                </li>
-              ))}
+              <li className="hover:text-[#8B7355] transition-colors">
+                <Link href="/shop">Shop</Link>
+              </li>
+              <li className="hover:text-[#8B7355] transition-colors">
+                <Link href="/#our-story">Our Story</Link>
+              </li>
+              <li className="hover:text-[#8B7355] transition-colors">
+                <Link href="/contact">Contact</Link>
+              </li>
             </ul>
           </div>
 
@@ -43,12 +47,12 @@ const Footer = () => {
                 placeholder="Your email"
                 className="w-full bg-white/10 border border-white/20 rounded px-4 py-3 focus:outline-none focus:border-[#8B7355]"
               />
-              <AnimateButton
+              <button
+                type="submit"
                 className="w-full bg-[#8B7355] py-3 rounded hover:bg-[#6B563F] transition-colors"
-                animation="scale-golden"
               >
                 Subscribe
-              </AnimateButton>
+              </button>
             </form>
           </div>
         </div>
@@ -58,7 +62,5 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
-
-export default Footer;
+  )
+}
