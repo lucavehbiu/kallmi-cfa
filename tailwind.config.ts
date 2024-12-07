@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const config: Config = {
+export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,26 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        cormorant: ['Cormorant Garamond', 'serif'],
-      },
       colors: {
-        stone: {
-          900: '#1c1917',
-          800: '#292524',
-          700: '#44403c',
-          600: '#57534e',
-          500: '#78716c',
-          400: '#a8a29e',
-          300: '#d6d3d1',
-          200: '#e7e5e4',
-          100: '#f5f5f4',
-          50: '#fafaf9',
-        },
+        background: "var(--background)",
+        foreground: "var(--foreground)",
       },
     },
   },
   plugins: [],
-}
-
-export default config;
+} satisfies Config;

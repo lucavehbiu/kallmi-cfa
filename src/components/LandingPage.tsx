@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { AnimateDiv, AnimateButton } from './motion/MotionWrapper'
 
-const LandingPage = () => {
+export default function LandingPage() {
   return (
     <div className="font-cormorant text-gray-800 overflow-hidden">
       {/* Hero Section */}
@@ -401,5 +401,3 @@ const pressReviews = [
     logo: '/images/food-wine-logo.svg'
   }
 ]
-
-export default LandingPage
