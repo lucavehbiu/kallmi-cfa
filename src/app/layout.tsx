@@ -1,5 +1,5 @@
 import { Cormorant } from 'next/font/google'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import './globals.css'
 
 const cormorant = Cormorant({
@@ -14,10 +14,13 @@ export const metadata: Metadata = {
     template: '%s | Kallmi Estate',
     default: 'Kallmi Estate | Premium Albanian Olive Oil'
   },
-  description: 'Experience the finest cold-pressed extra virgin olive oil from Albania\'s pristine Kallmi coast.',
+  description: 'Experience the finest extra virgin olive oil from Albania\'s Kallmi Estate. Hand-harvested, cold-pressed, and crafted with centuries of tradition.',
+  keywords: ['olive oil', 'albania', 'kallmi estate', 'premium', 'extra virgin', 'organic'],
   openGraph: {
     type: 'website',
     siteName: 'Kallmi Estate',
+    title: 'Kallmi Estate | Premium Albanian Olive Oil',
+    description: 'Experience the finest extra virgin olive oil from Albania\'s Kallmi Estate.',
     images: [{
       url: '/images/og-image.jpg',
       width: 1200,

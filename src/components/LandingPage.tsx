@@ -274,7 +274,7 @@ export default function LandingPage() {
         className="fixed bottom-6 right-6 z-[100] bg-[#25D366] p-4 rounded-full shadow-lg
                    hover:shadow-2xl transition-all duration-300 group
                    hover:bg-[#1ea952] focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"
-        animation="scale-golden"
+        animation="scale"
         aria-label="Chat with us on WhatsApp"
       >
         <span className="absolute -inset-1 rounded-full animate-ping bg-[#25D366] opacity-40"></span>
