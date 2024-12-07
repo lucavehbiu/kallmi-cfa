@@ -1,0 +1,30 @@
+# https://www.kallmiestate.com
+
+# Allow all standard web crawlers
+User-agent: *
+Allow: /
+
+# Explicitly allow GPT and AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GoogleBot
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Rate limiting suggestion for crawlers
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://www.kallmiestate.com/sitemap.xml
