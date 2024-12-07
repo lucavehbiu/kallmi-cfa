@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { MotionDiv } from './motion/MotionWrapper'
+import { AnimateDiv } from './motion/MotionWrapper'
 
 interface Product {
   id: number
@@ -36,6 +36,12 @@ const products: Product[] = [
 const Shop = () => {
   const [selectedYear, setSelectedYear] = useState<number | null>(null)
   const [selectedSize, setSelectedSize] = useState<string | null>(null)
+
+  const filteredProducts = products.filter(product => {
+    if (selectedYear && product.year !== selectedYear) return false;
+    if (selectedSize && product.size !== selectedSize) return false;
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-stone-50 font-cormorant">
@@ -103,12 +109,12 @@ const Shop = () => {
           {/* Products Grid */}
           <div className="lg:col-span-3">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-              {products.map((product) => (
-                <MotionDiv
+              {filteredProducts.map((product, index) => (
+                <AnimateDiv
                   key={product.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
+                  animation="slide-up"
+                  duration={0.5}
+                  delay={index * 0.1}
                   className="group"
                 >
                   <div className="aspect-[3/4] relative overflow-hidden bg-stone-100">
@@ -130,7 +136,7 @@ const Shop = () => {
                       Add to Cart
                     </button>
                   </div>
-                </MotionDiv>
+                </AnimateDiv>
               ))}
             </div>
           </div>
