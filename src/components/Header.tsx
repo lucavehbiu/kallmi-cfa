@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { MotionDiv, MotionButton, AnimatePresence } from './motion/MotionWrapper'
+import { AnimateDiv, AnimateButton, AnimatePresence } from './motion/MotionWrapper'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -29,9 +29,9 @@ const Header = () => {
 
   return (
     <>
-      <MotionDiv
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
+      <AnimateDiv
+        animation="slide-down"
+        duration={0.8}
         className={`fixed w-full z-50 transition-all duration-500 ${
           isScrolled ? 'bg-white/90 backdrop-blur-md shadow-md' : 'bg-transparent'
         }`}
@@ -48,7 +48,7 @@ const Header = () => {
             </button>
 
             <div className="hidden md:flex space-x-16 flex-1 justify-start">
-              <MotionDiv whileHover={{ y: -2 }}>
+              <AnimateDiv animation="fade" className="hover:-translate-y-1 transition-transform duration-200">
                 <Link
                   href="/shop"
                   className={`font-cormorant text-lg ${
@@ -57,16 +57,16 @@ const Header = () => {
                 >
                   Shop
                 </Link>
-              </MotionDiv>
-              <MotionButton
-                onClick={() => scrollToSection('our-story')}
+              </AnimateDiv>
+              <AnimateButton
+                animation="fade"
                 className={`font-cormorant text-lg ${
                   isScrolled ? 'text-gray-800' : 'text-white'
-                } hover:text-[#8B7355] transition-colors`}
-                whileHover={{ y: -2 }}
+                } hover:text-[#8B7355] transition-colors hover:-translate-y-1`}
+                onClick={() => scrollToSection('our-story')}
               >
                 Our Story
-              </MotionButton>
+              </AnimateButton>
             </div>
 
             <Link
@@ -77,16 +77,16 @@ const Header = () => {
             </Link>
 
             <div className="hidden md:flex space-x-16 flex-1 justify-end">
-              <MotionButton
-                onClick={() => scrollToSection('process')}
+              <AnimateButton
+                animation="fade"
                 className={`font-cormorant text-lg ${
                   isScrolled ? 'text-gray-800' : 'text-white'
-                } hover:text-[#8B7355] transition-colors`}
-                whileHover={{ y: -2 }}
+                } hover:text-[#8B7355] transition-colors hover:-translate-y-1`}
+                onClick={() => scrollToSection('process')}
               >
                 Process
-              </MotionButton>
-              <MotionDiv whileHover={{ y: -2 }}>
+              </AnimateButton>
+              <AnimateDiv animation="fade" className="hover:-translate-y-1 transition-transform duration-200">
                 <Link
                   href="/contact"
                   className={`font-cormorant text-lg ${
@@ -95,22 +95,21 @@ const Header = () => {
                 >
                   Contact
                 </Link>
-              </MotionDiv>
+              </AnimateDiv>
             </div>
           </nav>
         </div>
-      </MotionDiv>
+      </AnimateDiv>
 
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <MotionDiv
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
+          <AnimateDiv
+            animation="slide-down"
+            duration={0.4}
             className="fixed inset-0 z-40 bg-black/95 pt-24"
           >
             <nav className="flex flex-col items-center space-y-8 p-8">
-              <MotionDiv whileHover={{ x: 10 }}>
+              <AnimateDiv animation="slide-right" delay={0.1} className="hover:translate-x-2 transition-transform duration-200">
                 <Link
                   href="/shop"
                   className="font-cormorant text-2xl text-white hover:text-[#8B7355] transition-colors"
@@ -118,21 +117,22 @@ const Header = () => {
                 >
                   Shop
                 </Link>
-              </MotionDiv>
-              {['our-story', 'process'].map((item) => (
-                <MotionButton
+              </AnimateDiv>
+              {['our-story', 'process'].map((item, index) => (
+                <AnimateButton
                   key={item}
+                  animation="slide-right"
+                  delay={0.2 + index * 0.1}
+                  className="font-cormorant text-2xl text-white hover:text-[#8B7355] transition-colors hover:translate-x-2"
                   onClick={() => {
                     scrollToSection(item)
                     setIsMobileMenuOpen(false)
                   }}
-                  className="font-cormorant text-2xl text-white hover:text-[#8B7355] transition-colors"
-                  whileHover={{ x: 10 }}
                 >
                   {item === 'our-story' ? 'Our Story' : 'Process'}
-                </MotionButton>
+                </AnimateButton>
               ))}
-              <MotionDiv whileHover={{ x: 10 }}>
+              <AnimateDiv animation="slide-right" delay={0.4} className="hover:translate-x-2 transition-transform duration-200">
                 <Link
                   href="/contact"
                   className="font-cormorant text-2xl text-white hover:text-[#8B7355] transition-colors"
@@ -140,9 +140,9 @@ const Header = () => {
                 >
                   Contact
                 </Link>
-              </MotionDiv>
+              </AnimateDiv>
             </nav>
-          </MotionDiv>
+          </AnimateDiv>
         )}
       </AnimatePresence>
     </>

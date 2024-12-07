@@ -23,7 +23,7 @@ const Contact = () => {
       <div className="h-[40vh] relative overflow-hidden">
         <div className="absolute inset-0 bg-black/40 z-10" />
         <Image
-          src="/images/hero_kallmi.webp"
+          src="/images/hero-kallmi.webp"
           alt="Olive Grove"
           className="object-cover object-center"
           fill

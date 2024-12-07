@@ -142,5 +142,11 @@ export const AnimateLink = ({
   )
 }
 
+// Backward compatibility exports
+export const MotionDiv = AnimateDiv
+export const MotionButton = AnimateButton
+export const MotionLink = AnimateLink
+
 // For backwards compatibility with existing code using AnimatePresence
 export const AnimatePresence = ({ children }: { children: ReactNode }) => <>{children}</>
+export { AnimatePresence as MotionPresence }

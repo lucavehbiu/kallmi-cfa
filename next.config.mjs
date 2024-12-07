@@ -10,6 +10,8 @@ const nextConfig = {
       },
     ],
     formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   // Modern optimization features
   compiler: {
@@ -18,8 +20,7 @@ const nextConfig = {
   // Enable modern optimizations
   experimental: {
     optimizeCss: true,
-    typedRoutes: true,
-    serverActions: true,
+    typedRoutes: true
   },
   // Enable modern output
   output: 'standalone',
