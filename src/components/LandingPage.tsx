@@ -8,6 +8,7 @@ import { AnimateDiv, AnimateButton } from './motion/MotionWrapper'
 import LandingHero from './sections/LandingHero'
 import { features, tastingNotes, certifications, pressReviews } from '@/data/content'
 import { useEffect } from 'react'
+import TastingNotes from './sections/TastingNotes'
 
 export default function LandingPage() {
   console.log('LandingPage component rendering')
@@ -105,38 +106,7 @@ export default function LandingPage() {
         </AnimateDiv>
       </section>
 
-      {/* Tasting Notes Section */}
-      <section className="py-24 bg-[#F8F6F3]">
-        <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
-          animation="fade"
-          duration={0.8}
-        >
-          <h2 className="text-4xl sm:text-5xl font-light text-center text-[#8B7355] mb-16">Tasting Notes</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {tastingNotes.map((note, index) => (
-              <AnimateDiv
-                key={note.title}
-                animation="slide-up"
-                duration={0.5}
-                delay={index * 0.2}
-                className="text-center"
-              >
-                <div className="h-32 w-32 mx-auto mb-6 relative">
-                  <Image
-                    src={note.icon}
-                    alt={note.title}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <h3 className="text-2xl text-[#8B7355] mb-3">{note.title}</h3>
-                <p className="text-gray-600 italic">{note.description}</p>
-              </AnimateDiv>
-            ))}
-          </div>
-        </AnimateDiv>
-      </section>
+      <TastingNotes />
 
       {/* Sustainability Section */}
       <section className="py-24 bg-white relative">
@@ -149,7 +119,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative aspect-square w-full rounded-lg overflow-hidden">
               <Image
-                src="/images/sustainability.webp"
+                src="/images/sustainability.jpg"
                 alt="Sustainable olive farming"
                 fill
                 className="object-cover"
