@@ -1,35 +1,25 @@
-'use client'
+import React from 'react';
+import { motion } from 'framer-motion';
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { MotionDiv, MotionButton } from './motion/MotionWrapper'
-
-const LandingPage = () => {
+const LandingPage: React.FC = () => {
   return (
     <div className="font-cormorant text-gray-800 overflow-hidden">
       {/* Hero Section - Adding subtle text animation and enhanced overlay */}
       <section className="relative h-[90vh] sm:h-screen">
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 backdrop-blur-[2px]">
-          <MotionDiv
-            className="relative w-full h-full"
+          <motion.img
+            src="/images/hero_3rd.webp"
+            alt="Olive grove"
+            loading="lazy"
+            className="w-full h-full object-cover scale-110"
             initial={{ scale: 1.2 }}
             animate={{ scale: 1.1 }}
             transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
-          >
-            <Image
-              src="/images/hero_3rd.webp"
-              alt="Olive grove"
-              className="object-cover scale-110"
-              fill
-              priority
-              sizes="100vw"
-              quality={90}
-            />
-          </MotionDiv>
+          />
         </div>
 
         <div className="relative flex items-center justify-center h-full text-center text-white">
-          <MotionDiv
+          <motion.div
             className="max-w-3xl px-4 sm:px-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,7 +32,7 @@ const LandingPage = () => {
             <p className="text-lg sm:text-xl md:text-2xl italic mb-8 sm:mb-12 opacity-90">
               Liquid gold from the sun-kissed shores of Albania
             </p>
-            <Link
+            <a
               href="/shop"
               className="group inline-block px-8 py-4 bg-[#8B7355]/90 hover:bg-[#8B7355]
                          transition-all duration-300 rounded-md text-white border border-white/20
@@ -52,14 +42,14 @@ const LandingPage = () => {
               <span className="group-hover:tracking-wider transition-all duration-300">
                 Experience Our Heritage
               </span>
-            </Link>
-          </MotionDiv>
+            </a>
+          </motion.div>
         </div>
       </section>
 
       {/* Features Section - Adding sophisticated hover states */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <MotionDiv
+        <motion.div
           className="max-w-7xl mx-auto px-4 sm:px-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -68,7 +58,7 @@ const LandingPage = () => {
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
             {features.map((feature, index) => (
-              <MotionDiv
+              <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -78,29 +68,27 @@ const LandingPage = () => {
                            backdrop-blur-sm transition-all duration-500 transform hover:-translate-y-2
                            border border-transparent hover:border-gray-100"
               >
-                <div className="relative w-40 h-40 mx-auto mb-6">
-                  <Image
-                    src={feature.image}
-                    alt={feature.title}
-                    className="rounded-full object-cover group-hover:scale-110 transition-transform duration-500 shadow-md"
-                    fill
-                    sizes="160px"
-                  />
-                </div>
+                <img
+                  src={feature.image}
+                  alt={feature.title}
+                  className="w-40 h-40 mx-auto mb-6 rounded-full object-cover
+                             group-hover:scale-110 transition-transform duration-500
+                             shadow-md"
+                />
                 <h3 className="text-2xl text-[#8B7355] mb-4 group-hover:text-[#6B563F]">
                   {feature.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-              </MotionDiv>
+              </motion.div>
             ))}
           </div>
-        </MotionDiv>
+        </motion.div>
       </section>
 
       {/* Story Section - Adding parallax effect */}
-      <section id="our-story" className="py-20 sm:py-32 bg-white relative overflow-hidden">
+      <section className="py-20 sm:py-32 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/subtle-pattern.png')] opacity-5"></div>
-        <MotionDiv
+        <motion.div
           className="max-w-7xl mx-auto px-4 sm:px-8 relative"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -127,22 +115,19 @@ const LandingPage = () => {
                 </p>
               </div>
             </div>
-            <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] rounded-lg overflow-hidden shadow-2xl">
-              <Image
+            <div className="h-[400px] sm:h-[500px] lg:h-[600px] rounded-lg overflow-hidden shadow-2xl">
+              <img
                 src="/images/history.webp"
                 alt="Kallmi Estate"
-                className="object-cover object-[50%_35%] scale-[1.15] hover:scale-100 transition-transform duration-700"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                quality={90}
+                className="w-full h-full object-cover object-[50%_35%] scale-[1.15] hover:scale-100 transition-transform duration-700"
               />
             </div>
           </div>
-        </MotionDiv>
+        </motion.div>
       </section>
 
       {/* WhatsApp button - Fixed z-index and animation issues */}
-      <MotionButton
+      <motion.a
         href="https://wa.me/355682450851"
         target="_blank"
         rel="noopener noreferrer"
@@ -174,10 +159,11 @@ const LandingPage = () => {
                         before:border-l-black/80">
           Chat with us
         </span>
-      </MotionButton>
+      </motion.a>
+
     </div>
-  )
-}
+  );
+};
 
 // Feature data
 const features = [
@@ -196,6 +182,6 @@ const features = [
     description: "Five generations of olive oil craftsmanship on Kallmi's pristine coast",
     image: '/images/family_legacy.webp'
   }
-]
+];
 
-export default LandingPage
+export default LandingPage;

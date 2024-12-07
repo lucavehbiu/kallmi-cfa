@@ -1,16 +1,13 @@
-'use client'
-
-import { useState } from 'react'
-import Image from 'next/image'
-import { MotionDiv } from './motion/MotionWrapper'
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 interface Product {
-  id: number
-  name: string
-  year: number
-  size: string
-  price: number
-  image: string
+  id: number;
+  name: string;
+  year: number;
+  size: string;
+  price: number;
+  image: string;
 }
 
 const products: Product[] = [
@@ -31,27 +28,23 @@ const products: Product[] = [
     image: "/images/bottle-2.webp"
   },
   // Add more products as needed
-]
+];
 
 const Shop = () => {
-  const [selectedYear, setSelectedYear] = useState<number | null>(null)
-  const [selectedSize, setSelectedSize] = useState<string | null>(null)
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-stone-50 font-cormorant">
       {/* Hero Section */}
       <div className="h-[40vh] relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/40 z-10" />
-        <Image
+        <div className="absolute inset-0 bg-black/40" />
+        <img
           src="/images/hand_harvested.webp"
           alt="Olive Oil Collection"
-          className="object-cover object-center"
-          fill
-          priority
-          sizes="100vw"
-          quality={90}
+          className="w-full h-full object-cover object-center"
         />
-        <h1 className="absolute inset-0 flex items-center justify-center text-5xl text-white font-light tracking-wider z-20">
+        <h1 className="absolute inset-0 flex items-center justify-center text-5xl text-white font-light tracking-wider">
           Our Collection
         </h1>
       </div>
@@ -104,20 +97,18 @@ const Shop = () => {
           <div className="lg:col-span-3">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
               {products.map((product) => (
-                <MotionDiv
+                <motion.div
                   key={product.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                   className="group"
                 >
-                  <div className="aspect-[3/4] relative overflow-hidden bg-stone-100">
-                    <Image
+                  <div className="aspect-[3/4] overflow-hidden bg-stone-100">
+                    <img
                       src={product.image}
                       alt={product.name}
-                      className="group-hover:scale-105 transition-transform duration-500"
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                   <div className="mt-4 space-y-1">
@@ -130,14 +121,14 @@ const Shop = () => {
                       Add to Cart
                     </button>
                   </div>
-                </MotionDiv>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Shop
+export default Shop;

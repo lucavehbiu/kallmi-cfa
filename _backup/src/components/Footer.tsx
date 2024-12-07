@@ -1,4 +1,4 @@
-import { AnimateButton } from './motion/MotionWrapper'
+import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
@@ -16,9 +16,9 @@ const Footer = () => {
             <h4 className="font-cormorant text-xl mb-4">Quick Links</h4>
             <ul className="space-y-3 text-white/70">
               {['Shop', 'Our Story', 'Process', 'Contact'].map((item) => (
-                <li key={item} className="transition-all duration-200 hover:translate-x-1 hover:text-[#8B7355]">
+                <motion.li key={item} whileHover={{ x: 5 }} className="transition-colors hover:text-[#8B7355]">
                   <a href={`#${item.toLowerCase()}`}>{item}</a>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </div>
@@ -43,12 +43,13 @@ const Footer = () => {
                 placeholder="Your email"
                 className="w-full bg-white/10 border border-white/20 rounded px-4 py-3 focus:outline-none focus:border-[#8B7355]"
               />
-              <AnimateButton
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 className="w-full bg-[#8B7355] py-3 rounded hover:bg-[#6B563F] transition-colors"
-                animation="scale-golden"
               >
                 Subscribe
-              </AnimateButton>
+              </motion.button>
             </form>
           </div>
         </div>

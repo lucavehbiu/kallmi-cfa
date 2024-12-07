@@ -1,8 +1,5 @@
-'use client'
-
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import Image from 'next/image';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +8,7 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Add your form submission logic here
     console.log(formData);
@@ -21,17 +18,13 @@ const Contact = () => {
     <div className="min-h-screen bg-stone-50 font-cormorant">
       {/* Hero Section */}
       <div className="h-[40vh] relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/40 z-10" />
-        <Image
+        <div className="absolute inset-0 bg-black/40" />
+        <img
           src="/images/hero_kallmi.webp"
           alt="Olive Grove"
-          className="object-cover object-center"
-          fill
-          priority
-          sizes="100vw"
-          quality={90}
+          className="w-full h-full object-cover object-center"
         />
-        <h1 className="absolute inset-0 flex items-center justify-center text-5xl text-white font-light tracking-wider z-20">
+        <h1 className="absolute inset-0 flex items-center justify-center text-5xl text-white font-light tracking-wider">
           Contact Us
         </h1>
       </div>
@@ -151,7 +144,7 @@ const Contact = () => {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="grayscale hover:grayscale-0 transition-all duration-300"
-              />
+              ></iframe>
             </div>
           </motion.div>
         </div>
