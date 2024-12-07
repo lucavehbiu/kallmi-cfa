@@ -9,6 +9,7 @@ import LandingHero from './sections/LandingHero'
 import { features, tastingNotes, certifications, pressReviews } from '@/data/content'
 import { useEffect } from 'react'
 import TastingNotes from './sections/TastingNotes'
+import Certifications from './sections/Certifications'
 
 export default function LandingPage() {
   console.log('LandingPage component rendering')
@@ -107,6 +108,8 @@ export default function LandingPage() {
       </section>
 
       <TastingNotes />
+
+      <Certifications />
 
       {/* Sustainability Section */}
       <section className="py-24 bg-white relative">
