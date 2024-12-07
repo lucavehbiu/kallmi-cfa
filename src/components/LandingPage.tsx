@@ -6,10 +6,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { AnimateDiv, AnimateButton } from './motion/MotionWrapper'
 import LandingHero from './sections/LandingHero'
-import { features, tastingNotes, certifications, pressReviews } from '@/data/content'
+import { features, pressReviews } from '@/data/content'
 import { useEffect } from 'react'
 import TastingNotes from './sections/TastingNotes'
 import Certifications from './sections/Certifications'
+import LimitedEditionPage from './LimitedEditionPage'
 
 export default function LandingPage() {
   console.log('LandingPage component rendering')
@@ -108,52 +109,7 @@ export default function LandingPage() {
       </section>
 
       <TastingNotes />
-
       <Certifications />
-
-      {/* Sustainability Section */}
-      <section className="py-24 bg-white relative">
-        <div className="absolute inset-0 bg-[url('/images/pattern.webp')] opacity-5"></div>
-        <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8 relative"
-          animation="fade"
-          duration={0.8}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative aspect-square w-full rounded-lg overflow-hidden">
-              <Image
-                src="/images/sustainability.jpg"
-                alt="Sustainable olive farming"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                quality={90}
-              />
-            </div>
-            <div className="space-y-8">
-              <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355]">Sustainability & Heritage</h2>
-              <div className="space-y-6 text-lg text-gray-700">
-                {certifications.map((cert, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div className="w-12 h-12 relative flex-shrink-0 mt-1">
-                      <Image
-                        src={cert.icon}
-                        alt={cert.title}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="text-xl text-[#8B7355] mb-2">{cert.title}</h3>
-                      <p className="leading-relaxed">{cert.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </AnimateDiv>
-      </section>
 
       {/* Press Section */}
       <section className="py-24 bg-[#F8F6F3]">
@@ -180,7 +136,7 @@ export default function LandingPage() {
                     className="object-contain"
                   />
                 </div>
-                <p className="text-gray-600 italic mb-4">"{review.quote}"</p>
+                <p className="text-gray-600 italic mb-4">&ldquo;{review.quote}&rdquo;</p>
                 <p className="text-[#8B7355] font-semibold">{review.source}</p>
               </AnimateDiv>
             ))}
@@ -189,55 +145,7 @@ export default function LandingPage() {
       </section>
 
       {/* Limited Edition Section */}
-      <section className="py-24 bg-[#2C2C2C] text-white">
-        <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
-          animation="fade"
-          duration={0.8}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <h2 className="text-4xl sm:text-5xl font-light">Limited Edition 2024</h2>
-              <p className="text-xl text-gray-300 italic">First Press of the Season</p>
-              <div className="space-y-6 text-gray-300">
-                <p>Experience our most exclusive offering - the first cold press of the 2024 harvest. Limited to only 500 bottles, each numbered and presented in hand-blown glass with 24k gold leaf details.</p>
-                <ul className="space-y-4">
-                  <li className="flex items-center space-x-3">
-                    <span className="text-[#8B7355]">✦</span>
-                    <span>Single-estate olives from centennial trees</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <span className="text-[#8B7355]">✦</span>
-                    <span>Pressed within 4 hours of harvest</span>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <span className="text-[#8B7355]">✦</span>
-                    <span>Individually numbered bottles</span>
-                  </li>
-                </ul>
-              </div>
-              <Link
-                href="/limited-edition"
-                className="inline-block px-8 py-4 bg-[#8B7355] hover:bg-[#6B563F]
-                         transition-all duration-300 rounded-md text-white
-                         hover:shadow-xl transform hover:-translate-y-1"
-              >
-                <span className="tracking-wider">Reserve Your Bottle</span>
-              </Link>
-            </div>
-            <div className="relative aspect-[3/4] w-full">
-              <Image
-                src="/images/limited-edition.webp"
-                alt="Limited Edition Bottle"
-                fill
-                className="object-cover rounded-lg"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                quality={90}
-              />
-            </div>
-          </div>
-        </AnimateDiv>
-      </section>
+      <LimitedEditionPage />
 
       {/* WhatsApp button */}
       <AnimateButton

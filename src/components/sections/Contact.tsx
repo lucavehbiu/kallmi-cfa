@@ -17,7 +17,7 @@ export default function ContactSection() {
         </p>
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <Link
-            href="/visit"
+            href="/contact#visit"
             className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-md hover:bg-white/30 transition-colors"
           >
             Visit Our Estate
