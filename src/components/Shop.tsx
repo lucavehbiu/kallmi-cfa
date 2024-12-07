@@ -30,18 +30,18 @@ const products: Product[] = [
     price: 39.99,
     image: "/images/bottle-2.webp"
   },
-  // Add more products as needed
+  {
+    id: 3,
+    name: "Premium Selection",
+    year: 2023,
+    size: "1000ml",
+    price: 49.99,
+    image: "/images/bottle-3.webp"
+  }
 ]
 
-const Shop = () => {
-  const [selectedYear, setSelectedYear] = useState<number | null>(null)
-  const [selectedSize, setSelectedSize] = useState<string | null>(null)
-
-  const filteredProducts = products.filter(product => {
-    if (selectedYear && product.year !== selectedYear) return false;
-    if (selectedSize && product.size !== selectedSize) return false;
-    return true;
-  });
+export default function Shop() {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 
   return (
     <div className="min-h-screen bg-stone-50 font-cormorant">
@@ -49,8 +49,8 @@ const Shop = () => {
       <div className="h-[40vh] relative overflow-hidden">
         <div className="absolute inset-0 bg-black/40 z-10" />
         <Image
-          src="/images/hand_harvested.webp"
-          alt="Olive Oil Collection"
+          src="/images/shop-hero.webp"
+          alt="Olive Oil Bottles"
           className="object-cover object-center"
           fill
           priority
@@ -62,88 +62,45 @@ const Shop = () => {
         </h1>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Filters Sidebar */}
-          <div className="lg:col-span-1 space-y-8">
-            <div>
-              <h3 className="text-2xl font-light mb-4">Harvest Year</h3>
-              <div className="space-y-2">
-                {[2023, 2022, 2021].map((year) => (
+      {/* Products Grid */}
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map((product) => (
+            <AnimateDiv
+              key={product.id}
+              animation="slide-up"
+              duration={0.5}
+              className="group"
+            >
+              <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="relative aspect-[2/3] mb-6">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-contain group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    quality={90}
+                  />
+                </div>
+                <h2 className="text-2xl text-[#8B7355] mb-2">{product.name}</h2>
+                <p className="text-gray-600 mb-4">
+                  {product.year} Harvest • {product.size}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl text-[#8B7355]">${product.price}</span>
                   <button
-                    key={year}
-                    onClick={() => setSelectedYear(year === selectedYear ? null : year)}
-                    className={`block w-full text-left px-4 py-2 transition-colors ${
-                      year === selectedYear
-                        ? 'bg-stone-800 text-white'
-                        : 'hover:bg-stone-100'
-                    }`}
+                    onClick={() => setSelectedProduct(product)}
+                    className="px-6 py-2 bg-[#8B7355] text-white rounded hover:bg-[#6B563F] transition-colors"
                   >
-                    {year}
+                    Add to Cart
                   </button>
-                ))}
+                </div>
               </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-light mb-4">Bottle Size</h3>
-              <div className="space-y-2">
-                {['250ml', '500ml', '750ml'].map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size === selectedSize ? null : size)}
-                    className={`block w-full text-left px-4 py-2 transition-colors ${
-                      size === selectedSize
-                        ? 'bg-stone-800 text-white'
-                        : 'hover:bg-stone-100'
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Products Grid */}
-          <div className="lg:col-span-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-              {filteredProducts.map((product, index) => (
-                <AnimateDiv
-                  key={product.id}
-                  animation="slide-up"
-                  duration={0.5}
-                  delay={index * 0.1}
-                  className="group"
-                >
-                  <div className="aspect-[3/4] relative overflow-hidden bg-stone-100">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      className="group-hover:scale-105 transition-transform duration-500"
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                  </div>
-                  <div className="mt-4 space-y-1">
-                    <h3 className="text-xl font-light">{product.name}</h3>
-                    <p className="text-sm text-stone-600">
-                      {product.size} • {product.year} Harvest
-                    </p>
-                    <p className="text-lg">${product.price}</p>
-                    <button className="w-full py-2 px-4 bg-stone-800 text-white hover:bg-stone-700 transition-colors">
-                      Add to Cart
-                    </button>
-                  </div>
-                </AnimateDiv>
-              ))}
-            </div>
-          </div>
+            </AnimateDiv>
+          ))}
         </div>
       </div>
     </div>
   )
 }
-
-export default Shop
