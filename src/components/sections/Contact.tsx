@@ -28,7 +28,7 @@ export default function ContactSection() {
         <div className="text-center mb-16">
           <h2 className="text-4xl mb-6">Experience Our Heritage</h2>
           <p className="text-xl mb-10 opacity-90">
-            Visit our estate in Durrës or contact us to learn more about our premium olive oil
+            Visit our estate in Durrës, Albania or contact us to learn more about our premium olive oil
           </p>
         </div>
 

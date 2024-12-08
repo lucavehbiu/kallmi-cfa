@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { AnimateDiv } from '@/components/motion/MotionWrapper'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 export const metadata: Metadata = {
   title: 'Our Story | Kallmi i Bukur - Premium Albanian Olive Oil',
@@ -149,6 +150,8 @@ export default function OurStory() {
           </div>
         </AnimateDiv>
       </section>
+
+      <WhatsAppButton />
     </main>
   )
 }

@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 const Shop = dynamic(() => import('@/components/Shop'), {
   loading: () => (
@@ -28,6 +29,7 @@ export default function ShopPage() {
       }
     >
       <Shop />
+      <WhatsAppButton />
     </Suspense>
   )
 }

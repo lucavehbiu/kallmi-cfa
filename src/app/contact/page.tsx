@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 const ContactSection = dynamic(() => import('@/components/sections/Contact'), {
   loading: () => <ContactLoading />
@@ -29,6 +30,7 @@ export default function ContactPage() {
   return (
     <Suspense fallback={<ContactLoading />}>
       <ContactSection />
+      <WhatsAppButton />
     </Suspense>
   )
 }
