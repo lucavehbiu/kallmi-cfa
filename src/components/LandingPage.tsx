@@ -94,7 +94,7 @@ export default function LandingPage() {
             </div>
             <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden shadow-2xl">
               <Image
-                src="/images/story.webp"
+                src="/images/contact.webp"
                 alt="Kallmi Estate olive groves"
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 fill
