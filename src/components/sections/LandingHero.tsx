@@ -11,7 +11,7 @@ export default function LandingHero() {
     <section className="relative h-screen">
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-3rd.webp"
+          src="/images/hero.webp"
           alt="Olive grove"
           fill
           priority
