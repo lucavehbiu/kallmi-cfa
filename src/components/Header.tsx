@@ -19,7 +19,7 @@ export function Header() {
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/#our-story" className="text-stone-600 hover:text-stone-900 transition-colors">
+            <Link href="/our-story" className="text-stone-600 hover:text-stone-900 transition-colors">
               Our Story
             </Link>
             <Link href="/shop" className="text-stone-600 hover:text-stone-900 transition-colors">
