@@ -128,12 +128,12 @@ export default function LandingPage() {
                 delay={index * 0.2}
                 className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                <div className="h-16 relative mb-6">
+                <div className="h-8 relative mb-6 rounded-full overflow-hidden">
                   <Image
-                    src={review.logo}
+                    src={review.imageUrl}
                     alt={review.source}
                     fill
-                    className="object-contain"
+                    className="object-contain rounded-full"
                   />
                 </div>
                 <p className="text-gray-600 italic mb-4">&ldquo;{review.quote}&rdquo;</p>
@@ -145,7 +145,7 @@ export default function LandingPage() {
       </section>
 
       {/* Limited Edition Section */}
-      <LimitedEditionPage />
+      {/* <LimitedEditionPage /> */}
 
       {/* WhatsApp button */}
       <AnimateButton

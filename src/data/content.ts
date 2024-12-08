@@ -1,42 +1,62 @@
+import {
+  NoSymbolIcon,
+  FireIcon,
+  SparklesIcon,
+  CheckBadgeIcon,
+  MapPinIcon,
+  StarIcon,
+  NewspaperIcon,
+  BookOpenIcon,
+  TrophyIcon,
+  HandRaisedIcon,
+  BeakerIcon,
+  HomeModernIcon
+} from '@heroicons/react/24/outline'
+import type { ElementType } from 'react'
+
 interface Feature {
   title: string
   description: string
   image: string
+  icon: ElementType
 }
 
 interface TastingNote {
   title: string
   description: string
-  icon: string
+  icon: ElementType
 }
 
 interface Certification {
   title: string
   description: string
-  icon: string
+  icon: ElementType
 }
 
 interface PressReview {
   quote: string
   source: string
-  logo: string
+  imageUrl: string
 }
 
 export const features: Feature[] = [
   {
     title: 'Hand-Harvested',
     description: 'Each olive carefully selected at peak ripeness from our century-old groves',
-    image: '/images/hand-harvested.webp'
+    image: '/images/hand-harvested.webp',
+    icon: HandRaisedIcon
   },
   {
     title: 'Cold-Pressed',
     description: 'Pressed within hours of harvest to capture the purest flavors',
-    image: '/images/cold-pressed.webp'
+    image: '/images/cold-pressed.webp',
+    icon: BeakerIcon
   },
   {
     title: 'Family Legacy',
     description: "Five generations of olive oil craftsmanship on Kallmi's pristine coast",
-    image: '/images/family-legacy.webp'
+    image: '/images/family-legacy.webp',
+    icon: HomeModernIcon
   }
 ]
 
@@ -44,17 +64,17 @@ export const tastingNotes: TastingNote[] = [
   {
     title: 'Aroma',
     description: 'Fresh cut grass, green tomato leaves, and a hint of Mediterranean herbs',
-    icon: '/images/aroma-icon.svg'
+    icon: NoSymbolIcon
   },
   {
     title: 'Taste',
     description: 'Perfectly balanced with notes of artichoke, almond, and fresh pepper',
-    icon: '/images/taste-icon.svg'
+    icon: FireIcon
   },
   {
     title: 'Finish',
     description: 'Long-lasting peppery finish with a smooth, velvety mouthfeel',
-    icon: '/images/finish-icon.svg'
+    icon: SparklesIcon
   }
 ]
 
@@ -62,17 +82,17 @@ export const certifications: Certification[] = [
   {
     title: 'Organic Certified',
     description: 'Our olives are grown without pesticides or artificial fertilizers, certified by the European Union Organic Farming standards.',
-    icon: '/images/organic-cert.svg'
+    icon: CheckBadgeIcon
   },
   {
     title: 'Protected Geographical Indication',
     description: 'Recognized by the EU for our unique terroir and traditional production methods in the Kallmi region.',
-    icon: '/images/pgi-cert.svg'
+    icon: MapPinIcon
   },
   {
     title: 'Extra Virgin Grade A+',
     description: 'Certified by the International Olive Council for exceptional quality and purity.',
-    icon: '/images/evoo-cert.svg'
+    icon: StarIcon
   }
 ]
 
@@ -80,16 +100,16 @@ export const pressReviews: PressReview[] = [
   {
     source: 'Olive Oil Times',
     quote: 'A remarkable oil that captures the essence of Albania\'s ancient olive-growing tradition.',
-    logo: '/images/olive-times-logo.svg'
+    imageUrl: '/images/olive_oil_times.webp'
   },
   {
     source: 'Gourmet Magazine',
     quote: 'One of the finest Mediterranean olive oils we\'ve tasted this year.',
-    logo: '/images/gourmet-logo.svg'
+    imageUrl: '/images/gourmet.webp'
   },
   {
     source: 'Food & Wine',
     quote: 'A hidden gem from Albania that deserves a place among the world\'s premium olive oils.',
-    logo: '/images/food-wine-logo.svg'
+    imageUrl: '/images/foo_and_wine.webp'
   }
 ]

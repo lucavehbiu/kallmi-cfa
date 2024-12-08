@@ -10,13 +10,12 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="/images/logo.png"
+              src="/images/logo.webp"
               alt="Kallmi Estate"
               width={40}
               height={40}
               className="w-auto h-8"
             />
-            <span className="text-xl font-cormorant text-stone-800">Kallmi Estate</span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
