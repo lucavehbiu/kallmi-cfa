@@ -25,9 +25,6 @@ export function Header() {
             <Link href="/shop" className="text-stone-600 hover:text-stone-900 transition-colors">
               Shop
             </Link>
-            <Link href="/limited-edition" className="text-stone-600 hover:text-stone-900 transition-colors">
-              Limited Edition
-            </Link>
             <Link href="/contact" className="text-stone-600 hover:text-stone-900 transition-colors">
               Contact
             </Link>
