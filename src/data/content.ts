@@ -5,9 +5,6 @@ import {
   CheckBadgeIcon,
   MapPinIcon,
   StarIcon,
-  NewspaperIcon,
-  BookOpenIcon,
-  TrophyIcon,
   HandRaisedIcon,
   BeakerIcon,
   HomeModernIcon

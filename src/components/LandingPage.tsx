@@ -10,7 +10,7 @@ import { features, pressReviews } from '@/data/content'
 import { useEffect } from 'react'
 import TastingNotes from './sections/TastingNotes'
 import Certifications from './sections/Certifications'
-import LimitedEditionPage from './LimitedEditionPage'
+// import LimitedEditionPage from './LimitedEditionPage'
 import WhatsAppButton from './WhatsAppButton'
 
 export default function LandingPage() {
@@ -22,7 +22,7 @@ export default function LandingPage() {
   }, [])
 
   return (
-    <div className="font-cormorant text-gray-800 overflow-hidden">
+    <main className="font-cormorant text-gray-800 overflow-hidden">
       <LandingHero />
 
       {/* Features Section */}
@@ -149,6 +149,6 @@ export default function LandingPage() {
       {/* <LimitedEditionPage /> */}
 
       <WhatsAppButton />
-    </div>
+    </main>
   )
 }

@@ -2,21 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-rgb: 0, 0, 0;
-  }
+html, body {
+  height: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  color: rgb(0, 0, 0);
+  line-height: 1;
+}
+
+.header-transparent {
+  background: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.header-scrolled {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
 }
 
 @layer utilities {

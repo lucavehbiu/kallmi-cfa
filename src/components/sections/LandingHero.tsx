@@ -5,10 +5,8 @@ import Link from 'next/link'
 import { Button } from '@/components/ui'
 
 export default function LandingHero() {
-  console.log('LandingHero component rendering')
-
   return (
-    <section className="relative h-screen">
+    <section className="relative h-screen -mt-24">
       <div className="absolute inset-0">
         <Image
           src="/images/hero.webp"
