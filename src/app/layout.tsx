@@ -11,7 +11,7 @@ const cormorant = Cormorant({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.kallmiestate.com'),
+  metadataBase: new URL('https://www.kallmibukur.al'),
   title: {
     template: '%s | Kallmi Estate',
     default: 'Kallmi Estate | Premium Albanian Olive Oil'

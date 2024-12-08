@@ -1,4 +1,4 @@
-# https://www.kallmiestate.com
+# https://www.kallmibukur.al
 
 # Allow all standard web crawlers
 User-agent: *
@@ -27,4 +27,4 @@ Allow: /
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://www.kallmiestate.com/sitemap.xml
+Sitemap: https://www.kallmibukur.al/sitemap.xml

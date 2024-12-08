@@ -21,7 +21,7 @@ function generateSiteMap() {
       priority: 0.8,
     },
     {
-      url: '/limited-edition',
+      url: '/our-story',
       lastMod: new Date().toISOString().split('T')[0],
       changeFreq: 'weekly',
       priority: 0.9,
@@ -40,7 +40,7 @@ function generateSiteMap() {
     },
   ];
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.kallmiestate.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.kallmibukur.al';
 
   return `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
