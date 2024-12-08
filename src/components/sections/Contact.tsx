@@ -7,11 +7,11 @@ import Image from 'next/image'
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="relative py-24 text-white">
+    <section id="contact" className="relative py-48 text-white">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/contact.webp"
+          src="/images/entrance.webp"
           alt="Olive grove background"
           fill
           className="object-cover"
