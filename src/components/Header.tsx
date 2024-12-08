@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import type { LinkProps } from 'next/link'
+import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -73,9 +74,9 @@ export function Header() {
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? (
-              <X className={`w-6 h-6 ${scrolled ? 'text-neutral-800' : 'text-white'}`} />
+              <XMarkIcon className={`w-6 h-6 ${scrolled ? 'text-neutral-800' : 'text-white'}`} />
             ) : (
-              <Menu className={`w-6 h-6 ${scrolled ? 'text-neutral-800' : 'text-white'}`} />
+              <Bars3Icon className={`w-6 h-6 ${scrolled ? 'text-neutral-800' : 'text-white'}`} />
             )}
           </button>
         </div>
