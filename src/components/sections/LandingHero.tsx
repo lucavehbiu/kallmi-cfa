@@ -6,7 +6,7 @@ import { Button } from '@/components/ui'
 
 export default function LandingHero() {
   return (
-    <section className="relative h-screen -mt-24">
+    <section className="relative h-screen">
       <div className="absolute inset-0">
         <Image
           src="/images/hero.webp"

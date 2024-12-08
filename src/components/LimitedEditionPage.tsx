@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { AnimateDiv } from './motion/MotionWrapper'
-import { BeakerIcon, SparklesIcon, FireIcon } from '@heroicons/react/24/outline'
+import { SparklesIcon } from '@heroicons/react/24/outline'
 
 const limitedEditionDetails = {
   name: "Limited Edition 2024",

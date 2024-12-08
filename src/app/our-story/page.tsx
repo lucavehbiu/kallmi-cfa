@@ -145,7 +145,7 @@ export default function OurStory() {
               Through generations, our family has been the custodian of these ancient olive groves. Each generation has added its own chapter to our story while maintaining the core values that make Kallmi i Bukur special.
             </p>
             <p className="text-lg text-stone-700">
-              Today, we invite you to be part of our continuing story. Every bottle of Kallmi i Bukur olive oil is more than just a product – it's a piece of our heritage, a taste of our tradition, and a promise of our commitment to excellence.
+              Today, we invite you to be part of our continuing story. Every bottle of Kallmi i Bukur olive oil is more than just a product – it&apos;s a piece of our heritage, a taste of our tradition, and a promise of our commitment to excellence.
             </p>
           </div>
         </AnimateDiv>

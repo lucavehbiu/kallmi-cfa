@@ -3,8 +3,7 @@
 console.log('Loading LandingPage.tsx module')
 
 import Image from 'next/image'
-import Link from 'next/link'
-import { AnimateDiv, AnimateButton } from './motion/MotionWrapper'
+import { AnimateDiv } from './motion/MotionWrapper'
 import LandingHero from './sections/LandingHero'
 import { features, pressReviews } from '@/data/content'
 import { useEffect } from 'react'

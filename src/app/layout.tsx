@@ -39,11 +39,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cormorant.variable}>
-      <body className="min-h-screen bg-stone-50">
+      <body className="min-h-screen">
         <Header />
-        <main className="pt-16">
-          {children}
-        </main>
+        {children}
         <Footer />
       </body>
     </html>
