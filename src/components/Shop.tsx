@@ -49,7 +49,7 @@ export default function Shop() {
       <div className="h-[40vh] relative overflow-hidden">
         <div className="absolute inset-0 bg-black/40 z-10" />
         <Image
-          src="/images/shop-hero.webp"
+          src="/images/hand-harvested.webp"
           alt="Olive Oil Bottles"
           className="object-cover object-center"
           fill
