@@ -3,25 +3,41 @@
 # Allow all standard web crawlers
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+Disallow: /*.json$
+Disallow: /*_buildManifest.js$
+Disallow: /*_middlewareManifest.js$
+Disallow: /*_ssgManifest.js$
+Disallow: /*.js$
 
 # Explicitly allow GPT and AI crawlers
 User-agent: GPTBot
 Allow: /
+Disallow: /api/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /api/
 
 User-agent: GoogleBot
 Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
 
 User-agent: Anthropic-AI
 Allow: /
+Disallow: /api/
 
 User-agent: CCBot
 Allow: /
+Disallow: /api/
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /api/
 
 # Rate limiting suggestion for crawlers
 Crawl-delay: 1

@@ -96,6 +96,21 @@ const nextConfig = {
     ]
   },
   serverExternalPackages: [],
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'kallmibukur.al',
+          },
+        ],
+        destination: 'https://www.kallmibukur.al/:path*',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig
