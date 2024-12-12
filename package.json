@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run optimize-images && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "optimize-images": "node scripts/optimize-images.js"
@@ -30,6 +30,6 @@
     "typescript": "5.3.3"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   }
 }
