@@ -10,7 +10,15 @@ import { useCart } from '@/context/CartContext'
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const { cartCount } = useCart()
+  const [isCartOpen, setIsCartOpen] = useState(false)
+  const { cartCount, cartItems, removeFromCart } = useCart()
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('de-DE', {
+      style: 'currency',
+      currency: 'EUR'
+    }).format(price)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,14 +78,78 @@ export function Header() {
 
             {/* Cart Icon */}
             <div className="relative group">
-              <ShoppingCartIcon
-                className={`w-6 h-6 transition-colors duration-300
-                  ${scrolled ? 'text-neutral-800' : 'text-white'}`}
-              />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {cartCount}
-                </span>
+              <button
+                onClick={() => setIsCartOpen(!isCartOpen)}
+                className="relative group"
+              >
+                <ShoppingCartIcon
+                  className={`w-6 h-6 transition-colors duration-300
+                    ${scrolled ? 'text-neutral-800' : 'text-white'}`}
+                />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+
+              {/* Mini Cart Dropdown */}
+              {isCartOpen && (
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl z-50 overflow-hidden">
+                  <div className="p-4">
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">Shopping Cart</h3>
+                    {cartItems.length === 0 ? (
+                      <p className="text-gray-500">Your cart is empty</p>
+                    ) : (
+                      <>
+                        <div className="space-y-4 max-h-96 overflow-auto">
+                          {cartItems.map((item) => (
+                            <div key={item.id} className="flex items-center space-x-4">
+                              <div className="relative w-16 h-16">
+                                <Image
+                                  src={item.image}
+                                  alt={item.name}
+                                  fill
+                                  className="object-cover rounded"
+                                />
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="text-sm font-medium text-gray-900">{item.name}</h4>
+                                <p className="text-sm text-gray-500">
+                                  {item.quantity} × {formatPrice(item.price)}
+                                </p>
+                              </div>
+                              <button
+                                onClick={() => removeFromCart(item.id)}
+                                className="text-gray-400 hover:text-gray-500"
+                              >
+                                <XMarkIcon className="w-5 h-5" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 pt-4 border-t border-gray-200">
+                          <div className="flex justify-between text-base font-medium text-gray-900">
+                            <p>Total</p>
+                            <p>
+                              {formatPrice(
+                                cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
+                              )}
+                            </p>
+                          </div>
+                          <div className="mt-4">
+                            <Link
+                              href="/checkout"
+                              className="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#8B7355] hover:bg-[#6B563F]"
+                            >
+                              Checkout
+                            </Link>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
           </div>

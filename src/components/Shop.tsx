@@ -53,12 +53,12 @@ const formatPrice = (price: number) => {
 }
 
 export default function Shop() {
-  const { setCartCount } = useCart()
+  const { addToCart } = useCart()
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 
   const handleAddToCart = (product: Product) => {
     setSelectedProduct(product)
-    setCartCount(prev => prev + 1)
+    addToCart(product)
   }
 
   return (
