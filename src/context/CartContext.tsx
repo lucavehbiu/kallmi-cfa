@@ -6,10 +6,12 @@ interface Product {
   id: number
   name: string
   price: number
+  image: string
 }
 
 interface CartItem extends Product {
-  quantity: number
+  quantity: number,
+  image: string
 }
 
 interface CartContextType {
@@ -69,4 +71,4 @@ export function useCart() {
     throw new Error('useCart must be used within a CartProvider')
   }
   return context
-} 
+}
