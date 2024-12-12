@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { AnimateDiv } from './motion/MotionWrapper'
+import { useCart } from '@/context/CartContext'
 
 interface Product {
   id: number
@@ -11,40 +12,57 @@ interface Product {
   size: string
   price: number
   image: string
+  inStock?: boolean
 }
 
 const products: Product[] = [
   {
     id: 1,
     name: "Estate Reserve Olive Oil",
-    year: 2023,
+    year: 2024,
     size: "500ml",
-    price: 29.99,
-    image: "/images/bottle-1.webp"
+    price: 8,
+    image: "/images/product.webp",
+    inStock: false
   },
   {
     id: 2,
     name: "Limited Harvest",
-    year: 2023,
+    year: 2024,
     size: "750ml",
-    price: 39.99,
-    image: "/images/bottle-2.webp"
+    price: 12,
+    image: "/images/product.webp",
+    inStock: true
   },
   {
     id: 3,
     name: "Premium Selection",
-    year: 2023,
+    year: 2024,
     size: "1000ml",
-    price: 49.99,
-    image: "/images/bottle-3.webp"
+    price: 16,
+    image: "/images/product.webp",
+    inStock: false
   }
 ]
 
+const formatPrice = (price: number) => {
+  return new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(price)
+}
+
 export default function Shop() {
+  const { setCartCount } = useCart()
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 
+  const handleAddToCart = (product: Product) => {
+    setSelectedProduct(product)
+    setCartCount(prev => prev + 1)
+  }
+
   return (
-    <div className="min-h-screen bg-stone-50 font-cormorant">
+    <div className="min-h-screen bg-stone-50 font-cormorant relative">
       {/* Hero Section */}
       <div className="h-[40vh] relative overflow-hidden">
         <div className="absolute inset-0 bg-black/40 z-10" />
@@ -88,13 +106,19 @@ export default function Shop() {
                   {product.year} Harvest • {product.size}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl text-[#8B7355]">${product.price}</span>
-                  <button
-                    onClick={() => setSelectedProduct(product)}
-                    className="px-6 py-2 bg-[#8B7355] text-white rounded hover:bg-[#6B563F] transition-colors"
-                  >
-                    Add to Cart
-                  </button>
+                  <span className="text-2xl text-[#8B7355]">{formatPrice(product.price)}</span>
+                  {product.inStock ? (
+                    <button
+                      onClick={() => handleAddToCart(product)}
+                      className="px-6 py-2 bg-[#8B7355] text-white rounded hover:bg-[#6B563F] transition-colors"
+                    >
+                      Add to Cart
+                    </button>
+                  ) : (
+                    <span className="px-6 py-2 bg-gray-200 text-gray-500 rounded cursor-not-allowed">
+                      Out of Stock
+                    </span>
+                  )}
                 </div>
               </div>
             </AnimateDiv>

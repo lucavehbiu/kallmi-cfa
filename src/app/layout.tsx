@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import './globals.css'
+import { CartProvider } from '@/context/CartContext'
 
 const cormorant = Cormorant({
   subsets: ['latin'],
@@ -64,8 +65,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={cormorant.variable}>
       <body className="min-h-screen">
-        <Header />
-        {children}
+        <CartProvider>
+          <Header />
+          {children}
+        </CartProvider>
         <Footer />
       </body>
     </html>

@@ -11,11 +11,13 @@ import {
 } from '@heroicons/react/24/outline'
 import type { ElementType } from 'react'
 
-interface Feature {
+export interface Feature {
   title: string
   description: string
   image: string
+  blurDataURL: string
   icon: ElementType
+  priority: boolean
 }
 
 interface TastingNote {
@@ -41,19 +43,25 @@ export const features: Feature[] = [
     title: 'Hand-Harvested',
     description: 'Each olive carefully selected at peak ripeness from our century-old groves',
     image: '/images/hand-harvested.webp',
-    icon: HandRaisedIcon
+    blurDataURL: "data:image/jpeg;base64,/9j...",
+    icon: HandRaisedIcon,
+    priority: true
   },
   {
     title: 'Cold-Pressed',
     description: 'Pressed within hours of harvest to capture the purest flavors',
     image: '/images/cold-pressed.webp',
-    icon: BeakerIcon
+    blurDataURL: "data:image/jpeg;base64,/9j...",
+    icon: BeakerIcon,
+    priority: true
   },
   {
     title: 'Family Legacy',
     description: "Five generations of olive oil craftsmanship on Kallmi's pristine coast",
     image: '/images/family-legacy.webp',
-    icon: HomeModernIcon
+    blurDataURL: "data:image/jpeg;base64,/9j...",
+    icon: HomeModernIcon,
+    priority: true
   }
 ]
 

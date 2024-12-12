@@ -15,7 +15,9 @@ export default function LandingHero() {
           priority
           className="object-cover"
           sizes="100vw"
-          quality={90}
+          quality={65}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABA..."
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
       </div>

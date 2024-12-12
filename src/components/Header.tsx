@@ -4,11 +4,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import type { LinkProps } from 'next/link'
-import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline'
+import { XMarkIcon, Bars3Icon, ShoppingCartIcon } from '@heroicons/react/24/outline'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [cartCount, setCartCount] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,19 +66,46 @@ export function Header() {
                 />
               </Link>
             ))}
+
+            {/* Cart Icon */}
+            <div className="relative group">
+              <ShoppingCartIcon
+                className={`w-6 h-6 transition-colors duration-300
+                  ${scrolled ? 'text-neutral-800' : 'text-white'}`}
+              />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden transition-transform duration-200 hover:scale-95 active:scale-90"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? (
-              <XMarkIcon className={`w-6 h-6 ${scrolled ? 'text-neutral-800' : 'text-white'}`} />
-            ) : (
-              <Bars3Icon className={`w-6 h-6 ${scrolled ? 'text-neutral-800' : 'text-white'}`} />
-            )}
-          </button>
+          <div className="md:hidden flex items-center space-x-4">
+            {/* Cart Icon for Mobile */}
+            <div className="relative">
+              <ShoppingCartIcon
+                className={`w-6 h-6 ${scrolled ? 'text-neutral-800' : 'text-white'}`}
+              />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </div>
+
+            <button
+              className="transition-transform duration-200 hover:scale-95 active:scale-90"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? (
+                <XMarkIcon className={`w-6 h-6 ${scrolled ? 'text-neutral-800' : 'text-white'}`} />
+              ) : (
+                <Bars3Icon className={`w-6 h-6 ${scrolled ? 'text-neutral-800' : 'text-white'}`} />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
