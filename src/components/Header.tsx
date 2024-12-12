@@ -5,11 +5,12 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import type { LinkProps } from 'next/link'
 import { XMarkIcon, Bars3Icon, ShoppingCartIcon } from '@heroicons/react/24/outline'
+import { useCart } from '@/context/CartContext'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [cartCount, setCartCount] = useState(0)
+  const { cartCount } = useCart()
 
   useEffect(() => {
     const handleScroll = () => {
