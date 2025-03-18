@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import Script from 'next/script'
 import { AnimateDiv } from './motion/MotionWrapper'
 
 interface MenuItem {
@@ -103,6 +104,23 @@ export default function Restaurant() {
   const filteredMenu = activeCategory === 'featured'
     ? menu.filter(item => item.featured)
     : menu.filter(item => item.category === activeCategory)
+
+  // Load external stylesheets
+  useEffect(() => {
+    // Ensure this only runs in the browser
+    if (typeof window !== 'undefined') {
+      // Add Restaurant Guru badge stylesheet
+      const link = document.createElement('link');
+      link.href = 'https://awards.infcdn.net/2024/badge-circledLeaves27.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+
+      // Clean up function
+      return () => {
+        document.head.removeChild(link);
+      };
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-stone-50 font-cormorant">
@@ -366,6 +384,75 @@ export default function Restaurant() {
               />
             </div>
           </div>
+        </AnimateDiv>
+      </section>
+
+      {/* Recognition & Certificates Section */}
+      <section className="py-20 bg-white">
+        <AnimateDiv
+          className="max-w-7xl mx-auto px-4 sm:px-8 text-center"
+          animation="fade"
+          duration={0.8}
+        >
+          <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355] mb-16">Recognition & Certificates</h2>
+          <p className="text-lg text-gray-700 mb-12 max-w-3xl mx-auto">
+            Kallmi i Bukur has been recognized for our commitment to culinary excellence and outstanding dining experience.
+          </p>
+
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12 flex-wrap">
+            <AnimateDiv
+              animation="slide-up"
+              duration={0.5}
+              className="flex flex-col items-center"
+            >
+              <div className="mb-16">
+                <a
+                  href="https://al.sluurpy.com/durres/restaurant/6026481/kallmi-bukur"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block transition-transform hover:scale-105"
+                >
+                  <Image
+                    src="https://foto1.sluurpy.com/bollini_2025/6026481.png"
+                    alt="Sluurpy Certificate"
+                    width={150}
+                    height={150}
+                    unoptimized={true} // Because it's an external image
+                  />
+                </a>
+              </div>
+              <p className="text-gray-600">Sluurpy 2025 Certificate of Excellence</p>
+            </AnimateDiv>
+
+            <AnimateDiv
+              animation="slide-up"
+              duration={0.5}
+              delay={0.2}
+              className="flex flex-col items-center"
+            >
+              <div className="mb-4">
+                {/* Custom wrapper to control size of Restaurant Guru Badge */}
+                <div className="flex justify-center items-center scale-[1] transform-gpu">
+                  <a
+                    id="b-circledLeaves27"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://restaurantguru.com/Kallmi-Bukur-Durres"
+                    className="b-circledLeaves27--light b-circledLeaves27--2025 transition-transform hover:scale-105"
+                  >
+                    <span className="b-circledLeaves27__title">Recommended</span>
+                    <span className="b-circledLeaves27__separator"></span>
+                    <span className="b-circledLeaves27__name">Kallmi i Bukur</span>
+                  </a>
+                </div>
+              </div>
+              <p className="text-gray-600">Restaurant Guru 2025 Recommendation</p>
+            </AnimateDiv>
+          </div>
+
+          <p className="mt-16 text-lg text-gray-700">
+            We're honored to be recognized for our commitment to quality and authentic Albanian cuisine.
+          </p>
         </AnimateDiv>
       </section>
     </div>
