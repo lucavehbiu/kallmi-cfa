@@ -16,7 +16,7 @@ export default function AccommodationsSnippet() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 items-center">
           <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden shadow-2xl">
             <Image
-              src="/images/accommodations.webp"
+              src="/images/stay_snippet.webp"
               alt="Kallmi Estate Accommodations"
               className="object-cover hover:scale-105 transition-transform duration-700"
               fill

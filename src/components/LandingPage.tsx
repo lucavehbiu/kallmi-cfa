@@ -106,47 +106,6 @@ export default function LandingPage() {
         </AnimateDiv>
       </section>
 
-      {/* Features Section */}
-      {/* <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
-          animation="fade"
-          duration={0.8}
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
-            {features.map((feature, index) => (
-              <AnimateDiv
-                key={feature.title}
-                animation="slide-up"
-                duration={0.5}
-                delay={index * 0.2}
-                className="group text-center p-8 rounded-lg hover:bg-white/80 hover:shadow-2xl
-                           backdrop-blur-sm transition-all duration-500 transform hover:-translate-y-2
-                           border border-transparent hover:border-gray-100"
-              >
-                <div className="relative w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden">
-                  <Image
-                    src={feature.image}
-                    alt={feature.title}
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    fill
-                    sizes="(max-width: 640px) 160px, 160px"
-                    quality={75}
-                    loading="lazy"
-                    placeholder="blur"
-                    blurDataURL={feature.blurDataURL}
-                  />
-                </div>
-                <h3 className="text-2xl text-[#8B7355] mb-4 group-hover:text-[#6B563F]">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-              </AnimateDiv>
-            ))}
-          </div>
-        </AnimateDiv>
-      </section> */}
-
       {/* Story Section */}
       <section id="our-story" className="py-20 sm:py-32 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/pattern.webp')] opacity-5"></div>
@@ -177,7 +136,7 @@ export default function LandingPage() {
             </div>
             <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden shadow-2xl">
               <Image
-                src="/images/contact.webp"
+                src="/images/about_snippet.webp"
                 alt="Kallmi Estate olive groves"
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 fill

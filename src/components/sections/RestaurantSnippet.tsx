@@ -37,7 +37,7 @@ export default function RestaurantSnippet() {
           </div>
           <div className="order-1 lg:order-2 relative aspect-[4/3] w-full rounded-lg overflow-hidden shadow-2xl">
             <Image
-              src="/images/restaurant.webp"
+              src="/images/restaurant_snippet.webp"
               alt="Kallmi Estate Restaurant"
               className="object-cover hover:scale-105 transition-transform duration-700"
               fill
