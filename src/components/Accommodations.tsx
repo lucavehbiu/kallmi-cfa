@@ -79,7 +79,7 @@ export default function Accommodations() {
       <div className="h-[60vh] relative overflow-hidden">
         <div className="absolute inset-0 bg-black/40 z-10" />
         <Image
-          src="/images/accommodations-hero.webp"
+          src="/images/stay_snippet.webp"
           alt="Kallmi Estate Accommodations"
           className="object-cover object-center"
           fill
