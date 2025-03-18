@@ -5,10 +5,7 @@ console.log('Loading LandingPage.tsx module')
 import Image from 'next/image'
 import { AnimateDiv } from './motion/MotionWrapper'
 import LandingHero from './sections/LandingHero'
-import { features, pressReviews } from '@/data/content'
 import { useEffect } from 'react'
-import TastingNotes from './sections/TastingNotes'
-import Certifications from './sections/Certifications'
 import RestaurantSnippet from './sections/RestaurantSnippet'
 import AccommodationsSnippet from './sections/AccommodationsSnippet'
 import ShopSnippet from './sections/ShopSnippet'
@@ -110,7 +107,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white">
+      {/* <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white">
         <AnimateDiv
           className="max-w-7xl mx-auto px-4 sm:px-8"
           animation="fade"
@@ -148,7 +145,7 @@ export default function LandingPage() {
             ))}
           </div>
         </AnimateDiv>
-      </section>
+      </section> */}
 
       {/* Story Section */}
       <section id="our-story" className="py-20 sm:py-32 bg-white relative overflow-hidden">
@@ -195,7 +192,6 @@ export default function LandingPage() {
         </AnimateDiv>
       </section>
 
-      <TastingNotes />
 
       {/* Restaurant Section */}
       <RestaurantSnippet />
@@ -206,10 +202,8 @@ export default function LandingPage() {
       {/* Shop Section */}
       <ShopSnippet />
 
-      <Certifications />
-
       {/* Press Section */}
-      <section className="py-24 bg-[#F8F6F3]">
+      {/* <section className="py-24 bg-[#F8F6F3]">
         <AnimateDiv
           className="max-w-7xl mx-auto px-4 sm:px-8"
           animation="fade"
@@ -239,7 +233,7 @@ export default function LandingPage() {
             ))}
           </div>
         </AnimateDiv>
-      </section>
+      </section> */}
 
       <WhatsAppButton />
     </main>
