@@ -8,7 +8,6 @@ import LandingHero from './sections/LandingHero'
 import { useEffect } from 'react'
 import RestaurantSnippet from './sections/RestaurantSnippet'
 import AccommodationsSnippet from './sections/AccommodationsSnippet'
-import ShopSnippet from './sections/ShopSnippet'
 import WhatsAppButton from './WhatsAppButton'
 
 export default function LandingPage() {
@@ -45,8 +44,8 @@ export default function LandingPage() {
             >
               <div className="relative h-64">
                 <Image
-                  src="/images/product.webp"
-                  alt="Shop Local Products"
+                  src="/images/sunset3.webp"
+                  alt="Breathtaking Adriatic Sunsets"
                   className="object-cover hover:scale-105 transition-transform duration-700"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
@@ -54,7 +53,7 @@ export default function LandingPage() {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                  <h3 className="text-3xl text-white font-light tracking-wider">Shop</h3>
+                  <h3 className="text-3xl text-white font-light tracking-wider">Sunsets</h3>
                 </div>
               </div>
             </AnimateDiv>
@@ -67,7 +66,7 @@ export default function LandingPage() {
             >
               <div className="relative h-64">
                 <Image
-                  src="/images/restaurant.webp"
+                  src="/images/restaurant_snippet.webp"
                   alt="Fine Dining Restaurant"
                   className="object-cover hover:scale-105 transition-transform duration-700"
                   fill
@@ -89,7 +88,7 @@ export default function LandingPage() {
             >
               <div className="relative h-64">
                 <Image
-                  src="/images/accommodations.webp"
+                  src="/images/stay_snippet.webp"
                   alt="Luxurious Accommodations"
                   className="object-cover hover:scale-105 transition-transform duration-700"
                   fill
@@ -144,13 +143,12 @@ export default function LandingPage() {
                 quality={75}
                 loading="lazy"
                 placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMjU1LC0yMi4xODY6Oj03MS85RkVHSnBwcHp6eXp4eXl5eXl5eXn/2wBDARUXFyAeIBogHh4gIiEgMSEhISEhMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTH/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMjU1LC0yMi4xODY6Oj03MS85RkVHSnBwcHp6eXp4eXl5eXl5eXn/2wBDARUXFyAeIBogHh4gIiEgMSEhISEhMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTH/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               />
             </div>
           </div>
         </AnimateDiv>
       </section>
-
 
       {/* Restaurant Section */}
       <RestaurantSnippet />
@@ -158,8 +156,79 @@ export default function LandingPage() {
       {/* Accommodations Section */}
       <AccommodationsSnippet />
 
-      {/* Shop Section */}
-      <ShopSnippet />
+      {/* Sunset Gallery Section */}
+      <section className="py-24 bg-[#F8F6F3]">
+        <AnimateDiv
+          className="max-w-7xl mx-auto px-4 sm:px-8"
+          animation="fade"
+          duration={0.8}
+        >
+          <h2 className="text-4xl sm:text-5xl font-light text-center text-[#8B7355] mb-6">Breathtaking Sunsets</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-16 text-center">
+            Experience the magic of Adriatic sunsets from Kallmi Estate, where every evening brings a spectacular
+            display of colors reflecting over the sea.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimateDiv
+              animation="slide-up"
+              duration={0.5}
+              delay={0.1}
+              className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg group"
+            >
+              <Image
+                src="/images/story.webp"
+                alt="Adriatic Sunset View"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                quality={85}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+            </AnimateDiv>
+
+            <AnimateDiv
+              animation="slide-up"
+              duration={0.5}
+              delay={0.2}
+              className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg group"
+            >
+              <Image
+                src="/images/sunset2.webp"
+                alt="Golden Hour at Kallmi Beach"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                quality={85}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+            </AnimateDiv>
+
+            <AnimateDiv
+              animation="slide-up"
+              duration={0.5}
+              delay={0.3}
+              className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg group"
+            >
+              <Image
+                src="/images/sunset3.webp"
+                alt="Sunset View from Restaurant Terrace"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                quality={85}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+            </AnimateDiv>
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-lg text-gray-700 italic">
+              "The sun setting over the Adriatic Sea from Kallmi Estate creates a canvas of colors that words cannot describe."
+            </p>
+          </div>
+        </AnimateDiv>
+      </section>
 
       {/* Press Section */}
       {/* <section className="py-24 bg-[#F8F6F3]">

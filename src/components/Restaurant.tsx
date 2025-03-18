@@ -128,7 +128,7 @@ export default function Restaurant() {
       <div className="h-[60vh] relative overflow-hidden">
         <div className="absolute inset-0 bg-black/40 z-10" />
         <Image
-          src="/images/restaurant-hero.webp"
+          src="/images/restaurant_snippet.webp"
           alt="Kallmi Estate Restaurant"
           className="object-cover object-center"
           fill
@@ -184,7 +184,7 @@ export default function Restaurant() {
               </div>
               <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg mt-8">
                 <Image
-                  src="/images/dining-interior.webp"
+                  src="/images/interior.webp"
                   alt="Restaurant Interior"
                   className="object-cover"
                   fill
