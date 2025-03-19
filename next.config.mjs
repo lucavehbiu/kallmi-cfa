@@ -14,6 +14,14 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Improved image optimization settings
+    domains: ['localhost', 'kallmibukur.al'],
+    path: '/_next/image',
+    loader: 'default',
+    disableStaticImages: false,
+    minimumCacheTTL: 60 * 60 * 24, // 24 hours
+    // Development settings
+    unoptimized: process.env.NODE_ENV === 'development',
   },
   // Modern optimization features
   compiler: {

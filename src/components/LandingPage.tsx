@@ -2,13 +2,19 @@
 
 console.log('Loading LandingPage.tsx module')
 
-import Image from 'next/image'
 import { AnimateDiv } from './motion/MotionWrapper'
 import LandingHero from './sections/LandingHero'
 import { useEffect } from 'react'
 import RestaurantSnippet from './sections/RestaurantSnippet'
 import AccommodationsSnippet from './sections/AccommodationsSnippet'
 import WhatsAppButton from './WhatsAppButton'
+import OptimizedImage from './common/OptimizedImage'
+
+// Fallback image handler
+const handleImageError = (e: any) => {
+  console.error('Image failed to load, using fallback', e);
+  e.currentTarget.src = '/images/placeholders/fallback.webp';
+};
 
 export default function LandingPage() {
   console.log('LandingPage component rendering')
@@ -43,7 +49,7 @@ export default function LandingPage() {
               className="rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 bg-white hover:-translate-y-2"
             >
               <div className="relative h-64">
-                <Image
+                <OptimizedImage
                   src="/images/sunset3.webp"
                   alt="Breathtaking Adriatic Sunsets"
                   className="object-cover hover:scale-105 transition-transform duration-700"
@@ -51,6 +57,7 @@ export default function LandingPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                   quality={75}
                   loading="lazy"
+                  id="sunset3"
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                   <h3 className="text-3xl text-white font-light tracking-wider">Sunsets</h3>
@@ -65,7 +72,7 @@ export default function LandingPage() {
               className="rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 bg-white hover:-translate-y-2"
             >
               <div className="relative h-64">
-                <Image
+                <OptimizedImage
                   src="/images/restaurant_snippet.webp"
                   alt="Fine Dining Restaurant"
                   className="object-cover hover:scale-105 transition-transform duration-700"
@@ -73,6 +80,7 @@ export default function LandingPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                   quality={75}
                   loading="lazy"
+                  id="restaurant_snippet"
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                   <h3 className="text-3xl text-white font-light tracking-wider">Dine</h3>
@@ -87,7 +95,7 @@ export default function LandingPage() {
               className="rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 bg-white hover:-translate-y-2"
             >
               <div className="relative h-64">
-                <Image
+                <OptimizedImage
                   src="/images/stay_snippet.webp"
                   alt="Luxurious Accommodations"
                   className="object-cover hover:scale-105 transition-transform duration-700"
@@ -95,6 +103,7 @@ export default function LandingPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                   quality={75}
                   loading="lazy"
+                  id="stay_snippet"
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                   <h3 className="text-3xl text-white font-light tracking-wider">Stay</h3>
@@ -134,7 +143,7 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden shadow-2xl">
-              <Image
+              <OptimizedImage
                 src="/images/about_snippet.webp"
                 alt="Kallmi Estate olive groves"
                 className="object-cover hover:scale-105 transition-transform duration-700"
@@ -142,8 +151,7 @@ export default function LandingPage() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                 quality={75}
                 loading="lazy"
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMjU1LC0yMi4xODY6Oj03MS85RkVHSnBwcHp6eXp4eXl5eXl5eXn/2wBDARUXFyAeIBogHh4gIiEgMSEhISEhMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTH/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                id="about_snippet"
               />
             </div>
           </div>
@@ -176,13 +184,14 @@ export default function LandingPage() {
               delay={0.1}
               className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg group"
             >
-              <Image
+              <OptimizedImage
                 src="/images/story.webp"
                 alt="Adriatic Sunset View"
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 quality={85}
+                id="story"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
             </AnimateDiv>
@@ -193,13 +202,14 @@ export default function LandingPage() {
               delay={0.2}
               className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg group"
             >
-              <Image
+              <OptimizedImage
                 src="/images/sunset2.webp"
                 alt="Golden Hour at Kallmi Beach"
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 quality={85}
+                id="sunset2"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
             </AnimateDiv>
@@ -210,13 +220,14 @@ export default function LandingPage() {
               delay={0.3}
               className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg group"
             >
-              <Image
+              <OptimizedImage
                 src="/images/sunset3.webp"
                 alt="Sunset View from Restaurant Terrace"
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 quality={85}
+                id="sunset3_gallery"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
             </AnimateDiv>
