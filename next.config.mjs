@@ -101,6 +101,7 @@ const nextConfig = {
   serverExternalPackages: [],
   async redirects() {
     return [
+      // Non-www to www redirect
       {
         source: '/:path*',
         has: [
@@ -110,6 +111,25 @@ const nextConfig = {
           },
         ],
         destination: 'https://www.kallmibukur.al/:path*',
+        permanent: true,
+      },
+      // HTTP to HTTPS redirect (handled at server level but adding for completeness)
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'header',
+            key: 'x-forwarded-proto',
+            value: 'http',
+          },
+        ],
+        destination: 'https://www.kallmibukur.al/:path*',
+        permanent: true,
+      },
+      // Redirect old limited-edition page to our-story
+      {
+        source: '/limited-edition',
+        destination: '/our-story',
         permanent: true,
       },
     ]
