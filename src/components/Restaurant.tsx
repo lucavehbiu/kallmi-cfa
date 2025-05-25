@@ -34,9 +34,9 @@ const menu: MenuItem[] = [
     description: "Fresh catch from the Adriatic, grilled to perfection with herbs and our estate olive oil",
     price: 4800,
     category: "featured",
-    image: "/images/fish.webp",
+    image: "https://fishandmore.co.uk/wp-content/uploads/2021/07/frozen-fish-bbq-grilled-whole-sea-bass-recipe.jpg",
     featured: true,
-    unit: "per kg"
+    unit: "per KG"
   },
   {
     id: 2,
@@ -44,7 +44,7 @@ const menu: MenuItem[] = [
     description: "Tender octopus with Mediterranean herbs, olive oil, and fresh vegetables",
     price: 1700,
     category: "featured",
-    image: "/images/salad.webp",
+    image: "https://www.charlottefashionplate.com/wp-content/uploads/2019/12/fullsizeoutput_edb8.jpeg",
     featured: true
   },
   {
@@ -53,7 +53,7 @@ const menu: MenuItem[] = [
     description: "Red peppers and aubergines with balsamic vinegar and garlic",
     price: 600,
     category: "featured",
-    image: "/images/grilled-veg.webp",
+    image: "https://yourguardianchef.com/wp-content/uploads/2022/06/Grilled-Zucchini-Eggplants-And-Peppers-Salad-3.jpg",
     featured: true
   },
 
@@ -64,7 +64,7 @@ const menu: MenuItem[] = [
     description: "Traditional Greek salad with feta, olives, and fresh vegetables",
     price: 600,
     category: "salads",
-    image: "/images/salad.webp"
+    image: "https://images.themodernproper.com/production/posts/GreekSalad_9.jpg?w=1200&h=1200&q=60&fm=jpg&fit=crop&dm=1718650734&s=70119bf37604d243d0729db7f4cda445"
   },
   {
     id: 5,
@@ -72,7 +72,7 @@ const menu: MenuItem[] = [
     description: "Fresh mixed greens with our signature olive oil dressing",
     price: 600,
     category: "salads",
-    image: "/images/salad.webp"
+    image: "https://saladswithanastasia.com/wp-content/uploads/2020/11/maroulosalata-close-up.webp"
   },
   {
     id: 6,
@@ -80,7 +80,7 @@ const menu: MenuItem[] = [
     description: "Peppery arugula with parmesan and balsamic reduction",
     price: 600,
     category: "salads",
-    image: "/images/salad.webp"
+    image: "https://i0.wp.com/happyhealthymama.com/wp-content/uploads/2023/06/Arugula-Quinoa-Salad-3.jpg?fit=1340%2C1800&ssl=1"
   },
   {
     id: 7,
@@ -88,7 +88,7 @@ const menu: MenuItem[] = [
     description: "Tender octopus with Mediterranean herbs and olive oil",
     price: 1700,
     category: "salads",
-    image: "/images/salad.webp",
+    image: "https://www.charlottefashionplate.com/wp-content/uploads/2019/12/fullsizeoutput_edb8.jpeg",
     seasonal: true
   },
   {
@@ -97,7 +97,7 @@ const menu: MenuItem[] = [
     description: "With oregano, crumbled feta cheese and olive oil",
     price: 600,
     category: "salads",
-    image: "/images/grilled-veg.webp"
+    image: "https://fitfoodiefinds.com/wp-content/uploads/2019/06/baked-potatoes.jpg"
   },
   {
     id: 9,
@@ -105,7 +105,7 @@ const menu: MenuItem[] = [
     description: "Red peppers and aubergines with balsamic vinegar and garlic",
     price: 600,
     category: "salads",
-    image: "/images/grilled-veg.webp"
+    image: "https://yourguardianchef.com/wp-content/uploads/2022/06/Grilled-Zucchini-Eggplants-And-Peppers-Salad-3.jpg"
   },
   {
     id: 10,
@@ -113,7 +113,7 @@ const menu: MenuItem[] = [
     description: "Toasted bread with fresh tomatoes, basil and garlic",
     price: 300,
     category: "salads",
-    image: "/images/byrek.webp"
+    image: "https://www.allrecipes.com/thmb/QSsjryxShEx1L6o0HLer1Nn4jwA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/54165-balsamic-bruschetta-DDMFS-4x3-e2b55b5ca39b4c1783e524a2461634ea.jpg"
   },
 
   // Fresh Fish
@@ -123,7 +123,7 @@ const menu: MenuItem[] = [
     description: "Fresh from the Adriatic, grilled with herbs and olive oil",
     price: 4800,
     category: "fish",
-    image: "/images/fish.webp",
+    image: "https://fishandmore.co.uk/wp-content/uploads/2021/07/frozen-fish-bbq-grilled-whole-sea-bass-recipe.jpg",
     unit: "per kg"
   },
   {
@@ -132,7 +132,7 @@ const menu: MenuItem[] = [
     description: "Premium Mediterranean fish, simply grilled",
     price: 6500,
     category: "fish",
-    image: "/images/fish.webp",
+    image: "https://media-cdn.tripadvisor.com/media/photo-s/13/b4/88/4f/koce-fish-fresh-served.jpg",
     unit: "per kg"
   },
   {
@@ -141,7 +141,7 @@ const menu: MenuItem[] = [
     description: "Fresh Adriatic shrimps, grilled or sautéed (250gr)",
     price: 1200,
     category: "fish",
-    image: "/images/fish.webp"
+    image: "https://www.seriouseats.com/thmb/ch4c6o15shxPyfO8jnSfUh_wQ0s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2015__08__09102015-grilled-lemongrass-shrimp-shaozhizhong-8-a5525792ce7a4c9693af0a564eae74a4.jpg"
   },
   {
     id: 14,
@@ -149,7 +149,7 @@ const menu: MenuItem[] = [
     description: "Tender grilled octopus with olive oil and herbs",
     price: 1300,
     category: "fish",
-    image: "/images/fish.webp"
+    image: "https://www.allrecipes.com/thmb/J7hX8IQcYGf3vlvfZrz5r7pd29U=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/6723522-af2855be1a38418ebd9fc516034ffecc.jpg"
   },
   {
     id: 15,
@@ -157,7 +157,7 @@ const menu: MenuItem[] = [
     description: "Local catch, grilled to perfection",
     price: 1300,
     category: "fish",
-    image: "/images/fish.webp"
+    image: "https://cookingwithnonna.com/images/com_yoorecipe/cropped-grilled-mullets-700.jpg"
   },
   {
     id: 16,
@@ -165,25 +165,34 @@ const menu: MenuItem[] = [
     description: "Fresh squid, grilled or fried",
     price: 1300,
     category: "fish",
-    image: "/images/fish.webp"
+    image: "https://i.imgur.com/3RZIQkw.png"
+  },
+
+  {
+    id: 17,
+    name: "Cuttlefish",
+    description: "Fresh cuttlefish, grilled to perfection",
+    price: 1300,
+    category: "fish",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxrpHrOQeImHqGb_OJj9H71CpQlJbBpvPwig&s"
   },
 
   // Farmed Fish
   {
-    id: 17,
+    id: 18,
     name: "Farmed Sea Bass",
     description: "Quality farmed sea bass, 300gr portion",
     price: 1200,
     category: "farmed-fish",
-    image: "/images/fish.webp"
+    image: "https://fishandmore.co.uk/wp-content/uploads/2021/07/frozen-fish-bbq-grilled-whole-sea-bass-recipe.jpg"
   },
   {
-    id: 18,
+    id: 19,
     name: "Farmed Koce",
     description: "Quality farmed koce, 300gr portion",
     price: 1200,
     category: "farmed-fish",
-    image: "/images/fish.webp"
+    image: "https://media-cdn.tripadvisor.com/media/photo-s/13/b4/88/4f/koce-fish-fresh-served.jpg"
   }
 ]
 
@@ -287,7 +296,7 @@ export default function Restaurant() {
             >
               <div className="backdrop-blur-md bg-white/10 rounded-full px-6 py-3 border border-white/20 mb-4">
                 <span className="text-sm sm:text-base font-medium tracking-widest uppercase text-white/90">
-                  Adriatic Fine Dining
+                  Mediterrenean Cuisine
                 </span>
               </div>
             </AnimateDiv>
@@ -335,16 +344,15 @@ export default function Restaurant() {
               animation="slide-up"
               duration={1.0}
               delay={1.5}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mt-8"
+              className="flex justify-center max-w-3xl mx-auto mt-8"
             >
               {[
-                { icon: ClockIcon, text: "12:00 - 23:00" },
+                { icon: ClockIcon, text: "13:00 - 16:00" },
                 { icon: MapPinIcon, text: "Seaside Terrace" },
-                { icon: StarIcon, text: "Award Winning" }
               ].map((item, index) => (
-                <div key={index} className="backdrop-blur-md bg-white/10 rounded-2xl p-4 border border-white/20">
-                  <item.icon className="w-6 h-6 text-[#D4AF37] mx-auto mb-2" />
-                  <p className="text-white/90 text-sm font-light">{item.text}</p>
+                <div key={index} className="backdrop-blur-md bg-white/10 rounded-2xl p-4 border border-white/20 mx-2 min-w-[140px] flex flex-col items-center">
+                  <item.icon className="w-6 h-6 text-[#D4AF37] mb-2" />
+                  <p className="text-white/90 text-sm font-light text-center">{item.text}</p>
                 </div>
               ))}
             </AnimateDiv>
@@ -395,10 +403,6 @@ export default function Restaurant() {
 
               <div className="space-y-6 text-base sm:text-lg text-gray-700 leading-relaxed font-light">
                 <p className="relative pl-6 border-l-2 border-[#8B7355]/30">
-                  At Kallmi Estate, our restaurant celebrates the rich culinary heritage of Albania
-                  while embracing modern techniques and presentation.
-                </p>
-                <p className="relative pl-6 border-l-2 border-[#8B7355]/30">
                   Every dish tells a story of our land, featuring the freshest catch from the Adriatic
                   and ingredients from our own gardens, all enhanced by our estate's liquid gold.
                 </p>
@@ -441,7 +445,7 @@ export default function Restaurant() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="aspect-[3/4] relative rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
                     <Image
-                      src="/images/chef.webp"
+                      src="https://storage.googleapis.com/oda-images/IMG_0655.jpg"
                       alt="Our Executive Chef"
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       fill

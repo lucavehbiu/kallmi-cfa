@@ -68,7 +68,7 @@ export default function OurStory() {
               <div className="backdrop-blur-md bg-white/10 rounded-full px-6 py-3 border border-white/20 mb-6">
                 <span className="text-sm sm:text-base font-medium tracking-widest uppercase text-white/90 flex items-center space-x-2">
                   <SparklesIcon className="w-4 h-4" />
-                  <span>Est. 1920 • Four Generations</span>
+                  <span>Est. 2004 • Four Generations</span>
                   <SparklesIcon className="w-4 h-4" />
                 </span>
               </div>
@@ -123,7 +123,7 @@ export default function OurStory() {
               {[
                 { icon: ClockIcon, number: "100+", text: "Years of Heritage" },
                 { icon: BeakerIcon, number: "4th", text: "Generation" },
-                { icon: StarIcon, number: "1920", text: "Founded" }
+                { icon: StarIcon, number: "2004", text: "Founded" }
               ].map((item, index) => (
                 <div key={index} className="backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20">
                   <item.icon className="w-8 h-8 text-[#D4AF37] mx-auto mb-3" />
@@ -210,10 +210,10 @@ export default function OurStory() {
               {/* Heritage Timeline */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8">
                 {[
-                  { year: '1920', event: 'Founded' },
-                  { year: '1950', event: 'Expanded' },
-                  { year: '1980', event: 'Modernized' },
-                  { year: '2024', event: 'Thriving' }
+                  { year: '1920', event: 'Bought by the family' },
+                  { year: '2004', event: 'First work started' },
+                  { year: '2007', event: 'Small bar and restaurant opened' },
+                  { year: '2025', event: 'Thriving' }
                 ].map((milestone, index) => (
                   <AnimateDiv
                     key={index}
@@ -250,7 +250,7 @@ export default function OurStory() {
 
                   {/* Floating Heritage Badge */}
                   <div className="absolute top-6 left-6 backdrop-blur-md bg-white/20 rounded-2xl p-4 border border-white/30">
-                    <div className="text-white text-sm font-medium">Est. 1920</div>
+                    <div className="text-white text-sm font-medium">Est. 2004</div>
                     <div className="text-white/80 text-xs">Albania's Heritage</div>
                   </div>
                 </div>

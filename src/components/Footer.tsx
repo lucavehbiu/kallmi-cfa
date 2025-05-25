@@ -61,7 +61,7 @@ export function Footer() {
             <div className="inline-block backdrop-blur-sm bg-white/5 rounded-2xl px-4 py-3 border border-white/10">
               <div className="flex items-center space-x-2 text-[#D4AF37]">
                 <HeartIcon className="w-4 h-4" />
-                <span className="text-xs font-medium tracking-widest uppercase">Est. 1920</span>
+                <span className="text-xs font-medium tracking-widest uppercase">Est. 2004</span>
               </div>
             </div>
           </div>
