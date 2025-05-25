@@ -73,11 +73,11 @@ export function Footer() {
             </h4>
             <ul className="space-y-4">
               {[
-                { name: 'Our Heritage', href: '/our-story' },
-                { name: 'Premium Oils', href: '/shop' },
-                { name: 'Fine Dining', href: '/restaurant' },
-                { name: 'Estate Stay', href: '/camping' },
-                { name: 'Visit Us', href: '/contact' }
+                { name: 'Our Heritage', href: '/our-story' as const },
+                { name: 'Premium Oils', href: '/shop' as const },
+                { name: 'Fine Dining', href: '/restaurant' as const },
+                { name: 'Estate Stay', href: '/camping' as const },
+                { name: 'Visit Us', href: '/contact' as const }
               ].map((link, index) => (
                 <li key={link.name}>
                   <Link
