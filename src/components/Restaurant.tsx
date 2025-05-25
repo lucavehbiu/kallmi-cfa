@@ -5,302 +5,669 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Script from 'next/script'
 import { AnimateDiv } from './motion/MotionWrapper'
+import {
+  SparklesIcon,
+  HeartIcon,
+  ClockIcon,
+  MapPinIcon,
+  PhoneIcon,
+  StarIcon
+} from '@heroicons/react/24/outline'
 
 interface MenuItem {
   id: number
   name: string
   description: string
   price: number
-  category: 'starters' | 'mains' | 'desserts'
+  category: 'featured' | 'salads' | 'fish' | 'farmed-fish' | 'drinks'
   image: string
   seasonal?: boolean
   featured?: boolean
+  unit?: string
 }
 
 const menu: MenuItem[] = [
+  // Featured Items
   {
     id: 1,
-    name: "Wild Herb Salad",
-    description: "Foraged herbs with feta, pomegranate, and our estate olive oil",
-    price: 8,
-    category: "starters",
-    image: "/images/salad.webp",
-    seasonal: true,
-    featured: true
+    name: "Sea Bass",
+    description: "Fresh catch from the Adriatic, grilled to perfection with herbs and our estate olive oil",
+    price: 4800,
+    category: "featured",
+    image: "/images/fish.webp",
+    featured: true,
+    unit: "per kg"
   },
   {
     id: 2,
-    name: "Grilled Vegetables",
-    description: "Seasonal vegetables grilled over olive wood, drizzled with herb-infused oil",
-    price: 9,
-    category: "starters",
-    image: "/images/grilled-veg.webp"
+    name: "Cold Octopus Salad",
+    description: "Tender octopus with Mediterranean herbs, olive oil, and fresh vegetables",
+    price: 1700,
+    category: "featured",
+    image: "/images/salad.webp",
+    featured: true
   },
   {
     id: 3,
-    name: "Traditional Byrek",
-    description: "Layered filo pastry with spinach and local cheese",
-    price: 7,
-    category: "starters",
-    image: "/images/byrek.webp",
+    name: "Grilled Vegetables",
+    description: "Red peppers and aubergines with balsamic vinegar and garlic",
+    price: 600,
+    category: "featured",
+    image: "/images/grilled-veg.webp",
     featured: true
   },
+
+  // Salads
   {
     id: 4,
-    name: "Seafood Risotto",
-    description: "Arborio rice with fresh Adriatic seafood and saffron",
-    price: 18,
-    category: "mains",
-    image: "/images/risotto.webp",
-    featured: true
+    name: "Greek Salad",
+    description: "Traditional Greek salad with feta, olives, and fresh vegetables",
+    price: 600,
+    category: "salads",
+    image: "/images/salad.webp"
   },
   {
     id: 5,
-    name: "Slow-Roasted Lamb",
-    description: "Mountain lamb with herbs, roasted for 12 hours",
-    price: 22,
-    category: "mains",
-    image: "/images/lamb.webp",
-    featured: true
+    name: "Green Salad",
+    description: "Fresh mixed greens with our signature olive oil dressing",
+    price: 600,
+    category: "salads",
+    image: "/images/salad.webp"
   },
   {
     id: 6,
-    name: "Fresh Catch",
-    description: "Daily fish selection from local fishermen, grilled with olive oil and lemon",
-    price: 20,
-    category: "mains",
-    image: "/images/fish.webp",
-    seasonal: true
+    name: "Rucola Salad",
+    description: "Peppery arugula with parmesan and balsamic reduction",
+    price: 600,
+    category: "salads",
+    image: "/images/salad.webp"
   },
   {
     id: 7,
-    name: "Olive Oil Cake",
-    description: "Light sponge infused with our olive oil and orange blossom",
-    price: 7,
-    category: "desserts",
-    image: "/images/cake.webp",
-    featured: true
+    name: "Cold Octopus Salad",
+    description: "Tender octopus with Mediterranean herbs and olive oil",
+    price: 1700,
+    category: "salads",
+    image: "/images/salad.webp",
+    seasonal: true
   },
   {
     id: 8,
-    name: "Honey Baklava",
-    description: "Layers of filo with walnuts and estate honey",
-    price: 8,
-    category: "desserts",
-    image: "/images/baklava.webp"
-  }
-];
+    name: "Grilled Potatoes",
+    description: "With oregano, crumbled feta cheese and olive oil",
+    price: 600,
+    category: "salads",
+    image: "/images/grilled-veg.webp"
+  },
+  {
+    id: 9,
+    name: "Grilled Vegetables",
+    description: "Red peppers and aubergines with balsamic vinegar and garlic",
+    price: 600,
+    category: "salads",
+    image: "/images/grilled-veg.webp"
+  },
+  {
+    id: 10,
+    name: "Bruschetta",
+    description: "Toasted bread with fresh tomatoes, basil and garlic",
+    price: 300,
+    category: "salads",
+    image: "/images/byrek.webp"
+  },
 
-const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('de-DE', {
-    style: 'currency',
-    currency: 'EUR'
+  // Fresh Fish
+  {
+    id: 11,
+    name: "Sea Bass",
+    description: "Fresh from the Adriatic, grilled with herbs and olive oil",
+    price: 4800,
+    category: "fish",
+    image: "/images/fish.webp",
+    unit: "per kg"
+  },
+  {
+    id: 12,
+    name: "Koce (Orata)",
+    description: "Premium Mediterranean fish, simply grilled",
+    price: 6500,
+    category: "fish",
+    image: "/images/fish.webp",
+    unit: "per kg"
+  },
+  {
+    id: 13,
+    name: "Shrimps",
+    description: "Fresh Adriatic shrimps, grilled or sautéed (250gr)",
+    price: 1200,
+    category: "fish",
+    image: "/images/fish.webp"
+  },
+  {
+    id: 14,
+    name: "Octopus",
+    description: "Tender grilled octopus with olive oil and herbs",
+    price: 1300,
+    category: "fish",
+    image: "/images/fish.webp"
+  },
+  {
+    id: 15,
+    name: "Mullet",
+    description: "Local catch, grilled to perfection",
+    price: 1300,
+    category: "fish",
+    image: "/images/fish.webp"
+  },
+  {
+    id: 16,
+    name: "Calamari",
+    description: "Fresh squid, grilled or fried",
+    price: 1300,
+    category: "fish",
+    image: "/images/fish.webp"
+  },
+
+  // Farmed Fish
+  {
+    id: 17,
+    name: "Farmed Sea Bass",
+    description: "Quality farmed sea bass, 300gr portion",
+    price: 1200,
+    category: "farmed-fish",
+    image: "/images/fish.webp"
+  },
+  {
+    id: 18,
+    name: "Farmed Koce",
+    description: "Quality farmed koce, 300gr portion",
+    price: 1200,
+    category: "farmed-fish",
+    image: "/images/fish.webp"
+  }
+]
+
+const drinks = [
+  // Beers
+  { name: "Korca", price: 250, category: "beer" },
+  { name: "Corona", price: 500, category: "beer" },
+  { name: "Heineken", price: 300, category: "beer" },
+  { name: "Paulaner", price: 500, category: "beer" },
+
+  // Cocktails
+  { name: "Mojito", price: 700, category: "cocktail" },
+  { name: "Cuba Libre", price: 700, category: "cocktail" },
+  { name: "Hugo", price: 700, category: "cocktail" },
+  { name: "Aperol Spritz", price: 700, category: "cocktail" },
+  { name: "Caipirinha", price: 700, category: "cocktail" },
+  { name: "Vodka Sour", price: 700, category: "cocktail" },
+
+  // Soft Drinks
+  { name: "Cola", price: 250, category: "soft" },
+  { name: "Fanta", price: 250, category: "soft" },
+  { name: "Schweppes", price: 150, category: "soft" },
+  { name: "Water", price: 100, category: "soft" },
+  { name: "Large Water", price: 250, category: "soft" },
+
+  // Coffee
+  { name: "Coffee", price: 120, category: "coffee" },
+  { name: "Cappuccino", price: 200, category: "coffee" },
+  { name: "Macchiato", price: 140, category: "coffee" }
+]
+
+const formatPrice = (price: number, unit?: string) => {
+  const formatted = new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 0
   }).format(price)
+  return `${formatted}L${unit ? ` ${unit}` : ''}`
 }
 
 export default function Restaurant() {
-  const [activeCategory, setActiveCategory] = useState<'featured' | 'starters' | 'mains' | 'desserts'>('featured')
+  const [activeCategory, setActiveCategory] = useState<'featured' | 'salads' | 'fish' | 'farmed-fish' | 'drinks'>('featured')
+  const [showDrinks, setShowDrinks] = useState(false)
 
-  const filteredMenu = activeCategory === 'featured'
-    ? menu.filter(item => item.featured)
-    : menu.filter(item => item.category === activeCategory)
+  const filteredMenu = menu.filter(item => item.category === activeCategory)
 
   // Load external stylesheets
   useEffect(() => {
-    // Ensure this only runs in the browser
     if (typeof window !== 'undefined') {
-      // Add Restaurant Guru badge stylesheet
       const link = document.createElement('link');
       link.href = 'https://awards.infcdn.net/2024/badge-circledLeaves27.css';
       link.rel = 'stylesheet';
       document.head.appendChild(link);
 
-      // Clean up function
       return () => {
-        document.head.removeChild(link);
+        if (document.head.contains(link)) {
+          document.head.removeChild(link);
+        }
       };
     }
   }, []);
 
   return (
-    <div className="min-h-screen bg-stone-50 font-cormorant">
-      {/* Hero Section */}
-      <div className="h-[60vh] relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/40 z-10" />
-        <Image
-          src="/images/restaurant_snippet.webp"
-          alt="Kallmi Estate Restaurant"
-          className="object-cover object-center"
-          fill
-          priority
-          sizes="100vw"
-          quality={90}
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-20 px-4">
-          <h1 className="text-5xl md:text-7xl font-light tracking-wider mb-4 text-center">Our Restaurant</h1>
-          <p className="text-xl md:text-2xl max-w-2xl text-center font-light">
-            Authentic Albanian cuisine with a contemporary twist
-          </p>
+    <div className="min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 font-cormorant relative overflow-hidden">
+
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-[#8B7355]/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-48 h-48 bg-[#D4AF37]/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse delay-2000" />
+      </div>
+
+      {/* Immersive Hero Section */}
+      <div className="relative h-[70vh] overflow-hidden">
+        {/* Parallax Background */}
+        <div className="absolute inset-0 scale-110">
+          <Image
+            src="/images/restaurant_snippet.webp"
+            alt="Kallmi Estate Restaurant - Adriatic Dining Experience"
+            className="object-cover object-center"
+            fill
+            priority
+            sizes="100vw"
+            quality={90}
+          />
         </div>
+
+        {/* Sophisticated Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/30 via-transparent to-[#D4AF37]/20" />
+
+        {/* Hero Content */}
+        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6">
+          <div className="max-w-4xl space-y-6 sm:space-y-8">
+
+            {/* Floating Badge */}
+            <AnimateDiv
+              animation="fade"
+              duration={1.0}
+              delay={0.3}
+              className="inline-block"
+            >
+              <div className="backdrop-blur-md bg-white/10 rounded-full px-6 py-3 border border-white/20 mb-4">
+                <span className="text-sm sm:text-base font-medium tracking-widest uppercase text-white/90">
+                  Adriatic Fine Dining
+                </span>
+              </div>
+            </AnimateDiv>
+
+            {/* Main Title */}
+            <AnimateDiv
+              animation="slide-up"
+              duration={1.2}
+              delay={0.6}
+            >
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extralight tracking-wide leading-tight">
+                <span className="block">Kallmi</span>
+                <span className="block text-3xl sm:text-5xl lg:text-6xl italic font-light text-[#D4AF37] mt-2">
+                  Restaurant
+                </span>
+              </h1>
+            </AnimateDiv>
+
+            {/* Elegant Divider */}
+            <AnimateDiv
+              animation="fade"
+              duration={0.8}
+              delay={1.0}
+              className="flex items-center justify-center space-x-4"
+            >
+              <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              <HeartIcon className="w-5 h-5 text-[#D4AF37]" />
+              <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+            </AnimateDiv>
+
+            {/* Subtitle */}
+            <AnimateDiv
+              animation="slide-up"
+              duration={1.0}
+              delay={1.2}
+            >
+              <p className="text-lg sm:text-2xl font-light opacity-95 leading-relaxed max-w-3xl mx-auto">
+                Where <span className="text-[#D4AF37]">authentic Albanian cuisine</span> meets
+                contemporary elegance, overlooking the sparkling Adriatic Sea
+              </p>
+            </AnimateDiv>
+
+            {/* Restaurant Info Cards */}
+            <AnimateDiv
+              animation="slide-up"
+              duration={1.0}
+              delay={1.5}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mt-8"
+            >
+              {[
+                { icon: ClockIcon, text: "12:00 - 23:00" },
+                { icon: MapPinIcon, text: "Seaside Terrace" },
+                { icon: StarIcon, text: "Award Winning" }
+              ].map((item, index) => (
+                <div key={index} className="backdrop-blur-md bg-white/10 rounded-2xl p-4 border border-white/20">
+                  <item.icon className="w-6 h-6 text-[#D4AF37] mx-auto mb-2" />
+                  <p className="text-white/90 text-sm font-light">{item.text}</p>
+                </div>
+              ))}
+            </AnimateDiv>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <AnimateDiv
+          animation="fade"
+          duration={1.0}
+          delay={1.8}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        >
+          <div className="flex flex-col items-center space-y-2 text-white/70">
+            <span className="text-xs sm:text-sm font-light tracking-widest uppercase">
+              Discover Our Menu
+            </span>
+            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce" />
+            </div>
+          </div>
+        </AnimateDiv>
       </div>
 
       {/* Introduction Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-16 sm:py-24">
         <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
+          className="max-w-7xl mx-auto px-4 sm:px-6"
           animation="fade"
-          duration={0.8}
+          duration={1.0}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355]">A Culinary Journey</h2>
-              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
-                <p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+
+            {/* Content Side */}
+            <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
+              <div className="space-y-4">
+                <div className="inline-block">
+                  <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+                    Culinary Heritage
+                  </span>
+                  <div className="w-16 h-px bg-[#8B7355] mt-2" />
+                </div>
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extralight text-[#8B7355] leading-tight">
+                  A Journey Through
+                  <span className="block italic">Albanian Flavors</span>
+                </h2>
+              </div>
+
+              <div className="space-y-6 text-base sm:text-lg text-gray-700 leading-relaxed font-light">
+                <p className="relative pl-6 border-l-2 border-[#8B7355]/30">
                   At Kallmi Estate, our restaurant celebrates the rich culinary heritage of Albania
-                  while embracing modern techniques and presentation. Every dish tells a story of our land,
-                  our traditions, and our commitment to authentic flavors.
+                  while embracing modern techniques and presentation.
                 </p>
-                <p>
-                  Our menu changes with the seasons, always featuring the freshest ingredients from our
-                  own gardens and local producers. Our olive oil, produced on the estate, is the cornerstone
-                  of our cuisine, adding its distinctive character to every dish.
+                <p className="relative pl-6 border-l-2 border-[#8B7355]/30">
+                  Every dish tells a story of our land, featuring the freshest catch from the Adriatic
+                  and ingredients from our own gardens, all enhanced by our estate's liquid gold.
                 </p>
-                <p>
-                  Dine with us and experience the true taste of Albania, with panoramic views of our olive
-                  groves and the sparkling Adriatic Sea as your backdrop.
+                <p className="relative pl-6 border-l-2 border-[#8B7355]/30">
+                  Dine with panoramic views of olive groves and the sparkling sea as your backdrop,
+                  creating memories that last a lifetime.
                 </p>
+              </div>
+
+              {/* Experience Stats */}
+              <div className="grid grid-cols-3 gap-4 pt-8">
+                {[
+                  { number: '15+', label: 'Fresh Dishes' },
+                  { number: '4.8★', label: 'Guest Rating' },
+                  { number: 'Daily', label: 'Fresh Catch' }
+                ].map((stat, index) => (
+                  <AnimateDiv
+                    key={index}
+                    animation="slide-up"
+                    delay={0.8 + index * 0.2}
+                    className="text-center"
+                  >
+                    <div className="backdrop-blur-sm bg-white/60 rounded-2xl p-4 border border-white/40">
+                      <div className="text-2xl sm:text-3xl font-light text-[#8B7355]">{stat.number}</div>
+                      <div className="text-xs sm:text-sm text-gray-600 font-medium">{stat.label}</div>
+                    </div>
+                  </AnimateDiv>
+                ))}
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg">
-                <Image
-                  src="/images/chef.webp"
-                  alt="Our Executive Chef"
-                  className="object-cover"
-                  fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  quality={80}
-                />
-              </div>
-              <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg mt-8">
-                <Image
-                  src="/images/interior.webp"
-                  alt="Restaurant Interior"
-                  className="object-cover"
-                  fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  quality={80}
-                />
-              </div>
+
+            {/* Image Side */}
+            <div className="lg:col-span-5 order-1 lg:order-2">
+              <AnimateDiv
+                animation="slide-up"
+                duration={1.0}
+                delay={0.3}
+                className="relative group"
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="aspect-[3/4] relative rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                    <Image
+                      src="/images/chef.webp"
+                      alt="Our Executive Chef"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      quality={85}
+                    />
+                  </div>
+                  <div className="aspect-[3/4] relative rounded-2xl overflow-hidden shadow-xl mt-8 group-hover:shadow-2xl transition-all duration-500">
+                    <Image
+                      src="/images/interior.webp"
+                      alt="Restaurant Interior"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      quality={85}
+                    />
+                  </div>
+                </div>
+                {/* Floating Frame Effect */}
+                <div className="absolute -inset-4 bg-gradient-to-r from-[#8B7355]/20 to-transparent rounded-3xl -z-10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </AnimateDiv>
             </div>
           </div>
         </AnimateDiv>
       </section>
 
-      {/* Menu Section */}
-      <section className="py-20 bg-[#F8F6F3]">
+      {/* Enhanced Menu Section */}
+      <section className="relative py-16 sm:py-24 bg-gradient-to-b from-stone-50/50 to-white">
         <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
+          className="max-w-7xl mx-auto px-4 sm:px-6"
           animation="fade"
-          duration={0.8}
+          duration={1.0}
         >
-          <h2 className="text-4xl sm:text-5xl font-light text-center text-[#8B7355] mb-16">Our Menu</h2>
-
-          {/* Menu Categories */}
-          <div className="flex justify-center mb-12 space-x-8 overflow-x-auto pb-4">
-            {['featured', 'starters', 'mains', 'desserts'].map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category as any)}
-                className={`px-6 py-2 text-lg transition-colors duration-300 rounded-full ${
-                  activeCategory === category
-                    ? 'bg-[#8B7355] text-white'
-                    : 'text-[#8B7355] hover:bg-[#8B7355]/10'
-                }`}
-              >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </button>
-            ))}
+          {/* Menu Header */}
+          <div className="text-center mb-12 sm:mb-20">
+            <AnimateDiv animation="slide-up" delay={0.2}>
+              <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+                Fresh Daily Selection
+              </span>
+              <h2 className="text-3xl sm:text-6xl font-extralight text-[#8B7355] mt-4 mb-6 leading-tight">
+                Our Menu
+              </h2>
+              <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
+                Discover our carefully curated selection of fresh Adriatic seafood,
+                vibrant salads, and traditional Albanian specialties
+              </p>
+            </AnimateDiv>
           </div>
 
-          {/* Menu Items */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredMenu.map((item) => (
+          {/* Enhanced Menu Categories */}
+          <div className="flex justify-center mb-12 overflow-x-auto pb-4">
+            <div className="flex space-x-2 sm:space-x-4 bg-white/60 backdrop-blur-sm rounded-3xl p-2 border border-white/30">
+              {[
+                { key: 'featured', label: 'Featured', icon: SparklesIcon },
+                { key: 'salads', label: 'Salads', icon: HeartIcon },
+                { key: 'fish', label: 'Fresh Fish', icon: StarIcon },
+                { key: 'farmed-fish', label: 'Farmed Fish', icon: StarIcon }
+              ].map((category) => (
+                <button
+                  key={category.key}
+                  onClick={() => setActiveCategory(category.key as any)}
+                  className={`flex items-center space-x-2 px-4 sm:px-6 py-3 text-sm sm:text-base transition-all duration-300 rounded-2xl font-medium whitespace-nowrap ${
+                    activeCategory === category.key
+                      ? 'bg-gradient-to-r from-[#8B7355] to-[#A0845C] text-white shadow-lg'
+                      : 'text-[#8B7355] hover:bg-[#8B7355]/10'
+                  }`}
+                >
+                  <category.icon className="w-4 h-4" />
+                  <span>{category.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Menu Items Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+            {filteredMenu.map((item, index) => (
               <AnimateDiv
                 key={item.id}
                 animation="slide-up"
-                duration={0.5}
-                className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                duration={0.8}
+                delay={index * 0.1}
+                className="group"
               >
-                <div className="relative h-64">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    className="object-cover hover:scale-105 transition-transform duration-500"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    quality={75}
-                  />
+                <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/30 hover:border-[#8B7355]/30">
+
+                  {/* Seasonal Badge */}
                   {item.seasonal && (
-                    <div className="absolute top-4 right-4 bg-[#8B7355] text-white px-3 py-1 rounded-full text-sm">
-                      Seasonal
+                    <div className="absolute top-4 right-4 z-10">
+                      <div className="bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] text-white px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
+                        <SparklesIcon className="w-3 h-3" />
+                        <span>Seasonal</span>
+                      </div>
                     </div>
                   )}
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-2xl text-[#8B7355]">{item.name}</h3>
-                    <span className="text-xl text-[#8B7355]">{formatPrice(item.price)}</span>
+
+                  {/* Dish Image */}
+                  <div className="relative aspect-[4/3] bg-gradient-to-br from-stone-50 to-stone-100">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      quality={85}
+                    />
+
+                    {/* Floating Glow */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#8B7355]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
-                  <p className="text-gray-600">{item.description}</p>
+
+                  {/* Dish Info */}
+                  <div className="p-6 lg:p-8 space-y-4">
+                    <div className="flex justify-between items-start">
+                      <h3 className="text-xl lg:text-2xl font-light text-[#8B7355] group-hover:text-[#A0845C] transition-colors duration-300">
+                        {item.name}
+                      </h3>
+                      <span className="text-xl lg:text-2xl font-light text-[#8B7355] whitespace-nowrap ml-4">
+                        {formatPrice(item.price, item.unit)}
+                      </span>
+                    </div>
+                    <p className="text-sm lg:text-base text-gray-600 leading-relaxed font-light">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               </AnimateDiv>
             ))}
           </div>
+
+          {/* Drinks Section Toggle */}
+          <div className="text-center">
+            <button
+              onClick={() => setShowDrinks(!showDrinks)}
+              className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+            >
+              <HeartIcon className="w-5 h-5 transition-transform group-hover:scale-110" />
+              <span>{showDrinks ? 'Hide' : 'View'} Drinks Menu</span>
+            </button>
+          </div>
+
+          {/* Drinks Menu */}
+          {showDrinks && (
+            <AnimateDiv
+              animation="slide-up"
+              duration={0.8}
+              className="mt-12 backdrop-blur-sm bg-white/60 rounded-3xl p-8 border border-white/40"
+            >
+              <h3 className="text-2xl lg:text-3xl font-light text-[#8B7355] mb-8 text-center">Beverages</h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {['beer', 'cocktail', 'soft', 'coffee'].map((category) => (
+                  <div key={category} className="space-y-4">
+                    <h4 className="text-lg font-medium text-[#8B7355] capitalize border-b border-[#8B7355]/30 pb-2">
+                      {category === 'soft' ? 'Soft Drinks' : category}s
+                    </h4>
+                    <div className="space-y-3">
+                      {drinks
+                        .filter(drink => drink.category === category)
+                        .map((drink, index) => (
+                          <div key={index} className="flex justify-between items-center">
+                            <span className="text-gray-700 font-light">{drink.name}</span>
+                            <span className="text-[#8B7355] font-medium">{formatPrice(drink.price)}</span>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </AnimateDiv>
+          )}
         </AnimateDiv>
       </section>
 
-      {/* Reservation Section */}
-      <section className="py-20 bg-white relative">
+      {/* Enhanced Reservation Section */}
+      <section className="relative py-16 sm:py-24 bg-gradient-to-b from-white to-stone-50">
         <div className="absolute inset-0 bg-[url('/images/pattern.webp')] opacity-5"></div>
         <AnimateDiv
-          className="max-w-3xl mx-auto px-4 sm:px-8 text-center relative"
+          className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10"
           animation="fade"
-          duration={0.8}
+          duration={1.0}
         >
-          <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355] mb-6">Make a Reservation</h2>
-          <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
-            Join us for lunch or dinner and experience the flavors of Kallmi Estate.
-            We recommend reservations, especially during peak season.
-          </p>
-          <div className="bg-white p-8 rounded-lg shadow-xl">
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <div className="flex-1">
+          <div className="space-y-6 mb-12">
+            <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+              Reserve Your Table
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extralight text-[#8B7355] leading-tight">
+              Join Us for an
+              <span className="block italic">Unforgettable Experience</span>
+            </h2>
+            <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed font-light">
+              Secure your table overlooking the Adriatic Sea and let us create
+              a memorable dining experience for you and your loved ones.
+            </p>
+          </div>
+
+          <div className="backdrop-blur-sm bg-white/80 rounded-3xl p-8 lg:p-12 shadow-2xl border border-white/30">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+              <div className="relative group">
                 <input
                   type="text"
                   placeholder="Your Name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
+                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
-              <div className="flex-1">
+              <div className="relative group">
                 <input
                   type="email"
                   placeholder="Email Address"
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
+                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <div className="flex-1">
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
+              <div className="relative group">
                 <input
                   type="date"
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
+                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
-              <div className="flex-1">
-                <select
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                >
+              <div className="relative group">
+                <select className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light">
                   <option value="">Select Time</option>
                   <option value="12:00">12:00 PM</option>
                   <option value="12:30">12:30 PM</option>
@@ -311,11 +678,10 @@ export default function Restaurant() {
                   <option value="20:00">8:00 PM</option>
                   <option value="20:30">8:30 PM</option>
                 </select>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
-              <div className="flex-1">
-                <select
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                >
+              <div className="relative group">
+                <select className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light">
                   <option value="">Number of Guests</option>
                   <option value="1">1 Guest</option>
                   <option value="2">2 Guests</option>
@@ -325,120 +691,160 @@ export default function Restaurant() {
                   <option value="6">6 Guests</option>
                   <option value="7+">7+ Guests</option>
                 </select>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
             </div>
-            <div className="mb-6">
+
+            <div className="mb-8 relative group">
               <textarea
-                placeholder="Special Requests"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355] h-24"
+                placeholder="Special Requests or Dietary Requirements"
+                className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 h-32 resize-none font-light"
               ></textarea>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
             </div>
-            <button
-              className="w-full px-6 py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#6B563F] transition-colors duration-300 text-lg"
-            >
+
+            <button className="w-full px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg text-lg">
               Request Reservation
             </button>
           </div>
-          <p className="mt-8 text-gray-500">
-            For large groups or special events, please contact us directly at <span className="text-[#8B7355]">restaurant@kallmiestate.com</span>
+
+          <p className="mt-8 text-gray-500 font-light">
+            For large groups or special events, please contact us directly at{' '}
+            <a href="tel:+355682450851" className="text-[#8B7355] hover:text-[#A0845C] transition-colors duration-300">
+              +355 68 24 50 851
+            </a>
           </p>
         </AnimateDiv>
       </section>
 
-      {/* Private Events */}
-      <section className="py-20 bg-stone-50">
+      {/* Private Events Section */}
+      <section className="relative py-16 sm:py-24">
         <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
+          className="max-w-7xl mx-auto px-4 sm:px-6"
           animation="fade"
-          duration={0.8}
+          duration={1.0}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1 space-y-6">
-              <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355]">Private Events</h2>
-              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
-                <p>
-                  Celebrate your special occasions in the stunning setting of Kallmi Estate.
-                  Our restaurant offers private dining experiences for weddings, anniversaries,
-                  corporate events, and more.
-                </p>
-                <p>
-                  Our team will work with you to create a customized menu and experience that
-                  exceeds your expectations, with attentive service and breathtaking views.
-                </p>
-                <Link
-                  href="/contact"
-                  className="inline-block px-8 py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#6B563F] transition-colors duration-300 mt-4"
-                >
-                  Inquire About Events
-                </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+            <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
+              <div className="space-y-4">
+                <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+                  Special Occasions
+                </span>
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extralight text-[#8B7355] leading-tight">
+                  Private Events &
+                  <span className="block italic">Celebrations</span>
+                </h2>
               </div>
+
+              <div className="space-y-6 text-base sm:text-lg text-gray-700 leading-relaxed font-light">
+                <p className="relative pl-6 border-l-2 border-[#8B7355]/30">
+                  Celebrate life's most precious moments in the stunning setting of Kallmi Estate,
+                  where every detail is crafted to perfection.
+                </p>
+                <p className="relative pl-6 border-l-2 border-[#8B7355]/30">
+                  From intimate anniversaries to grand weddings, our team creates bespoke experiences
+                  with customized menus and impeccable service.
+                </p>
+              </div>
+
+              <Link
+                href="/contact"
+                className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              >
+                <HeartIcon className="w-5 h-5 transition-transform group-hover:scale-110" />
+                <span>Plan Your Event</span>
+              </Link>
             </div>
-            <div className="order-1 lg:order-2 relative aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
-              <Image
-                src="/images/private-event.webp"
-                alt="Private Dining at Kallmi Estate"
-                className="object-cover"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                quality={80}
-              />
+
+            <div className="lg:col-span-5 order-1 lg:order-2">
+              <AnimateDiv
+                animation="slide-up"
+                duration={1.0}
+                delay={0.3}
+                className="relative group"
+              >
+                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/images/private-event.webp"
+                    alt="Private Dining at Kallmi Estate"
+                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                    quality={90}
+                  />
+                  {/* Floating Frame Effect */}
+                  <div className="absolute -inset-4 bg-gradient-to-r from-[#8B7355]/20 to-transparent rounded-3xl -z-10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+              </AnimateDiv>
             </div>
           </div>
         </AnimateDiv>
       </section>
 
       {/* Recognition & Certificates Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-16 sm:py-24 bg-gradient-to-b from-stone-50/50 to-white">
         <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8 text-center"
+          className="max-w-7xl mx-auto px-4 sm:px-6 text-center"
           animation="fade"
-          duration={0.8}
+          duration={1.0}
         >
-          <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355] mb-16">Recognition & Certificates</h2>
-          <p className="text-lg text-gray-700 mb-12 max-w-3xl mx-auto">
-            Kallmi i Bukur has been recognized for our commitment to culinary excellence and outstanding dining experience.
-          </p>
+          <div className="space-y-6 mb-16">
+            <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+              Awards & Recognition
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extralight text-[#8B7355] leading-tight">
+              Celebrated
+              <span className="block italic">Excellence</span>
+            </h2>
+            <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed font-light">
+              Kallmi i Bukur has been recognized for our commitment to culinary excellence
+              and outstanding dining experience.
+            </p>
+          </div>
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 flex-wrap">
             <AnimateDiv
               animation="slide-up"
-              duration={0.5}
-              className="flex flex-col items-center"
+              duration={0.8}
+              className="flex flex-col items-center group"
             >
-              <div className="mb-16">
+              <div className="mb-6 transform transition-transform duration-300 group-hover:scale-105">
                 <a
                   href="https://al.sluurpy.com/durres/restaurant/6026481/kallmi-bukur"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block transition-transform hover:scale-105"
+                  className="block"
                 >
                   <Image
                     src="https://foto1.sluurpy.com/bollini_2025/6026481.png"
                     alt="Sluurpy Certificate"
                     width={150}
                     height={150}
-                    unoptimized={true} // Because it's an external image
+                    unoptimized={true}
+                    className="rounded-2xl shadow-lg"
                   />
                 </a>
               </div>
-              <p className="text-gray-600">Sluurpy 2025 Certificate of Excellence</p>
+              <div className="backdrop-blur-sm bg-white/60 rounded-2xl p-4 border border-white/40">
+                <p className="text-[#8B7355] font-medium">Sluurpy 2025</p>
+                <p className="text-gray-600 text-sm">Certificate of Excellence</p>
+              </div>
             </AnimateDiv>
 
             <AnimateDiv
               animation="slide-up"
-              duration={0.5}
+              duration={0.8}
               delay={0.2}
-              className="flex flex-col items-center"
+              className="flex flex-col items-center group"
             >
-              <div className="mb-4">
-                {/* Custom wrapper to control size of Restaurant Guru Badge */}
-                <div className="flex justify-center items-center scale-[1] transform-gpu">
+              <div className="mb-6 transform transition-transform duration-300 group-hover:scale-105">
+                <div className="flex justify-center items-center">
                   <a
                     id="b-circledLeaves27"
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://restaurantguru.com/Kallmi-Bukur-Durres"
-                    className="b-circledLeaves27--light b-circledLeaves27--2025 transition-transform hover:scale-105"
+                    className="b-circledLeaves27--light b-circledLeaves27--2025"
                   >
                     <span className="b-circledLeaves27__title">Recommended</span>
                     <span className="b-circledLeaves27__separator"></span>
@@ -446,13 +852,26 @@ export default function Restaurant() {
                   </a>
                 </div>
               </div>
-              <p className="text-gray-600">Restaurant Guru 2025 Recommendation</p>
+              <div className="backdrop-blur-sm bg-white/60 rounded-2xl p-4 border border-white/40">
+                <p className="text-[#8B7355] font-medium">Restaurant Guru 2025</p>
+                <p className="text-gray-600 text-sm">Recommendation</p>
+              </div>
             </AnimateDiv>
           </div>
 
-          <p className="mt-16 text-lg text-gray-700">
-            We're honored to be recognized for our commitment to quality and authentic Albanian cuisine.
-          </p>
+          <AnimateDiv
+            animation="fade"
+            delay={0.8}
+            className="mt-16"
+          >
+            <div className="backdrop-blur-sm bg-white/60 rounded-3xl p-8 border border-white/40 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-700 italic font-light leading-relaxed">
+                "We're honored to be recognized for our commitment to authentic Albanian cuisine
+                and the unforgettable experiences we create for our guests."
+              </p>
+              <div className="w-16 h-px bg-[#8B7355] mx-auto mt-6" />
+            </div>
+          </AnimateDiv>
         </AnimateDiv>
       </section>
     </div>

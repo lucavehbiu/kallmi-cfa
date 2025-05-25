@@ -52,11 +52,11 @@ export default function ContactSection() {
             <div className="space-y-6 backdrop-blur-sm bg-black/30 p-8 rounded-lg shadow-xl">
               <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
 
-              <a href="mailto:eldivehbiu@gmail.com" className="flex items-center space-x-4 hover:text-stone-300 transition-colors group">
+              <a href="mailto:kallmibukur@gmail.com" className="flex items-center space-x-4 hover:text-stone-300 transition-colors group">
                 <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
                   <EnvelopeIcon className="w-5 h-5" />
                 </div>
-                <span className="text-lg">eldivehbiu@gmail.com</span>
+                <span className="text-lg">kallmibukur@gmail.com</span>
               </a>
 
               <a href="tel:+355682450851" className="flex items-center space-x-4 hover:text-stone-300 transition-colors group">
