@@ -265,7 +265,7 @@ export default function Restaurant() {
       </div>
 
       {/* Immersive Hero Section */}
-      <div className="relative h-[70vh] overflow-hidden">
+      <div className="relative min-h-screen sm:h-[80vh] lg:h-[70vh] overflow-hidden pt-20 lg:pt-24">
         {/* Parallax Background */}
         <div className="absolute inset-0 scale-110">
           <Image
@@ -284,8 +284,8 @@ export default function Restaurant() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/30 via-transparent to-[#D4AF37]/20" />
 
         {/* Hero Content */}
-        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6">
-          <div className="max-w-4xl space-y-6 sm:space-y-8">
+        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6 py-16">
+          <div className="max-w-4xl space-y-4 sm:space-y-6 lg:space-y-8">
 
             {/* Floating Badge */}
             <AnimateDiv
@@ -294,9 +294,9 @@ export default function Restaurant() {
               delay={0.3}
               className="inline-block"
             >
-              <div className="backdrop-blur-md bg-white/10 rounded-full px-6 py-3 border border-white/20 mb-4">
-                <span className="text-sm sm:text-base font-medium tracking-widest uppercase text-white/90">
-                  Mediterrenean Cuisine
+              <div className="backdrop-blur-md bg-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3 border border-white/20 mb-3 sm:mb-4">
+                <span className="text-xs sm:text-sm lg:text-base font-medium tracking-widest uppercase text-white/90">
+                  Mediterranean Cuisine
                 </span>
               </div>
             </AnimateDiv>
@@ -307,9 +307,9 @@ export default function Restaurant() {
               duration={1.2}
               delay={0.6}
             >
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extralight tracking-wide leading-tight">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight tracking-wide leading-tight">
                 <span className="block">Kallmi</span>
-                <span className="block text-3xl sm:text-5xl lg:text-6xl italic font-light text-[#D4AF37] mt-2">
+                <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-6xl italic font-light text-[#D4AF37] mt-1 sm:mt-2">
                   Restaurant
                 </span>
               </h1>
@@ -320,11 +320,11 @@ export default function Restaurant() {
               animation="fade"
               duration={0.8}
               delay={1.0}
-              className="flex items-center justify-center space-x-4"
+              className="flex items-center justify-center space-x-3 sm:space-x-4"
             >
-              <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-              <HeartIcon className="w-5 h-5 text-[#D4AF37]" />
-              <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              <HeartIcon className="w-4 sm:w-5 h-4 sm:h-5 text-[#D4AF37]" />
+              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </AnimateDiv>
 
             {/* Subtitle */}
@@ -333,38 +333,41 @@ export default function Restaurant() {
               duration={1.0}
               delay={1.2}
             >
-              <p className="text-lg sm:text-2xl font-light opacity-95 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-base sm:text-xl lg:text-2xl font-light opacity-95 leading-relaxed max-w-3xl mx-auto px-2">
                 Where <span className="text-[#D4AF37]">authentic Albanian cuisine</span> meets
                 contemporary elegance, overlooking the sparkling Adriatic Sea
               </p>
             </AnimateDiv>
-
-            {/* Restaurant Info Cards */}
-            <AnimateDiv
-              animation="slide-up"
-              duration={1.0}
-              delay={1.5}
-              className="flex justify-center max-w-3xl mx-auto mt-8"
-            >
-              {[
-                { icon: ClockIcon, text: "13:00 - 16:00" },
-                { icon: MapPinIcon, text: "Seaside Terrace" },
-              ].map((item, index) => (
-                <div key={index} className="backdrop-blur-md bg-white/10 rounded-2xl p-4 border border-white/20 mx-2 min-w-[140px] flex flex-col items-center">
-                  <item.icon className="w-6 h-6 text-[#D4AF37] mb-2" />
-                  <p className="text-white/90 text-sm font-light text-center">{item.text}</p>
-                </div>
-              ))}
-            </AnimateDiv>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Restaurant Info Cards - Positioned at Bottom */}
+        <div className="absolute bottom-16 sm:bottom-20 left-4 right-4 z-10">
+          <AnimateDiv
+            animation="slide-up"
+            duration={1.0}
+            delay={1.5}
+            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 max-w-4xl mx-auto"
+          >
+            {[
+              { icon: ClockIcon, text: "13:00 - 16:00" },
+              { icon: MapPinIcon, text: "Seaside Terrace" },
+              { icon: SparklesIcon, text: "Daily Fresh Seafood" },
+            ].map((item, index) => (
+              <div key={index} className="backdrop-blur-md bg-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/20 min-w-[120px] sm:min-w-[140px] flex flex-col items-center">
+                <item.icon className="w-5 sm:w-6 h-5 sm:h-6 text-[#D4AF37] mb-1 sm:mb-2" />
+                <p className="text-white/90 text-xs sm:text-sm font-light text-center">{item.text}</p>
+              </div>
+            ))}
+          </AnimateDiv>
+        </div>
+
+        {/* Scroll Indicator - Hidden on Mobile */}
         <AnimateDiv
           animation="fade"
           duration={1.0}
           delay={1.8}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
           <div className="flex flex-col items-center space-y-2 text-white/70">
             <span className="text-xs sm:text-sm font-light tracking-widest uppercase">
@@ -378,42 +381,42 @@ export default function Restaurant() {
       </div>
 
       {/* Introduction Section */}
-      <section className="relative py-16 sm:py-24">
+      <section className="relative py-12 sm:py-16 lg:py-24">
         <AnimateDiv
           className="max-w-7xl mx-auto px-4 sm:px-6"
           animation="fade"
           duration={1.0}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
 
             {/* Content Side */}
             <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
-              <div className="space-y-4">
+              <div className="space-y-4 sm:space-y-6">
                 <div className="inline-block">
                   <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
                     Culinary Heritage
                   </span>
                   <div className="w-16 h-px bg-[#8B7355] mt-2" />
                 </div>
-                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extralight text-[#8B7355] leading-tight">
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-extralight text-[#8B7355] leading-tight">
                   A Journey Through
-                  <span className="block italic">Albanian Flavors</span>
+                  <span className="block italic mt-1 sm:mt-2">Albanian Flavors</span>
                 </h2>
               </div>
 
-              <div className="space-y-6 text-base sm:text-lg text-gray-700 leading-relaxed font-light">
-                <p className="relative pl-6 border-l-2 border-[#8B7355]/30">
+              <div className="space-y-4 sm:space-y-6 text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed font-light">
+                <p className="relative pl-4 sm:pl-6 border-l-2 border-[#8B7355]/30">
                   Every dish tells a story of our land, featuring the freshest catch from the Adriatic
                   and ingredients from our own gardens, all enhanced by our estate's liquid gold.
                 </p>
-                <p className="relative pl-6 border-l-2 border-[#8B7355]/30">
+                <p className="relative pl-4 sm:pl-6 border-l-2 border-[#8B7355]/30">
                   Dine with panoramic views of olive groves and the sparkling sea as your backdrop,
                   creating memories that last a lifetime.
                 </p>
               </div>
 
               {/* Experience Stats */}
-              <div className="grid grid-cols-3 gap-4 pt-8">
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-6 sm:pt-8">
                 {[
                   { number: '15+', label: 'Fresh Dishes' },
                   { number: '4.8★', label: 'Guest Rating' },
@@ -425,9 +428,9 @@ export default function Restaurant() {
                     delay={0.8 + index * 0.2}
                     className="text-center"
                   >
-                    <div className="backdrop-blur-sm bg-white/60 rounded-2xl p-4 border border-white/40">
-                      <div className="text-2xl sm:text-3xl font-light text-[#8B7355]">{stat.number}</div>
-                      <div className="text-xs sm:text-sm text-gray-600 font-medium">{stat.label}</div>
+                    <div className="backdrop-blur-sm bg-white/60 rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/40">
+                      <div className="text-xl sm:text-2xl lg:text-3xl font-light text-[#8B7355]">{stat.number}</div>
+                      <div className="text-xs sm:text-sm text-gray-600 font-medium mt-1">{stat.label}</div>
                     </div>
                   </AnimateDiv>
                 ))}
@@ -435,15 +438,15 @@ export default function Restaurant() {
             </div>
 
             {/* Image Side */}
-            <div className="lg:col-span-5 order-1 lg:order-2">
+            <div className="lg:col-span-5 order-1 lg:order-2 mb-8 lg:mb-0">
               <AnimateDiv
                 animation="slide-up"
                 duration={1.0}
                 delay={0.3}
                 className="relative group"
               >
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="aspect-[3/4] relative rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="aspect-[3/4] relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
                     <Image
                       src="https://storage.googleapis.com/oda-images/IMG_0655.jpg"
                       alt="Our Executive Chef"
@@ -453,7 +456,7 @@ export default function Restaurant() {
                       quality={85}
                     />
                   </div>
-                  <div className="aspect-[3/4] relative rounded-2xl overflow-hidden shadow-xl mt-8 group-hover:shadow-2xl transition-all duration-500">
+                  <div className="aspect-[3/4] relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl mt-4 sm:mt-8 group-hover:shadow-2xl transition-all duration-500">
                     <Image
                       src="/images/interior.webp"
                       alt="Restaurant Interior"

@@ -117,7 +117,7 @@ export default function Shop() {
       </div>
 
       {/* Immersive Hero Section */}
-      <div className="relative h-[60vh] sm:h-[70vh] overflow-hidden">
+      <div className="relative min-h-screen sm:h-[80vh] lg:h-[70vh] overflow-hidden pt-20 lg:pt-24">
         {/* Parallax Background */}
         <div className="absolute inset-0 scale-110">
           <Image
@@ -136,8 +136,8 @@ export default function Shop() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/30 via-transparent to-[#D4AF37]/20" />
 
         {/* Hero Content */}
-        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6">
-          <div className="max-w-4xl space-y-6 sm:space-y-8">
+        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6 py-16">
+          <div className="max-w-4xl space-y-4 sm:space-y-6 lg:space-y-8">
 
             {/* Floating Badge */}
             <AnimateDiv
@@ -146,8 +146,8 @@ export default function Shop() {
               delay={0.3}
               className="inline-block"
             >
-              <div className="backdrop-blur-md bg-white/10 rounded-full px-6 py-3 border border-white/20 mb-4">
-                <span className="text-sm sm:text-base font-medium tracking-widest uppercase text-white/90">
+              <div className="backdrop-blur-md bg-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3 border border-white/20 mb-3 sm:mb-4">
+                <span className="text-xs sm:text-sm lg:text-base font-medium tracking-widest uppercase text-white/90">
                   Liquid Gold Collection
                 </span>
               </div>
@@ -159,9 +159,9 @@ export default function Shop() {
               duration={1.2}
               delay={0.6}
             >
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extralight tracking-wide leading-tight">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight tracking-wide leading-tight">
                 <span className="block">Artisanal</span>
-                <span className="block text-3xl sm:text-5xl lg:text-6xl italic font-light text-[#D4AF37] mt-2">
+                <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-6xl italic font-light text-[#D4AF37] mt-1 sm:mt-2">
                   Excellence
                 </span>
               </h1>
@@ -172,11 +172,11 @@ export default function Shop() {
               animation="fade"
               duration={0.8}
               delay={1.0}
-              className="flex items-center justify-center space-x-4"
+              className="flex items-center justify-center space-x-3 sm:space-x-4"
             >
-              <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-              <SparklesIcon className="w-5 h-5 text-[#D4AF37]" />
-              <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              <SparklesIcon className="w-4 sm:w-5 h-4 sm:h-5 text-[#D4AF37]" />
+              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </AnimateDiv>
 
             {/* Subtitle */}
@@ -185,7 +185,7 @@ export default function Shop() {
               duration={1.0}
               delay={1.2}
             >
-              <p className="text-lg sm:text-2xl font-light opacity-95 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-base sm:text-xl lg:text-2xl font-light opacity-95 leading-relaxed max-w-3xl mx-auto px-2">
                 Discover our curated collection of premium extra virgin olive oils,
                 each bottle telling the story of our <span className="text-[#D4AF37]">ancient heritage</span>
               </p>
@@ -193,12 +193,33 @@ export default function Shop() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Shop Info Cards - Positioned at Bottom */}
+        <div className="absolute bottom-16 sm:bottom-20 left-4 right-4 z-10">
+          <AnimateDiv
+            animation="slide-up"
+            duration={1.0}
+            delay={1.5}
+            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 max-w-4xl mx-auto"
+          >
+            {[
+              { icon: SparklesIcon, text: "Premium Quality" },
+              { icon: HeartIcon, text: "2024 Harvest" },
+              { icon: ShoppingCartIcon, text: "Limited Edition" },
+            ].map((item, index) => (
+              <div key={index} className="backdrop-blur-md bg-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/20 min-w-[120px] sm:min-w-[140px] flex flex-col items-center">
+                <item.icon className="w-5 sm:w-6 h-5 sm:h-6 text-[#D4AF37] mb-1 sm:mb-2" />
+                <p className="text-white/90 text-xs sm:text-sm font-light text-center">{item.text}</p>
+              </div>
+            ))}
+          </AnimateDiv>
+        </div>
+
+        {/* Scroll Indicator - Hidden on Mobile */}
         <AnimateDiv
           animation="fade"
           duration={1.0}
           delay={1.8}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
           <div className="flex flex-col items-center space-y-2 text-white/70">
             <span className="text-xs sm:text-sm font-light tracking-widest uppercase">

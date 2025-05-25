@@ -1,9 +1,43 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, ReactNode } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AnimateDiv } from './motion/MotionWrapper'
+import {
+  SparklesIcon,
+  HeartIcon,
+  FireIcon,
+  MapPinIcon,
+  StarIcon,
+  SunIcon,
+  MoonIcon,
+  HomeIcon
+} from '@heroicons/react/24/outline'
+
+interface AnimationProps {
+  children: ReactNode
+  className?: string
+  animation?: 'fade' | 'slide-up' | 'scale'
+  duration?: number
+  delay?: number
+  [key: string]: any
+}
+
+const AnimateDiv = ({
+  children,
+  className = '',
+  animation = 'fade',
+  ...props
+}: AnimationProps) => {
+  return (
+    <div
+      className={className}
+      {...props}
+    >
+      {children}
+    </div>
+  )
+}
 
 interface CampSite {
   id: number
@@ -59,9 +93,9 @@ const campsites: CampSite[] = [
 ];
 
 const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('de-DE', {
-    style: 'currency',
-    currency: 'EUR'
+  return new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 0
   }).format(price)
 }
 
@@ -70,135 +104,332 @@ export default function Camping() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   return (
-    <div className="min-h-screen bg-stone-50 font-cormorant">
-      {/* Hero Section */}
-      <div className="h-[60vh] relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/40 z-10" />
-        <Image
-          src="/images/stay_snippet.webp"
-          alt="Kallmi Estate Camping"
-          className="object-cover object-center"
-          fill
-          priority
-          sizes="100vw"
-          quality={90}
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-20 px-4">
-          <h1 className="text-5xl md:text-7xl font-light tracking-wider mb-4 text-center">Camp With Us</h1>
-          <p className="text-xl md:text-2xl max-w-2xl text-center font-light">
-            Experience the beauty of the Albanian coast under the stars
-          </p>
+    <div className="min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 font-cormorant relative overflow-hidden">
+
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-[#8B7355]/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-48 h-48 bg-[#D4AF37]/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse delay-2000" />
+      </div>
+
+      {/* Immersive Hero Section */}
+      <div className="relative min-h-screen sm:h-[80vh] lg:h-[70vh] overflow-hidden pt-20 lg:pt-24">
+        {/* Parallax Background */}
+        <div className="absolute inset-0 scale-110">
+          <Image
+            src="/images/stay_snippet.webp"
+            alt="Kallmi Estate Camping - Under the Stars"
+            className="object-cover object-center"
+            fill
+            priority
+            sizes="100vw"
+            quality={90}
+          />
         </div>
+
+        {/* Sophisticated Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/30 via-transparent to-[#D4AF37]/20" />
+
+        {/* Hero Content */}
+        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6 py-16">
+          <div className="max-w-4xl space-y-4 sm:space-y-6 lg:space-y-8">
+
+            {/* Floating Badge */}
+            <AnimateDiv
+              animation="fade"
+              duration={1.0}
+              delay={0.3}
+              className="inline-block"
+            >
+              <div className="backdrop-blur-md bg-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3 border border-white/20 mb-3 sm:mb-4">
+                <span className="text-xs sm:text-sm lg:text-base font-medium tracking-widest uppercase text-white/90">
+                  Est. 2004 • Wild & Free
+                </span>
+              </div>
+            </AnimateDiv>
+
+            {/* Main Title */}
+            <AnimateDiv
+              animation="slide-up"
+              duration={1.2}
+              delay={0.6}
+            >
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight tracking-wide leading-tight">
+                <span className="block">KALLMI</span>
+                <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-6xl italic font-light text-[#D4AF37] mt-1 sm:mt-2">
+                  Camping
+                </span>
+              </h1>
+            </AnimateDiv>
+
+            {/* Elegant Divider */}
+            <AnimateDiv
+              animation="fade"
+              duration={0.8}
+              delay={1.0}
+              className="flex items-center justify-center space-x-3 sm:space-x-4"
+            >
+              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              <HomeIcon className="w-4 sm:w-5 h-4 sm:h-5 text-[#D4AF37]" />
+              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+            </AnimateDiv>
+
+            {/* Subtitle */}
+            <AnimateDiv
+              animation="slide-up"
+              duration={1.0}
+              delay={1.2}
+            >
+              <p className="text-base sm:text-xl lg:text-2xl font-light opacity-95 leading-relaxed max-w-3xl mx-auto px-2">
+                Sleep under <span className="text-[#D4AF37]">ancient olive trees</span> and wake to
+                breathtaking Adriatic sunrises in Albania's most enchanting camping destination
+              </p>
+            </AnimateDiv>
+          </div>
+        </div>
+
+        {/* Camping Info Cards - Positioned at Bottom */}
+        <div className="absolute bottom-16 sm:bottom-20 left-4 right-4 z-10">
+          <AnimateDiv
+            animation="slide-up"
+            duration={1.0}
+            delay={1.5}
+            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 max-w-4xl mx-auto"
+          >
+            {[
+              { icon: HomeIcon, text: "Olive Grove Sites" },
+              { icon: SunIcon, text: "Sea Views" },
+              { icon: MoonIcon, text: "Stargazing" },
+            ].map((item, index) => (
+              <div key={index} className="backdrop-blur-md bg-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/20 min-w-[120px] sm:min-w-[140px] flex flex-col items-center">
+                <item.icon className="w-5 sm:w-6 h-5 sm:h-6 text-[#D4AF37] mb-1 sm:mb-2" />
+                <p className="text-white/90 text-xs sm:text-sm font-light text-center">{item.text}</p>
+              </div>
+            ))}
+          </AnimateDiv>
+        </div>
+
+        {/* Scroll Indicator - Hidden on Mobile */}
+        <AnimateDiv
+          animation="fade"
+          duration={1.0}
+          delay={1.8}
+          className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        >
+          <div className="flex flex-col items-center space-y-2 text-white/70">
+            <span className="text-xs sm:text-sm font-light tracking-widest uppercase">
+              Discover Camping
+            </span>
+            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce" />
+            </div>
+          </div>
+        </AnimateDiv>
       </div>
 
       {/* Introduction Section */}
-      <section className="py-20 bg-white">
+      <section className="relative py-12 sm:py-16 lg:py-24">
         <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
+          className="max-w-7xl mx-auto px-4 sm:px-6"
           animation="fade"
-          duration={0.8}
+          duration={1.0}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355]">Camping at Kallmi Estate</h2>
-              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
-                <p>
-                  Immerse yourself in the natural beauty of Albania with our unique camping experience
-                  at Kallmi Estate. Camp among centuries-old olive trees with breathtaking views of the
-                  Adriatic Sea.
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
+
+            {/* Content Side */}
+            <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="inline-block">
+                  <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+                    Wild Adventure
+                  </span>
+                  <div className="w-16 h-px bg-[#8B7355] mt-2" />
+                </div>
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-extralight text-[#8B7355] leading-tight">
+                  Camping Among
+                  <span className="block italic mt-1 sm:mt-2">Ancient Olives</span>
+                </h2>
+              </div>
+
+              <div className="space-y-4 sm:space-y-6 text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed font-light">
+                <p className="relative pl-4 sm:pl-6 border-l-2 border-[#8B7355]/30">
+                  Immerse yourself in nature's embrace where centuries-old olive trees whisper stories
+                  of the past while the Adriatic Sea serenades you to sleep under a blanket of stars.
                 </p>
-                <p>
-                  Whether you prefer a simple tent site or our luxurious glamping option, you'll connect
-                  with nature while enjoying access to the amenities and experiences of the estate.
+                <p className="relative pl-4 sm:pl-6 border-l-2 border-[#8B7355]/30">
+                  From rustic tent sites to luxury glamping, experience the perfect balance of adventure
+                  and comfort in Albania's most pristine coastal setting.
                 </p>
-                <p>
-                  Wake up to stunning sunrises, spend your days exploring the coastline, and fall asleep
-                  under a blanket of stars, all while being just steps away from our restaurant and facilities.
+                <p className="relative pl-4 sm:pl-6 border-l-2 border-[#8B7355]/30">
+                  Wake to stunning sunrises, explore hidden beaches, and create memories that will
+                  last a lifetime in this untouched paradise.
                 </p>
+              </div>
+
+              {/* Experience Stats */}
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-6 sm:pt-8">
+                {[
+                  { number: '4', label: 'Unique Sites' },
+                  { number: '5★', label: 'Experience' },
+                  { number: '24/7', label: 'Nature' }
+                ].map((stat, index) => (
+                  <AnimateDiv
+                    key={index}
+                    animation="slide-up"
+                    delay={0.8 + index * 0.2}
+                    className="text-center"
+                  >
+                    <div className="backdrop-blur-sm bg-white/60 rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/40">
+                      <div className="text-xl sm:text-2xl lg:text-3xl font-light text-[#8B7355]">{stat.number}</div>
+                      <div className="text-xs sm:text-sm text-gray-600 font-medium mt-1">{stat.label}</div>
+                    </div>
+                  </AnimateDiv>
+                ))}
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg">
-                <Image
-                  src="/images/room-interior.webp"
-                  alt="Camping Site"
-                  className="object-cover"
-                  fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  quality={80}
-                />
-              </div>
-              <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg mt-8">
-                <Image
-                  src="/images/room-view.webp"
-                  alt="Camping View"
-                  className="object-cover"
-                  fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  quality={80}
-                />
-              </div>
+
+            {/* Image Side */}
+            <div className="lg:col-span-5 order-1 lg:order-2 mb-8 lg:mb-0">
+              <AnimateDiv
+                animation="slide-up"
+                duration={1.0}
+                delay={0.3}
+                className="relative group"
+              >
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="aspect-[3/4] relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                    <Image
+                      src="/images/room-interior.webp"
+                      alt="Camping Under Olive Trees"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      quality={85}
+                    />
+                  </div>
+                  <div className="aspect-[3/4] relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl mt-4 sm:mt-8 group-hover:shadow-2xl transition-all duration-500">
+                    <Image
+                      src="/images/room-view.webp"
+                      alt="Adriatic Sea Views"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      quality={85}
+                    />
+                  </div>
+                </div>
+                {/* Floating Frame Effect */}
+                <div className="absolute -inset-4 bg-gradient-to-r from-[#8B7355]/20 to-transparent rounded-3xl -z-10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </AnimateDiv>
             </div>
           </div>
         </AnimateDiv>
       </section>
 
-      {/* Campsites Section */}
-      <section className="py-20 bg-[#F8F6F3]">
+      {/* Enhanced Campsites Section */}
+      <section className="relative py-16 sm:py-24 bg-gradient-to-b from-stone-50/50 to-white">
         <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
+          className="max-w-7xl mx-auto px-4 sm:px-6"
           animation="fade"
-          duration={0.8}
+          duration={1.0}
         >
-          <h2 className="text-4xl sm:text-5xl font-light text-center text-[#8B7355] mb-16">Our Campsites</h2>
+          {/* Section Header */}
+          <div className="text-center mb-12 sm:mb-20">
+            <AnimateDiv animation="slide-up" delay={0.2}>
+              <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+                Choose Your Adventure
+              </span>
+              <h2 className="text-3xl sm:text-6xl font-extralight text-[#8B7355] mt-4 mb-6 leading-tight">
+                Our Campsites
+              </h2>
+              <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
+                From rustic tent pitches under ancient olives to luxury glamping with all amenities,
+                find your perfect camping experience
+              </p>
+            </AnimateDiv>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {campsites.map((site) => (
+          {/* Campsites Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {campsites.map((site, index) => (
               <AnimateDiv
                 key={site.id}
                 animation="slide-up"
-                duration={0.5}
-                className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                duration={0.8}
+                delay={index * 0.2}
+                className="group"
               >
-                <div className="relative h-64">
-                  <Image
-                    src={site.images[0]}
-                    alt={site.name}
-                    className="object-cover hover:scale-105 transition-transform duration-500"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    quality={75}
-                  />
+                <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/30 hover:border-[#8B7355]/30">
+
+                  {/* Featured Badge */}
                   {site.featured && (
-                    <div className="absolute top-4 right-4 bg-[#8B7355] text-white px-3 py-1 rounded-full text-sm">
-                      Featured
+                    <div className="absolute top-4 right-4 z-10">
+                      <div className="bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] text-white px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
+                        <SparklesIcon className="w-3 h-3" />
+                        <span>Featured</span>
+                      </div>
                     </div>
                   )}
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-2xl text-[#8B7355]">{site.name}</h3>
-                    <span className="text-xl text-[#8B7355]">{formatPrice(site.price)} / night</span>
+
+                  {/* Site Image */}
+                  <div className="relative aspect-[4/3] bg-gradient-to-br from-stone-50 to-stone-100">
+                    <Image
+                      src={site.images[0]}
+                      alt={site.name}
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                      quality={85}
+                    />
+
+                    {/* Floating Glow */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#8B7355]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
-                  <p className="text-gray-600 mb-4">{site.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-sm bg-gray-100 px-2 py-1 rounded">Up to {site.capacity} people</span>
-                    {site.amenities.slice(0, 3).map((amenity, index) => (
-                      <span key={index} className="text-sm bg-gray-100 px-2 py-1 rounded">{amenity}</span>
-                    ))}
-                    {site.amenities.length > 3 && (
-                      <span className="text-sm bg-gray-100 px-2 py-1 rounded">+{site.amenities.length - 3} more</span>
-                    )}
+
+                  {/* Site Info */}
+                  <div className="p-6 lg:p-8 space-y-4">
+                    <div className="flex justify-between items-start">
+                      <h3 className="text-xl lg:text-2xl font-light text-[#8B7355] group-hover:text-[#A0845C] transition-colors duration-300">
+                        {site.name}
+                      </h3>
+                      <span className="text-xl lg:text-2xl font-light text-[#8B7355] whitespace-nowrap ml-4">
+                        €{formatPrice(site.price)} / night
+                      </span>
+                    </div>
+
+                    <p className="text-sm lg:text-base text-gray-600 leading-relaxed font-light">
+                      {site.description}
+                    </p>
+
+                    {/* Capacity & Amenities Preview */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <span className="text-xs bg-[#8B7355]/10 text-[#8B7355] px-3 py-1 rounded-full font-medium">
+                        Up to {site.capacity} people
+                      </span>
+                      {site.amenities.slice(0, 2).map((amenity, index) => (
+                        <span key={index} className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
+                          {amenity}
+                        </span>
+                      ))}
+                      {site.amenities.length > 2 && (
+                        <span className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
+                          +{site.amenities.length - 2} more
+                        </span>
+                      )}
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        setSelectedSite(site)
+                        setCurrentImageIndex(0)
+                      }}
+                      className="w-full px-6 py-3 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg"
+                    >
+                      View Details & Book
+                    </button>
                   </div>
-                  <button
-                    onClick={() => {
-                      setSelectedSite(site)
-                      setCurrentImageIndex(0)
-                    }}
-                    className="px-6 py-2 bg-[#8B7355] text-white rounded hover:bg-[#6B563F] transition-colors w-full"
-                  >
-                    View Details & Book
-                  </button>
                 </div>
               </AnimateDiv>
             ))}
@@ -206,50 +437,60 @@ export default function Camping() {
         </AnimateDiv>
       </section>
 
-      {/* Reservation Section */}
-      <section className="py-20 bg-white relative booking-section">
+      {/* Enhanced Reservation Section */}
+      <section className="relative py-16 sm:py-24 bg-gradient-to-b from-white to-stone-50">
         <div className="absolute inset-0 bg-[url('/images/pattern.webp')] opacity-5"></div>
         <AnimateDiv
-          className="max-w-3xl mx-auto px-4 sm:px-8 text-center relative"
+          className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10"
           animation="fade"
-          duration={0.8}
+          duration={1.0}
         >
-          <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355] mb-6">Book Your Campsite</h2>
-          <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
-            Reserve your perfect camping spot at Kallmi Estate and create unforgettable memories under the Albanian stars.
-          </p>
-          <div className="bg-white p-8 rounded-lg shadow-xl">
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <div className="flex-1">
+          <div className="space-y-6 mb-12">
+            <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+              Book Your Adventure
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extralight text-[#8B7355] leading-tight">
+              Reserve Your
+              <span className="block italic">Perfect Campsite</span>
+            </h2>
+            <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed font-light">
+              Secure your spot under the stars and create unforgettable memories
+              in Albania's most enchanting camping destination.
+            </p>
+          </div>
+
+          <div className="backdrop-blur-sm bg-white/80 rounded-3xl p-8 lg:p-12 shadow-2xl border border-white/30">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+              <div className="relative group">
                 <input
                   type="text"
                   placeholder="Your Name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
+                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
-              <div className="flex-1">
+              <div className="relative group">
                 <input
                   type="email"
                   placeholder="Email Address"
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
+                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <div className="flex-1">
-                <select
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                >
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+              <div className="relative group">
+                <select className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light">
                   <option value="">Select Campsite Type</option>
                   {campsites.map(site => (
                     <option key={site.id} value={site.id}>{site.name}</option>
                   ))}
                 </select>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
-              <div className="flex-1">
-                <select
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                >
+              <div className="relative group">
+                <select className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light">
                   <option value="">Number of Campers</option>
                   <option value="1">1 Person</option>
                   <option value="2">2 People</option>
@@ -257,120 +498,132 @@ export default function Camping() {
                   <option value="4">4 People</option>
                   <option value="5+">5+ People</option>
                 </select>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <div className="flex-1">
-                <label className="block text-gray-700 text-sm font-medium mb-1 text-left">Check-in Date</label>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+              <div className="relative group">
+                <label className="block text-gray-700 text-sm font-medium mb-2 text-left">Check-in Date</label>
                 <input
                   type="date"
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
+                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
-              <div className="flex-1">
-                <label className="block text-gray-700 text-sm font-medium mb-1 text-left">Check-out Date</label>
+              <div className="relative group">
+                <label className="block text-gray-700 text-sm font-medium mb-2 text-left">Check-out Date</label>
                 <input
                   type="date"
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
+                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
             </div>
-            <div className="mb-6">
+
+            <div className="mb-8 relative group">
               <textarea
-                placeholder="Special Requests"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355] h-24"
+                placeholder="Special Requests or Equipment Needs"
+                className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 h-32 resize-none font-light"
               ></textarea>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
             </div>
-            <button
-              className="w-full px-6 py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#6B563F] transition-colors duration-300 text-lg"
-            >
+
+            <button className="w-full px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg text-lg">
               Check Availability
             </button>
           </div>
-          <p className="mt-8 text-gray-500">
-            For special arrangements or group bookings, please contact us directly at <span className="text-[#8B7355]">camping@kallmiestate.com</span>
+
+          <p className="mt-8 text-gray-500 font-light">
+            For group bookings or special arrangements, contact us at{' '}
+            <a href="mailto:camping@kallmiestate.com" className="text-[#8B7355] hover:text-[#A0845C] transition-colors duration-300">
+              camping@kallmiestate.com
+            </a>
           </p>
         </AnimateDiv>
       </section>
 
-      {/* Outdoor Activities Section */}
-      <section className="py-20 bg-stone-50">
+      {/* Enhanced Outdoor Activities Section */}
+      <section className="relative py-16 sm:py-24 bg-gradient-to-b from-stone-50/50 to-white">
         <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
+          className="max-w-7xl mx-auto px-4 sm:px-6"
           animation="fade"
-          duration={0.8}
+          duration={1.0}
         >
-          <h2 className="text-4xl sm:text-5xl font-light text-center text-[#8B7355] mb-16">Outdoor Activities</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <AnimateDiv
-              animation="slide-up"
-              duration={0.5}
-              delay={0.1}
-              className="text-center p-6"
-            >
-              <div className="w-16 h-16 mx-auto mb-6 bg-[#8B7355]/10 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl text-[#8B7355] mb-4">Hiking Trails</h3>
-              <p className="text-gray-600">
-                Explore scenic trails from the estate through olive groves, along the coastline, and into the nearby mountains with spectacular views.
+          <div className="text-center mb-12 sm:mb-20">
+            <AnimateDiv animation="slide-up" delay={0.2}>
+              <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+                Adventure Awaits
+              </span>
+              <h2 className="text-3xl sm:text-6xl font-extralight text-[#8B7355] mt-4 mb-6 leading-tight">
+                Outdoor Activities
+              </h2>
+              <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
+                Discover endless adventures from hiking ancient trails to stargazing
+                under pristine Albanian skies
               </p>
             </AnimateDiv>
+          </div>
 
-            <AnimateDiv
-              animation="slide-up"
-              duration={0.5}
-              delay={0.2}
-              className="text-center p-6"
-            >
-              <div className="w-16 h-16 mx-auto mb-6 bg-[#8B7355]/10 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl text-[#8B7355] mb-4">Beach Access</h3>
-              <p className="text-gray-600">
-                Enjoy private access to the pristine Adriatic beaches, perfect for swimming, snorkeling, and sunbathing during your camping stay.
-              </p>
-            </AnimateDiv>
-
-            <AnimateDiv
-              animation="slide-up"
-              duration={0.5}
-              delay={0.3}
-              className="text-center p-6"
-            >
-              <div className="w-16 h-16 mx-auto mb-6 bg-[#8B7355]/10 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
-                </svg>
-              </div>
-              <h3 className="text-2xl text-[#8B7355] mb-4">Stargazing</h3>
-              <p className="text-gray-600">
-                Experience the magic of the night sky with minimal light pollution. We offer guided stargazing sessions with our resident astronomy enthusiast.
-              </p>
-            </AnimateDiv>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            {[
+              {
+                icon: MapPinIcon,
+                title: "Hiking Trails",
+                description: "Explore scenic trails through olive groves, along the coastline, and into nearby mountains with spectacular panoramic views.",
+                delay: 0.1
+              },
+              {
+                icon: SunIcon,
+                title: "Beach Access",
+                description: "Enjoy private access to pristine Adriatic beaches, perfect for swimming, snorkeling, and sunbathing during your stay.",
+                delay: 0.2
+              },
+              {
+                icon: MoonIcon,
+                title: "Stargazing",
+                description: "Experience the magic of unpolluted night skies with guided stargazing sessions and astronomy talks.",
+                delay: 0.3
+              }
+            ].map((activity, index) => (
+              <AnimateDiv
+                key={index}
+                animation="slide-up"
+                duration={0.8}
+                delay={activity.delay}
+                className="group text-center"
+              >
+                <div className="backdrop-blur-sm bg-white/60 rounded-3xl p-8 lg:p-10 border border-white/40 hover:border-[#8B7355]/30 transition-all duration-500 hover:shadow-xl">
+                  <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-[#8B7355]/10 to-[#D4AF37]/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <activity.icon className="w-8 h-8 text-[#8B7355]" />
+                  </div>
+                  <h3 className="text-xl lg:text-2xl font-light text-[#8B7355] mb-4 group-hover:text-[#A0845C] transition-colors duration-300">
+                    {activity.title}
+                  </h3>
+                  <p className="text-sm lg:text-base text-gray-600 leading-relaxed font-light">
+                    {activity.description}
+                  </p>
+                </div>
+              </AnimateDiv>
+            ))}
           </div>
 
           <div className="text-center mt-12">
             <Link
               href="/contact"
-              className="inline-block px-8 py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#6B563F] transition-colors duration-300"
+              className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
             >
-              Ask About Activities
+              <HeartIcon className="w-5 h-5 transition-transform group-hover:scale-110" />
+              <span>Plan Your Adventure</span>
             </Link>
           </div>
         </AnimateDiv>
       </section>
 
-      {/* Campsite Detail Modal */}
+      {/* Enhanced Campsite Detail Modal */}
       {selectedSite && (
-        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white/95 backdrop-blur-md rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-white/30">
             <div className="relative h-80">
               <Image
                 src={selectedSite.images[currentImageIndex]}
@@ -382,7 +635,7 @@ export default function Camping() {
               />
               <button
                 onClick={() => setSelectedSite(null)}
-                className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white p-2 rounded-full hover:bg-black/70 transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -393,7 +646,7 @@ export default function Camping() {
                 <>
                   <button
                     onClick={() => setCurrentImageIndex(prev => (prev > 0 ? prev - 1 : selectedSite.images.length - 1))}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 backdrop-blur-sm text-white p-2 rounded-full hover:bg-black/70 transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -401,7 +654,7 @@ export default function Camping() {
                   </button>
                   <button
                     onClick={() => setCurrentImageIndex(prev => (prev < selectedSite.images.length - 1 ? prev + 1 : 0))}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 backdrop-blur-sm text-white p-2 rounded-full hover:bg-black/70 transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -412,7 +665,7 @@ export default function Camping() {
                       <button
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
-                        className={`w-2 h-2 rounded-full ${currentImageIndex === index ? 'bg-white' : 'bg-white/50'}`}
+                        className={`w-2 h-2 rounded-full transition-colors ${currentImageIndex === index ? 'bg-white' : 'bg-white/50'}`}
                       />
                     ))}
                   </div>
@@ -420,34 +673,43 @@ export default function Camping() {
               )}
             </div>
 
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-3xl text-[#8B7355]">{selectedSite.name}</h3>
-                <span className="text-2xl text-[#8B7355]">{formatPrice(selectedSite.price)} / night</span>
+            <div className="p-8 lg:p-12">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl lg:text-3xl font-light text-[#8B7355]">{selectedSite.name}</h3>
+                <span className="text-2xl lg:text-3xl font-light text-[#8B7355]">€{formatPrice(selectedSite.price)} / night</span>
               </div>
 
-              <div className="flex flex-wrap gap-3 mb-4">
-                <span className="text-sm bg-gray-100 px-3 py-1 rounded-full">Up to {selectedSite.capacity} people</span>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <span className="text-sm bg-[#8B7355]/10 text-[#8B7355] px-4 py-2 rounded-full font-medium">
+                  Up to {selectedSite.capacity} people
+                </span>
+                {selectedSite.featured && (
+                  <span className="text-sm bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] text-white px-4 py-2 rounded-full font-medium">
+                    Featured Site
+                  </span>
+                )}
               </div>
 
-              <p className="text-gray-700 mb-6">{selectedSite.description}</p>
+              <p className="text-gray-700 mb-8 text-lg leading-relaxed font-light">{selectedSite.description}</p>
 
-              <div className="mb-6">
-                <h4 className="text-xl text-[#8B7355] mb-2">Amenities</h4>
-                <ul className="grid grid-cols-2 gap-2">
+              <div className="mb-8">
+                <h4 className="text-xl text-[#8B7355] mb-4 font-light">Amenities & Features</h4>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {selectedSite.amenities.map((amenity, index) => (
-                    <li key={index} className="flex items-center gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>{amenity}</span>
+                    <li key={index} className="flex items-center gap-3">
+                      <div className="w-5 h-5 bg-[#8B7355]/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-gray-700 font-light">{amenity}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               <button
-                className="w-full px-6 py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#6B563F] transition-colors duration-300 text-lg"
+                className="w-full px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg text-lg"
                 onClick={() => {
                   setSelectedSite(null)
                   // Scroll to booking section

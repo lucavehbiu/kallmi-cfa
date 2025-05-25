@@ -60,7 +60,7 @@ export default function LandingHero() {
       </div>
 
       {/* Main Content - Fixed Mobile Layout */}
-      <div className="relative flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 pt-24 sm:pt-16 pb-16">
+      <div className="relative flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 pt-24 lg:pt-32 pb-16">
         <div className="max-w-5xl space-y-6 sm:space-y-8 lg:space-y-12">
 
           {/* Animated Badge - Smaller on Mobile */}
@@ -127,10 +127,46 @@ export default function LandingHero() {
             <div className="backdrop-blur-md bg-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-white/20 shadow-2xl">
               <p className="text-sm sm:text-base lg:text-lg font-light leading-relaxed text-white/90">
                 Four generations of passion have cultivated this sacred land,
-                creating Albania's finest extra virgin olive oil from sun-kissed groves
-                that dance between mountain and sea.
+                creating Albania's hidden gem. Experience tasty food and raw nature
               </p>
             </div>
+          </AnimateDiv>
+
+          {/* Desktop Buttons - In Content Flow */}
+          <AnimateDiv
+            animation="slide-up"
+            duration={1.0}
+            delay={1.8}
+            className="hidden sm:flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center items-center pt-4"
+          >
+            <Link href="/shop" className="group">
+              <Button
+                size="lg"
+                className="bg-[#8B7355] hover:bg-[#8B7355]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#8B7355]/30"
+              >
+                <span className="flex items-center space-x-2">
+                  <span>Discover Our Heritage</span>
+                  <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+              </Button>
+            </Link>
+
+            <Link href="/our-story" className="group">
+              <Button
+                variant="secondary"
+                size="lg"
+                className="bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 backdrop-blur-sm"
+              >
+                <span className="flex items-center space-x-2">
+                  <span>Our Story</span>
+                  <svg className="w-5 h-5 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </span>
+            </Button>
+          </Link>
           </AnimateDiv>
         </div>
 
@@ -170,98 +206,6 @@ export default function LandingHero() {
                 </span>
             </Button>
           </Link>
-          </AnimateDiv>
-        </div>
-      </div>
-
-      {/* Desktop Buttons - Centered in Content */}
-      <div className="hidden sm:block absolute bottom-32 lg:bottom-40 left-1/2 transform -translate-x-1/2">
-        <AnimateDiv
-          animation="slide-up"
-          duration={1.0}
-          delay={1.8}
-          className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center items-center"
-        >
-          <Link href="/shop" className="group">
-            <Button
-              size="lg"
-              className="bg-[#8B7355] hover:bg-[#8B7355]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#8B7355]/30"
-            >
-              <span className="flex items-center space-x-2">
-                <span>Discover Our Heritage</span>
-                <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </span>
-            </Button>
-          </Link>
-
-          <Link href="/our-story" className="group">
-            <Button
-              variant="secondary"
-              size="lg"
-              className="bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 backdrop-blur-sm"
-            >
-              <span className="flex items-center space-x-2">
-                <span>Our Story</span>
-                <svg className="w-5 h-5 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </span>
-          </Button>
-        </Link>
-        </AnimateDiv>
-      </div>
-
-      {/* Scroll Indicator - Desktop Only */}
-      <div className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <AnimateDiv
-          animation="fade"
-          duration={1.0}
-          delay={2.2}
-        >
-          <div className="flex flex-col items-center space-y-2 text-white/70">
-            <span className="text-xs sm:text-sm font-light tracking-widest uppercase">
-              Scroll to Explore
-            </span>
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce" />
-            </div>
-          </div>
-        </AnimateDiv>
-      </div>
-
-      {/* Floating Stats - Desktop Only */}
-      <div className="hidden lg:block absolute bottom-12 left-12 right-12">
-        <div className="flex justify-between items-end">
-          <AnimateDiv
-            animation="slide-up"
-            duration={1.0}
-            delay={2.0}
-            className="backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20"
-          >
-            <div className="text-3xl font-light text-[#D4AF37] mb-1">100+</div>
-            <div className="text-sm text-white/80 font-medium">Years of Heritage</div>
-          </AnimateDiv>
-
-          <AnimateDiv
-            animation="slide-up"
-            duration={1.0}
-            delay={2.2}
-            className="backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20"
-          >
-            <div className="text-3xl font-light text-[#D4AF37] mb-1">4th</div>
-            <div className="text-sm text-white/80 font-medium">Generation</div>
-          </AnimateDiv>
-
-          <AnimateDiv
-            animation="slide-up"
-            duration={1.0}
-            delay={2.4}
-            className="backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20"
-          >
-            <div className="text-3xl font-light text-[#D4AF37] mb-1">Premium</div>
-            <div className="text-sm text-white/80 font-medium">Extra Virgin</div>
           </AnimateDiv>
         </div>
       </div>

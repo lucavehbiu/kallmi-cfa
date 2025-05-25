@@ -121,7 +121,7 @@ export function Footer() {
 
               <div className="group">
                 <a
-                  href="mailto:info@kallmiestate.com"
+                  href="mailto:kallmibukur@gmail.com"
                   className="flex items-center justify-center md:justify-start space-x-3 text-white/70 hover:text-[#D4AF37] transition-all duration-300 group"
                 >
                   <EnvelopeIcon className="w-5 h-5 text-[#8B7355] group-hover:text-[#D4AF37] transition-colors duration-300" />

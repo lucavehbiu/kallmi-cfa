@@ -23,12 +23,12 @@ const getAnimationClass = (animation: string = 'fade') => {
   }
 }
 
-export function AnimateDiv({
+export const AnimateDiv = ({
   children,
   className = '',
   animation = 'fade',
   ...props
-}: AnimationProps) {
+}: AnimationProps) => {
   const animationClass = getAnimationClass(animation)
 
   return (
@@ -41,13 +41,13 @@ export function AnimateDiv({
   )
 }
 
-export function AnimateButton({
+export const AnimateButton = ({
   children,
   className = '',
   animation = 'fade',
   href,
   ...props
-}: AnimationProps & { href?: string }) {
+}: AnimationProps & { href?: string }) => {
   const animationClass = getAnimationClass(animation)
 
   if (href) {

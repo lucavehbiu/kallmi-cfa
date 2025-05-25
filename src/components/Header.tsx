@@ -74,7 +74,7 @@ export function Header() {
                 alt="Kallmi Estate"
                   width={48}
                   height={48}
-                  className={`w-auto h-12 transition-all duration-300 group-hover:opacity-90
+                  className={`w-auto h-8 transition-all duration-300 group-hover:opacity-90
                     ${scrolled ? 'brightness-0' : 'brightness-0 invert'}`}
                 />
                 {/* Floating glow effect */}
