@@ -7,6 +7,70 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'kallmibukur.al',
       },
+      {
+        protocol: 'https',
+        hostname: 'fishandmore.co.uk',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.charlottefashionplate.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'yourguardianchef.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.themodernproper.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'saladswithanastasia.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i0.wp.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'fitfoodiefinds.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.allrecipes.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media-cdn.tripadvisor.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.seriouseats.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cookingwithnonna.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'foto1.sluurpy.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'happyhealthymama.com',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
