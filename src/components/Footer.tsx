@@ -184,11 +184,22 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
 
             {/* Copyright */}
-            <div className="text-center md:text-left">
+            <div className="text-center md:text-left space-y-1">
               <p className="text-sm text-white/50">
                 © {new Date().getFullYear()} Kallmi Estate. Crafted with
                 <HeartIcon className="w-4 h-4 inline mx-1 text-red-400" />
                 in Albania.
+              </p>
+              <p className="text-xs text-white/40">
+                Developed by{' '}
+                <a 
+                  href="https://lucavehbiu.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[#8B7355] hover:text-[#D4AF37] transition-colors duration-300"
+                >
+                  Luca
+                </a>
               </p>
             </div>
 
