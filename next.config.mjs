@@ -93,7 +93,7 @@ const nextConfig = {
   },
   // Enable modern optimizations
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Disabled - causes localStorage SSR issues in dev
     typedRoutes: true,
   },
   // Enable modern output
