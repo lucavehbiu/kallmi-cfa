@@ -72,6 +72,66 @@ const formatPrice = (price: number) => {
 export default function Accommodations() {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    roomId: '',
+    guests: '',
+    checkIn: '',
+    checkOut: '',
+    specialRequests: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitMessage(null)
+
+    try {
+      const selectedRoomData = rooms.find(room => room.id.toString() === formData.roomId)
+
+      const response = await fetch('/api/booking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          roomName: selectedRoomData?.name || 'Unknown Room'
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitMessage({ type: 'success', text: data.message })
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          roomId: '',
+          guests: '',
+          checkIn: '',
+          checkOut: '',
+          specialRequests: ''
+        })
+      } else {
+        setSubmitMessage({ type: 'error', text: data.error || 'Failed to submit booking request' })
+      }
+    } catch (error) {
+      setSubmitMessage({ type: 'error', text: 'An error occurred. Please try again.' })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-stone-50 font-cormorant">
@@ -224,26 +284,54 @@ export default function Accommodations() {
           <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
             Experience the serenity of Kallmi Estate. Reserve your accommodation and create lasting memories with us.
           </p>
-          <div className="bg-white p-8 rounded-lg shadow-xl">
+          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-xl booking-section">
+            {submitMessage && (
+              <div className={`mb-4 p-4 rounded ${submitMessage.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                {submitMessage.text}
+              </div>
+            )}
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
               <div className="flex-1">
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   placeholder="Your Name"
+                  required
                   className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
                 />
               </div>
               <div className="flex-1">
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   placeholder="Email Address"
+                  required
                   className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
                 />
               </div>
             </div>
+            <div className="mb-4">
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                placeholder="Phone Number"
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
+              />
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
               <div className="flex-1">
                 <select
+                  name="roomId"
+                  value={formData.roomId}
+                  onChange={handleInputChange}
+                  required
                   className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
                 >
                   <option value="">Select Room Type</option>
@@ -254,6 +342,10 @@ export default function Accommodations() {
               </div>
               <div className="flex-1">
                 <select
+                  name="guests"
+                  value={formData.guests}
+                  onChange={handleInputChange}
+                  required
                   className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
                 >
                   <option value="">Number of Guests</option>
@@ -270,6 +362,10 @@ export default function Accommodations() {
                 <label className="block text-gray-700 text-sm font-medium mb-1 text-left">Check-in Date</label>
                 <input
                   type="date"
+                  name="checkIn"
+                  value={formData.checkIn}
+                  onChange={handleInputChange}
+                  required
                   className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
                 />
               </div>
@@ -277,22 +373,31 @@ export default function Accommodations() {
                 <label className="block text-gray-700 text-sm font-medium mb-1 text-left">Check-out Date</label>
                 <input
                   type="date"
+                  name="checkOut"
+                  value={formData.checkOut}
+                  onChange={handleInputChange}
+                  required
                   className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
                 />
               </div>
             </div>
             <div className="mb-6">
               <textarea
+                name="specialRequests"
+                value={formData.specialRequests}
+                onChange={handleInputChange}
                 placeholder="Special Requests"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355] h-24"
               ></textarea>
             </div>
             <button
-              className="w-full px-6 py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#6B563F] transition-colors duration-300 text-lg"
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full px-6 py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#6B563F] transition-colors duration-300 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Check Availability
+              {isSubmitting ? 'Submitting...' : 'Check Availability'}
             </button>
-          </div>
+          </form>
           <p className="mt-8 text-gray-500">
             For special arrangements or group bookings, please contact us directly at <span className="text-[#8B7355]">stay@kallmiestate.com</span>
           </p>

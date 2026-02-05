@@ -48,6 +48,7 @@ export function Header() {
 
   const navItems: NavItem[] = [
     { name: 'Our Story', href: '/our-story' },
+    { name: 'Stay', href: '/stay' },
     { name: 'Restaurant', href: '/restaurant' },
     { name: 'Camping', href: '/camping' },
     { name: 'Shop', href: '/shop' },
