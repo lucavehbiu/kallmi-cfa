@@ -1,0 +1,75 @@
+# Kallmi Estate - Project Memory for Claude
+
+## Project Overview
+
+This is a Next.js 15 website for Kallmi Estate, a premium Albanian olive oil estate. The site showcases:
+- Olive oil products (shop)
+- Estate restaurant
+- Accommodations (stay/camping)
+- Contact and booking functionality
+
+## Tech Stack
+
+- **Next.js**: 15.1.6 (App Router not used - uses pages directory)
+- **React**: 19.0.0
+- **TypeScript**: 5.7.3
+- **Tailwind CSS**: 3.4.17
+- **Email**: Mailjet API for contact forms
+
+## Key Commands
+
+```bash
+npm install          # Install dependencies
+npm run dev          # Start dev server at localhost:3000
+npm run build        # Production build
+npm run lint         # Run ESLint
+```
+
+## Project Structure
+
+- `src/pages/` - Next.js pages (index, our-story, shop, restaurant, stay, camping, contact)
+- `src/components/` - React components (LandingPage, Navigation, Footer, etc.)
+- `src/styles/` - Global CSS and Tailwind config
+- `public/images/` - Static images (hero.webp, sunset.webp, etc.)
+- `next.config.mjs` - Next.js configuration including image domains
+
+## Image Configuration
+
+Remote images require domains to be whitelisted in `next.config.mjs` under `images.remotePatterns`. Currently allowed:
+- kallmibukur.al
+- Various food image CDNs (imgur, tripadvisor, etc.)
+
+## Common Issues & Solutions
+
+### Images not rendering in dev
+- Check if domain is in `remotePatterns` in next.config.mjs
+- Clear `.next` cache: `rm -rf .next && npm run dev`
+
+### Slow dev server startup
+- Clear node_modules and reinstall: `rm -rf node_modules .next && npm install`
+
+### React version mismatch
+- Next.js 15 requires React 19. Don't downgrade to React 18.
+
+## Environment Variables
+
+Required in `.env.local`:
+```
+MJ_APIKEY_PUBLIC=xxx
+MJ_APIKEY_PRIVATE=xxx
+```
+
+## Deployment
+
+The site uses `output: 'standalone'` in next.config.mjs for containerized deployments.
+
+## Browser Testing with Playwright MCP
+
+Claude has access to Playwright MCP for browser automation:
+- `browser_navigate` - Go to URLs
+- `browser_snapshot` - Get page accessibility tree
+- `browser_take_screenshot` - Capture screenshots
+- `browser_click` - Click elements
+- `browser_type` - Type into inputs
+
+Use these to debug visual issues or test functionality.

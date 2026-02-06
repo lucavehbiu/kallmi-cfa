@@ -73,29 +73,19 @@ const nextConfig = {
       },
     ],
     formats: ['image/avif', 'image/webp'],
+    qualities: [75, 85, 90, 95],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 60 * 60 * 24, // 24 hours
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Improved image optimization settings
-    domains: ['localhost', 'kallmibukur.al'],
-    path: '/_next/image',
-    loader: 'default',
-    disableStaticImages: false,
-    minimumCacheTTL: 60 * 60 * 24, // 24 hours
-    // Development settings
-    unoptimized: process.env.NODE_ENV === 'development',
   },
   // Modern optimization features
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   // Enable modern optimizations
-  experimental: {
-    // optimizeCss: true, // Disabled - causes localStorage SSR issues in dev
-    typedRoutes: true,
-  },
+  typedRoutes: true,
   // Enable modern output
   output: 'standalone',
   poweredByHeader: false,
