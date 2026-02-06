@@ -3,7 +3,11 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AnimateDiv } from './motion/MotionWrapper'
+import { FadeIn } from './motion/FadeIn'
+import { Section, SectionHeader } from './layout/Section'
+import { Card, CardBody } from './ui/Card'
+import { Button } from './ui/Button'
+import { CheckCircleIcon, XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 
 interface Room {
   id: number
@@ -126,7 +130,7 @@ export default function Accommodations() {
       } else {
         setSubmitMessage({ type: 'error', text: data.error || 'Failed to submit booking request' })
       }
-    } catch (error) {
+    } catch {
       setSubmitMessage({ type: 'error', text: 'An error occurred. Please try again.' })
     } finally {
       setIsSubmitting(false)
@@ -134,10 +138,9 @@ export default function Accommodations() {
   }
 
   return (
-    <div className="min-h-screen bg-stone-50 font-cormorant">
+    <div className="min-h-screen font-cormorant" style={{ backgroundColor: 'var(--color-surface-primary)' }}>
       {/* Hero Section */}
-      <div className="h-[60vh] relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/40 z-10" />
+      <div className="h-[60vh] min-h-[500px] relative overflow-hidden">
         <Image
           src="/images/stay_snippet.webp"
           alt="Kallmi Estate Accommodations"
@@ -147,25 +150,38 @@ export default function Accommodations() {
           sizes="100vw"
           quality={90}
         />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-20 px-4">
-          <h1 className="text-5xl md:text-7xl font-light tracking-wider mb-4 text-center">Stay With Us</h1>
-          <p className="text-xl md:text-2xl max-w-2xl text-center font-light">
-            Experience authentic Albanian hospitality in our boutique accommodations
-          </p>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50" />
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10 px-4">
+          <FadeIn animation="fade" delay={0.2}>
+            <span className="text-overline text-white/80 block mb-4 text-center">
+              Boutique Hospitality
+            </span>
+          </FadeIn>
+
+          <FadeIn animation="slide-up" delay={0.4}>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-tight mb-6 text-center">
+              Stay With Us
+            </h1>
+          </FadeIn>
+
+          <FadeIn animation="slide-up" delay={0.6}>
+            <p className="text-lg sm:text-xl font-light opacity-90 max-w-2xl text-center">
+              Experience authentic Albanian hospitality in our boutique accommodations
+            </p>
+          </FadeIn>
         </div>
       </div>
 
       {/* Introduction Section */}
-      <section className="py-20 bg-white">
-        <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
-          animation="fade"
-          duration={0.8}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <Section background="secondary" spacing="lg">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <FadeIn animation="slide-up">
             <div className="space-y-6">
-              <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355]">Your Home in Albania</h2>
-              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
+              <h2 className="text-heading" style={{ color: 'var(--color-brand-olive)' }}>
+                Your Home in Albania
+              </h2>
+              <div className="space-y-4 text-body-lg">
                 <p>
                   At Kallmi Estate, we invite you to experience the genuine warmth of Albanian
                   hospitality in our thoughtfully designed accommodations. Each room is a perfect
@@ -175,351 +191,397 @@ export default function Accommodations() {
                   Nestled among centuries-old olive trees with breathtaking views of the Adriatic Sea,
                   our accommodations offer a peaceful retreat from the bustle of everyday life.
                 </p>
-                <p>
-                  Whether you're enjoying a morning coffee on your private balcony, relaxing in our gardens,
-                  or stargazing in the evening, you'll feel a deep connection to the natural beauty and
-                  rich heritage of Albania.
-                </p>
               </div>
             </div>
+          </FadeIn>
+
+          <FadeIn animation="slide-up" delay={0.2}>
             <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg">
+              <div className="aspect-[3/4] relative rounded-xl overflow-hidden">
                 <Image
                   src="/images/room-interior.webp"
                   alt="Room Interior"
                   className="object-cover"
                   fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                   quality={80}
                 />
               </div>
-              <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-lg mt-8">
+              <div className="aspect-[3/4] relative rounded-xl overflow-hidden mt-8">
                 <Image
                   src="/images/room-view.webp"
                   alt="Room with a View"
                   className="object-cover"
                   fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                   quality={80}
                 />
               </div>
             </div>
-          </div>
-        </AnimateDiv>
-      </section>
+          </FadeIn>
+        </div>
+      </Section>
 
       {/* Our Rooms Section */}
-      <section className="py-20 bg-[#F8F6F3]">
-        <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
-          animation="fade"
-          duration={0.8}
-        >
-          <h2 className="text-4xl sm:text-5xl font-light text-center text-[#8B7355] mb-16">Our Accommodations</h2>
+      <Section background="default" spacing="lg">
+        <SectionHeader
+          overline="Accommodations"
+          title="Our Rooms"
+          subtitle="Choose from our selection of comfortable rooms and suites"
+          centered
+        />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {rooms.map((room) => (
-              <AnimateDiv
-                key={room.id}
-                animation="slide-up"
-                duration={0.5}
-                className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-              >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+          {rooms.map((room, index) => (
+            <FadeIn
+              key={room.id}
+              animation="slide-up"
+              delay={index * 0.1}
+            >
+              <Card variant="elevated" hover className="overflow-hidden">
                 <div className="relative h-64">
                   <Image
                     src={room.images[0]}
                     alt={room.name}
-                    className="object-cover hover:scale-105 transition-transform duration-500"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     quality={75}
                   />
                   {room.featured && (
-                    <div className="absolute top-4 right-4 bg-[#8B7355] text-white px-3 py-1 rounded-full text-sm">
+                    <div
+                      className="absolute top-4 right-4 px-3 py-1 rounded-full text-sm text-white"
+                      style={{ backgroundColor: 'var(--color-brand-olive)' }}
+                    >
                       Featured
                     </div>
                   )}
                 </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-2xl text-[#8B7355]">{room.name}</h3>
-                    <span className="text-xl text-[#8B7355]">{formatPrice(room.price)} / night</span>
+                <CardBody className="space-y-4">
+                  <div className="flex justify-between items-start">
+                    <h3
+                      className="text-2xl font-light"
+                      style={{ color: 'var(--color-brand-olive)' }}
+                    >
+                      {room.name}
+                    </h3>
+                    <span
+                      className="text-xl font-light"
+                      style={{ color: 'var(--color-brand-olive)' }}
+                    >
+                      {formatPrice(room.price)} / night
+                    </span>
                   </div>
-                  <p className="text-gray-600 mb-4">{room.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-sm bg-gray-100 px-2 py-1 rounded">{room.size}</span>
-                    <span className="text-sm bg-gray-100 px-2 py-1 rounded">Sleeps {room.capacity}</span>
-                    {room.amenities.slice(0, 3).map((amenity, index) => (
-                      <span key={index} className="text-sm bg-gray-100 px-2 py-1 rounded">{amenity}</span>
+
+                  <p style={{ color: 'var(--color-text-secondary)' }}>
+                    {room.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    <span
+                      className="text-sm px-2 py-1 rounded"
+                      style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
+                    >
+                      {room.size}
+                    </span>
+                    <span
+                      className="text-sm px-2 py-1 rounded"
+                      style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
+                    >
+                      Sleeps {room.capacity}
+                    </span>
+                    {room.amenities.slice(0, 2).map((amenity, i) => (
+                      <span
+                        key={i}
+                        className="text-sm px-2 py-1 rounded"
+                        style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
+                      >
+                        {amenity}
+                      </span>
                     ))}
-                    {room.amenities.length > 3 && (
-                      <span className="text-sm bg-gray-100 px-2 py-1 rounded">+{room.amenities.length - 3} more</span>
-                    )}
                   </div>
-                  <button
+
+                  <Button
                     onClick={() => {
                       setSelectedRoom(room)
                       setCurrentImageIndex(0)
                     }}
-                    className="px-6 py-2 bg-[#8B7355] text-white rounded hover:bg-[#6B563F] transition-colors w-full"
+                    variant="primary"
+                    fullWidth
                   >
                     View Details & Book
-                  </button>
-                </div>
-              </AnimateDiv>
-            ))}
-          </div>
-        </AnimateDiv>
-      </section>
+                  </Button>
+                </CardBody>
+              </Card>
+            </FadeIn>
+          ))}
+        </div>
+      </Section>
 
       {/* Reservation Section */}
-      <section className="py-20 bg-white relative">
-        <div className="absolute inset-0 bg-[url('/images/pattern.webp')] opacity-5"></div>
-        <AnimateDiv
-          className="max-w-3xl mx-auto px-4 sm:px-8 text-center relative"
-          animation="fade"
-          duration={0.8}
-        >
-          <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355] mb-6">Book Your Stay</h2>
-          <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
-            Experience the serenity of Kallmi Estate. Reserve your accommodation and create lasting memories with us.
-          </p>
-          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-xl booking-section">
-            {submitMessage && (
-              <div className={`mb-4 p-4 rounded ${submitMessage.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                {submitMessage.text}
-              </div>
-            )}
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <div className="flex-1">
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder="Your Name"
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                />
-              </div>
-              <div className="flex-1">
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="Email Address"
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                />
-              </div>
-            </div>
-            <div className="mb-4">
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                placeholder="Phone Number"
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-              />
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <div className="flex-1">
-                <select
-                  name="roomId"
-                  value={formData.roomId}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
+      <Section background="secondary" spacing="lg">
+        <div className="max-w-3xl mx-auto">
+          <SectionHeader
+            overline="Reservations"
+            title="Book Your Stay"
+            subtitle="Experience the serenity of Kallmi Estate. Reserve your accommodation and create lasting memories with us."
+            centered
+          />
+
+          <FadeIn animation="slide-up" delay={0.2}>
+            <Card variant="elevated" className="p-8 mt-12 booking-section">
+              {submitMessage && (
+                <div
+                  className="mb-6 p-4 rounded-xl"
+                  style={{
+                    backgroundColor: submitMessage.type === 'success' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                    color: submitMessage.type === 'success' ? '#15803d' : '#dc2626'
+                  }}
                 >
-                  <option value="">Select Room Type</option>
-                  {rooms.map(room => (
-                    <option key={room.id} value={room.id}>{room.name}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex-1">
-                <select
-                  name="guests"
-                  value={formData.guests}
+                  {submitMessage.text}
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Your Name"
+                    required
+                    className="input-field"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Email Address"
+                    required
+                    className="input-field"
+                  />
+                </div>
+
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
                   onChange={handleInputChange}
+                  placeholder="Phone Number"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
+                  className="input-field"
+                />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <select
+                    name="roomId"
+                    value={formData.roomId}
+                    onChange={handleInputChange}
+                    required
+                    className="select-field"
+                  >
+                    <option value="">Select Room Type</option>
+                    {rooms.map(room => (
+                      <option key={room.id} value={room.id}>{room.name}</option>
+                    ))}
+                  </select>
+                  <select
+                    name="guests"
+                    value={formData.guests}
+                    onChange={handleInputChange}
+                    required
+                    className="select-field"
+                  >
+                    <option value="">Number of Guests</option>
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5+">5+ Guests</option>
+                  </select>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-1"
+                      style={{ color: 'var(--color-text-secondary)' }}
+                    >
+                      Check-in Date
+                    </label>
+                    <input
+                      type="date"
+                      name="checkIn"
+                      value={formData.checkIn}
+                      onChange={handleInputChange}
+                      required
+                      className="input-field"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-1"
+                      style={{ color: 'var(--color-text-secondary)' }}
+                    >
+                      Check-out Date
+                    </label>
+                    <input
+                      type="date"
+                      name="checkOut"
+                      value={formData.checkOut}
+                      onChange={handleInputChange}
+                      required
+                      className="input-field"
+                    />
+                  </div>
+                </div>
+
+                <textarea
+                  name="specialRequests"
+                  value={formData.specialRequests}
+                  onChange={handleInputChange}
+                  placeholder="Special Requests"
+                  className="textarea-field"
+                />
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  variant="primary"
+                  fullWidth
+                  size="lg"
                 >
-                  <option value="">Number of Guests</option>
-                  <option value="1">1 Guest</option>
-                  <option value="2">2 Guests</option>
-                  <option value="3">3 Guests</option>
-                  <option value="4">4 Guests</option>
-                  <option value="5+">5+ Guests</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <div className="flex-1">
-                <label className="block text-gray-700 text-sm font-medium mb-1 text-left">Check-in Date</label>
-                <input
-                  type="date"
-                  name="checkIn"
-                  value={formData.checkIn}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                />
-              </div>
-              <div className="flex-1">
-                <label className="block text-gray-700 text-sm font-medium mb-1 text-left">Check-out Date</label>
-                <input
-                  type="date"
-                  name="checkOut"
-                  value={formData.checkOut}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                />
-              </div>
-            </div>
-            <div className="mb-6">
-              <textarea
-                name="specialRequests"
-                value={formData.specialRequests}
-                onChange={handleInputChange}
-                placeholder="Special Requests"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355] h-24"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full px-6 py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#6B563F] transition-colors duration-300 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? 'Submitting...' : 'Check Availability'}
-            </button>
-          </form>
-          <p className="mt-8 text-gray-500">
-            For special arrangements or group bookings, please contact us directly at <span className="text-[#8B7355]">stay@kallmiestate.com</span>
-          </p>
-        </AnimateDiv>
-      </section>
+                  {isSubmitting ? 'Submitting...' : 'Check Availability'}
+                </Button>
+              </form>
+
+              <p className="mt-6 text-center text-caption">
+                For special arrangements, contact us at{' '}
+                <span style={{ color: 'var(--color-brand-olive)' }}>stay@kallmiestate.com</span>
+              </p>
+            </Card>
+          </FadeIn>
+        </div>
+      </Section>
 
       {/* Experiences Section */}
-      <section className="py-20 bg-stone-50">
-        <AnimateDiv
-          className="max-w-7xl mx-auto px-4 sm:px-8"
-          animation="fade"
-          duration={0.8}
-        >
-          <h2 className="text-4xl sm:text-5xl font-light text-center text-[#8B7355] mb-16">Guest Experiences</h2>
+      <Section background="default" spacing="lg">
+        <SectionHeader
+          overline="Experiences"
+          title="Guest Activities"
+          subtitle="Make the most of your stay with our curated experiences"
+          centered
+        />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <AnimateDiv
-              animation="slide-up"
-              duration={0.5}
-              delay={0.1}
-              className="text-center p-6"
-            >
-              <div className="w-16 h-16 mx-auto mb-6 bg-[#8B7355]/10 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+          {[
+            {
+              title: 'Olive Oil Tasting',
+              description: 'Join our experts for a guided tasting of our estate-produced olive oils.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-              </div>
-              <h3 className="text-2xl text-[#8B7355] mb-4">Olive Oil Tasting</h3>
-              <p className="text-gray-600">
-                Join our experts for a guided tasting of our estate-produced olive oils, learning about
-                the distinctive qualities of different varieties and production methods.
-              </p>
-            </AnimateDiv>
-
-            <AnimateDiv
-              animation="slide-up"
-              duration={0.5}
-              delay={0.2}
-              className="text-center p-6"
-            >
-              <div className="w-16 h-16 mx-auto mb-6 bg-[#8B7355]/10 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              )
+            },
+            {
+              title: 'Cooking Workshops',
+              description: 'Learn the secrets of traditional Albanian cuisine in our hands-on cooking classes.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-              </div>
-              <h3 className="text-2xl text-[#8B7355] mb-4">Cooking Workshops</h3>
-              <p className="text-gray-600">
-                Learn the secrets of traditional Albanian cuisine in our hands-on cooking classes,
-                using ingredients freshly harvested from our gardens.
-              </p>
-            </AnimateDiv>
-
-            <AnimateDiv
-              animation="slide-up"
-              duration={0.5}
-              delay={0.3}
-              className="text-center p-6"
-            >
-              <div className="w-16 h-16 mx-auto mb-6 bg-[#8B7355]/10 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              )
+            },
+            {
+              title: 'Local Excursions',
+              description: 'Explore the stunning Albanian coastline and historic sites with our guided tours.',
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
                 </svg>
-              </div>
-              <h3 className="text-2xl text-[#8B7355] mb-4">Local Excursions</h3>
-              <p className="text-gray-600">
-                Explore the stunning Albanian coastline, historic sites, and charming villages with our
-                guided tours, discovering the rich culture and natural beauty of the region.
-              </p>
-            </AnimateDiv>
-          </div>
+              )
+            }
+          ].map((experience, index) => (
+            <FadeIn key={index} animation="slide-up" delay={index * 0.1}>
+              <Card variant="subtle" className="text-center p-8">
+                <div
+                  className="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: 'rgba(139, 115, 85, 0.1)', color: 'var(--color-brand-olive)' }}
+                >
+                  {experience.icon}
+                </div>
+                <h3
+                  className="text-xl font-light mb-4"
+                  style={{ color: 'var(--color-brand-olive)' }}
+                >
+                  {experience.title}
+                </h3>
+                <p style={{ color: 'var(--color-text-secondary)' }}>
+                  {experience.description}
+                </p>
+              </Card>
+            </FadeIn>
+          ))}
+        </div>
 
+        <FadeIn animation="fade" delay={0.4}>
           <div className="text-center mt-12">
-            <Link
-              href="/contact"
-              className="inline-block px-8 py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#6B563F] transition-colors duration-300"
-            >
-              Inquire About Activities
+            <Link href="/contact">
+              <Button variant="primary">
+                Inquire About Activities
+              </Button>
             </Link>
           </div>
-        </AnimateDiv>
-      </section>
+        </FadeIn>
+      </Section>
 
       {/* Room Detail Modal */}
       {selectedRoom && (
-        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}
+          onClick={() => setSelectedRoom(null)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="relative h-80">
               <Image
                 src={selectedRoom.images[currentImageIndex]}
                 alt={selectedRoom.name}
                 className="object-cover"
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
+                sizes="800px"
                 quality={85}
               />
               <button
                 onClick={() => setSelectedRoom(null)}
-                className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                className="absolute top-4 right-4 p-2 rounded-full transition-colors"
+                style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <XMarkIcon className="h-6 w-6" />
               </button>
 
               {selectedRoom.images.length > 1 && (
                 <>
                   <button
                     onClick={() => setCurrentImageIndex(prev => (prev > 0 ? prev - 1 : selectedRoom.images.length - 1))}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors"
+                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
+                    <ChevronLeftIcon className="h-6 w-6" />
                   </button>
                   <button
                     onClick={() => setCurrentImageIndex(prev => (prev < selectedRoom.images.length - 1 ? prev + 1 : 0))}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors"
+                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                    <ChevronRightIcon className="h-6 w-6" />
                   </button>
                   <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
                     {selectedRoom.images.map((_, index) => (
@@ -534,43 +596,72 @@ export default function Accommodations() {
               )}
             </div>
 
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-3xl text-[#8B7355]">{selectedRoom.name}</h3>
-                <span className="text-2xl text-[#8B7355]">{formatPrice(selectedRoom.price)} / night</span>
+            <div className="p-6 space-y-6">
+              <div className="flex justify-between items-center">
+                <h3
+                  className="text-3xl font-light"
+                  style={{ color: 'var(--color-brand-olive)' }}
+                >
+                  {selectedRoom.name}
+                </h3>
+                <span
+                  className="text-2xl font-light"
+                  style={{ color: 'var(--color-brand-olive)' }}
+                >
+                  {formatPrice(selectedRoom.price)} / night
+                </span>
               </div>
 
-              <div className="flex flex-wrap gap-3 mb-4">
-                <span className="text-sm bg-gray-100 px-3 py-1 rounded-full">{selectedRoom.size}</span>
-                <span className="text-sm bg-gray-100 px-3 py-1 rounded-full">Sleeps {selectedRoom.capacity}</span>
+              <div className="flex flex-wrap gap-3">
+                <span
+                  className="text-sm px-3 py-1 rounded-full"
+                  style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
+                >
+                  {selectedRoom.size}
+                </span>
+                <span
+                  className="text-sm px-3 py-1 rounded-full"
+                  style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
+                >
+                  Sleeps {selectedRoom.capacity}
+                </span>
               </div>
 
-              <p className="text-gray-700 mb-6">{selectedRoom.description}</p>
+              <p style={{ color: 'var(--color-text-secondary)' }}>
+                {selectedRoom.description}
+              </p>
 
-              <div className="mb-6">
-                <h4 className="text-xl text-[#8B7355] mb-2">Amenities</h4>
+              <div>
+                <h4
+                  className="text-xl font-light mb-3"
+                  style={{ color: 'var(--color-brand-olive)' }}
+                >
+                  Amenities
+                </h4>
                 <ul className="grid grid-cols-2 gap-2">
                   {selectedRoom.amenities.map((amenity, index) => (
                     <li key={index} className="flex items-center gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>{amenity}</span>
+                      <CheckCircleIcon
+                        className="h-5 w-5 flex-shrink-0"
+                        style={{ color: 'var(--color-brand-olive)' }}
+                      />
+                      <span style={{ color: 'var(--color-text-primary)' }}>{amenity}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <button
-                className="w-full px-6 py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#6B563F] transition-colors duration-300 text-lg"
+              <Button
+                variant="primary"
+                fullWidth
+                size="lg"
                 onClick={() => {
                   setSelectedRoom(null)
-                  // Scroll to booking section
                   document.querySelector('.booking-section')?.scrollIntoView({ behavior: 'smooth' })
                 }}
               >
                 Book This Room
-              </button>
+              </Button>
             </div>
           </div>
         </div>

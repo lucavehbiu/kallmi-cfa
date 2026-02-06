@@ -1,6 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
+import { FadeIn } from './FadeIn'
 
 interface AnimationProps {
   children: ReactNode
@@ -8,36 +9,31 @@ interface AnimationProps {
   animation?: 'fade' | 'slide-up' | 'scale'
   duration?: number
   delay?: number
-  [key: string]: any
+  [key: string]: unknown
 }
 
-const getAnimationClass = (animation: string = 'fade') => {
-  switch (animation) {
-    case 'slide-up':
-      return 'animate-slide-up'
-    case 'scale':
-      return 'animate-scale'
-    case 'fade':
-    default:
-      return 'animate-fade'
-  }
-}
-
+// Backwards-compatible AnimateDiv that uses the new FadeIn component
 export const AnimateDiv = ({
   children,
   className = '',
   animation = 'fade',
+  duration = 0.5,
+  delay = 0,
   ...props
 }: AnimationProps) => {
-  const animationClass = getAnimationClass(animation)
+  // Map old animation names to new ones
+  const animationType = animation === 'slide-up' ? 'slide-up' : animation === 'scale' ? 'scale' : 'fade'
 
   return (
-    <div
-      className={`${className} ${animationClass}`}
-      {...props}
+    <FadeIn
+      animation={animationType}
+      duration={duration}
+      delay={delay}
+      className={className}
+      once={true}
     >
       {children}
-    </div>
+    </FadeIn>
   )
 }
 
@@ -45,29 +41,22 @@ export const AnimateButton = ({
   children,
   className = '',
   animation = 'fade',
+  duration = 0.5,
+  delay = 0,
   href,
   ...props
 }: AnimationProps & { href?: string }) => {
-  const animationClass = getAnimationClass(animation)
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        className={`${className} ${animationClass}`}
-        {...props}
-      >
-        {children}
-      </a>
-    )
-  }
+  const animationType = animation === 'slide-up' ? 'slide-up' : animation === 'scale' ? 'scale' : 'fade'
 
   return (
-    <button
-      className={`${className} ${animationClass}`}
-      {...props}
+    <FadeIn
+      animation={animationType}
+      duration={duration}
+      delay={delay}
+      className={className}
+      once={true}
     >
       {children}
-    </button>
+    </FadeIn>
   )
 }

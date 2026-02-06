@@ -1,0 +1,20 @@
+name = "booking-availability"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# ──────────────────────────────────────────────
+# SETUP: Replace ICAL_URL with your Booking.com
+# iCal export link from:
+#   Extranet → Rates & Availability → Sync Calendars → Export
+# ──────────────────────────────────────────────
+
+[vars]
+ICAL_URL = "https://admin.booking.com/hotel/hoteladmin/ical.html?t=YOUR_TOKEN_HERE"
+PROPERTY_NAME = "My Property"
+CACHE_TTL = "1800"   # 30 minutes — adjust as needed
+
+# Optional: bind to a custom domain (subdomain of your CF domain)
+# [routes]
+# routes = [
+#   { pattern = "availability.yourdomain.com", custom_domain = true }
+# ]

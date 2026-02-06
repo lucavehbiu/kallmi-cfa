@@ -41,15 +41,26 @@ Remote images require domains to be whitelisted in `next.config.mjs` under `imag
 
 ## Common Issues & Solutions
 
+### Node.js malloc error / server crash
+If you see `malloc: *** error for object: pointer being freed was not allocated`:
+```bash
+rm -rf .next node_modules/.cache && npm run dev
+```
+This is a corrupted cache issue, not a code problem.
+
 ### Images not rendering in dev
 - Check if domain is in `remotePatterns` in next.config.mjs
 - Clear `.next` cache: `rm -rf .next && npm run dev`
+- Missing local images show 404 in console but DON'T crash the server
 
 ### Slow dev server startup
 - Clear node_modules and reinstall: `rm -rf node_modules .next && npm install`
 
 ### React version mismatch
 - Next.js 15 requires React 19. Don't downgrade to React 18.
+
+### Multiple lockfile warning
+The warning about multiple lockfiles is harmless. To fix permanently, delete `/Users/lucavehbiu/Documents/GitHub/package-lock.json` (the parent directory one).
 
 ## Environment Variables
 

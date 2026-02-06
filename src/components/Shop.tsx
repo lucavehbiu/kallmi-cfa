@@ -2,14 +2,15 @@
 
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
-import { AnimateDiv } from './motion/MotionWrapper'
+import { FadeIn } from './motion/FadeIn'
 import { useCart } from '@/context/CartContext'
+import { Section, SectionHeader } from './layout/Section'
+import { Card, CardBody } from './ui/Card'
+import { Button } from './ui/Button'
 import {
   FunnelIcon,
   XMarkIcon,
   ShoppingCartIcon,
-  HeartIcon,
-  SparklesIcon,
   CheckCircleIcon
 } from '@heroicons/react/24/outline'
 
@@ -68,7 +69,6 @@ const formatPrice = (price: number) => {
 
 export default function Shop() {
   const { addToCart } = useCart()
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [showFilters, setShowFilters] = useState(false)
   const [addedToCart, setAddedToCart] = useState<number | null>(null)
   const [filters, setFilters] = useState({
@@ -100,201 +100,130 @@ export default function Shop() {
   }
 
   const handleAddToCart = (product: Product) => {
-    setSelectedProduct(product)
     addToCart(product)
     setAddedToCart(product.id)
     setTimeout(() => setAddedToCart(null), 2000)
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 font-cormorant relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--color-surface-primary)] font-cormorant">
 
-      {/* Floating Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-[#8B7355]/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-48 h-48 bg-[#D4AF37]/5 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse delay-2000" />
-      </div>
+      {/* Hero Section - Clean, Product-Focused */}
+      <div className="relative h-[60vh] min-h-[500px] overflow-hidden">
+        {/* Background */}
+        <Image
+          src="/images/hand-harvested.webp"
+          alt="Artisanal Olive Oil Collection"
+          className="object-cover object-center"
+          fill
+          priority
+          sizes="100vw"
+          quality={90}
+        />
 
-      {/* Immersive Hero Section */}
-      <div className="relative min-h-screen sm:h-[80vh] lg:h-[70vh] overflow-hidden pt-20 lg:pt-24">
-        {/* Parallax Background */}
-        <div className="absolute inset-0 scale-110">
-          <Image
-            src="/images/hand-harvested.webp"
-            alt="Artisanal Olive Oil Collection"
-            className="object-cover object-center"
-            fill
-            priority
-            sizes="100vw"
-            quality={90}
-          />
-        </div>
-
-        {/* Sophisticated Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/30 via-transparent to-[#D4AF37]/20" />
+        {/* Single Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
 
         {/* Hero Content */}
-        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6 py-16">
-          <div className="max-w-4xl space-y-4 sm:space-y-6 lg:space-y-8">
+        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4">
+          <div className="max-w-3xl">
+            <FadeIn animation="fade" delay={0.2}>
+              <span className="text-overline text-white/80 block mb-4">
+                2024 Collection
+              </span>
+            </FadeIn>
 
-            {/* Floating Badge */}
-            <AnimateDiv
-              animation="fade"
-              duration={1.0}
-              delay={0.3}
-              className="inline-block"
-            >
-              <div className="backdrop-blur-md bg-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3 border border-white/20 mb-3 sm:mb-4">
-                <span className="text-xs sm:text-sm lg:text-base font-medium tracking-widest uppercase text-white/90">
-                  Liquid Gold Collection
-                </span>
-              </div>
-            </AnimateDiv>
-
-            {/* Main Title */}
-            <AnimateDiv
-              animation="slide-up"
-              duration={1.2}
-              delay={0.6}
-            >
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight tracking-wide leading-tight">
-                <span className="block">Artisanal</span>
-                <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-6xl italic font-light text-[#D4AF37] mt-1 sm:mt-2">
-                  Excellence
-                </span>
+            <FadeIn animation="slide-up" delay={0.4}>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-tight mb-6">
+                Liquid Gold
               </h1>
-            </AnimateDiv>
+            </FadeIn>
 
-            {/* Elegant Divider */}
-            <AnimateDiv
-              animation="fade"
-              duration={0.8}
-              delay={1.0}
-              className="flex items-center justify-center space-x-3 sm:space-x-4"
-            >
-              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-              <SparklesIcon className="w-4 sm:w-5 h-4 sm:h-5 text-[#D4AF37]" />
-              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-            </AnimateDiv>
-
-            {/* Subtitle */}
-            <AnimateDiv
-              animation="slide-up"
-              duration={1.0}
-              delay={1.2}
-            >
-              <p className="text-base sm:text-xl lg:text-2xl font-light opacity-95 leading-relaxed max-w-3xl mx-auto px-2">
-                Discover our curated collection of premium extra virgin olive oils,
-                each bottle telling the story of our <span className="text-[#D4AF37]">ancient heritage</span>
+            <FadeIn animation="slide-up" delay={0.6}>
+              <p className="text-lg sm:text-xl font-light opacity-90 max-w-2xl mx-auto">
+                Premium extra virgin olive oils, cold-pressed from our heritage groves
               </p>
-            </AnimateDiv>
+            </FadeIn>
           </div>
         </div>
-
-        {/* Shop Info Cards - Positioned at Bottom */}
-        <div className="absolute bottom-16 sm:bottom-20 left-4 right-4 z-10">
-          <AnimateDiv
-            animation="slide-up"
-            duration={1.0}
-            delay={1.5}
-            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 max-w-4xl mx-auto"
-          >
-            {[
-              { icon: SparklesIcon, text: "Premium Quality" },
-              { icon: HeartIcon, text: "2024 Harvest" },
-              { icon: ShoppingCartIcon, text: "Limited Edition" },
-            ].map((item, index) => (
-              <div key={index} className="backdrop-blur-md bg-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/20 min-w-[120px] sm:min-w-[140px] flex flex-col items-center">
-                <item.icon className="w-5 sm:w-6 h-5 sm:h-6 text-[#D4AF37] mb-1 sm:mb-2" />
-                <p className="text-white/90 text-xs sm:text-sm font-light text-center">{item.text}</p>
-              </div>
-            ))}
-          </AnimateDiv>
-        </div>
-
-        {/* Scroll Indicator - Hidden on Mobile */}
-        <AnimateDiv
-          animation="fade"
-          duration={1.0}
-          delay={1.8}
-          className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center space-y-2 text-white/70">
-            <span className="text-xs sm:text-sm font-light tracking-widest uppercase">
-              Explore Collection
-            </span>
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce" />
-            </div>
-          </div>
-        </AnimateDiv>
       </div>
 
-      {/* Enhanced Filter Toggle - Mobile */}
+      {/* Filter Toggle - Mobile */}
       <button
         onClick={() => setShowFilters(!showFilters)}
-        className="md:hidden fixed bottom-6 right-6 z-50 group"
+        className="md:hidden fixed bottom-6 right-6 z-50"
       >
-        <div className="bg-gradient-to-r from-[#8B7355] to-[#A0845C] text-white p-4 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/20 transition-all duration-300 group-hover:scale-110">
+        <div
+          className="p-4 rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+          style={{ backgroundColor: 'var(--color-brand-olive)', color: 'white' }}
+        >
           {showFilters ? (
-            <XMarkIcon className="w-6 h-6 transition-transform duration-300 group-hover:rotate-90" />
+            <XMarkIcon className="w-6 h-6" />
           ) : (
-            <FunnelIcon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
+            <FunnelIcon className="w-6 h-6" />
           )}
         </div>
-        <div className="absolute inset-0 bg-[#D4AF37]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
       </button>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
-
-        {/* Collection Stats */}
-        <AnimateDiv
-          animation="fade"
-          duration={1.0}
-          className="text-center mb-12 sm:mb-20"
-        >
-          <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl mx-auto">
+      <Section background="default" spacing="lg">
+        {/* Collection Stats - Clean Cards */}
+        <FadeIn animation="fade" className="mb-16">
+          <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-2xl mx-auto">
             {[
               { number: '3', label: 'Premium Oils' },
               { number: '2024', label: 'Fresh Harvest' },
               { number: '100%', label: 'Extra Virgin' }
             ].map((stat, index) => (
-              <div key={index} className="backdrop-blur-sm bg-white/60 rounded-2xl p-4 sm:p-6 border border-white/40">
-                <div className="text-2xl sm:text-3xl font-light text-[#8B7355]">{stat.number}</div>
-                <div className="text-xs sm:text-sm text-gray-600 font-medium">{stat.label}</div>
-              </div>
+              <Card key={index} variant="elevated" className="text-center p-4 sm:p-6">
+                <div
+                  className="text-2xl sm:text-3xl font-light mb-1"
+                  style={{ color: 'var(--color-brand-olive)' }}
+                >
+                  {stat.number}
+                </div>
+                <div
+                  className="text-xs sm:text-sm font-medium"
+                  style={{ color: 'var(--color-text-secondary)' }}
+                >
+                  {stat.label}
+                </div>
+              </Card>
             ))}
           </div>
-        </AnimateDiv>
+        </FadeIn>
 
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
 
-          {/* Enhanced Filter Sidebar */}
+          {/* Filter Sidebar */}
           <aside className={`
-            lg:w-80 flex-shrink-0 transition-all duration-500
+            lg:w-72 flex-shrink-0 transition-all duration-300
             ${showFilters
-              ? 'fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:relative lg:bg-transparent lg:backdrop-blur-none'
+              ? 'fixed inset-0 z-40 bg-black/30 lg:relative lg:bg-transparent'
               : 'hidden lg:block'
             }
           `}>
-            <div className={`
-              ${showFilters ? 'absolute right-0 top-0 h-full w-80 max-w-[90vw]' : ''}
-              bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/30 p-6 lg:p-8
-            `}>
-
+            <Card
+              variant="elevated"
+              className={`
+                ${showFilters ? 'absolute right-0 top-0 h-full w-80 max-w-[90vw] rounded-none lg:rounded-2xl' : ''}
+                p-6 lg:p-8
+              `}
+            >
               {/* Filter Header */}
               <div className="flex items-center justify-between mb-8">
-                <h3 className="text-2xl font-light text-[#8B7355] flex items-center space-x-2">
-                  <FunnelIcon className="w-6 h-6" />
-                  <span>Refine Selection</span>
+                <h3
+                  className="text-xl font-light flex items-center gap-2"
+                  style={{ color: 'var(--color-brand-olive)' }}
+                >
+                  <FunnelIcon className="w-5 h-5" />
+                  <span>Refine</span>
                 </h3>
                 {showFilters && (
                   <button
                     onClick={() => setShowFilters(false)}
-                    className="lg:hidden p-2 hover:bg-gray-100 rounded-xl transition-colors duration-200"
+                    className="lg:hidden p-2 rounded-lg transition-colors duration-200"
+                    style={{ color: 'var(--color-text-tertiary)' }}
                   >
                     <XMarkIcon className="w-5 h-5" />
                   </button>
@@ -303,31 +232,29 @@ export default function Shop() {
 
               {/* Harvest Year Filter */}
               <div className="mb-8">
-                <h4 className="text-lg font-medium text-gray-800 mb-4 flex items-center space-x-2">
-                  <SparklesIcon className="w-5 h-5 text-[#D4AF37]" />
-                  <span>Harvest Year</span>
+                <h4
+                  className="text-sm font-medium uppercase tracking-wide mb-4"
+                  style={{ color: 'var(--color-text-secondary)' }}
+                >
+                  Harvest Year
                 </h4>
                 <div className="space-y-3">
                   {filterOptions.years.map(year => (
-                    <label key={year} className="flex items-center space-x-3 group cursor-pointer">
-                      <div className="relative">
-                        <input
-                          type="checkbox"
-                          checked={filters.years.includes(year)}
-                          onChange={() => handleFilterChange('years', year)}
-                          className="sr-only"
-                        />
-                        <div className={`w-5 h-5 rounded border-2 transition-all duration-200 flex items-center justify-center
-                          ${filters.years.includes(year)
-                            ? 'bg-[#8B7355] border-[#8B7355]'
-                            : 'border-gray-300 group-hover:border-[#8B7355]'
-                          }`}>
-                          {filters.years.includes(year) && (
-                            <CheckCircleIcon className="w-3 h-3 text-white" />
-                          )}
-                        </div>
-                      </div>
-                      <span className="text-gray-700 group-hover:text-[#8B7355] transition-colors duration-200">
+                    <label key={year} className="flex items-center gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={filters.years.includes(year)}
+                        onChange={() => handleFilterChange('years', year)}
+                        className="w-4 h-4 rounded transition-colors"
+                        style={{
+                          accentColor: 'var(--color-brand-olive)',
+                          borderColor: 'var(--color-border)'
+                        }}
+                      />
+                      <span
+                        className="transition-colors duration-200 group-hover:text-[var(--color-brand-olive)]"
+                        style={{ color: 'var(--color-text-primary)' }}
+                      >
                         {year}
                       </span>
                     </label>
@@ -337,150 +264,174 @@ export default function Shop() {
 
               {/* Bottle Size Filter */}
               <div>
-                <h4 className="text-lg font-medium text-gray-800 mb-4 flex items-center space-x-2">
-                  <HeartIcon className="w-5 h-5 text-[#D4AF37]" />
-                  <span>Bottle Size</span>
+                <h4
+                  className="text-sm font-medium uppercase tracking-wide mb-4"
+                  style={{ color: 'var(--color-text-secondary)' }}
+                >
+                  Bottle Size
                 </h4>
                 <div className="space-y-3">
                   {filterOptions.sizes.map(size => (
-                    <label key={size} className="flex items-center space-x-3 group cursor-pointer">
-                      <div className="relative">
-                        <input
-                          type="checkbox"
-                          checked={filters.sizes.includes(size)}
-                          onChange={() => handleFilterChange('sizes', size)}
-                          className="sr-only"
-                        />
-                        <div className={`w-5 h-5 rounded border-2 transition-all duration-200 flex items-center justify-center
-                          ${filters.sizes.includes(size)
-                            ? 'bg-[#8B7355] border-[#8B7355]'
-                            : 'border-gray-300 group-hover:border-[#8B7355]'
-                          }`}>
-                          {filters.sizes.includes(size) && (
-                            <CheckCircleIcon className="w-3 h-3 text-white" />
-                          )}
-                        </div>
-                      </div>
-                      <span className="text-gray-700 group-hover:text-[#8B7355] transition-colors duration-200">
+                    <label key={size} className="flex items-center gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={filters.sizes.includes(size)}
+                        onChange={() => handleFilterChange('sizes', size)}
+                        className="w-4 h-4 rounded transition-colors"
+                        style={{
+                          accentColor: 'var(--color-brand-olive)',
+                          borderColor: 'var(--color-border)'
+                        }}
+                      />
+                      <span
+                        className="transition-colors duration-200 group-hover:text-[var(--color-brand-olive)]"
+                        style={{ color: 'var(--color-text-primary)' }}
+                      >
                         {size}
                       </span>
                     </label>
                   ))}
                 </div>
               </div>
-            </div>
+            </Card>
           </aside>
 
-          {/* Enhanced Products Grid */}
+          {/* Products Grid */}
           <div className="flex-1">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
               {filteredProducts.map((product, index) => (
-                <AnimateDiv
+                <FadeIn
                   key={product.id}
                   animation="slide-up"
-                  duration={0.8}
-                  delay={index * 0.2}
-                  className="group"
+                  delay={index * 0.1}
                 >
-                  <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/30 hover:border-[#8B7355]/30">
-
+                  <Card
+                    variant="elevated"
+                    hover
+                    className="overflow-hidden group"
+                  >
                     {/* Featured Badge */}
                     {product.featured && (
-                      <div className="absolute top-4 left-4 z-10">
-                        <div className="bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] text-white px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
-                          <SparklesIcon className="w-3 h-3" />
-                          <span>Featured</span>
-                        </div>
+                      <div
+                        className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-medium text-white"
+                        style={{ backgroundColor: 'var(--color-brand-gold)' }}
+                      >
+                        Featured
                       </div>
                     )}
 
-                    {/* Product Image */}
-                    <div className="relative aspect-[3/4] p-8 bg-gradient-to-br from-stone-50 to-stone-100">
+                    {/* Product Image - Clean Background */}
+                    <div
+                      className="relative aspect-[3/4] p-8"
+                      style={{ backgroundColor: 'var(--color-surface-secondary)' }}
+                    >
                       <Image
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-contain group-hover:scale-110 transition-transform duration-700"
+                        className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         quality={90}
                       />
-
-                      {/* Floating Glow */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#8B7355]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
 
                     {/* Product Info */}
-                    <div className="p-6 lg:p-8 space-y-4">
+                    <CardBody className="space-y-4">
                       <div className="space-y-2">
-                        <h2 className="text-xl lg:text-2xl font-light text-[#8B7355] group-hover:text-[#A0845C] transition-colors duration-300">
+                        <h2
+                          className="text-xl font-light"
+                          style={{ color: 'var(--color-text-primary)' }}
+                        >
                           {product.name}
                         </h2>
-                        <p className="text-sm text-gray-600 font-light">
+                        <p
+                          className="text-sm"
+                          style={{ color: 'var(--color-text-tertiary)' }}
+                        >
                           {product.year} Harvest • {product.size}
                         </p>
                         {product.description && (
-                          <p className="text-sm text-gray-500 leading-relaxed">
+                          <p
+                            className="text-sm leading-relaxed"
+                            style={{ color: 'var(--color-text-secondary)' }}
+                          >
                             {product.description}
                           </p>
                         )}
                       </div>
 
                       {/* Price and Action */}
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <span className="text-2xl lg:text-3xl font-light text-[#8B7355]">
+                      <div
+                        className="flex items-center justify-between pt-4"
+                        style={{ borderTop: '1px solid var(--color-border-light)' }}
+                      >
+                        <span
+                          className="text-2xl font-light"
+                          style={{ color: 'var(--color-brand-olive)' }}
+                        >
                           {formatPrice(product.price)}
                         </span>
 
                         {product.inStock ? (
-                          <button
+                          <Button
                             onClick={() => handleAddToCart(product)}
                             disabled={addedToCart === product.id}
-                            className="group/btn relative px-6 py-3 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg disabled:opacity-50"
+                            variant="primary"
+                            size="sm"
                           >
                             {addedToCart === product.id ? (
-                              <span className="flex items-center space-x-2">
-                                <CheckCircleIcon className="w-5 h-5" />
-                                <span>Added!</span>
+                              <span className="flex items-center gap-2">
+                                <CheckCircleIcon className="w-4 h-4" />
+                                <span>Added</span>
                               </span>
                             ) : (
-                              <span className="flex items-center space-x-2">
-                                <ShoppingCartIcon className="w-5 h-5 transition-transform group-hover/btn:scale-110" />
-                                <span>Add to Cart</span>
+                              <span className="flex items-center gap-2">
+                                <ShoppingCartIcon className="w-4 h-4" />
+                                <span>Add</span>
                               </span>
                             )}
-                          </button>
+                          </Button>
                         ) : (
-                          <div className="px-6 py-3 bg-gray-100 text-gray-500 rounded-2xl font-medium cursor-not-allowed">
-                            <span className="flex items-center space-x-2">
-                              <HeartIcon className="w-5 h-5" />
-                              <span>Coming Soon</span>
-                            </span>
-                          </div>
+                          <span
+                            className="text-sm px-4 py-2 rounded-lg"
+                            style={{
+                              backgroundColor: 'var(--color-surface-tertiary)',
+                              color: 'var(--color-text-tertiary)'
+                            }}
+                          >
+                            Coming Soon
+                          </span>
                         )}
                       </div>
-                    </div>
-                  </div>
-                </AnimateDiv>
+                    </CardBody>
+                  </Card>
+                </FadeIn>
               ))}
             </div>
 
             {/* Empty State */}
             {filteredProducts.length === 0 && (
-              <AnimateDiv
-                animation="fade"
-                duration={0.8}
-                className="text-center py-16"
-              >
-                <div className="backdrop-blur-sm bg-white/60 rounded-3xl p-12 border border-white/40 max-w-md mx-auto">
-                  <SparklesIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                  <h3 className="text-xl font-light text-gray-600 mb-2">No products found</h3>
-                  <p className="text-gray-500">Try adjusting your filters to see more options</p>
-                </div>
-              </AnimateDiv>
+              <FadeIn animation="fade">
+                <Card variant="subtle" className="text-center p-12 max-w-md mx-auto">
+                  <FunnelIcon
+                    className="w-12 h-12 mx-auto mb-4"
+                    style={{ color: 'var(--color-text-tertiary)' }}
+                  />
+                  <h3
+                    className="text-lg font-light mb-2"
+                    style={{ color: 'var(--color-text-primary)' }}
+                  >
+                    No products found
+                  </h3>
+                  <p style={{ color: 'var(--color-text-secondary)' }}>
+                    Try adjusting your filters
+                  </p>
+                </Card>
+              </FadeIn>
             )}
           </div>
         </div>
-      </div>
+      </Section>
     </div>
   )
 }
