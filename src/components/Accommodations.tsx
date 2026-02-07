@@ -21,48 +21,57 @@ interface Room {
   featured?: boolean
 }
 
+const COUNTRY_CODES = [
+  { code: '+355', country: 'AL', label: 'Albania (+355)' },
+  { code: '+1', country: 'US', label: 'US (+1)' },
+  { code: '+44', country: 'GB', label: 'UK (+44)' },
+  { code: '+49', country: 'DE', label: 'Germany (+49)' },
+  { code: '+39', country: 'IT', label: 'Italy (+39)' },
+  { code: '+33', country: 'FR', label: 'France (+33)' },
+  { code: '+34', country: 'ES', label: 'Spain (+34)' },
+  { code: '+41', country: 'CH', label: 'Switzerland (+41)' },
+  { code: '+43', country: 'AT', label: 'Austria (+43)' },
+  { code: '+30', country: 'GR', label: 'Greece (+30)' },
+  { code: '+381', country: 'RS', label: 'Serbia (+381)' },
+  { code: '+383', country: 'XK', label: 'Kosovo (+383)' },
+  { code: '+389', country: 'MK', label: 'N. Macedonia (+389)' },
+  { code: '+382', country: 'ME', label: 'Montenegro (+382)' },
+  { code: '+385', country: 'HR', label: 'Croatia (+385)' },
+  { code: '+386', country: 'SI', label: 'Slovenia (+386)' },
+  { code: '+31', country: 'NL', label: 'Netherlands (+31)' },
+  { code: '+32', country: 'BE', label: 'Belgium (+32)' },
+  { code: '+46', country: 'SE', label: 'Sweden (+46)' },
+  { code: '+47', country: 'NO', label: 'Norway (+47)' },
+  { code: '+48', country: 'PL', label: 'Poland (+48)' },
+  { code: '+90', country: 'TR', label: 'Turkey (+90)' },
+  { code: '+61', country: 'AU', label: 'Australia (+61)' },
+  { code: '+86', country: 'CN', label: 'China (+86)' },
+  { code: '+81', country: 'JP', label: 'Japan (+81)' },
+  { code: '+971', country: 'AE', label: 'UAE (+971)' },
+]
+
 const rooms: Room[] = [
   {
     id: 1,
-    name: "Olive View Suite",
-    description: "Luxurious suite with panoramic views of our olive groves and the Adriatic Sea. Features a king-sized bed, spacious living area, and private balcony.",
+    name: "West Room - Sea View",
+    description: "Beautiful room on the west side of the estate with stunning views of the Adriatic Sea. Features a comfortable bed, ensuite bathroom, and private balcony.",
     price: 120,
-    size: "45 m²",
+    size: "30 m²",
     capacity: 2,
-    amenities: ["King bed", "Private balcony", "Ensuite bathroom", "Air conditioning", "Mini fridge", "Free WiFi", "Daily housekeeping"],
+    amenities: ["Double bed", "Sea view", "Private balcony", "Ensuite bathroom", "Air conditioning", "Free WiFi", "Daily housekeeping"],
     images: ["/images/room-olive-1.webp", "/images/room-olive-2.webp", "/images/room-olive-3.webp"],
     featured: true
   },
   {
     id: 2,
-    name: "Garden Retreat",
-    description: "Charming room overlooking our lush gardens. Features a queen-sized bed, cozy sitting area, and traditional Albanian furnishings.",
-    price: 90,
+    name: "East Room - Sea View",
+    description: "Charming room on the east side of the estate with panoramic sea views. Features a comfortable bed, ensuite bathroom, and morning sunshine.",
+    price: 120,
     size: "30 m²",
     capacity: 2,
-    amenities: ["Queen bed", "Garden view", "Ensuite bathroom", "Air conditioning", "Free WiFi", "Daily housekeeping"],
-    images: ["/images/room-garden-1.webp", "/images/room-garden-2.webp"]
-  },
-  {
-    id: 3,
-    name: "Family Cottage",
-    description: "Spacious cottage ideal for families, with a master bedroom, second bedroom with twin beds, and a comfortable living area.",
-    price: 160,
-    size: "65 m²",
-    capacity: 4,
-    amenities: ["King bed", "Two twin beds", "Full kitchen", "Living area", "Private patio", "Air conditioning", "Free WiFi", "Daily housekeeping"],
-    images: ["/images/room-family-1.webp", "/images/room-family-2.webp", "/images/room-family-3.webp"],
+    amenities: ["Double bed", "Sea view", "Ensuite bathroom", "Air conditioning", "Free WiFi", "Daily housekeeping"],
+    images: ["/images/room-garden-1.webp", "/images/room-garden-2.webp"],
     featured: true
-  },
-  {
-    id: 4,
-    name: "Heritage Room",
-    description: "Traditional room featuring authentic Albanian decor and craftsmanship. Offers a queen-sized bed and views of the countryside.",
-    price: 85,
-    size: "25 m²",
-    capacity: 2,
-    amenities: ["Queen bed", "Countryside view", "Ensuite bathroom", "Air conditioning", "Free WiFi", "Daily housekeeping"],
-    images: ["/images/room-heritage-1.webp", "/images/room-heritage-2.webp"]
   }
 ];
 
@@ -79,28 +88,113 @@ export default function Accommodations() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    countryCode: '+355',
     phone: '',
-    roomId: '',
+    roomId: '' as string,
     guests: '',
     checkIn: '',
     checkOut: '',
-    specialRequests: ''
+    specialRequests: '',
+    ageConfirm: false
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
+
+  // Get tomorrow's date as minimum selectable date
+  const getMinDate = () => {
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    return tomorrow.toISOString().split('T')[0]
+  }
+
+  // Determine max guests based on room selection
+  const getMaxGuests = () => {
+    const selectedIds = formData.roomId.split(',').filter(Boolean)
+    if (selectedIds.length === 2) return 4
+    return 2
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+    const { name, value, type } = e.target
+    const checked = (e.target as HTMLInputElement).checked
+
+    setFormErrors(prev => ({ ...prev, [name]: '' }))
+
+    if (type === 'checkbox') {
+      setFormData(prev => ({ ...prev, [name]: checked }))
+      return
+    }
+
+    // When room changes, reset guests if over new max
+    if (name === 'roomId') {
+      const selectedIds = value.split(',').filter(Boolean)
+      const maxGuests = selectedIds.length === 2 ? 4 : 2
+      const currentGuests = parseInt(formData.guests) || 0
+      if (currentGuests > maxGuests) {
+        setFormData(prev => ({ ...prev, [name]: value, guests: '' }))
+        return
+      }
+    }
+
+    // When checkIn changes, ensure checkOut is after it
+    if (name === 'checkIn' && formData.checkOut && value >= formData.checkOut) {
+      setFormData(prev => ({ ...prev, [name]: value, checkOut: '' }))
+      return
+    }
+
     setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const validateForm = (): boolean => {
+    const errors: Record<string, string> = {}
+
+    // Email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    if (!emailRegex.test(formData.email)) {
+      errors.email = 'Please enter a valid email address'
+    }
+
+    // Phone validation (digits only, 6-15 digits)
+    const phoneDigits = formData.phone.replace(/\D/g, '')
+    if (phoneDigits.length < 6 || phoneDigits.length > 15) {
+      errors.phone = 'Please enter a valid phone number'
+    }
+
+    // Date validation - must be in the future (not today)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const checkIn = new Date(formData.checkIn)
+    if (checkIn <= today) {
+      errors.checkIn = 'Check-in must be a future date'
+    }
+
+    const checkOut = new Date(formData.checkOut)
+    if (checkOut <= checkIn) {
+      errors.checkOut = 'Check-out must be after check-in'
+    }
+
+    // Age confirmation
+    if (!formData.ageConfirm) {
+      errors.ageConfirm = 'You must confirm all guests are 13 or older'
+    }
+
+    setFormErrors(errors)
+    return Object.keys(errors).length === 0
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!validateForm()) return
+
     setIsSubmitting(true)
     setSubmitMessage(null)
 
     try {
-      const selectedRoomData = rooms.find(room => room.id.toString() === formData.roomId)
+      const selectedIds = formData.roomId.split(',').filter(Boolean)
+      const roomNames = selectedIds.map(id => rooms.find(r => r.id.toString() === id)?.name || 'Unknown').join(' & ')
+      const fullPhone = `${formData.countryCode} ${formData.phone}`
 
       const response = await fetch('/api/booking', {
         method: 'POST',
@@ -108,8 +202,15 @@ export default function Accommodations() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...formData,
-          roomName: selectedRoomData?.name || 'Unknown Room'
+          name: formData.name,
+          email: formData.email,
+          phone: fullPhone,
+          roomId: formData.roomId,
+          roomName: roomNames,
+          guests: formData.guests,
+          checkIn: formData.checkIn,
+          checkOut: formData.checkOut,
+          specialRequests: formData.specialRequests
         }),
       })
 
@@ -120,12 +221,14 @@ export default function Accommodations() {
         setFormData({
           name: '',
           email: '',
+          countryCode: '+355',
           phone: '',
           roomId: '',
           guests: '',
           checkIn: '',
           checkOut: '',
-          specialRequests: ''
+          specialRequests: '',
+          ageConfirm: false
         })
       } else {
         setSubmitMessage({ type: 'error', text: data.error || 'Failed to submit booking request' })
@@ -228,7 +331,7 @@ export default function Accommodations() {
           overline="Accommodations"
           title="Our Rooms"
           subtitle="Choose from our selection of comfortable rooms and suites"
-          centered
+          align="center"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
@@ -325,7 +428,7 @@ export default function Accommodations() {
             overline="Reservations"
             title="Book Your Stay"
             subtitle="Experience the serenity of Kallmi Estate. Reserve your accommodation and create lasting memories with us."
-            centered
+            align="center"
           />
 
           <FadeIn animation="slide-up" delay={0.2}>
@@ -353,54 +456,82 @@ export default function Accommodations() {
                     required
                     className="input-field"
                   />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Email Address"
-                    required
-                    className="input-field"
-                  />
+                  <div>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Email Address"
+                      required
+                      className={`input-field ${formErrors.email ? 'border-red-400 focus:border-red-400' : ''}`}
+                    />
+                    {formErrors.email && <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>}
+                  </div>
                 </div>
 
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  placeholder="Phone Number"
-                  required
-                  className="input-field"
-                />
+                <div>
+                  <div className="flex gap-2">
+                    <select
+                      name="countryCode"
+                      value={formData.countryCode}
+                      onChange={handleInputChange}
+                      className="select-field"
+                      style={{ width: '160px', minWidth: '160px', backgroundPosition: 'right 0.5rem center' }}
+                    >
+                      {COUNTRY_CODES.map(cc => (
+                        <option key={cc.code} value={cc.code}>{cc.label}</option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="Phone Number"
+                      required
+                      className={`input-field flex-1 ${formErrors.phone ? 'border-red-400 focus:border-red-400' : ''}`}
+                    />
+                  </div>
+                  {formErrors.phone && <p className="text-red-500 text-xs mt-1">{formErrors.phone}</p>}
+                </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <select
-                    name="roomId"
-                    value={formData.roomId}
-                    onChange={handleInputChange}
-                    required
-                    className="select-field"
-                  >
-                    <option value="">Select Room Type</option>
-                    {rooms.map(room => (
-                      <option key={room.id} value={room.id}>{room.name}</option>
-                    ))}
-                  </select>
-                  <select
-                    name="guests"
-                    value={formData.guests}
-                    onChange={handleInputChange}
-                    required
-                    className="select-field"
-                  >
-                    <option value="">Number of Guests</option>
-                    <option value="1">1 Guest</option>
-                    <option value="2">2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4">4 Guests</option>
-                    <option value="5+">5+ Guests</option>
-                  </select>
+                  <div>
+                    <select
+                      name="roomId"
+                      value={formData.roomId}
+                      onChange={handleInputChange}
+                      required
+                      className="select-field"
+                    >
+                      <option value="">Select Room</option>
+                      {rooms.map(room => (
+                        <option key={room.id} value={room.id.toString()}>{room.name}</option>
+                      ))}
+                      <option value={rooms.map(r => r.id).join(',')}>Both Rooms</option>
+                    </select>
+                  </div>
+                  <div>
+                    <select
+                      name="guests"
+                      value={formData.guests}
+                      onChange={handleInputChange}
+                      required
+                      className="select-field"
+                    >
+                      <option value="">Number of Guests</option>
+                      <option value="1">1 Guest</option>
+                      <option value="2">2 Guests</option>
+                      {getMaxGuests() >= 3 && <option value="3">3 Guests</option>}
+                      {getMaxGuests() >= 4 && <option value="4">4 Guests</option>}
+                    </select>
+                    {formData.roomId && (
+                      <p className="text-xs mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
+                        Max {getMaxGuests()} guests for {formData.roomId.includes(',') ? 'both rooms' : 'one room'}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -416,9 +547,11 @@ export default function Accommodations() {
                       name="checkIn"
                       value={formData.checkIn}
                       onChange={handleInputChange}
+                      min={getMinDate()}
                       required
-                      className="input-field"
+                      className={`input-field ${formErrors.checkIn ? 'border-red-400 focus:border-red-400' : ''}`}
                     />
+                    {formErrors.checkIn && <p className="text-red-500 text-xs mt-1">{formErrors.checkIn}</p>}
                   </div>
                   <div>
                     <label
@@ -432,9 +565,11 @@ export default function Accommodations() {
                       name="checkOut"
                       value={formData.checkOut}
                       onChange={handleInputChange}
+                      min={formData.checkIn || getMinDate()}
                       required
-                      className="input-field"
+                      className={`input-field ${formErrors.checkOut ? 'border-red-400 focus:border-red-400' : ''}`}
                     />
+                    {formErrors.checkOut && <p className="text-red-500 text-xs mt-1">{formErrors.checkOut}</p>}
                   </div>
                 </div>
 
@@ -445,6 +580,22 @@ export default function Accommodations() {
                   placeholder="Special Requests"
                   className="textarea-field"
                 />
+
+                <div>
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      name="ageConfirm"
+                      checked={formData.ageConfirm}
+                      onChange={handleInputChange}
+                      className="mt-1 rounded border-gray-300 text-[#8B7355] focus:ring-[#8B7355]"
+                    />
+                    <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+                      I confirm that all guests are <strong>13 years of age or older</strong>. Kallmi Estate does not accommodate children under 13.
+                    </span>
+                  </label>
+                  {formErrors.ageConfirm && <p className="text-red-500 text-xs mt-1 ml-7">{formErrors.ageConfirm}</p>}
+                </div>
 
                 <Button
                   type="submit"
@@ -474,7 +625,7 @@ export default function Accommodations() {
           overline="Experiences"
           title="Guest Activities"
           subtitle="Make the most of your stay with our curated experiences"
-          centered
+          align="center"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">

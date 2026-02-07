@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import Mailjet from 'node-mailjet'
+import { supabase } from '@/lib/supabase'
 
 const mailjet = Mailjet.apiConnect(
   process.env.MAILJET_API_KEY || '',
@@ -322,7 +323,7 @@ export async function POST(request: NextRequest) {
           },
           To: [
             {
-              Email: "kallmibukur@gmail.com",
+              Email: "reservations@kallmibukur.al",
               Name: "Kallmi Estate"
             }
           ],

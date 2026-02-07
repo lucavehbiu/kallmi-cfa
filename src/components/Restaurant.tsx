@@ -18,6 +18,35 @@ import {
   StarIcon
 } from '@heroicons/react/24/outline'
 
+const COUNTRY_CODES = [
+  { code: '+355', country: 'AL', label: 'Albania (+355)' },
+  { code: '+1', country: 'US', label: 'US (+1)' },
+  { code: '+44', country: 'GB', label: 'UK (+44)' },
+  { code: '+49', country: 'DE', label: 'Germany (+49)' },
+  { code: '+39', country: 'IT', label: 'Italy (+39)' },
+  { code: '+33', country: 'FR', label: 'France (+33)' },
+  { code: '+34', country: 'ES', label: 'Spain (+34)' },
+  { code: '+41', country: 'CH', label: 'Switzerland (+41)' },
+  { code: '+43', country: 'AT', label: 'Austria (+43)' },
+  { code: '+30', country: 'GR', label: 'Greece (+30)' },
+  { code: '+381', country: 'RS', label: 'Serbia (+381)' },
+  { code: '+383', country: 'XK', label: 'Kosovo (+383)' },
+  { code: '+389', country: 'MK', label: 'N. Macedonia (+389)' },
+  { code: '+382', country: 'ME', label: 'Montenegro (+382)' },
+  { code: '+385', country: 'HR', label: 'Croatia (+385)' },
+  { code: '+386', country: 'SI', label: 'Slovenia (+386)' },
+  { code: '+31', country: 'NL', label: 'Netherlands (+31)' },
+  { code: '+32', country: 'BE', label: 'Belgium (+32)' },
+  { code: '+46', country: 'SE', label: 'Sweden (+46)' },
+  { code: '+47', country: 'NO', label: 'Norway (+47)' },
+  { code: '+48', country: 'PL', label: 'Poland (+48)' },
+  { code: '+90', country: 'TR', label: 'Turkey (+90)' },
+  { code: '+61', country: 'AU', label: 'Australia (+61)' },
+  { code: '+86', country: 'CN', label: 'China (+86)' },
+  { code: '+81', country: 'JP', label: 'Japan (+81)' },
+  { code: '+971', country: 'AE', label: 'UAE (+971)' },
+]
+
 interface MenuItem {
   id: number
   name: string
@@ -236,6 +265,8 @@ export default function Restaurant() {
   const [reservationForm, setReservationForm] = useState({
     name: '',
     email: '',
+    countryCode: '+355',
+    phone: '',
     date: '',
     time: '',
     guests: '',
@@ -243,21 +274,70 @@ export default function Restaurant() {
   })
   const [reservationStatus, setReservationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [reservationMessage, setReservationMessage] = useState('')
+  const [reservationErrors, setReservationErrors] = useState<Record<string, string>>({})
+
+  // Get tomorrow's date as minimum selectable date
+  const getMinReservationDate = () => {
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    return tomorrow.toISOString().split('T')[0]
+  }
 
   const handleReservationChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setReservationErrors(prev => ({ ...prev, [e.target.name]: '' }))
     setReservationForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  const validateReservation = (): boolean => {
+    const errors: Record<string, string> = {}
+
+    // Email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    if (!emailRegex.test(reservationForm.email)) {
+      errors.email = 'Please enter a valid email address'
+    }
+
+    // Phone validation (digits only, 6-15 digits)
+    const phoneDigits = reservationForm.phone.replace(/\D/g, '')
+    if (phoneDigits.length < 6 || phoneDigits.length > 15) {
+      errors.phone = 'Please enter a valid phone number'
+    }
+
+    // Date must be in the future (not today)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const reservationDate = new Date(reservationForm.date)
+    if (reservationDate <= today) {
+      errors.date = 'Reservation must be for a future date'
+    }
+
+    setReservationErrors(errors)
+    return Object.keys(errors).length === 0
   }
 
   const handleReservationSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!validateReservation()) return
+
     setReservationStatus('loading')
     setReservationMessage('')
 
     try {
+      const fullPhone = `${reservationForm.countryCode} ${reservationForm.phone}`
+
       const response = await fetch('/api/restaurant-reservation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(reservationForm)
+        body: JSON.stringify({
+          name: reservationForm.name,
+          email: reservationForm.email,
+          phone: fullPhone,
+          date: reservationForm.date,
+          time: reservationForm.time,
+          guests: reservationForm.guests,
+          specialRequests: reservationForm.specialRequests
+        })
       })
 
       const data = await response.json()
@@ -265,7 +345,7 @@ export default function Restaurant() {
       if (response.ok) {
         setReservationStatus('success')
         setReservationMessage(data.message || 'Reservation request submitted! Please await confirmation — our team will get back to you shortly.')
-        setReservationForm({ name: '', email: '', date: '', time: '', guests: '', specialRequests: '' })
+        setReservationForm({ name: '', email: '', countryCode: '+355', phone: '', date: '', time: '', guests: '', specialRequests: '' })
       } else {
         setReservationStatus('error')
         setReservationMessage(data.error || 'Something went wrong. Please try again.')
@@ -603,26 +683,59 @@ export default function Restaurant() {
                     className="input-field"
                     required
                   />
-                  <input
-                    type="email"
-                    name="email"
-                    value={reservationForm.email}
-                    onChange={handleReservationChange}
-                    placeholder="Email Address"
-                    className="input-field"
-                    required
-                  />
+                  <div>
+                    <input
+                      type="email"
+                      name="email"
+                      value={reservationForm.email}
+                      onChange={handleReservationChange}
+                      placeholder="Email Address"
+                      className={`input-field ${reservationErrors.email ? 'border-red-400 focus:border-red-400' : ''}`}
+                      required
+                    />
+                    {reservationErrors.email && <p className="text-red-500 text-xs mt-1">{reservationErrors.email}</p>}
+                  </div>
+                </div>
+
+                <div className="mb-4">
+                  <div className="flex gap-2">
+                    <select
+                      name="countryCode"
+                      value={reservationForm.countryCode}
+                      onChange={handleReservationChange}
+                      className="select-field"
+                      style={{ width: '160px', minWidth: '160px', backgroundPosition: 'right 0.5rem center' }}
+                    >
+                      {COUNTRY_CODES.map(cc => (
+                        <option key={cc.code} value={cc.code}>{cc.label}</option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={reservationForm.phone}
+                      onChange={handleReservationChange}
+                      placeholder="Phone Number"
+                      required
+                      className={`input-field flex-1 ${reservationErrors.phone ? 'border-red-400 focus:border-red-400' : ''}`}
+                    />
+                  </div>
+                  {reservationErrors.phone && <p className="text-red-500 text-xs mt-1">{reservationErrors.phone}</p>}
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-                  <input
-                    type="date"
-                    name="date"
-                    value={reservationForm.date}
-                    onChange={handleReservationChange}
-                    className="input-field"
-                    required
-                  />
+                  <div>
+                    <input
+                      type="date"
+                      name="date"
+                      value={reservationForm.date}
+                      onChange={handleReservationChange}
+                      min={getMinReservationDate()}
+                      className={`input-field ${reservationErrors.date ? 'border-red-400 focus:border-red-400' : ''}`}
+                      required
+                    />
+                    {reservationErrors.date && <p className="text-red-500 text-xs mt-1">{reservationErrors.date}</p>}
+                  </div>
                   <select
                     name="time"
                     value={reservationForm.time}

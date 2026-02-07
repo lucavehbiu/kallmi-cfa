@@ -10,6 +10,7 @@ const mailjet = Mailjet.apiConnect(
 interface ReservationData {
   name: string
   email: string
+  phone: string
   date: string
   time: string
   guests: string
@@ -19,10 +20,10 @@ interface ReservationData {
 export async function POST(request: NextRequest) {
   try {
     const body: ReservationData = await request.json()
-    const { name, email, date, time, guests, specialRequests } = body
+    const { name, email, phone, date, time, guests, specialRequests } = body
 
     // Validate required fields
-    if (!name || !email || !date || !time || !guests) {
+    if (!name || !email || !phone || !date || !time || !guests) {
       return NextResponse.json(
         { error: 'All required fields must be filled' },
         { status: 400 }
@@ -114,8 +115,18 @@ export async function POST(request: NextRequest) {
                             </tr>
                             <tr>
                               <td style="padding: 12px 0; border-bottom: 1px solid #ece6dd;">
-                                <span style="font-size: 12px; color: #8B7355; text-transform: uppercase; letter-spacing: 1px;">Guests</span><br>
-                                <span style="font-size: 16px; color: #333; margin-top: 4px; display: inline-block;">${guests}</span>
+                                <table width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td width="50%" style="vertical-align: top;">
+                                      <span style="font-size: 12px; color: #8B7355; text-transform: uppercase; letter-spacing: 1px;">Guests</span><br>
+                                      <span style="font-size: 15px; color: #333; margin-top: 4px; display: inline-block;">${guests}</span>
+                                    </td>
+                                    <td width="50%" style="vertical-align: top;">
+                                      <span style="font-size: 12px; color: #8B7355; text-transform: uppercase; letter-spacing: 1px;">Phone</span><br>
+                                      <span style="font-size: 15px; color: #333; margin-top: 4px; display: inline-block;">${phone}</span>
+                                    </td>
+                                  </tr>
+                                </table>
                               </td>
                             </tr>
                             ${specialRequests ? `
@@ -201,6 +212,9 @@ export async function POST(request: NextRequest) {
                           <p style="margin: 0 0 4px; font-size: 20px; color: #333;">${name}</p>
                           <p style="margin: 0 0 2px; font-size: 14px; color: #666;">
                             <a href="mailto:${email}" style="color: #8B7355; text-decoration: none;">${email}</a>
+                          </p>
+                          <p style="margin: 0; font-size: 14px; color: #666;">
+                            <a href="tel:${phone}" style="color: #8B7355; text-decoration: none;">${phone}</a>
                           </p>
                         </td>
                       </tr>
@@ -295,7 +309,7 @@ export async function POST(request: NextRequest) {
           },
           To: [
             {
-              Email: "kallmibukur@gmail.com",
+              Email: "reservations@kallmibukur.al",
               Name: "Kallmi Restaurant"
             }
           ],
