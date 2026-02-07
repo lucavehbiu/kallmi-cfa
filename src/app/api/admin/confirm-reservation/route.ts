@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createSupabaseServerClient } from '@/lib/supabase-server'
+import { getSupabaseAdmin } from '@/lib/supabase-admin'
 import Mailjet from 'node-mailjet'
 
 const mailjet = Mailjet.apiConnect(
@@ -9,10 +10,9 @@ const mailjet = Mailjet.apiConnect(
 
 export async function POST(request: Request) {
   try {
-    const supabase = await createSupabaseServerClient()
-
-    // Verify auth
-    const { data: { user } } = await supabase.auth.getUser()
+    // Verify auth via cookie-based client
+    const authClient = await createSupabaseServerClient()
+    const { data: { user } } = await authClient.auth.getUser()
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
@@ -27,14 +27,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Reservation ID required' }, { status: 400 })
     }
 
-    // Fetch the reservation
-    const { data: reservation, error: fetchError } = await supabase
+    // Use service role client for DB operations (bypasses RLS)
+    const admin = getSupabaseAdmin()
+    const { data: reservation, error: fetchError } = await admin
       .from('restaurant_reservations')
       .select('*')
       .eq('id', id)
       .single()
 
     if (fetchError || !reservation) {
+      console.error('Fetch reservation error:', fetchError)
       return NextResponse.json({ error: 'Reservation not found' }, { status: 404 })
     }
 
@@ -43,7 +45,7 @@ export async function POST(request: Request) {
     }
 
     // Update status
-    const { error: updateError } = await supabase
+    const { error: updateError } = await admin
       .from('restaurant_reservations')
       .update({ status: 'confirmed' })
       .eq('id', id)
@@ -65,8 +67,8 @@ export async function POST(request: Request) {
     const displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour
     const displayTime = `${displayHour}:${minutes} ${ampm}`
 
-    // Send confirmation email to guest
-    const htmlContent = `
+    // Confirmation email to guest
+    const guestHtmlContent = `
       <!DOCTYPE html>
       <html>
       <head>
@@ -162,23 +164,71 @@ export async function POST(request: Request) {
       </html>
     `
 
+    // Notification email to owner
+    const ownerHtmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+      <body style="margin: 0; padding: 0; background-color: #f5f0eb; font-family: Georgia, 'Times New Roman', serif;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f0eb; padding: 40px 20px;">
+          <tr><td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(139, 115, 85, 0.12);">
+              <tr>
+                <td style="background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%); padding: 36px 40px; text-align: center;">
+                  <p style="margin: 0 0 8px 0; font-size: 13px; letter-spacing: 4px; color: #D4AF37; text-transform: uppercase;">Reservation Confirmed</p>
+                  <h1 style="margin: 0; font-size: 24px; font-weight: 300; color: #ffffff;">${reservationDate} at ${displayTime} - ${reservation.name}</h1>
+                  <div style="width: 60px; height: 1px; background-color: #D4AF37; margin: 16px auto 0;"></div>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 32px 40px;">
+                  <p style="margin: 0 0 16px; font-size: 15px; color: #666;">The following reservation has been confirmed by <strong>${user.email}</strong>:</p>
+                  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f0fdf4; border-radius: 12px; border: 1px solid #bbf7d0;">
+                    <tr><td style="padding: 20px 24px;">
+                      <p style="margin: 0 0 4px; font-size: 18px; color: #333;"><strong>${reservation.name}</strong></p>
+                      <p style="margin: 0 0 2px; font-size: 14px; color: #666;">${reservation.email} &middot; ${reservation.phone}</p>
+                      <p style="margin: 12px 0 0; font-size: 14px; color: #333;">${reservationDate} at ${displayTime} &middot; ${reservation.guests} guests</p>
+                      ${reservation.special_requests ? `<p style="margin: 8px 0 0; font-size: 13px; color: #666; font-style: italic;">"${reservation.special_requests}"</p>` : ''}
+                    </td></tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: #faf8f5; padding: 20px 40px; text-align: center; border-top: 1px solid #ece6dd;">
+                  <p style="margin: 0; font-size: 12px; color: #999;">Kallmi Restaurant Reservation System</p>
+                </td>
+              </tr>
+            </table>
+          </td></tr>
+        </table>
+      </body>
+      </html>
+    `
+
     try {
       await mailjet
         .post('send', { version: 'v3.1' })
         .request({
-          Messages: [{
-            From: { Email: 'kallmibukur@gmail.com', Name: 'Kallmi Restaurant' },
-            To: [{ Email: reservation.email, Name: reservation.name }],
-            Subject: `Reservation Confirmed - Kallmi Restaurant - ${reservationDate}`,
-            HTMLPart: htmlContent,
-          }],
+          Messages: [
+            {
+              From: { Email: 'kallmibukur@gmail.com', Name: 'Kallmi Restaurant' },
+              To: [{ Email: reservation.email, Name: reservation.name }],
+              Subject: `Reservation Confirmed - Kallmi Restaurant - ${reservationDate}`,
+              HTMLPart: guestHtmlContent,
+            },
+            {
+              From: { Email: 'kallmibukur@gmail.com', Name: 'Kallmi Restaurant Reservations' },
+              To: [{ Email: 'reservations@kallmibukur.al', Name: 'Kallmi Restaurant' }],
+              Subject: `Reservation Confirmed - ${reservation.name} - ${reservationDate} ${displayTime}`,
+              HTMLPart: ownerHtmlContent,
+            },
+          ],
         })
     } catch (emailErr) {
       console.error('Confirmation email failed:', emailErr)
-      // Status was already updated, don't fail the request
     }
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true, message: 'Reservation confirmed and emails sent' })
   } catch (error) {
     console.error('Confirm reservation error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

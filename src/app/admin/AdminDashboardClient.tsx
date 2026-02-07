@@ -64,11 +64,13 @@ export default function AdminDashboardClient({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id }),
       })
+      const data = await res.json()
       if (!res.ok) {
-        const data = await res.json()
         alert(data.error || 'Failed to confirm booking')
+      } else {
+        alert('Booking confirmed! Confirmation emails sent.')
+        router.refresh()
       }
-      router.refresh()
     } catch {
       alert('Network error')
     } finally {
@@ -84,11 +86,13 @@ export default function AdminDashboardClient({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id }),
       })
+      const data = await res.json()
       if (!res.ok) {
-        const data = await res.json()
         alert(data.error || 'Failed to confirm reservation')
+      } else {
+        alert('Reservation confirmed! Confirmation emails sent.')
+        router.refresh()
       }
-      router.refresh()
     } catch {
       alert('Network error')
     } finally {
