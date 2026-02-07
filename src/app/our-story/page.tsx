@@ -29,157 +29,72 @@ export default function OurStory() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 font-cormorant relative overflow-hidden">
 
-      {/* Floating Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-[#8B7355]/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-48 h-48 bg-[#D4AF37]/5 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse delay-2000" />
-        <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-[#8B7355]/3 rounded-full blur-3xl animate-pulse delay-3000" />
-        <div className="absolute bottom-1/3 left-1/3 w-24 h-24 bg-[#D4AF37]/10 rounded-full blur-2xl animate-pulse delay-4000" />
-      </div>
-
-      {/* Immersive Hero Section */}
-      <section className="relative min-h-screen overflow-hidden">
-        {/* Parallax Background */}
-        <div className="absolute inset-0 scale-110">
+      {/* Hero Section - matching restaurant style */}
+      <section className="relative min-h-[70vh] lg:min-h-[60vh] overflow-hidden pt-20">
+        <div className="absolute inset-0">
           <Image
             src="/images/entrance.webp"
             alt="Kallmi Estate - Gateway to Heritage"
+            className="object-cover object-center"
             fill
-            className="object-cover object-center transition-transform duration-[20s] ease-linear hover:scale-125"
             priority
-            quality={95}
             sizes="100vw"
+            quality={90}
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
         </div>
 
-        {/* Sophisticated Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/40 via-transparent to-[#D4AF37]/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-        {/* Floating Decorative Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-[#D4AF37]/60 rounded-full animate-pulse delay-1000" />
-          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-white/40 rounded-full animate-pulse delay-2000" />
-          <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-[#D4AF37]/40 rounded-full animate-pulse delay-3000" />
-          <div className="absolute top-2/3 right-1/4 w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse delay-4000" />
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative z-10 h-full min-h-screen flex items-center justify-center text-center text-white px-4 sm:px-6 py-20">
-          <div className="max-w-6xl space-y-6 sm:space-y-8 lg:space-y-12">
-
-            {/* Floating Heritage Badge */}
-            <AnimateDiv
-              animation="fade"
-              duration={1.5}
-              delay={0.3}
-              className="inline-block"
-            >
-              <div className="backdrop-blur-xl bg-white/10 rounded-full px-6 sm:px-8 py-3 sm:py-4 border border-white/20 mb-6 sm:mb-8 hover:bg-white/15 transition-all duration-500 group">
-                <span className="text-sm sm:text-base lg:text-lg font-medium tracking-widest uppercase text-white/90 flex items-center justify-center space-x-3">
-                  <SparklesIcon className="w-4 sm:w-5 h-4 sm:h-5 group-hover:scale-110 transition-transform duration-300" />
-                  <span>Est. 2004 • Four Generations of Excellence</span>
-                  <SparklesIcon className="w-4 sm:w-5 h-4 sm:h-5 group-hover:scale-110 transition-transform duration-300" />
-                </span>
+        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6 py-20">
+          <div className="max-w-4xl space-y-6">
+            <AnimateDiv animation="fade" duration={1.0} delay={0.2}>
+              <div className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 text-white border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium tracking-wide">
+                <SparklesIcon className="w-4 h-4" />
+                Four Generations of Excellence
               </div>
             </AnimateDiv>
 
-            {/* Main Title with Enhanced Typography */}
-            <AnimateDiv
-              animation="slide-up"
-              duration={1.6}
-              delay={0.6}
-            >
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extralight tracking-wide leading-[0.9]">
-                <span className="block transform hover:scale-105 transition-transform duration-700">Our</span>
-                <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl italic font-light text-[#D4AF37] mt-2 sm:mt-4 transform hover:scale-105 transition-transform duration-700 delay-200">
+            <AnimateDiv animation="slide-up" duration={1.2} delay={0.3}>
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide">
+                Our
+                <span className="block text-3xl sm:text-5xl lg:text-6xl italic text-[#D4AF37] mt-2">
                   Story
                 </span>
               </h1>
             </AnimateDiv>
 
-            {/* Elegant Divider with Animation */}
-            <AnimateDiv
-              animation="fade"
-              duration={1.2}
-              delay={1.0}
-              className="flex items-center justify-center space-x-4 sm:space-x-6"
-            >
-              <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent animate-pulse" />
-              <HeartIcon className="w-6 sm:w-8 h-6 sm:h-8 text-[#D4AF37] animate-pulse delay-500" />
-              <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent animate-pulse" />
+            <AnimateDiv animation="fade" duration={1.0} delay={0.5}>
+              <div className="flex items-center justify-center gap-4">
+                <div className="w-16 h-px bg-white/40" />
+                <HeartIcon className="w-5 h-5 text-[#D4AF37]" />
+                <div className="w-16 h-px bg-white/40" />
+              </div>
             </AnimateDiv>
 
-            {/* Enhanced Subtitle */}
-            <AnimateDiv
-              animation="slide-up"
-              duration={1.4}
-              delay={1.3}
-            >
-              <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light opacity-95 leading-relaxed max-w-5xl mx-auto">
-                A <span className="text-[#D4AF37] font-medium">century of tradition</span>,
-                a lifetime of <span className="text-[#D4AF37] font-medium">passion</span>, and the eternal pursuit of
-                <span className="text-[#D4AF37] font-medium"> liquid gold</span>
+            <AnimateDiv animation="slide-up" duration={1.2} delay={0.6}>
+              <p className="text-lg sm:text-xl lg:text-2xl font-light opacity-90 max-w-2xl mx-auto">
+                A <span className="text-[#D4AF37]">century of tradition</span>,
+                a lifetime of passion, and the eternal pursuit of
+                <span className="text-[#D4AF37]"> liquid gold</span>
               </p>
             </AnimateDiv>
 
-            {/* Enhanced Heritage Stats */}
-            <AnimateDiv
-              animation="slide-up"
-              duration={1.2}
-              delay={1.6}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto mt-12 sm:mt-16"
-            >
-              {[
-                { icon: ClockIcon, number: "20+", text: "Years of Heritage", color: "from-[#8B7355] to-[#A0845C]" },
-                { icon: UserGroupIcon, number: "4th", text: "Generation", color: "from-[#D4AF37] to-[#F4D03F]" },
-                { icon: TrophyIcon, number: "2004", text: "Founded", color: "from-[#8B7355] to-[#D4AF37]" }
-              ].map((item, index) => (
-                <div key={index} className="backdrop-blur-xl bg-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-500 group">
-                  <div className={`inline-flex items-center justify-center w-12 sm:w-16 h-12 sm:h-16 rounded-2xl bg-gradient-to-r ${item.color} mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <item.icon className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
+            {/* Info Cards */}
+            <AnimateDiv animation="slide-up" duration={1.0} delay={0.8}>
+              <div className="flex flex-wrap justify-center gap-4 mt-8">
+                {[
+                  { icon: ClockIcon, text: "20+ Years" },
+                  { icon: MapPinIcon, text: "Durrës, Albania" },
+                  { icon: UserGroupIcon, text: "4th Generation" },
+                ].map((item, index) => (
+                  <div key={index} className="backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl px-4 py-3 min-w-[120px] text-center">
+                    <item.icon className="w-5 h-5 text-[#D4AF37] mx-auto mb-1" />
+                    <p className="text-white/90 text-sm">{item.text}</p>
                   </div>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-2 group-hover:text-[#D4AF37] transition-colors duration-300">{item.number}</div>
-                  <p className="text-white/90 text-sm sm:text-base font-light">{item.text}</p>
-                </div>
-              ))}
-            </AnimateDiv>
-
-            {/* Floating Quote */}
-            <AnimateDiv
-              animation="fade"
-              duration={1.0}
-              delay={2.0}
-              className="max-w-4xl mx-auto mt-12 sm:mt-16"
-            >
-              <div className="backdrop-blur-xl bg-white/5 rounded-3xl p-6 sm:p-8 border border-white/10">
-                <blockquote className="text-base sm:text-lg lg:text-xl italic text-white/90 font-light leading-relaxed">
-                  "Every olive tells a story, every drop carries our soul"
-                </blockquote>
-                <div className="w-12 h-px bg-[#D4AF37] mx-auto mt-4" />
+                ))}
               </div>
             </AnimateDiv>
           </div>
         </div>
-
-        {/* Enhanced Scroll Indicator */}
-        <AnimateDiv
-          animation="fade"
-          duration={1.0}
-          delay={2.3}
-          className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center space-y-3 text-white/70 group cursor-pointer">
-            <span className="text-xs sm:text-sm font-light tracking-widest uppercase group-hover:text-white transition-colors duration-300">
-              Discover Our Heritage
-            </span>
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center group-hover:border-white/50 transition-colors duration-300">
-              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce" />
-            </div>
-          </div>
-        </AnimateDiv>
       </section>
 
       {/* Enhanced Heritage Section */}

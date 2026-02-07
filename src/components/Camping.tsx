@@ -106,17 +106,9 @@ export default function Camping() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 font-cormorant relative overflow-hidden">
 
-      {/* Floating Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-[#8B7355]/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-48 h-48 bg-[#D4AF37]/5 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse delay-2000" />
-      </div>
-
-      {/* Immersive Hero Section */}
-      <div className="relative min-h-screen sm:h-[80vh] lg:h-[70vh] overflow-hidden pt-20 lg:pt-24">
-        {/* Parallax Background */}
-        <div className="absolute inset-0 scale-110">
+      {/* Hero Section - matching restaurant style */}
+      <section className="relative min-h-[70vh] lg:min-h-[60vh] overflow-hidden pt-20">
+        <div className="absolute inset-0">
           <Image
             src="/images/stay_snippet.webp"
             alt="Kallmi Estate Camping - Under the Stars"
@@ -126,108 +118,60 @@ export default function Camping() {
             sizes="100vw"
             quality={90}
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
         </div>
 
-        {/* Sophisticated Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/30 via-transparent to-[#D4AF37]/20" />
-
-        {/* Hero Content */}
-        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6 py-16">
-          <div className="max-w-4xl space-y-4 sm:space-y-6 lg:space-y-8">
-
-            {/* Floating Badge */}
-            <AnimateDiv
-              animation="fade"
-              duration={1.0}
-              delay={0.3}
-              className="inline-block"
-            >
-              <div className="backdrop-blur-md bg-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3 border border-white/20 mb-3 sm:mb-4">
-                <span className="text-xs sm:text-sm lg:text-base font-medium tracking-widest uppercase text-white/90">
-                  Est. 2004 • Wild & Free
-                </span>
+        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6 py-20">
+          <div className="max-w-4xl space-y-6">
+            <AnimateDiv animation="fade" duration={1.0} delay={0.2}>
+              <div className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 text-white border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium tracking-wide">
+                <FireIcon className="w-4 h-4" />
+                Wild & Free
               </div>
             </AnimateDiv>
 
-            {/* Main Title */}
-            <AnimateDiv
-              animation="slide-up"
-              duration={1.2}
-              delay={0.6}
-            >
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight tracking-wide leading-tight">
-                <span className="block">KALLMI</span>
-                <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-6xl italic font-light text-[#D4AF37] mt-1 sm:mt-2">
+            <AnimateDiv animation="slide-up" duration={1.2} delay={0.3}>
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide">
+                Kallmi
+                <span className="block text-3xl sm:text-5xl lg:text-6xl italic text-[#D4AF37] mt-2">
                   Camping
                 </span>
               </h1>
             </AnimateDiv>
 
-            {/* Elegant Divider */}
-            <AnimateDiv
-              animation="fade"
-              duration={0.8}
-              delay={1.0}
-              className="flex items-center justify-center space-x-3 sm:space-x-4"
-            >
-              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-              <HomeIcon className="w-4 sm:w-5 h-4 sm:h-5 text-[#D4AF37]" />
-              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+            <AnimateDiv animation="fade" duration={1.0} delay={0.5}>
+              <div className="flex items-center justify-center gap-4">
+                <div className="w-16 h-px bg-white/40" />
+                <HomeIcon className="w-5 h-5 text-[#D4AF37]" />
+                <div className="w-16 h-px bg-white/40" />
+              </div>
             </AnimateDiv>
 
-            {/* Subtitle */}
-            <AnimateDiv
-              animation="slide-up"
-              duration={1.0}
-              delay={1.2}
-            >
-              <p className="text-base sm:text-xl lg:text-2xl font-light opacity-95 leading-relaxed max-w-3xl mx-auto px-2">
+            <AnimateDiv animation="slide-up" duration={1.2} delay={0.6}>
+              <p className="text-lg sm:text-xl lg:text-2xl font-light opacity-90 max-w-2xl mx-auto">
                 Sleep under <span className="text-[#D4AF37]">ancient olive trees</span> and wake to
-                breathtaking Adriatic sunrises in Albania's most enchanting camping destination
+                breathtaking Adriatic sunrises
               </p>
             </AnimateDiv>
-          </div>
-        </div>
 
-        {/* Camping Info Cards - Positioned at Bottom */}
-        <div className="absolute bottom-16 sm:bottom-20 left-4 right-4 z-10">
-          <AnimateDiv
-            animation="slide-up"
-            duration={1.0}
-            delay={1.5}
-            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 max-w-4xl mx-auto"
-          >
-            {[
-              { icon: HomeIcon, text: "Olive Grove Sites" },
-              { icon: SunIcon, text: "Sea Views" },
-              { icon: MoonIcon, text: "Stargazing" },
-            ].map((item, index) => (
-              <div key={index} className="backdrop-blur-md bg-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/20 min-w-[120px] sm:min-w-[140px] flex flex-col items-center">
-                <item.icon className="w-5 sm:w-6 h-5 sm:h-6 text-[#D4AF37] mb-1 sm:mb-2" />
-                <p className="text-white/90 text-xs sm:text-sm font-light text-center">{item.text}</p>
+            {/* Info Cards */}
+            <AnimateDiv animation="slide-up" duration={1.0} delay={0.8}>
+              <div className="flex flex-wrap justify-center gap-4 mt-8">
+                {[
+                  { icon: HomeIcon, text: "Olive Grove Sites" },
+                  { icon: SunIcon, text: "Sea Views" },
+                  { icon: MoonIcon, text: "Stargazing" },
+                ].map((item, index) => (
+                  <div key={index} className="backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl px-4 py-3 min-w-[120px] text-center">
+                    <item.icon className="w-5 h-5 text-[#D4AF37] mx-auto mb-1" />
+                    <p className="text-white/90 text-sm">{item.text}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </AnimateDiv>
-        </div>
-
-        {/* Scroll Indicator - Hidden on Mobile */}
-        <AnimateDiv
-          animation="fade"
-          duration={1.0}
-          delay={1.8}
-          className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center space-y-2 text-white/70">
-            <span className="text-xs sm:text-sm font-light tracking-widest uppercase">
-              Discover Camping
-            </span>
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce" />
-            </div>
+            </AnimateDiv>
           </div>
-        </AnimateDiv>
-      </div>
+        </div>
+      </section>
 
       {/* Introduction Section */}
       <section className="relative py-12 sm:py-16 lg:py-24">

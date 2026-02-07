@@ -269,7 +269,7 @@ export function Header() {
         <div
           className={`lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-white/20 shadow-xl
             transition-all duration-500 ease-out overflow-hidden
-            ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+            ${isOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'}`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="py-6 space-y-2">

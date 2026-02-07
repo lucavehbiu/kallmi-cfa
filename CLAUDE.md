@@ -52,6 +52,11 @@ npm run dev
 ```
 If `nvm use` doesn't work, use: `export PATH="$HOME/.nvm/versions/node/v20.19.2/bin:$PATH"`
 
+### Image optimizer crash on stay/restaurant pages
+Even on Node 20, the sharp image optimizer can crash when processing missing local images or certain remote images.
+
+**Fix applied**: `unoptimized: process.env.NODE_ENV === 'development'` in `next.config.mjs` `images` config. This disables sharp processing in dev (images served as-is) while keeping optimization in production builds.
+
 ### Images not rendering in dev
 - Check if domain is in `remotePatterns` in next.config.mjs
 - Clear `.next` cache: `rm -rf .next && npm run dev`
