@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import Mailjet from 'node-mailjet'
+import { supabase } from '@/lib/supabase'
 
 const mailjet = Mailjet.apiConnect(
   process.env.MAILJET_API_KEY || '',
@@ -37,6 +38,28 @@ export async function POST(request: NextRequest) {
         { error: 'Invalid email format' },
         { status: 400 }
       )
+    }
+
+    // Insert into Supabase (graceful degradation - don't block email if this fails)
+    try {
+      const { error: dbError } = await supabase
+        .from('restaurant_reservations')
+        .insert({
+          name,
+          email,
+          phone,
+          reservation_date: date,
+          reservation_time: time,
+          guests: parseInt(guests) || 1,
+          special_requests: specialRequests || null,
+          status: 'pending',
+        })
+
+      if (dbError) {
+        console.error('Supabase insert error (restaurant_reservations):', dbError)
+      }
+    } catch (dbErr) {
+      console.error('Supabase connection error (restaurant_reservations):', dbErr)
     }
 
     // Format date for display

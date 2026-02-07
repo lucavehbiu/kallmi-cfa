@@ -42,6 +42,30 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Insert into Supabase (graceful degradation - don't block email if this fails)
+    try {
+      const { error: dbError } = await supabase
+        .from('stay_bookings')
+        .insert({
+          name,
+          email,
+          phone,
+          room_id: roomId,
+          room_name: roomName,
+          guests: parseInt(guests) || 1,
+          check_in: checkIn,
+          check_out: checkOut,
+          special_requests: specialRequests || null,
+          status: 'pending',
+        })
+
+      if (dbError) {
+        console.error('Supabase insert error (stay_bookings):', dbError)
+      }
+    } catch (dbErr) {
+      console.error('Supabase connection error (stay_bookings):', dbErr)
+    }
+
     // Format dates for display
     const checkInDate = new Date(checkIn).toLocaleDateString('en-US', {
       weekday: 'long',
