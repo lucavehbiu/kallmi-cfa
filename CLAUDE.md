@@ -43,10 +43,14 @@ Remote images require domains to be whitelisted in `next.config.mjs` under `imag
 
 ### Node.js malloc error / server crash
 If you see `malloc: *** error for object: pointer being freed was not allocated`:
+
+**Root cause**: Node.js v25 has a memory bug with Next.js. Must use **Node 20 LTS**.
 ```bash
-rm -rf .next node_modules/.cache && npm run dev
+nvm use 20
+rm -rf .next node_modules/.cache
+npm run dev
 ```
-This is a corrupted cache issue, not a code problem.
+If `nvm use` doesn't work, use: `export PATH="$HOME/.nvm/versions/node/v20.19.2/bin:$PATH"`
 
 ### Images not rendering in dev
 - Check if domain is in `remotePatterns` in next.config.mjs
