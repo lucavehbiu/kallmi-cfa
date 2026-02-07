@@ -232,6 +232,50 @@ export default function Restaurant() {
   const [activeCategory, setActiveCategory] = useState<'featured' | 'salads' | 'fish' | 'farmed-fish' | 'drinks'>('featured')
   const [showDrinks, setShowDrinks] = useState(false)
 
+  // Reservation form state
+  const [reservationForm, setReservationForm] = useState({
+    name: '',
+    email: '',
+    date: '',
+    time: '',
+    guests: '',
+    specialRequests: ''
+  })
+  const [reservationStatus, setReservationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [reservationMessage, setReservationMessage] = useState('')
+
+  const handleReservationChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setReservationForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  const handleReservationSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setReservationStatus('loading')
+    setReservationMessage('')
+
+    try {
+      const response = await fetch('/api/restaurant-reservation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reservationForm)
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setReservationStatus('success')
+        setReservationMessage(data.message || 'Reservation request submitted! Please await confirmation — our team will get back to you shortly.')
+        setReservationForm({ name: '', email: '', date: '', time: '', guests: '', specialRequests: '' })
+      } else {
+        setReservationStatus('error')
+        setReservationMessage(data.error || 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setReservationStatus('error')
+      setReservationMessage('Network error. Please try again.')
+    }
+  }
+
   const filteredMenu = menu.filter(item => item.category === activeCategory)
 
   useEffect(() => {
@@ -532,49 +576,118 @@ export default function Restaurant() {
 
         <FadeIn animation="slide-up" delay={0.2}>
           <Card variant="elevated" padding="lg" className="max-w-3xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="input-field"
-              />
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="input-field"
-              />
-            </div>
+            {reservationStatus === 'success' ? (
+              <div className="text-center py-8 space-y-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                  <HeartIcon className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-2xl font-light text-brand-olive">Thank You!</h3>
+                <p className="text-body max-w-md mx-auto">{reservationMessage}</p>
+                <Button
+                  variant="outline"
+                  onClick={() => setReservationStatus('idle')}
+                  className="mt-4"
+                >
+                  Make Another Reservation
+                </Button>
+              </div>
+            ) : (
+              <form onSubmit={handleReservationSubmit}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                  <input
+                    type="text"
+                    name="name"
+                    value={reservationForm.name}
+                    onChange={handleReservationChange}
+                    placeholder="Your Name"
+                    className="input-field"
+                    required
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    value={reservationForm.email}
+                    onChange={handleReservationChange}
+                    placeholder="Email Address"
+                    className="input-field"
+                    required
+                  />
+                </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-              <input
-                type="date"
-                className="input-field"
-              />
-              <select className="select-field">
-                <option value="">Select Time</option>
-                <option value="12:00">12:00 PM</option>
-                <option value="12:30">12:30 PM</option>
-                <option value="13:00">1:00 PM</option>
-                <option value="13:30">1:30 PM</option>
-              </select>
-              <select className="select-field">
-                <option value="">Guests</option>
-                <option value="1">1 Guest</option>
-                <option value="2">2 Guests</option>
-                <option value="3">3 Guests</option>
-                <option value="4">4 Guests</option>
-                <option value="5">5+ Guests</option>
-              </select>
-            </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                  <input
+                    type="date"
+                    name="date"
+                    value={reservationForm.date}
+                    onChange={handleReservationChange}
+                    className="input-field"
+                    required
+                  />
+                  <select
+                    name="time"
+                    value={reservationForm.time}
+                    onChange={handleReservationChange}
+                    className="select-field"
+                    required
+                  >
+                    <option value="">Select Time</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="12:30">12:30 PM</option>
+                    <option value="13:00">1:00 PM</option>
+                    <option value="13:30">1:30 PM</option>
+                    <option value="14:00">2:00 PM</option>
+                    <option value="14:30">2:30 PM</option>
+                    <option value="15:00">3:00 PM</option>
+                    <option value="15:30">3:30 PM</option>
+                  </select>
+                  <select
+                    name="guests"
+                    value={reservationForm.guests}
+                    onChange={handleReservationChange}
+                    className="select-field"
+                    required
+                  >
+                    <option value="">Guests</option>
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5 Guests</option>
+                    <option value="6">6 Guests</option>
+                    <option value="7">7 Guests</option>
+                    <option value="8">8+ Guests</option>
+                  </select>
+                </div>
 
-            <textarea
-              placeholder="Special Requests or Dietary Requirements"
-              className="textarea-field mb-6"
-            />
+                <textarea
+                  name="specialRequests"
+                  value={reservationForm.specialRequests}
+                  onChange={handleReservationChange}
+                  placeholder="Special Requests or Dietary Requirements"
+                  className="textarea-field mb-4"
+                />
 
-            <Button variant="primary" fullWidth size="lg">
-              Request Reservation
-            </Button>
+                {reservationStatus === 'error' && (
+                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm text-center">
+                    {reservationMessage}
+                  </div>
+                )}
+
+                <Button
+                  variant="primary"
+                  fullWidth
+                  size="lg"
+                  type="submit"
+                  disabled={reservationStatus === 'loading'}
+                >
+                  {reservationStatus === 'loading' ? 'Sending...' : 'Request Reservation'}
+                </Button>
+
+                <p className="text-center text-caption mt-3">
+                  Please await confirmation — our team will get back to you shortly.
+                </p>
+              </form>
+            )}
           </Card>
         </FadeIn>
 
