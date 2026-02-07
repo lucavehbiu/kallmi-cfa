@@ -1,10 +1,7 @@
 import { Cormorant } from 'next/font/google'
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import { Header } from '@/components/Header'
-import { Footer } from '@/components/Footer'
 import './globals.css'
-import { CartProvider } from '@/context/CartContext'
 
 const cormorant = Cormorant({
   subsets: ['latin'],
@@ -81,13 +78,8 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="min-h-screen">
-        <CartProvider>
-          <Header />
-          {children}
-        </CartProvider>
-        <Footer />
+        {children}
       </body>
     </html>
   )
 }
-
