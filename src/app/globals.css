@@ -487,6 +487,20 @@ body {
    UTILITIES LAYER
    ============================================ */
 
+/* Hide scrollbar globally */
+html {
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+  background: transparent;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

@@ -480,8 +480,8 @@ export default function Camping() {
 
           <p className="mt-8 text-gray-500 font-light">
             For group bookings or special arrangements, contact us at{' '}
-            <a href="mailto:camping@kallmiestate.com" className="text-[#8B7355] hover:text-[#A0845C] transition-colors duration-300">
-              camping@kallmiestate.com
+            <a href="mailto:reservations@kallmibukur.al" className="text-[#8B7355] hover:text-[#A0845C] transition-colors duration-300">
+              reservations@kallmibukur.al
             </a>
           </p>
         </AnimateDiv>

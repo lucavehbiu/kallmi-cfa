@@ -116,7 +116,7 @@ export default function Accommodations() {
       const data = await response.json()
 
       if (response.ok) {
-        setSubmitMessage({ type: 'success', text: data.message })
+        setSubmitMessage({ type: 'success', text: data.message || 'Booking request submitted! Please await confirmation — our team will get back to you shortly.' })
         setFormData({
           name: '',
           email: '',
@@ -453,13 +453,15 @@ export default function Accommodations() {
                   fullWidth
                   size="lg"
                 >
-                  {isSubmitting ? 'Submitting...' : 'Check Availability'}
+                  {isSubmitting ? 'Submitting...' : 'Request Booking'}
                 </Button>
               </form>
 
               <p className="mt-6 text-center text-caption">
+                Please await confirmation for your booking — our team will get back to you shortly.
+                <br />
                 For special arrangements, contact us at{' '}
-                <span style={{ color: 'var(--color-brand-olive)' }}>stay@kallmiestate.com</span>
+                <span style={{ color: 'var(--color-brand-olive)' }}>reservations@kallmibukur.al</span>
               </p>
             </Card>
           </FadeIn>
