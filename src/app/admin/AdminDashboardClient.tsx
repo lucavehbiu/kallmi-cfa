@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { createBrowserClient } from '@supabase/ssr'
 
@@ -32,6 +32,8 @@ interface Reservation {
   created_at: string
 }
 
+type ToastType = 'success' | 'error'
+
 export default function AdminDashboardClient({
   bookings,
   reservations,
@@ -45,11 +47,19 @@ export default function AdminDashboardClient({
   const [activeTab, setActiveTab] = useState<'bookings' | 'reservations'>('bookings')
   const [loadingId, setLoadingId] = useState<number | null>(null)
   const [loadingAction, setLoadingAction] = useState<string | null>(null)
+  const [toast, setToast] = useState<{ message: string; type: ToastType } | null>(null)
+  const [bookingFilter, setBookingFilter] = useState<'upcoming' | 'past' | 'all'>('upcoming')
+  const [reservationFilter, setReservationFilter] = useState<'upcoming' | 'past' | 'all'>('upcoming')
 
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
+
+  const showToast = useCallback((message: string, type: ToastType) => {
+    setToast({ message, type })
+    setTimeout(() => setToast(null), 4000)
+  }, [])
 
   async function handleLogout() {
     await supabase.auth.signOut()
@@ -68,13 +78,13 @@ export default function AdminDashboardClient({
       })
       const data = await res.json()
       if (!res.ok) {
-        alert(data.error || 'Failed to request payment')
+        showToast(data.error || 'Failed to request payment', 'error')
       } else {
-        alert(data.message || 'Payment request sent!')
+        showToast(data.message || 'Payment request sent!', 'success')
         router.refresh()
       }
     } catch {
-      alert('Network error')
+      showToast('Network error', 'error')
     } finally {
       setLoadingId(null)
       setLoadingAction(null)
@@ -92,13 +102,13 @@ export default function AdminDashboardClient({
       })
       const data = await res.json()
       if (!res.ok) {
-        alert(data.error || 'Failed to confirm booking')
+        showToast(data.error || 'Failed to confirm booking', 'error')
       } else {
-        alert('Booking confirmed! Confirmation emails sent.')
+        showToast('Booking confirmed! Guest has been notified.', 'success')
         router.refresh()
       }
     } catch {
-      alert('Network error')
+      showToast('Network error', 'error')
     } finally {
       setLoadingId(null)
       setLoadingAction(null)
@@ -116,19 +126,35 @@ export default function AdminDashboardClient({
       })
       const data = await res.json()
       if (!res.ok) {
-        alert(data.error || 'Failed to confirm reservation')
+        showToast(data.error || 'Failed to confirm reservation', 'error')
       } else {
-        alert('Reservation confirmed! Confirmation emails sent.')
+        showToast('Reservation confirmed! Guest has been notified.', 'success')
         router.refresh()
       }
     } catch {
-      alert('Network error')
+      showToast('Network error', 'error')
     } finally {
       setLoadingId(null)
       setLoadingAction(null)
     }
   }
 
+  const today = new Date().toISOString().split('T')[0]
+
+  // Filter bookings
+  const filteredBookings = bookings.filter(b => {
+    if (bookingFilter === 'upcoming') return b.check_in >= today
+    if (bookingFilter === 'past') return b.check_out < today
+    return true
+  })
+
+  const filteredReservations = reservations.filter(r => {
+    if (reservationFilter === 'upcoming') return r.reservation_date >= today
+    if (reservationFilter === 'past') return r.reservation_date < today
+    return true
+  })
+
+  // Stats (always from full list)
   const pendingBookings = bookings.filter(b => b.status === 'pending')
   const awaitingPaymentBookings = bookings.filter(b => b.status === 'awaiting_payment')
   const confirmedBookings = bookings.filter(b => b.status === 'confirmed')
@@ -155,6 +181,21 @@ export default function AdminDashboardClient({
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      {/* Toast Notification */}
+      {toast && (
+        <div className={`fixed top-6 right-6 z-50 px-5 py-3 rounded-xl shadow-lg border text-sm font-medium transition-all animate-fade-in ${
+          toast.type === 'success'
+            ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+            : 'bg-red-50 text-red-800 border-red-200'
+        }`}>
+          <div className="flex items-center gap-2">
+            <span>{toast.type === 'success' ? '\u2713' : '\u2717'}</span>
+            <span>{toast.message}</span>
+            <button onClick={() => setToast(null)} className="ml-3 opacity-50 hover:opacity-100">\u00d7</button>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
@@ -182,36 +223,59 @@ export default function AdminDashboardClient({
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-6 bg-white rounded-lg p-1 border border-[#ece6dd] w-fit">
-        <button
-          onClick={() => setActiveTab('bookings')}
-          className={`px-5 py-2 rounded-md text-sm tracking-wide transition-all ${
-            activeTab === 'bookings'
-              ? 'bg-[#8B7355] text-white'
-              : 'text-[#8B7355] hover:bg-[#faf8f5]'
-          }`}
-        >
-          Stay Bookings ({bookings.length})
-        </button>
-        <button
-          onClick={() => setActiveTab('reservations')}
-          className={`px-5 py-2 rounded-md text-sm tracking-wide transition-all ${
-            activeTab === 'reservations'
-              ? 'bg-[#8B7355] text-white'
-              : 'text-[#8B7355] hover:bg-[#faf8f5]'
-          }`}
-        >
-          Restaurant ({reservations.length})
-        </button>
+      <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+        <div className="flex gap-1 bg-white rounded-lg p-1 border border-[#ece6dd] w-fit">
+          <button
+            onClick={() => setActiveTab('bookings')}
+            className={`px-5 py-2 rounded-md text-sm tracking-wide transition-all ${
+              activeTab === 'bookings'
+                ? 'bg-[#8B7355] text-white'
+                : 'text-[#8B7355] hover:bg-[#faf8f5]'
+            }`}
+          >
+            Stay Bookings ({bookings.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('reservations')}
+            className={`px-5 py-2 rounded-md text-sm tracking-wide transition-all ${
+              activeTab === 'reservations'
+                ? 'bg-[#8B7355] text-white'
+                : 'text-[#8B7355] hover:bg-[#faf8f5]'
+            }`}
+          >
+            Restaurant ({reservations.length})
+          </button>
+        </div>
+
+        {/* Time Filter */}
+        <div className="flex gap-1 bg-white rounded-lg p-1 border border-[#ece6dd] w-fit">
+          {(['upcoming', 'past', 'all'] as const).map(f => {
+            const currentFilter = activeTab === 'bookings' ? bookingFilter : reservationFilter
+            const setFilter = activeTab === 'bookings' ? setBookingFilter : setReservationFilter
+            return (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`px-4 py-1.5 rounded-md text-xs tracking-wide transition-all capitalize ${
+                  currentFilter === f
+                    ? 'bg-[#faf8f5] text-[#8B7355] font-medium border border-[#ece6dd]'
+                    : 'text-[#999] hover:text-[#8B7355]'
+                }`}
+              >
+                {f}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* Content */}
       {activeTab === 'bookings' ? (
         <div className="space-y-3">
-          {bookings.length === 0 ? (
-            <EmptyState text="No stay bookings yet." />
+          {filteredBookings.length === 0 ? (
+            <EmptyState text={`No ${bookingFilter} stay bookings.`} />
           ) : (
-            bookings.map(booking => (
+            filteredBookings.map(booking => (
               <div
                 key={booking.id}
                 className={`bg-white rounded-xl border p-5 ${
@@ -286,10 +350,10 @@ export default function AdminDashboardClient({
         </div>
       ) : (
         <div className="space-y-3">
-          {reservations.length === 0 ? (
-            <EmptyState text="No restaurant reservations yet." />
+          {filteredReservations.length === 0 ? (
+            <EmptyState text={`No ${reservationFilter} restaurant reservations.`} />
           ) : (
-            reservations.map(reservation => (
+            filteredReservations.map(reservation => (
               <div
                 key={reservation.id}
                 className={`bg-white rounded-xl border p-5 ${
