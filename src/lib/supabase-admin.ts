@@ -1,10 +1,10 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 // Server-only admin client that bypasses RLS.
 // Uses the service role key — NEVER expose this to the browser.
-let _adminClient: ReturnType<typeof createClient> | null = null
+let _adminClient: SupabaseClient | null = null
 
-export function getSupabaseAdmin() {
+export function getSupabaseAdmin(): SupabaseClient {
   if (!_adminClient) {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL
     const serviceKey = process.env.SUPABASE_SECRET_KEY

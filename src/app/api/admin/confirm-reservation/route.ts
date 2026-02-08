@@ -29,16 +29,18 @@ export async function POST(request: Request) {
 
     // Use service role client for DB operations (bypasses RLS)
     const admin = getSupabaseAdmin()
-    const { data: reservation, error: fetchError } = await admin
+    const { data, error: fetchError } = await admin
       .from('restaurant_reservations')
       .select('*')
       .eq('id', id)
       .single()
 
-    if (fetchError || !reservation) {
+    if (fetchError || !data) {
       console.error('Fetch reservation error:', fetchError)
       return NextResponse.json({ error: 'Reservation not found' }, { status: 404 })
     }
+
+    const reservation: Record<string, string> = data as Record<string, string>
 
     if (reservation.status === 'confirmed') {
       return NextResponse.json({ error: 'Already confirmed' }, { status: 400 })

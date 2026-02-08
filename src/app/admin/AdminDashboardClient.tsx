@@ -43,7 +43,8 @@ export default function AdminDashboardClient({
 }) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'bookings' | 'reservations'>('bookings')
-  const [confirmingId, setConfirmingId] = useState<number | null>(null)
+  const [loadingId, setLoadingId] = useState<number | null>(null)
+  const [loadingAction, setLoadingAction] = useState<string | null>(null)
 
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -56,8 +57,33 @@ export default function AdminDashboardClient({
     router.refresh()
   }
 
+  async function requestPayment(id: number) {
+    setLoadingId(id)
+    setLoadingAction('requesting')
+    try {
+      const res = await fetch('/api/admin/request-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.error || 'Failed to request payment')
+      } else {
+        alert(data.message || 'Payment request sent!')
+        router.refresh()
+      }
+    } catch {
+      alert('Network error')
+    } finally {
+      setLoadingId(null)
+      setLoadingAction(null)
+    }
+  }
+
   async function confirmBooking(id: number) {
-    setConfirmingId(id)
+    setLoadingId(id)
+    setLoadingAction('confirming')
     try {
       const res = await fetch('/api/admin/confirm-booking', {
         method: 'POST',
@@ -74,12 +100,14 @@ export default function AdminDashboardClient({
     } catch {
       alert('Network error')
     } finally {
-      setConfirmingId(null)
+      setLoadingId(null)
+      setLoadingAction(null)
     }
   }
 
   async function confirmReservation(id: number) {
-    setConfirmingId(id)
+    setLoadingId(id)
+    setLoadingAction('confirming')
     try {
       const res = await fetch('/api/admin/confirm-reservation', {
         method: 'POST',
@@ -96,11 +124,13 @@ export default function AdminDashboardClient({
     } catch {
       alert('Network error')
     } finally {
-      setConfirmingId(null)
+      setLoadingId(null)
+      setLoadingAction(null)
     }
   }
 
   const pendingBookings = bookings.filter(b => b.status === 'pending')
+  const awaitingPaymentBookings = bookings.filter(b => b.status === 'awaiting_payment')
   const confirmedBookings = bookings.filter(b => b.status === 'confirmed')
   const pendingReservations = reservations.filter(r => r.status === 'pending')
   const confirmedReservations = reservations.filter(r => r.status === 'confirmed')
@@ -117,6 +147,10 @@ export default function AdminDashboardClient({
     const ampm = hour >= 12 ? 'PM' : 'AM'
     const displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour
     return `${displayHour}:${minutes} ${ampm}`
+  }
+
+  function isLoading(id: number, action: string) {
+    return loadingId === id && loadingAction === action
   }
 
   return (
@@ -139,8 +173,9 @@ export default function AdminDashboardClient({
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
         <StatCard label="Pending Bookings" value={pendingBookings.length} color="amber" />
+        <StatCard label="Awaiting Payment" value={awaitingPaymentBookings.length} color="orange" />
         <StatCard label="Confirmed Bookings" value={confirmedBookings.length} color="green" />
         <StatCard label="Pending Reservations" value={pendingReservations.length} color="amber" />
         <StatCard label="Confirmed Reservations" value={confirmedReservations.length} color="green" />
@@ -180,7 +215,11 @@ export default function AdminDashboardClient({
               <div
                 key={booking.id}
                 className={`bg-white rounded-xl border p-5 ${
-                  booking.status === 'pending' ? 'border-amber-200' : 'border-[#ece6dd]'
+                  booking.status === 'pending'
+                    ? 'border-amber-200'
+                    : booking.status === 'awaiting_payment'
+                    ? 'border-orange-200'
+                    : 'border-[#ece6dd]'
                 }`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
@@ -220,15 +259,26 @@ export default function AdminDashboardClient({
                       Submitted {formatDate(booking.created_at)}
                     </p>
                   </div>
-                  {booking.status === 'pending' && (
-                    <button
-                      onClick={() => confirmBooking(booking.id)}
-                      disabled={confirmingId === booking.id}
-                      className="shrink-0 px-5 py-2 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-lg text-sm tracking-wide hover:from-emerald-700 hover:to-emerald-600 transition-all disabled:opacity-50"
-                    >
-                      {confirmingId === booking.id ? 'Confirming...' : 'Confirm'}
-                    </button>
-                  )}
+                  <div className="flex flex-col gap-2 shrink-0">
+                    {booking.status === 'pending' && (
+                      <button
+                        onClick={() => requestPayment(booking.id)}
+                        disabled={isLoading(booking.id, 'requesting')}
+                        className="px-5 py-2 bg-gradient-to-r from-amber-500 to-amber-400 text-white rounded-lg text-sm tracking-wide hover:from-amber-600 hover:to-amber-500 transition-all disabled:opacity-50"
+                      >
+                        {isLoading(booking.id, 'requesting') ? 'Sending...' : 'Request Payment'}
+                      </button>
+                    )}
+                    {booking.status === 'awaiting_payment' && (
+                      <button
+                        onClick={() => confirmBooking(booking.id)}
+                        disabled={isLoading(booking.id, 'confirming')}
+                        className="px-5 py-2 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-lg text-sm tracking-wide hover:from-emerald-700 hover:to-emerald-600 transition-all disabled:opacity-50"
+                      >
+                        {isLoading(booking.id, 'confirming') ? 'Confirming...' : 'Confirm (Payment Received)'}
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             ))
@@ -285,10 +335,10 @@ export default function AdminDashboardClient({
                   {reservation.status === 'pending' && (
                     <button
                       onClick={() => confirmReservation(reservation.id)}
-                      disabled={confirmingId === reservation.id}
+                      disabled={isLoading(reservation.id, 'confirming')}
                       className="shrink-0 px-5 py-2 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-lg text-sm tracking-wide hover:from-emerald-700 hover:to-emerald-600 transition-all disabled:opacity-50"
                     >
-                      {confirmingId === reservation.id ? 'Confirming...' : 'Confirm'}
+                      {isLoading(reservation.id, 'confirming') ? 'Confirming...' : 'Confirm'}
                     </button>
                   )}
                 </div>
@@ -309,6 +359,13 @@ function StatusBadge({ status }: { status: string }) {
       </span>
     )
   }
+  if (status === 'awaiting_payment') {
+    return (
+      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-50 text-orange-700 border border-orange-200">
+        Awaiting Payment
+      </span>
+    )
+  }
   return (
     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
       Pending
@@ -316,11 +373,12 @@ function StatusBadge({ status }: { status: string }) {
   )
 }
 
-function StatCard({ label, value, color }: { label: string; value: number; color: 'amber' | 'green' }) {
+function StatCard({ label, value, color }: { label: string; value: number; color: 'amber' | 'green' | 'orange' }) {
+  const colorClass = color === 'amber' ? 'text-amber-600' : color === 'orange' ? 'text-orange-600' : 'text-emerald-600'
   return (
     <div className="bg-white rounded-xl border border-[#ece6dd] p-4">
       <p className="text-xs uppercase tracking-wider text-[#8B7355] mb-1">{label}</p>
-      <p className={`text-2xl font-light ${color === 'amber' ? 'text-amber-600' : 'text-emerald-600'}`}>
+      <p className={`text-2xl font-light ${colorClass}`}>
         {value}
       </p>
     </div>
