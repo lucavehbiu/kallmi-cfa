@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Our Story | Kallmi Estate - Premium Albanian Olive Oil Heritage',
     description: 'Discover the enchanting heritage of Kallmi Estate, a family-owned olive grove in Durrës, Albania. Our century-old tradition of crafting premium olive oil continues through four generations.',
-    images: ['/images/entrance.webp'],
+    images: ['https://storage.googleapis.com/kallmi/images/entrance.webp'],
   },
 }
 
@@ -33,7 +33,7 @@ export default function OurStory() {
       <section className="relative min-h-[70vh] lg:min-h-[60vh] overflow-hidden pt-20">
         <div className="absolute inset-0">
           <Image
-            src="/images/entrance.webp"
+            src="https://storage.googleapis.com/kallmi/images/entrance.webp"
             alt="Kallmi Estate - Gateway to Heritage"
             className="object-cover object-center"
             fill
@@ -185,7 +185,7 @@ export default function OurStory() {
               >
                 <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src="/images/hero-2nd.webp"
+                    src="https://storage.googleapis.com/kallmi/images/hero-2nd.webp"
                     alt="Historic view of Kallmi Estate olive grove"
                     fill
                     className="object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -350,7 +350,7 @@ export default function OurStory() {
               >
                 <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src="/images/hand-harvested.webp"
+                    src="https://storage.googleapis.com/kallmi/images/hand-harvested.webp"
                     alt="Artisanal olive oil production process at Kallmi Estate"
                     fill
                     className="object-cover transition-transform duration-1000 group-hover:scale-110"

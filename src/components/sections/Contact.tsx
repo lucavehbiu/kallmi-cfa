@@ -20,7 +20,7 @@ export default function ContactSection() {
       <section className="relative min-h-[70vh] lg:min-h-[60vh] overflow-hidden pt-20">
         <div className="absolute inset-0">
           <Image
-            src="/images/entrance.webp"
+            src="https://storage.googleapis.com/kallmi/images/entrance.webp"
             alt="Kallmi Estate Entrance - Welcome to Our Heritage"
             className="object-cover object-center"
             fill

@@ -71,7 +71,7 @@ export default function LandingPage() {
             <FadeIn animation="slide-up" delay={0.2}>
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg">
                 <OptimizedImage
-                  src="/images/about_snippet.webp"
+                  src="https://storage.googleapis.com/kallmi/images/about_snippet.webp"
                   alt="Kallmi Estate olive groves"
                   className="object-cover img-hover"
                   fill
@@ -107,7 +107,7 @@ export default function LandingPage() {
             <div className="relative overflow-hidden rounded-2xl shadow-lg group">
               <div className="aspect-[16/10] relative">
                 <OptimizedImage
-                  src="/images/sunset3.webp"
+                  src="https://storage.googleapis.com/kallmi/images/sunset3.webp"
                   alt="Breathtaking Adriatic Sunsets"
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                   fill
@@ -163,7 +163,7 @@ export default function LandingPage() {
           <FadeIn animation="slide-up" delay={0.1}>
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group">
               <OptimizedImage
-                src="/images/story.webp"
+                src="https://storage.googleapis.com/kallmi/images/story.webp"
                 alt="Adriatic Sunset View"
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 fill
@@ -177,7 +177,7 @@ export default function LandingPage() {
           <FadeIn animation="slide-up" delay={0.2}>
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group">
               <OptimizedImage
-                src="/images/sunset2.webp"
+                src="https://storage.googleapis.com/kallmi/images/sunset2.webp"
                 alt="Golden Hour at Kallmi Beach"
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 fill

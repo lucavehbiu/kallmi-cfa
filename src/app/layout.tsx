@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description: 'Experience the finest extra virgin olive oil from Albania\'s Kallmi Estate.',
     url: 'https://www.kallmibukur.al',
     images: [{
-      url: '/images/og-image.jpg',
+      url: 'https://storage.googleapis.com/kallmi/images/og-image.jpg',
       width: 1200,
       height: 630,
       alt: 'Kallmi Estate Olive Oil'
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Kallmi Estate | Premium Albanian Olive Oil',
     description: 'Experience the finest extra virgin olive oil from Albania\'s Kallmi Estate.',
-    images: ['/images/og-image.jpg'],
+    images: ['https://storage.googleapis.com/kallmi/images/og-image.jpg'],
   },
   verification: {
     google: 'YOUR_GOOGLE_VERIFICATION_CODE', // Add your Google verification code

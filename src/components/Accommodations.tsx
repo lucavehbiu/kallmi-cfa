@@ -59,7 +59,7 @@ const rooms: Room[] = [
     size: "30 m²",
     capacity: 2,
     amenities: ["Double bed", "Sea view", "Private balcony", "Ensuite bathroom", "Air conditioning", "Free WiFi", "Daily housekeeping"],
-    images: ["/images/room-olive-1.webp", "/images/room-olive-2.webp", "/images/room-olive-3.webp"],
+    images: ["https://storage.googleapis.com/kallmi/images/room-olive-1.webp", "https://storage.googleapis.com/kallmi/images/room-olive-2.webp", "https://storage.googleapis.com/kallmi/images/room-olive-3.webp"],
     featured: true
   },
   {
@@ -70,7 +70,7 @@ const rooms: Room[] = [
     size: "30 m²",
     capacity: 2,
     amenities: ["Double bed", "Sea view", "Ensuite bathroom", "Air conditioning", "Free WiFi", "Daily housekeeping"],
-    images: ["/images/room-garden-1.webp", "/images/room-garden-2.webp"],
+    images: ["https://storage.googleapis.com/kallmi/images/room-garden-1.webp", "https://storage.googleapis.com/kallmi/images/room-garden-2.webp"],
     featured: true
   }
 ];
@@ -245,7 +245,7 @@ export default function Accommodations() {
       {/* Hero Section */}
       <div className="h-[60vh] min-h-[500px] relative overflow-hidden">
         <Image
-          src="/images/stay_snippet.webp"
+          src="https://storage.googleapis.com/kallmi/images/stay_snippet.webp"
           alt="Kallmi Estate Accommodations"
           className="object-cover object-center"
           fill
@@ -302,7 +302,7 @@ export default function Accommodations() {
             <div className="grid grid-cols-2 gap-4">
               <div className="aspect-[3/4] relative rounded-xl overflow-hidden">
                 <Image
-                  src="/images/room-interior.webp"
+                  src="https://storage.googleapis.com/kallmi/images/stay/room_view.webp"
                   alt="Room Interior"
                   className="object-cover"
                   fill
@@ -312,7 +312,7 @@ export default function Accommodations() {
               </div>
               <div className="aspect-[3/4] relative rounded-xl overflow-hidden mt-8">
                 <Image
-                  src="/images/room-view.webp"
+                  src="https://storage.googleapis.com/kallmi/images/stay/room_design.webp"
                   alt="Room with a View"
                   className="object-cover"
                   fill

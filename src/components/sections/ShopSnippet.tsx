@@ -7,7 +7,7 @@ import { AnimateDiv } from '../motion/MotionWrapper'
 export default function ShopSnippet() {
   return (
     <section className="py-24 bg-[#F8F6F3] relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/images/pattern.webp')] opacity-5"></div>
+      <div className="absolute inset-0 bg-[url('https://storage.googleapis.com/kallmi/images/pattern.webp')] opacity-5"></div>
       <AnimateDiv
         className="max-w-7xl mx-auto px-4 sm:px-8 relative"
         animation="fade"
@@ -23,7 +23,7 @@ export default function ShopSnippet() {
           >
             <div className="relative h-80">
               <Image
-                src="/images/product.webp"
+                src="https://storage.googleapis.com/kallmi/images/product.webp"
                 alt="Premium Olive Oil"
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 fill
@@ -52,7 +52,7 @@ export default function ShopSnippet() {
           >
             <div className="relative h-80">
               <Image
-                src="/images/honey.webp"
+                src="https://storage.googleapis.com/kallmi/images/honey.webp"
                 alt="Local Honey"
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 fill
@@ -81,7 +81,7 @@ export default function ShopSnippet() {
           >
             <div className="relative h-80">
               <Image
-                src="/images/artisan.webp"
+                src="https://storage.googleapis.com/kallmi/images/artisan.webp"
                 alt="Artisan Crafts"
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 fill

@@ -27,7 +27,7 @@ export default function LimitedEditionPage() {
       <div className="h-screen relative overflow-hidden">
         <div className="absolute inset-0 bg-black/30 z-10" />
         <Image
-          src="/images/limited-edition-hero.webp"
+          src="https://storage.googleapis.com/kallmi/images/limited-edition-hero.webp"
           alt="Limited Edition 2024"
           className="object-cover object-center"
           fill
@@ -48,7 +48,7 @@ export default function LimitedEditionPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
           <AnimateDiv animation="fade" className="relative aspect-square">
             <Image
-              src="/images/limited-bottle.webp"
+              src="https://storage.googleapis.com/kallmi/images/limited-bottle.webp"
               alt="Limited Edition Bottle"
               fill
               className="object-contain"

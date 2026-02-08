@@ -42,7 +42,7 @@ export const features: Feature[] = [
   {
     title: 'Hand-Harvested',
     description: 'Each olive carefully selected at peak ripeness from our century-old groves',
-    image: '/images/hand-harvested.webp',
+    image: 'https://storage.googleapis.com/kallmi/images/hand-harvested.webp',
     blurDataURL: "data:image/jpeg;base64,/9j...",
     icon: HandRaisedIcon,
     priority: true
@@ -50,7 +50,7 @@ export const features: Feature[] = [
   {
     title: 'Cold-Pressed',
     description: 'Pressed within hours of harvest to capture the purest flavors',
-    image: '/images/cold-pressed.webp',
+    image: 'https://storage.googleapis.com/kallmi/images/cold-pressed.webp',
     blurDataURL: "data:image/jpeg;base64,/9j...",
     icon: BeakerIcon,
     priority: true
@@ -58,7 +58,7 @@ export const features: Feature[] = [
   {
     title: 'Family Legacy',
     description: "Five generations of olive oil craftsmanship on Kallmi's pristine coast",
-    image: '/images/family-legacy.webp',
+    image: 'https://storage.googleapis.com/kallmi/images/family-legacy.webp',
     blurDataURL: "data:image/jpeg;base64,/9j...",
     icon: HomeModernIcon,
     priority: true
@@ -105,16 +105,16 @@ export const pressReviews: PressReview[] = [
   {
     source: 'Olive Oil Times',
     quote: 'A remarkable oil that captures the essence of Albania\'s ancient olive-growing tradition.',
-    imageUrl: '/images/olive_oil_times.webp'
+    imageUrl: 'https://storage.googleapis.com/kallmi/images/olive_oil_times.webp'
   },
   {
     source: 'Gourmet Magazine',
     quote: 'One of the finest Mediterranean olive oils we\'ve tasted this year.',
-    imageUrl: '/images/gourmet.webp'
+    imageUrl: 'https://storage.googleapis.com/kallmi/images/gourmet.webp'
   },
   {
     source: 'Food & Wine',
     quote: 'A hidden gem from Albania that deserves a place among the world\'s premium olive oils.',
-    imageUrl: '/images/foo_and_wine.webp'
+    imageUrl: 'https://storage.googleapis.com/kallmi/images/foo_and_wine.webp'
   }
 ]

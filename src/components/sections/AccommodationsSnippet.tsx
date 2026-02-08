@@ -14,7 +14,7 @@ export default function AccommodationsSnippet() {
         <FadeIn animation="slide-up">
           <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-lg group">
             <Image
-              src="/images/stay_snippet.webp"
+              src="https://storage.googleapis.com/kallmi/images/stay_snippet.webp"
               alt="Kallmi Estate Accommodations"
               className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               fill

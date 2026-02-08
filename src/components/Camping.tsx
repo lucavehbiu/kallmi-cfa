@@ -58,7 +58,7 @@ const campsites: CampSite[] = [
     price: 35,
     capacity: 4,
     amenities: ["Fire pit", "Picnic table", "Shared bathrooms", "Drinking water", "BBQ area", "Wifi hotspot"],
-    images: ["/images/room-olive-1.webp", "/images/room-olive-2.webp"],
+    images: ["https://storage.googleapis.com/kallmi/images/room-olive-1.webp", "https://storage.googleapis.com/kallmi/images/room-olive-2.webp"],
     featured: true
   },
   {
@@ -68,7 +68,7 @@ const campsites: CampSite[] = [
     price: 45,
     capacity: 4,
     amenities: ["Private beach access", "Fire pit", "Picnic table", "Shared bathrooms", "Drinking water", "Hammock"],
-    images: ["/images/room-garden-1.webp", "/images/room-garden-2.webp"],
+    images: ["https://storage.googleapis.com/kallmi/images/room-garden-1.webp", "https://storage.googleapis.com/kallmi/images/room-garden-2.webp"],
     featured: true
   },
   {
@@ -78,7 +78,7 @@ const campsites: CampSite[] = [
     price: 30,
     capacity: 6,
     amenities: ["Fire pit", "Picnic table", "Shared bathrooms", "Drinking water", "Extra shade", "Wildlife viewing"],
-    images: ["/images/room-family-1.webp", "/images/room-family-2.webp"]
+    images: ["https://storage.googleapis.com/kallmi/images/room-family-1.webp", "https://storage.googleapis.com/kallmi/images/room-family-2.webp"]
   },
   {
     id: 4,
@@ -87,7 +87,7 @@ const campsites: CampSite[] = [
     price: 75,
     capacity: 2,
     amenities: ["Real bed", "Linens provided", "Solar lighting", "Private bathroom", "Outdoor lounge", "Breakfast included"],
-    images: ["/images/room-heritage-1.webp", "/images/room-heritage-2.webp"],
+    images: ["https://storage.googleapis.com/kallmi/images/room-heritage-1.webp", "https://storage.googleapis.com/kallmi/images/room-heritage-2.webp"],
     featured: true
   }
 ];
@@ -110,7 +110,7 @@ export default function Camping() {
       <section className="relative min-h-[70vh] lg:min-h-[60vh] overflow-hidden pt-20">
         <div className="absolute inset-0">
           <Image
-            src="/images/stay_snippet.webp"
+            src="https://storage.googleapis.com/kallmi/images/stay_snippet.webp"
             alt="Kallmi Estate Camping - Under the Stars"
             className="object-cover object-center"
             fill
@@ -245,7 +245,7 @@ export default function Camping() {
                 <div className="grid grid-cols-2 gap-3 sm:gap-4">
                   <div className="aspect-[3/4] relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
                     <Image
-                      src="/images/room-interior.webp"
+                      src="https://storage.googleapis.com/kallmi/images/room-interior.webp"
                       alt="Camping Under Olive Trees"
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       fill
@@ -255,7 +255,7 @@ export default function Camping() {
                   </div>
                   <div className="aspect-[3/4] relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl mt-4 sm:mt-8 group-hover:shadow-2xl transition-all duration-500">
                     <Image
-                      src="/images/room-view.webp"
+                      src="https://storage.googleapis.com/kallmi/images/room-view.webp"
                       alt="Adriatic Sea Views"
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       fill
@@ -383,7 +383,7 @@ export default function Camping() {
 
       {/* Enhanced Reservation Section */}
       <section className="relative py-16 sm:py-24 bg-gradient-to-b from-white to-stone-50">
-        <div className="absolute inset-0 bg-[url('/images/pattern.webp')] opacity-5"></div>
+        <div className="absolute inset-0 bg-[url('https://storage.googleapis.com/kallmi/images/pattern.webp')] opacity-5"></div>
         <AnimateDiv
           className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10"
           animation="fade"

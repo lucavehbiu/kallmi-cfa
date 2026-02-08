@@ -67,7 +67,7 @@ const menu: MenuItem[] = [
     description: "Fresh catch from the Adriatic, grilled to perfection with herbs and our estate olive oil",
     price: 4800,
     category: "featured",
-    image: "https://fishandmore.co.uk/wp-content/uploads/2021/07/frozen-fish-bbq-grilled-whole-sea-bass-recipe.jpg",
+    image: "https://storage.googleapis.com/kallmi/images/food/grilled-sea-bass.webp",
     featured: true,
     unit: "per KG"
   },
@@ -77,7 +77,7 @@ const menu: MenuItem[] = [
     description: "Tender octopus with Mediterranean herbs, olive oil, and fresh vegetables",
     price: 1700,
     category: "featured",
-    image: "https://www.charlottefashionplate.com/wp-content/uploads/2019/12/fullsizeoutput_edb8.jpeg",
+    image: "https://storage.googleapis.com/kallmi/images/food/seafood-platter.webp",
     featured: true
   },
   {
@@ -86,7 +86,7 @@ const menu: MenuItem[] = [
     description: "Red peppers and aubergines with balsamic vinegar and garlic",
     price: 600,
     category: "featured",
-    image: "https://yourguardianchef.com/wp-content/uploads/2022/06/Grilled-Zucchini-Eggplants-And-Peppers-Salad-3.jpg",
+    image: "https://storage.googleapis.com/kallmi/images/food/grilled-vegetables.webp",
     featured: true
   },
 
@@ -97,7 +97,7 @@ const menu: MenuItem[] = [
     description: "Traditional Greek salad with feta, olives, and fresh vegetables",
     price: 600,
     category: "salads",
-    image: "https://images.themodernproper.com/production/posts/GreekSalad_9.jpg?w=1200&h=1200&q=60&fm=jpg&fit=crop&dm=1718650734&s=70119bf37604d243d0729db7f4cda445"
+    image: "https://storage.googleapis.com/kallmi/images/food/greek-salad.webp"
   },
   {
     id: 5,
@@ -105,7 +105,7 @@ const menu: MenuItem[] = [
     description: "Fresh mixed greens with our signature olive oil dressing",
     price: 600,
     category: "salads",
-    image: "https://saladswithanastasia.com/wp-content/uploads/2020/11/maroulosalata-close-up.webp"
+    image: "https://storage.googleapis.com/kallmi/images/food/maroulosalata.webp"
   },
   {
     id: 6,
@@ -113,7 +113,7 @@ const menu: MenuItem[] = [
     description: "Peppery arugula with parmesan and balsamic reduction",
     price: 600,
     category: "salads",
-    image: "https://i0.wp.com/happyhealthymama.com/wp-content/uploads/2023/06/Arugula-Quinoa-Salad-3.jpg?fit=1340%2C1800&ssl=1"
+    image: "https://storage.googleapis.com/kallmi/images/food/arugula-quinoa.webp"
   },
   {
     id: 7,
@@ -121,7 +121,7 @@ const menu: MenuItem[] = [
     description: "Tender octopus with Mediterranean herbs and olive oil",
     price: 1700,
     category: "salads",
-    image: "https://www.charlottefashionplate.com/wp-content/uploads/2019/12/fullsizeoutput_edb8.jpeg",
+    image: "https://storage.googleapis.com/kallmi/images/food/seafood-platter.webp",
     seasonal: true
   },
   {
@@ -130,7 +130,7 @@ const menu: MenuItem[] = [
     description: "With oregano, crumbled feta cheese and olive oil",
     price: 600,
     category: "salads",
-    image: "https://fitfoodiefinds.com/wp-content/uploads/2019/06/baked-potatoes.jpg"
+    image: "https://storage.googleapis.com/kallmi/images/food/baked-potatoes.webp"
   },
   {
     id: 9,
@@ -138,7 +138,7 @@ const menu: MenuItem[] = [
     description: "Red peppers and aubergines with balsamic vinegar and garlic",
     price: 600,
     category: "salads",
-    image: "https://yourguardianchef.com/wp-content/uploads/2022/06/Grilled-Zucchini-Eggplants-And-Peppers-Salad-3.jpg"
+    image: "https://storage.googleapis.com/kallmi/images/food/grilled-vegetables.webp"
   },
   {
     id: 10,
@@ -146,7 +146,7 @@ const menu: MenuItem[] = [
     description: "Toasted bread with fresh tomatoes, basil and garlic",
     price: 300,
     category: "salads",
-    image: "https://www.allrecipes.com/thmb/QSsjryxShEx1L6o0HLer1Nn4jwA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/54165-balsamic-bruschetta-DDMFS-4x3-e2b55b5ca39b4c1783e524a2461634ea.jpg"
+    image: "https://storage.googleapis.com/kallmi/images/food/bruschetta.webp"
   },
 
   // Fresh Fish
@@ -156,7 +156,7 @@ const menu: MenuItem[] = [
     description: "Fresh from the Adriatic, grilled with herbs and olive oil",
     price: 4800,
     category: "fish",
-    image: "https://fishandmore.co.uk/wp-content/uploads/2021/07/frozen-fish-bbq-grilled-whole-sea-bass-recipe.jpg",
+    image: "https://storage.googleapis.com/kallmi/images/food/grilled-sea-bass.webp",
     unit: "per kg"
   },
   {
@@ -165,7 +165,7 @@ const menu: MenuItem[] = [
     description: "Premium Mediterranean fish, simply grilled",
     price: 6500,
     category: "fish",
-    image: "https://media-cdn.tripadvisor.com/media/photo-s/13/b4/88/4f/koce-fish-fresh-served.jpg",
+    image: "https://storage.googleapis.com/kallmi/images/food/koce-fish.webp",
     unit: "per kg"
   },
   {
@@ -174,7 +174,7 @@ const menu: MenuItem[] = [
     description: "Fresh Adriatic shrimps, grilled or sautéed (250gr)",
     price: 1200,
     category: "fish",
-    image: "https://www.seriouseats.com/thmb/ch4c6o15shxPyfO8jnSfUh_wQ0s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2015__08__09102015-grilled-lemongrass-shrimp-shaozhizhong-8-a5525792ce7a4c9693af0a564eae74a4.jpg"
+    image: "https://storage.googleapis.com/kallmi/images/food/grilled-shrimp.webp"
   },
   {
     id: 14,
@@ -182,7 +182,7 @@ const menu: MenuItem[] = [
     description: "Tender grilled octopus with olive oil and herbs",
     price: 1300,
     category: "fish",
-    image: "https://www.allrecipes.com/thmb/J7hX8IQcYGf3vlvfZrz5r7pd29U=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/6723522-af2855be1a38418ebd9fc516034ffecc.jpg"
+    image: "https://storage.googleapis.com/kallmi/images/food/octopus.webp"
   },
   {
     id: 15,
@@ -190,7 +190,7 @@ const menu: MenuItem[] = [
     description: "Local catch, grilled to perfection",
     price: 1300,
     category: "fish",
-    image: "https://cookingwithnonna.com/images/com_yoorecipe/cropped-grilled-mullets-700.jpg"
+    image: "https://storage.googleapis.com/kallmi/images/food/grilled-mullets.webp"
   },
   {
     id: 16,
@@ -198,7 +198,7 @@ const menu: MenuItem[] = [
     description: "Fresh squid, grilled or fried",
     price: 1300,
     category: "fish",
-    image: "https://i.imgur.com/3RZIQkw.png"
+    image: "https://storage.googleapis.com/kallmi/images/food/mixed-grill.webp"
   },
   {
     id: 17,
@@ -206,7 +206,7 @@ const menu: MenuItem[] = [
     description: "Fresh cuttlefish, grilled to perfection",
     price: 1300,
     category: "fish",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxrpHrOQeImHqGb_OJj9H71CpQlJbBpvPwig&s"
+    image: "https://storage.googleapis.com/kallmi/images/food/cuttlefish.webp"
   },
 
   // Farmed Fish
@@ -216,7 +216,7 @@ const menu: MenuItem[] = [
     description: "Quality farmed sea bass, 300gr portion",
     price: 1200,
     category: "farmed-fish",
-    image: "https://fishandmore.co.uk/wp-content/uploads/2021/07/frozen-fish-bbq-grilled-whole-sea-bass-recipe.jpg"
+    image: "https://storage.googleapis.com/kallmi/images/food/grilled-sea-bass.webp"
   },
   {
     id: 19,
@@ -224,7 +224,7 @@ const menu: MenuItem[] = [
     description: "Quality farmed koce, 300gr portion",
     price: 1200,
     category: "farmed-fish",
-    image: "https://media-cdn.tripadvisor.com/media/photo-s/13/b4/88/4f/koce-fish-fresh-served.jpg"
+    image: "https://storage.googleapis.com/kallmi/images/food/koce-fish.webp"
   }
 ]
 
@@ -379,7 +379,7 @@ export default function Restaurant() {
       <section className="relative min-h-[70vh] lg:min-h-[60vh] overflow-hidden pt-20">
         <div className="absolute inset-0">
           <Image
-            src="/images/restaurant_snippet.webp"
+            src="https://storage.googleapis.com/kallmi/images/restaurant_snippet.webp"
             alt="Kallmi Estate Restaurant - Adriatic Dining Experience"
             className="object-cover object-center"
             fill
@@ -491,7 +491,7 @@ export default function Restaurant() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="aspect-[3/4] relative rounded-xl overflow-hidden shadow-lg">
                   <Image
-                    src="https://storage.googleapis.com/oda-images/IMG_0655.jpg"
+                    src="https://storage.googleapis.com/kallmi/images/food/restaurant-interior.webp"
                     alt="Our Executive Chef"
                     className="object-cover transition-transform duration-500 hover:scale-[1.03]"
                     fill
@@ -501,7 +501,7 @@ export default function Restaurant() {
                 </div>
                 <div className="aspect-[3/4] relative rounded-xl overflow-hidden shadow-lg mt-8">
                   <Image
-                    src="/images/interior.webp"
+                    src="https://storage.googleapis.com/kallmi/images/interior.webp"
                     alt="Restaurant Interior"
                     className="object-cover transition-transform duration-500 hover:scale-[1.03]"
                     fill
@@ -855,7 +855,7 @@ export default function Restaurant() {
             <FadeIn animation="slide-up" delay={0.2}>
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
                 <Image
-                  src="/images/private-event.webp"
+                  src="https://storage.googleapis.com/kallmi/images/private-event.webp"
                   alt="Private Dining at Kallmi Estate"
                   className="object-cover transition-transform duration-500 hover:scale-[1.03]"
                   fill
@@ -889,7 +889,7 @@ export default function Restaurant() {
                 className="block transition-transform duration-300 group-hover:-translate-y-1"
               >
                 <Image
-                  src="https://foto1.sluurpy.com/bollini_2025/6026481.png"
+                  src="https://storage.googleapis.com/kallmi/images/food/sluurpy-badge.webp"
                   alt="Sluurpy Certificate"
                   width={150}
                   height={150}

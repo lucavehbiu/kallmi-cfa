@@ -52,7 +52,7 @@ export default function RestaurantSnippet() {
           <FadeIn animation="slide-up" delay={0.2}>
             <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-lg group">
               <Image
-                src="/images/restaurant_snippet.webp"
+                src="https://storage.googleapis.com/kallmi/images/restaurant_snippet.webp"
                 alt="Kallmi Estate Restaurant"
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 fill

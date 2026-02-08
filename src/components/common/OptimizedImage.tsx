@@ -11,7 +11,7 @@ interface OptimizedImageProps extends Omit<ImageProps, 'onError' | 'onLoad'> {
 export default function OptimizedImage({
   src,
   alt,
-  fallbackSrc = '/images/placeholders/fallback.webp',
+  fallbackSrc = 'https://storage.googleapis.com/kallmi/images/placeholders/fallback.webp',
   id,
   ...props
 }: OptimizedImageProps) {

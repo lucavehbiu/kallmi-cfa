@@ -34,7 +34,7 @@ export default function LandingHero() {
           }}
         >
         <Image
-          src="/images/hero.webp"
+          src="https://storage.googleapis.com/kallmi/images/hero.webp"
             alt="Kallmi Estate - Where ancient olive groves meet the Adriatic Sea"
           fill
           priority

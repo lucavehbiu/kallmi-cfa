@@ -71,7 +71,7 @@ export function Header() {
             <Link href="/" className="flex items-center space-x-3">
               <div className="relative">
               <Image
-                src="/images/logo.webp"
+                src="https://storage.googleapis.com/kallmi/images/logo.webp"
                 alt="Kallmi Estate"
                   width={48}
                   height={48}

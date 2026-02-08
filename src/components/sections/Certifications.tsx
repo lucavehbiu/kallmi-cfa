@@ -17,7 +17,7 @@ export default function Certifications() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-stone-100">
-              <Image src="/images/sustainability.webp" alt="Sustainability" fill className="object-cover" />
+              <Image src="https://storage.googleapis.com/kallmi/images/sustainability.webp" alt="Sustainability" fill className="object-cover" />
           </div>
           <div className="space-y-8">
             <h2 className="text-4xl sm:text-5xl font-light text-[#8B7355]">Sustainability & Heritage</h2>

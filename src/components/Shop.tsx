@@ -33,7 +33,7 @@ const products: Product[] = [
     year: 2024,
     size: "500ml",
     price: 8,
-    image: "/images/product.webp",
+    image: "https://storage.googleapis.com/kallmi/images/product.webp",
     inStock: false,
     description: "Our flagship blend from century-old olive trees",
     featured: true
@@ -44,7 +44,7 @@ const products: Product[] = [
     year: 2024,
     size: "750ml",
     price: 12,
-    image: "/images/product.webp",
+    image: "https://storage.googleapis.com/kallmi/images/product.webp",
     inStock: true,
     description: "Small-batch artisanal pressing from select groves"
   },
@@ -54,7 +54,7 @@ const products: Product[] = [
     year: 2024,
     size: "1000ml",
     price: 16,
-    image: "/images/product.webp",
+    image: "https://storage.googleapis.com/kallmi/images/product.webp",
     inStock: false,
     description: "Our finest extra virgin olive oil for connoisseurs"
   }
@@ -112,7 +112,7 @@ export default function Shop() {
       <div className="relative h-[60vh] min-h-[500px] overflow-hidden">
         {/* Background */}
         <Image
-          src="/images/hand-harvested.webp"
+          src="https://storage.googleapis.com/kallmi/images/hand-harvested.webp"
           alt="Artisanal Olive Oil Collection"
           className="object-cover object-center"
           fill
