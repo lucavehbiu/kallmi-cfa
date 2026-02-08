@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FadeIn } from './motion/FadeIn'
@@ -58,8 +58,19 @@ const rooms: Room[] = [
     price: 120,
     size: "30 m²",
     capacity: 2,
-    amenities: ["Double bed", "Sea view", "Private balcony", "Ensuite bathroom", "Air conditioning", "Free WiFi", "Daily housekeeping"],
-    images: ["https://storage.googleapis.com/kallmi/images/room-olive-1.webp", "https://storage.googleapis.com/kallmi/images/room-olive-2.webp", "https://storage.googleapis.com/kallmi/images/room-olive-3.webp"],
+    amenities: ["Double bed", "Sea view", "Private balcony", "Ensuite bathroom", "Air conditioning"],
+    images: [
+      "https://storage.googleapis.com/kallmi/images/stay/room_view.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/room_design.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/bed.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/room_living_room.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/more_room_design.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/bathrrom.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/bathroooom2.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/shower.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/wardrobe.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/entrance.webp"
+    ],
     featured: true
   },
   {
@@ -69,8 +80,19 @@ const rooms: Room[] = [
     price: 120,
     size: "30 m²",
     capacity: 2,
-    amenities: ["Double bed", "Sea view", "Ensuite bathroom", "Air conditioning", "Free WiFi", "Daily housekeeping"],
-    images: ["https://storage.googleapis.com/kallmi/images/room-garden-1.webp", "https://storage.googleapis.com/kallmi/images/room-garden-2.webp"],
+    amenities: ["Double bed", "Sea view", "Ensuite bathroom", "Air conditioning"],
+    images: [
+      "https://storage.googleapis.com/kallmi/images/stay/room_view.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/room_design.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/bed.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/room_living_room.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/more_room_design.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/bathrrom.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/bathroooom2.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/shower.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/wardrobe.webp",
+      "https://storage.googleapis.com/kallmi/images/stay/entrance.webp"
+    ],
     featured: true
   }
 ];
@@ -100,6 +122,36 @@ export default function Accommodations() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
   const [formErrors, setFormErrors] = useState<Record<string, string>>({})
+  const [priceEstimate, setPriceEstimate] = useState<{
+    nights: number
+    totalAmount: number
+    depositAmount: number
+    breakdown: { date: string; rate: number }[]
+  } | null>(null)
+  const [loadingPrice, setLoadingPrice] = useState(false)
+
+  const fetchPriceEstimate = useCallback(async (checkIn: string, checkOut: string) => {
+    if (!checkIn || !checkOut || checkIn >= checkOut) {
+      setPriceEstimate(null)
+      return
+    }
+    setLoadingPrice(true)
+    try {
+      const res = await fetch(`/api/pricing-estimate?checkIn=${checkIn}&checkOut=${checkOut}`)
+      if (res.ok) {
+        const data = await res.json()
+        setPriceEstimate(data)
+      }
+    } catch {
+      setPriceEstimate(null)
+    } finally {
+      setLoadingPrice(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchPriceEstimate(formData.checkIn, formData.checkOut)
+  }, [formData.checkIn, formData.checkOut, fetchPriceEstimate])
 
   // Get tomorrow's date as minimum selectable date
   const getMinDate = () => {
@@ -218,6 +270,7 @@ export default function Accommodations() {
 
       if (response.ok) {
         setSubmitMessage({ type: 'success', text: data.message || 'Booking request submitted! Please await confirmation — our team will get back to you shortly.' })
+        setPriceEstimate(null)
         setFormData({
           name: '',
           email: '',
@@ -369,10 +422,10 @@ export default function Accommodations() {
                       {room.name}
                     </h3>
                     <span
-                      className="text-xl font-light"
+                      className="text-lg font-light"
                       style={{ color: 'var(--color-brand-olive)' }}
                     >
-                      {formatPrice(room.price)} / night
+                      From {formatPrice(80)} / night
                     </span>
                   </div>
 
@@ -573,6 +626,38 @@ export default function Accommodations() {
                   </div>
                 </div>
 
+                {/* Price Estimate */}
+                {loadingPrice && (
+                  <div className="p-4 rounded-xl text-center text-sm" style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}>
+                    Calculating price...
+                  </div>
+                )}
+                {priceEstimate && !loadingPrice && (
+                  <div className="p-4 rounded-xl space-y-2" style={{ backgroundColor: 'rgba(139, 115, 85, 0.08)' }}>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>
+                        {priceEstimate.nights} night{priceEstimate.nights !== 1 ? 's' : ''}
+                      </span>
+                      <span className="text-lg font-light" style={{ color: 'var(--color-brand-olive)' }}>
+                        {formatPrice(priceEstimate.totalAmount)}
+                        {formData.roomId.includes(',') && ' per room'}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1">
+                      {priceEstimate.breakdown.map((b, i) => (
+                        <span key={i} className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                          {b.date}: {formatPrice(b.rate)}
+                        </span>
+                      ))}
+                    </div>
+                    {formData.roomId.includes(',') && (
+                      <p className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                        Total for both rooms: {formatPrice(priceEstimate.totalAmount * 2)}
+                      </p>
+                    )}
+                  </div>
+                )}
+
                 <textarea
                   name="specialRequests"
                   value={formData.specialRequests}
@@ -703,7 +788,7 @@ export default function Accommodations() {
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative h-80">
+            <div className="relative h-[50vh] min-h-[300px]">
               <Image
                 src={selectedRoom.images[currentImageIndex]}
                 alt={selectedRoom.name}
@@ -736,14 +821,19 @@ export default function Accommodations() {
                   >
                     <ChevronRightIcon className="h-6 w-6" />
                   </button>
-                  <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-                    {selectedRoom.images.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                        className={`w-2 h-2 rounded-full ${currentImageIndex === index ? 'bg-white' : 'bg-white/50'}`}
-                      />
-                    ))}
+                  <div className="absolute bottom-4 left-0 right-0 flex flex-col items-center gap-2">
+                    <span className="text-white text-sm font-sans drop-shadow-lg">
+                      {currentImageIndex + 1} / {selectedRoom.images.length}
+                    </span>
+                    <div className="flex justify-center gap-1.5">
+                      {selectedRoom.images.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === index ? 'bg-white scale-125' : 'bg-white/50'}`}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </>
               )}
@@ -758,12 +848,15 @@ export default function Accommodations() {
                   {selectedRoom.name}
                 </h3>
                 <span
-                  className="text-2xl font-light"
+                  className="text-lg font-light"
                   style={{ color: 'var(--color-brand-olive)' }}
                 >
-                  {formatPrice(selectedRoom.price)} / night
+                  From {formatPrice(80)} / night
                 </span>
               </div>
+              <p className="text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
+                Price varies by season. Select dates below for exact pricing.
+              </p>
 
               <div className="flex flex-wrap gap-3">
                 <span
