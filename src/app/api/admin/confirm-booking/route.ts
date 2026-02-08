@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createSupabaseServerClient } from '@/lib/supabase-server'
 import { getSupabaseAdmin } from '@/lib/supabase-admin'
+import { createBookingCalendarEvent } from '@/lib/google-calendar'
 import Mailjet from 'node-mailjet'
 
 const mailjet = Mailjet.apiConnect(
@@ -235,6 +236,14 @@ export async function POST(request: Request) {
         })
     } catch (emailErr) {
       console.error('Confirmation email failed:', emailErr)
+    }
+
+    // Create Google Calendar event for the confirmed booking
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await createBookingCalendarEvent(booking as any)
+    } catch (calendarErr) {
+      console.error('Google Calendar event creation failed:', calendarErr)
     }
 
     return NextResponse.json({ success: true, message: 'Booking confirmed and emails sent' })

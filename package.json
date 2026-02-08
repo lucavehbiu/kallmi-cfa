@@ -13,6 +13,7 @@
     "@heroicons/react": "^2.2.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.95.3",
+    "googleapis": "^171.4.0",
     "next": "^15.1.6",
     "node-mailjet": "^6.0.11",
     "react": "^19.0.0",
