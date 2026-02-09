@@ -11,6 +11,19 @@ interface BookingData {
   special_requests?: string
 }
 
+function toDateString(dateValue: string): string {
+  // Extract YYYY-MM-DD from any format (ISO timestamp, date string, etc.)
+  // Avoid new Date() to prevent timezone shifts
+  const match = dateValue.match(/(\d{4})-(\d{2})-(\d{2})/)
+  if (match) return match[0]
+  // Fallback: parse and use UTC components
+  const d = new Date(dateValue)
+  const year = d.getUTCFullYear()
+  const month = String(d.getUTCMonth() + 1).padStart(2, '0')
+  const day = String(d.getUTCDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 export async function createBookingCalendarEvent(booking: BookingData) {
   const calendarId = process.env.GOOGLE_CALENDAR_ID
   const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
@@ -29,13 +42,20 @@ export async function createBookingCalendarEvent(booking: BookingData) {
 
   const calendar = google.calendar({ version: 'v3', auth })
 
-  const description = [
+  const checkIn = toDateString(booking.check_in)
+  const checkOut = toDateString(booking.check_out)
+
+  const descriptionParts = [
     `Guest: ${booking.name}`,
     `Email: ${booking.email}`,
     `Phone: ${booking.phone}`,
     `Guests: ${booking.guests}`,
-    booking.special_requests ? `\nSpecial Requests: ${booking.special_requests}` : '',
-  ].filter(Boolean).join('\n')
+  ]
+  if (booking.special_requests) {
+    descriptionParts.push('')
+    descriptionParts.push(`Note: ${booking.special_requests}`)
+  }
+  const description = descriptionParts.join('\n')
 
   const event = await calendar.events.insert({
     calendarId,
@@ -43,10 +63,10 @@ export async function createBookingCalendarEvent(booking: BookingData) {
       summary: `🏠 ${booking.room_name} - ${booking.name}`,
       description,
       start: {
-        date: booking.check_in,
+        date: checkIn,
       },
       end: {
-        date: booking.check_out,
+        date: checkOut,
       },
       colorId: '10', // Green (basil)
     },
