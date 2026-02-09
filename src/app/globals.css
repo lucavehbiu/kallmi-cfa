@@ -531,3 +531,108 @@ html::-webkit-scrollbar {
   background-color: rgba(139, 115, 85, 0.2);
   color: var(--color-text-primary);
 }
+
+/* ============================================
+   CALENDAR (react-day-picker) STYLES
+   ============================================ */
+
+.kallmi-calendar-wrapper {
+  background-color: var(--color-surface-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.kallmi-calendar-wrapper .rdp-root {
+  --rdp-accent-color: #8B7355;
+  --rdp-accent-background-color: rgba(139, 115, 85, 0.15);
+  --rdp-day_button-border-radius: 8px;
+  --rdp-day_button-height: 44px;
+  --rdp-day_button-width: 44px;
+  --rdp-selected-border: 2px solid #8B7355;
+  --rdp-disabled-opacity: 0.35;
+  --rdp-range_middle-background-color: rgba(139, 115, 85, 0.08);
+  --rdp-range_start-color: white;
+  --rdp-range_end-color: white;
+  --rdp-range_start-background: #8B7355;
+  --rdp-range_end-background: #8B7355;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.kallmi-calendar-wrapper .rdp-month {
+  width: 100%;
+}
+
+.kallmi-calendar-wrapper .rdp-months {
+  justify-content: center;
+}
+
+.kallmi-calendar-wrapper .rdp-month_caption {
+  color: var(--color-brand-olive);
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.kallmi-calendar-wrapper .rdp-weekday {
+  color: var(--color-text-tertiary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.kallmi-calendar-wrapper .rdp-day button {
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  transition: all 0.15s ease;
+}
+
+.kallmi-calendar-wrapper .rdp-day button:hover:not(:disabled) {
+  background-color: rgba(139, 115, 85, 0.1);
+}
+
+.kallmi-calendar-wrapper .rdp-chevron {
+  fill: var(--color-brand-olive);
+}
+
+.kallmi-calendar-wrapper .kallmi-booked-day:not(.rdp-disabled) {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border-radius: 8px;
+  position: relative;
+}
+
+.kallmi-calendar-wrapper .kallmi-booked-day.rdp-disabled {
+  background-color: #fee2e2;
+  color: #991b1b;
+  opacity: 0.6;
+}
+
+/* Fully booked — both rooms taken */
+.kallmi-calendar-wrapper .kallmi-fully-booked-day {
+  background-color: #fee2e2;
+  color: #991b1b;
+  opacity: 0.5;
+  border-radius: 8px;
+  text-decoration: line-through;
+}
+
+/* Limited availability — 1 room left, shown with amber/yellow dot */
+.kallmi-calendar-wrapper .kallmi-limited-day {
+  position: relative;
+}
+
+.kallmi-calendar-wrapper .kallmi-limited-day::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #f59e0b;
+}

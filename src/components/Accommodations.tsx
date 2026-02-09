@@ -1,8 +1,10 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { DayPicker, type DateRange } from 'react-day-picker'
+import 'react-day-picker/style.css'
 import { FadeIn } from './motion/FadeIn'
 import { Section, SectionHeader } from './layout/Section'
 import { Card, CardBody } from './ui/Card'
@@ -129,6 +131,72 @@ export default function Accommodations() {
     breakdown: { date: string; rate: number }[]
   } | null>(null)
   const [loadingPrice, setLoadingPrice] = useState(false)
+  const [dateRange, setDateRange] = useState<DateRange | undefined>()
+  const [displayMonth, setDisplayMonth] = useState(new Date())
+  const [bookedDates, setBookedDates] = useState<Record<string, string[]>>({})
+  const [loadingAvailability, setLoadingAvailability] = useState(false)
+
+  // Fetch availability when month or room changes
+  useEffect(() => {
+    const monthStr = `${displayMonth.getFullYear()}-${String(displayMonth.getMonth() + 1).padStart(2, '0')}`
+    setLoadingAvailability(true)
+    fetch(`/api/availability?month=${monthStr}`)
+      .then(res => res.ok ? res.json() : {})
+      .then(data => setBookedDates(prev => ({ ...prev, ...data })))
+      .catch(() => {})
+      .finally(() => setLoadingAvailability(false))
+  }, [displayMonth])
+
+  // Compute disabled dates and "limited" dates based on room selection and booked data
+  const { disabledDates, limitedDates, fullyBookedDates } = useMemo(() => {
+    const selectedIds = formData.roomId.split(',').filter(Boolean)
+    if (selectedIds.length === 0) return { disabledDates: [], limitedDates: [], fullyBookedDates: [] }
+
+    const disabled: Date[] = []
+    const limited: Date[] = []
+    const fullyBooked: Date[] = []
+    const isBothRooms = selectedIds.length === 2
+
+    for (const [dateStr, roomIds] of Object.entries(bookedDates)) {
+      const bothBooked = roomIds.includes('1') && roomIds.includes('2')
+      const oneBooked = roomIds.includes('1') || roomIds.includes('2')
+      const dateObj = new Date(dateStr + 'T12:00:00')
+
+      if (bothBooked) {
+        // Both rooms booked on this date — fully booked, always disabled
+        fullyBooked.push(dateObj)
+        disabled.push(dateObj)
+      } else if (isBothRooms && oneBooked) {
+        // User wants both rooms but only one is available — block it
+        disabled.push(dateObj)
+      } else if (!isBothRooms) {
+        if (roomIds.includes(selectedIds[0])) {
+          // The specific room they want is booked
+          disabled.push(dateObj)
+        } else if (oneBooked) {
+          // The other room is booked — only 1 room left on this date
+          limited.push(dateObj)
+        }
+      }
+    }
+    return { disabledDates: disabled, limitedDates: limited, fullyBookedDates: fullyBooked }
+  }, [formData.roomId, bookedDates])
+
+  // Sync DayPicker range to form data
+  useEffect(() => {
+    if (dateRange?.from) {
+      const checkIn = dateRange.from.toLocaleDateString('en-CA') // YYYY-MM-DD
+      setFormData(prev => ({ ...prev, checkIn }))
+    } else {
+      setFormData(prev => ({ ...prev, checkIn: '' }))
+    }
+    if (dateRange?.to) {
+      const checkOut = dateRange.to.toLocaleDateString('en-CA')
+      setFormData(prev => ({ ...prev, checkOut }))
+    } else {
+      setFormData(prev => ({ ...prev, checkOut: '' }))
+    }
+  }, [dateRange])
 
   const fetchPriceEstimate = useCallback(async (checkIn: string, checkOut: string) => {
     if (!checkIn || !checkOut || checkIn >= checkOut) {
@@ -178,13 +246,14 @@ export default function Accommodations() {
       return
     }
 
-    // When room changes, reset guests if over new max
+    // When room changes, reset guests if over new max and clear date range
     if (name === 'roomId') {
+      setDateRange(undefined)
       const selectedIds = value.split(',').filter(Boolean)
       const maxGuests = selectedIds.length === 2 ? 4 : 2
       const currentGuests = parseInt(formData.guests) || 0
       if (currentGuests > maxGuests) {
-        setFormData(prev => ({ ...prev, [name]: value, guests: '' }))
+        setFormData(prev => ({ ...prev, [name]: value, guests: '', checkIn: '', checkOut: '' }))
         return
       }
     }
@@ -271,6 +340,7 @@ export default function Accommodations() {
       if (response.ok) {
         setSubmitMessage({ type: 'success', text: data.message || 'Booking request submitted! Please await confirmation — our team will get back to you shortly.' })
         setPriceEstimate(null)
+        setDateRange(undefined)
         setFormData({
           name: '',
           email: '',
@@ -587,43 +657,87 @@ export default function Accommodations() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label
-                      className="block text-sm font-medium mb-1"
-                      style={{ color: 'var(--color-text-secondary)' }}
+                {/* Date Picker */}
+                <div>
+                  <label
+                    className="block text-sm font-medium mb-2"
+                    style={{ color: 'var(--color-text-secondary)' }}
+                  >
+                    Select Dates
+                  </label>
+                  {!formData.roomId ? (
+                    <div
+                      className="p-6 rounded-xl text-center text-sm"
+                      style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-tertiary)' }}
                     >
-                      Check-in Date
-                    </label>
-                    <input
-                      type="date"
-                      name="checkIn"
-                      value={formData.checkIn}
-                      onChange={handleInputChange}
-                      min={getMinDate()}
-                      required
-                      className={`input-field ${formErrors.checkIn ? 'border-red-400 focus:border-red-400' : ''}`}
-                    />
-                    {formErrors.checkIn && <p className="text-red-500 text-xs mt-1">{formErrors.checkIn}</p>}
-                  </div>
-                  <div>
-                    <label
-                      className="block text-sm font-medium mb-1"
-                      style={{ color: 'var(--color-text-secondary)' }}
-                    >
-                      Check-out Date
-                    </label>
-                    <input
-                      type="date"
-                      name="checkOut"
-                      value={formData.checkOut}
-                      onChange={handleInputChange}
-                      min={formData.checkIn || getMinDate()}
-                      required
-                      className={`input-field ${formErrors.checkOut ? 'border-red-400 focus:border-red-400' : ''}`}
-                    />
-                    {formErrors.checkOut && <p className="text-red-500 text-xs mt-1">{formErrors.checkOut}</p>}
-                  </div>
+                      Please select a room first to see availability
+                    </div>
+                  ) : (
+                    <div className="kallmi-calendar-wrapper">
+                      <DayPicker
+                        mode="range"
+                        selected={dateRange}
+                        onSelect={(range) => {
+                          setDateRange(range)
+                          setFormErrors(prev => ({ ...prev, checkIn: '', checkOut: '' }))
+                        }}
+                        month={displayMonth}
+                        onMonthChange={setDisplayMonth}
+                        disabled={[
+                          { before: new Date(new Date().setDate(new Date().getDate() + 1)) },
+                          ...disabledDates
+                        ]}
+                        excludeDisabled
+                        numberOfMonths={1}
+                        showOutsideDays
+                        modifiers={{
+                          booked: disabledDates,
+                          fullyBooked: fullyBookedDates,
+                          limited: limitedDates
+                        }}
+                        modifiersClassNames={{
+                          booked: 'kallmi-booked-day',
+                          fullyBooked: 'kallmi-fully-booked-day',
+                          limited: 'kallmi-limited-day'
+                        }}
+                      />
+                      {loadingAvailability && (
+                        <p className="text-xs text-center mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
+                          Loading availability...
+                        </p>
+                      )}
+                      <div className="flex flex-wrap items-center gap-3 mt-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                        <span className="flex items-center gap-1">
+                          <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: 'rgba(139, 115, 85, 0.15)' }} />
+                          Selected
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <span className="inline-block w-3 h-3 rounded-sm bg-red-100 border border-red-200" />
+                          Booked
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: '#fef3c7', border: '1px solid #fcd34d' }} />
+                          1 room left
+                        </span>
+                      </div>
+                      {dateRange?.from && (
+                        <div className="flex gap-4 mt-3 text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+                          <span>
+                            <strong>Check-in:</strong>{' '}
+                            {dateRange.from.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </span>
+                          {dateRange.to && (
+                            <span>
+                              <strong>Check-out:</strong>{' '}
+                              {dateRange.to.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  {formErrors.checkIn && <p className="text-red-500 text-xs mt-1">{formErrors.checkIn}</p>}
+                  {formErrors.checkOut && <p className="text-red-500 text-xs mt-1">{formErrors.checkOut}</p>}
                 </div>
 
                 {/* Price Estimate */}

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import Mailjet from 'node-mailjet'
 import { supabase } from '@/lib/supabase'
+import { getBookedDates } from '@/lib/google-calendar'
 
 const mailjet = Mailjet.apiConnect(
   process.env.MAILJET_API_KEY || '',
@@ -40,6 +41,48 @@ export async function POST(request: NextRequest) {
         { error: 'Invalid email format' },
         { status: 400 }
       )
+    }
+
+    // Check availability against Google Calendar
+    try {
+      const bookedEntries = await getBookedDates(checkIn, checkOut)
+      const selectedIds = roomId.split(',').filter(Boolean)
+      const isBothRooms = selectedIds.length === 2
+
+      // Build a date->roomIds map from booked entries
+      const dateMap: Record<string, string[]> = {}
+      for (const entry of bookedEntries) {
+        if (!dateMap[entry.date]) dateMap[entry.date] = []
+        if (!dateMap[entry.date].includes(entry.roomId)) dateMap[entry.date].push(entry.roomId)
+      }
+
+      // Check each date in the requested range
+      const current = new Date(checkIn + 'T12:00:00Z')
+      const end = new Date(checkOut + 'T12:00:00Z')
+      while (current < end) {
+        const dateStr = current.toISOString().split('T')[0]
+        const bookedRooms = dateMap[dateStr] || []
+
+        if (isBothRooms) {
+          if (bookedRooms.includes('1') && bookedRooms.includes('2')) {
+            return NextResponse.json(
+              { error: `Both rooms are already booked on ${dateStr}. Please choose different dates.` },
+              { status: 409 }
+            )
+          }
+        } else {
+          if (bookedRooms.includes(selectedIds[0])) {
+            return NextResponse.json(
+              { error: `This room is already booked on ${dateStr}. Please choose different dates.` },
+              { status: 409 }
+            )
+          }
+        }
+        current.setUTCDate(current.getUTCDate() + 1)
+      }
+    } catch (availErr) {
+      // Don't block the booking if availability check fails (graceful degradation)
+      console.error('Availability check failed (proceeding with booking):', availErr)
     }
 
     // Insert into Supabase (graceful degradation - don't block email if this fails)
