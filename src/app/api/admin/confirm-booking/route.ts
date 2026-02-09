@@ -240,9 +240,14 @@ export async function POST(request: Request) {
 
     // Create Google Calendar event for the confirmed booking
     try {
-      await createBookingCalendarEvent(booking as unknown as Parameters<typeof createBookingCalendarEvent>[0])
+      const calendarEvent = await createBookingCalendarEvent(booking as unknown as Parameters<typeof createBookingCalendarEvent>[0])
+      if (calendarEvent) {
+        console.log('Google Calendar event created:', calendarEvent.id)
+      } else {
+        console.warn('Google Calendar event not created (env vars missing or returned null)')
+      }
     } catch (calendarErr) {
-      console.error('Google Calendar event creation failed:', calendarErr)
+      console.error('Google Calendar event creation failed:', calendarErr instanceof Error ? calendarErr.message : calendarErr)
     }
 
     return NextResponse.json({ success: true, message: 'Booking confirmed and emails sent' })

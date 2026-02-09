@@ -1,5 +1,46 @@
 import { google } from 'googleapis'
 
+interface GoogleCredentials {
+  email: string
+  privateKey: string
+  calendarId: string
+}
+
+function getGoogleCredentials(): GoogleCredentials | null {
+  const calendarId = process.env.GOOGLE_CALENDAR_ID
+
+  // Try GOOGLE_APPLICATION_CREDENTIALS_JSON first (full service account JSON)
+  const credentialsJson = process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON
+  if (credentialsJson && calendarId) {
+    try {
+      const creds = JSON.parse(credentialsJson)
+      if (creds.client_email && creds.private_key) {
+        return {
+          email: creds.client_email,
+          privateKey: creds.private_key,
+          calendarId,
+        }
+      }
+    } catch (e) {
+      console.error('Failed to parse GOOGLE_APPLICATION_CREDENTIALS_JSON:', e)
+    }
+  }
+
+  // Fallback to individual env vars
+  const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
+  const rawKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY
+
+  if (!calendarId || !serviceAccountEmail || !rawKey) return null
+
+  let key = rawKey
+  if ((key.startsWith('"') && key.endsWith('"')) || (key.startsWith("'") && key.endsWith("'"))) {
+    key = key.slice(1, -1)
+  }
+  key = key.replace(/\\n/g, '\n')
+
+  return { email: serviceAccountEmail, privateKey: key, calendarId }
+}
+
 interface BookingData {
   name: string
   email: string
@@ -25,22 +66,21 @@ function toDateString(dateValue: string): string {
 }
 
 export async function createBookingCalendarEvent(booking: BookingData) {
-  const calendarId = process.env.GOOGLE_CALENDAR_ID
-  const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
-  const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY
+  const creds = getGoogleCredentials()
 
-  if (!calendarId || !serviceAccountEmail || !privateKey) {
-    console.warn('Google Calendar env vars not configured, skipping calendar event creation')
+  if (!creds) {
+    console.warn('Google Calendar credentials not configured, skipping calendar event creation')
     return null
   }
 
   const auth = new google.auth.JWT({
-    email: serviceAccountEmail,
-    key: privateKey.replace(/\\n/g, '\n'),
+    email: creds.email,
+    key: creds.privateKey,
     scopes: ['https://www.googleapis.com/auth/calendar'],
   })
 
   const calendar = google.calendar({ version: 'v3', auth })
+  const calendarId = creds.calendarId
 
   const checkIn = toDateString(booking.check_in)
   const checkOut = toDateString(booking.check_out)
@@ -81,22 +121,21 @@ interface BookedDateEntry {
 }
 
 export async function getBookedDates(startDate: string, endDate: string): Promise<BookedDateEntry[]> {
-  const calendarId = process.env.GOOGLE_CALENDAR_ID
-  const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
-  const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY
+  const creds = getGoogleCredentials()
 
-  if (!calendarId || !serviceAccountEmail || !privateKey) {
-    console.warn('Google Calendar env vars not configured, skipping availability check')
+  if (!creds) {
+    console.warn('Google Calendar credentials not configured, skipping availability check')
     return []
   }
 
   const auth = new google.auth.JWT({
-    email: serviceAccountEmail,
-    key: privateKey.replace(/\\n/g, '\n'),
+    email: creds.email,
+    key: creds.privateKey,
     scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
   })
 
   const calendar = google.calendar({ version: 'v3', auth })
+  const calendarId = creds.calendarId
 
   const response = await calendar.events.list({
     calendarId,
