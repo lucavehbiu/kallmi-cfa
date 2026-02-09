@@ -240,8 +240,7 @@ export async function POST(request: Request) {
 
     // Create Google Calendar event for the confirmed booking
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await createBookingCalendarEvent(booking as any)
+      await createBookingCalendarEvent(booking as unknown as Parameters<typeof createBookingCalendarEvent>[0])
     } catch (calendarErr) {
       console.error('Google Calendar event creation failed:', calendarErr)
     }
