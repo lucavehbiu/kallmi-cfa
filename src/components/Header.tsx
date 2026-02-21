@@ -1,13 +1,16 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import type { LinkProps } from 'next/link'
 import { XMarkIcon, Bars3Icon, ShoppingCartIcon } from '@heroicons/react/24/outline'
 import { useCart } from '@/context/CartContext'
+import { Link } from '@/i18n/navigation'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { useTranslations } from 'next-intl'
 
 export function Header() {
+  const t = useTranslations('Navigation')
+  const tCart = useTranslations('Cart')
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
@@ -41,18 +44,13 @@ export function Header() {
     }
   }, [isOpen, isCartOpen])
 
-  type NavItem = {
-    name: string;
-    href: LinkProps<string>['href']
-  }
-
-  const navItems: NavItem[] = [
-    { name: 'Our Story', href: '/our-story' },
-    { name: 'Stay', href: '/stay' },
-    { name: 'Restaurant', href: '/restaurant' },
-    { name: 'Camping', href: '/camping' },
-    { name: 'Shop', href: '/shop' },
-    { name: 'Contact', href: '/contact' }
+  const navItems: Array<{ name: string; href: string }> = [
+    { name: t('ourStory'), href: '/our-story' },
+    { name: t('stay'), href: '/stay' },
+    { name: t('restaurant'), href: '/restaurant' },
+    { name: t('camping'), href: '/camping' },
+    { name: t('shop'), href: '/shop' },
+    { name: t('contact'), href: '/contact' }
   ]
 
   return (
@@ -114,6 +112,9 @@ export function Header() {
               </Link>
             ))}
 
+            {/* Language Switcher */}
+            <LanguageSwitcher scrolled={scrolled} />
+
             {/* Enhanced Cart Icon */}
             <div className="relative">
               <button
@@ -149,7 +150,7 @@ export function Header() {
                   {/* Header */}
                   <div className="bg-gradient-to-r from-[#8B7355] to-[#A0845C] p-6 text-white">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-medium">Shopping Cart</h3>
+                      <h3 className="text-lg font-medium">{tCart('title')}</h3>
                       <button
                         onClick={() => setIsCartOpen(false)}
                         className="p-1 hover:bg-white/20 rounded-full transition-colors duration-200"
@@ -166,8 +167,8 @@ export function Header() {
                     {cartItems.length === 0 ? (
                       <div className="text-center py-8">
                         <ShoppingCartIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                        <p className="text-gray-500 font-medium">Your cart is empty</p>
-                        <p className="text-gray-400 text-sm mt-1">Add some products to get started</p>
+                        <p className="text-gray-500 font-medium">{tCart('empty')}</p>
+                        <p className="text-gray-400 text-sm mt-1">{tCart('emptyHint')}</p>
                       </div>
                     ) : (
                       <>
@@ -212,7 +213,7 @@ export function Header() {
                             className="w-full flex justify-center items-center px-6 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] text-white rounded-2xl font-medium hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300"
                             onClick={() => setIsCartOpen(false)}
                             >
-                            Proceed to Checkout
+                            {tCart('proceedToCheckout')}
                             </Link>
                         </div>
                       </>
@@ -224,7 +225,10 @@ export function Header() {
           </div>
 
           {/* Mobile Menu Button & Cart */}
-          <div className="lg:hidden flex items-center space-x-3">
+          <div className="lg:hidden flex items-center space-x-1">
+            {/* Mobile Language Switcher */}
+            <LanguageSwitcher scrolled={scrolled} />
+
             {/* Mobile Cart Icon */}
             <div className="relative">
               <button

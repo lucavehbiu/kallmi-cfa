@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { useCart } from '@/context/CartContext'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from '@/i18n/navigation'
 
 export default function Checkout() {
   const { cartItems, removeFromCart } = useCart()
@@ -35,9 +36,9 @@ export default function Checkout() {
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl text-[#8B7355] mb-6">Your Cart is Empty</h1>
           <p className="text-gray-600 mb-8">Looks like you haven't added any items yet.</p>
-          <a href="/shop" className="inline-block px-8 py-3 bg-[#8B7355] text-white rounded hover:bg-[#6B563F] transition-colors">
+          <Link href="/shop" className="inline-block px-8 py-3 bg-[#8B7355] text-white rounded hover:bg-[#6B563F] transition-colors">
             Continue Shopping
-          </a>
+          </Link>
         </div>
       </div>
     )

@@ -1,0 +1,198 @@
+{
+  "Navigation": {
+    "home": "Kryefaqja",
+    "ourStory": "Historia Jonë",
+    "restaurant": "Restoranti",
+    "shop": "Dyqani",
+    "stay": "Qëndroni",
+    "camping": "Kamping",
+    "contact": "Kontakti",
+    "bookNow": "Rezervo Tani",
+    "orderNow": "Porosit Tani"
+  },
+  "Footer": {
+    "rights": "Të gjitha të drejtat e rezervuara",
+    "privacy": "Politika e Privatësisë",
+    "terms": "Kushtet e Shërbimt",
+    "followUs": "Na Ndiqni",
+    "newsletter": "Buletini",
+    "newsletterPlaceholder": "Vendos email-in tënd",
+    "subscribe": "Abonohu",
+    "address": "Durrës, Shqipëri",
+    "description": "Një prodhues familjar vaji ulliri në Durrës, Shqipëri, që prodhon vaj ulliri ekstra të virgjër premium për mbi një shekull."
+  },
+  "Metadata": {
+    "home": {
+      "title": "Kallmi Estate | Vaj Ulliri Premium Shqiptar",
+      "description": "Përjetoni vajin më të mirë ekstra të virgjër të ullirit nga Kallmi Estate në Shqipëri. I vjelë me dorë, i shtypur në të ftohtë dhe i punuar me tradita shekullore në Durrës."
+    },
+    "restaurant": {
+      "title": "Restoranti",
+      "description": "Hani në restorantin farm-to-table të Kallmi Estate në Durrës. Kuzhinë autentike shqiptare dhe mesdhetare e përgatitur me vajin tonë të ullirit."
+    },
+    "stay": {
+      "title": "Qëndroni me Ne",
+      "description": "Akomodim luksoz mes ullishtave shekullore me pamje mahnitëse të Detit Adriatik në Kallmi Estate, Durrës, Shqipëri."
+    },
+    "camping": {
+      "title": "Kampingu me Ne",
+      "description": "Glamping dhe kamping unik mes ullishtave të lashta me pamje nga Deti Adriatik. Një përvojë e paharrueshme në Kallmi Estate, Shqipëri."
+    },
+    "shop": {
+      "title": "Blini Vaj Ulliri Premium",
+      "description": "Blini vajin e ullirit ekstra të virgjër të Kallmi Estate. I shtypur në të ftohtë nga ullinjtë shqiptarë të vjelë me dorë, dërgohet në mbarë botën."
+    },
+    "ourStory": {
+      "title": "Historia Jonë",
+      "description": "Zbuloni trashëgiminë e Kallmi Estate, një ullishtë familjare në Durrës, Shqipëri. Katër breza mjeshtërie në prodhimin e vajit të ullirit që nga viti 1920."
+    },
+    "contact": {
+      "title": "Na Kontaktoni",
+      "description": "Vizitoni Kallmi Estate në Durrës, Shqipëri ose na kontaktoni. Mirëpresim pyetje rreth vajit tonë të ullirit, restorantit, akomodimit dhe tureve."
+    }
+  },
+  "Common": {
+    "learnMore": "Mëso Më Shumë",
+    "viewMenu": "Shiko Menunë",
+    "bookTable": "Rezervo Tavolinë",
+    "checkAvailability": "Kontrollo Disponueshmërinë",
+    "addToCart": "Shto në Shportë",
+    "checkout": "Përfundo Blerjen",
+    "total": "Totali",
+    "quantity": "Sasia",
+    "price": "Çmimi",
+    "loading": "Duke u ngarkuar...",
+    "error": "Diçka shkoi keq",
+    "tryAgain": "Provo Përsëri",
+    "send": "Dërgo",
+    "name": "Emri",
+    "email": "Email",
+    "phone": "Telefoni",
+    "message": "Mesazhi",
+    "submit": "Dërgo",
+    "success": "Sukses",
+    "close": "Mbyll"
+  },
+  "Hero": {
+    "badge": "Që nga Breza",
+    "subtitle": "Ku ullinjtë shekullore takojnë Detin Adriatik",
+    "cta": "Eksploroni Fermën"
+  },
+  "FAQ": {
+    "home": {
+      "q1": "Çfarë është Kallmi Estate?",
+      "a1": "Kallmi Estate është një fermë familjare vaji ulliri në Durrës, Shqipëri, që prodhon vaj ulliri ekstra të virgjër premium për mbi një shekull. Ferma gjithashtu ka një restorant farm-to-table, akomodim luksoz dhe glamping mes ullishtave të lashta me pamje nga Deti Adriatik.",
+      "q2": "Ku ndodhet Kallmi Estate?",
+      "a2": "Kallmi Estate ndodhet në zonën e Kallmit në Durrës, Shqipëri, rreth 30 minuta nga Aeroporti Ndërkombëtar i Tiranës. Ferma ka pamje nga Deti Adriatik dhe është e rrethuar nga ullinj shekullore.",
+      "q3": "Çfarë produktesh ofron Kallmi Estate?",
+      "a3": "Kallmi Estate prodhon vaj ulliri premium ekstra të virgjër të shtypur në të ftohtë nga ullinjtë shqiptarë të vjelë me dorë. Gjithashtu ofrojmë shishe me botim të kufizuar, produkte me bazë vaj ulliri, restorant farm-to-table, akomodim luksoz dhe përvoja glamping."
+    },
+    "restaurant": {
+      "q1": "Çfarë lloj kuzhine shërben restoranti i Kallmi Estate?",
+      "a1": "Restoranti ynë farm-to-table shërben kuzhinë autentike shqiptare dhe mesdhetare, me pjata të përgatitura me vajin tonë ekstra të virgjër të ullirit dhe përbërës sezonal nga rajoni i Durrësit.",
+      "q2": "A duhet të bëj rezervim për restorantin?",
+      "a2": "Rekomandonet të bëni rezervim, veçanërisht gjatë sezonit të pikut nga qershori deri në shtator. Mund të rezervoni një tavolinë direkt nga faqja jonë e internetit ose duke na kontaktuar me telefon apo email.",
+      "q3": "A është restoranti i hapur gjithë vitin?",
+      "a3": "Restoranti funksionon sezonalisht, zakonisht nga prilli deri në tetor, për të siguruar që shërbejmë vetëm përbërës më të freskët. Kontrolloni faqen tonë të internetit ose na kontaktoni për oraret aktuale."
+    },
+    "stay": {
+      "q1": "Çfarë lloje akomodimi janë të disponueshme në Kallmi Estate?",
+      "a1": "Kallmi Estate ofron dhoma dhe suite luksoze mes ullishtave, secila me pamje panoramike mahnitëse të Detit Adriatik. Të gjitha akomodimet kanë komodite moderne duke ruajtur hijeshinë autentike rustike.",
+      "q2": "Çfarë përfshihet në qëndrimin në Kallmi Estate?",
+      "a2": "Çdo qëndrim përfshin mëngjes mesdhetar me produktet tona të vajit të ullirit, akses në territorin e fermës dhe ullinjtë, si dhe degustim falas vaji ulliri. Rezervimet e restorantit dhe turet e udhëhequra mund të organizohen.",
+      "q3": "Si mund të rezervoj akomodim në Kallmi Estate?",
+      "a3": "Mund të rezervoni direkt nga faqja jonë e internetit duke përdorur kalendarin e disponueshmërisë, ose na kontaktoni me email apo telefon. Rekomandojmë të rezervoni paraprakisht për muajt e verës (qershor-shtator)."
+    },
+    "shop": {
+      "q1": "Si prodhohet vaji i ullirit i Kallmi Estate?",
+      "a1": "Vaji ynë ekstra i virgjër i ullirit shtypet në të ftohtë brenda orëve pas vjeljes me dorë nga ullinjtë shekullore. Vaji është i pafiltruar dhe prodhohet në sasi të vogla për të siguruar cilësinë më të lartë.",
+      "q2": "A bëni dërgesa ndërkombëtare?",
+      "a2": "Po, ne dërgojmë produktet tona të vajit të ullirit në mbarë botën. Kostot e transportit ndërkombëtar dhe kohët e parashikuara të dorëzimit variojnë sipas destinacionit.",
+      "q3": "Çfarë e bën vajin shqiptar të ullirit të veçantë?",
+      "a3": "Shqipëria ka një nga traditat më të vjetra të kultivimit të ullirit në Mesdhe, që daton mbi 2000 vjet. Mikroklima unike e Rivierës Shqiptare, varietetet e lashta Kallinjot dhe metodat tradicionale të vjeljes prodhojnë vaj jashtëzakonisht të shijshëm."
+    },
+    "camping": {
+      "q1": "Çfarë opsionesh kampingu janë të disponueshme në Kallmi Estate?",
+      "a1": "Ne ofrojmë si vende kampingu tradicionale ashtu edhe tenda luksoze glamping të vendosura mes ullishtave tona shekullore. Çdo vend ofron pamje mahnitëse të Detit Adriatik dhe akses në të gjitha shërbimet e fermës.",
+      "q2": "Çfarë komoditesh janë të disponueshme për kampistët?",
+      "a2": "Kampistët gëzojnë akses në banjot, lidhje elektrike, Wi-Fi, restorantin e fermës, degustime vaji ulliri dhe ture të udhëhequra në ullinj. Tendat tona glamping vijnë plotësisht të mobiluara me shtretër komodë.",
+      "q3": "Kur është koha më e mirë për kamping në Kallmi Estate?",
+      "a3": "Sezoni i kampingut shtrihet nga maji deri në shtator, me qershorin dhe shtatorin që ofrojnë kombinimin ideal të motit të ngrohtë, më pak turizëm dhe peizazhit mesdhetar në formën e tij më të bukur."
+    }
+  },
+  "LandingHero": {
+    "badge": "Guri i Fshehur i Shqipërisë",
+    "subtitle1": "Ku ullinjtë e lashtë pëshpërisin sekrete në",
+    "subtitle2": "flladin e Adriatikut",
+    "description": "Katër breza pasioni kanë kultivuar këtë tokë të shenjtë, duke krijuar gurin e fshehur të Shqipërisë. Përjetoni ushqim të shijshëm dhe natyrë të paprekur",
+    "cta1": "Zbuloni Trashëgiminë Tonë",
+    "cta2": "Historia Jonë"
+  },
+  "Landing": {
+    "heritageOverline": "Trashëgimia Jonë",
+    "heritageTitle1": "Breza",
+    "heritageTitle2": "Pasioni",
+    "heritageText1": "Aty ku ullinjtë e lashtë pëshpërisin histori brezash të kaluar, familja jonë ka kultivuar këtë tokë të shenjtë me përkushtim të palëkundur.",
+    "heritageText2": "Çdo pikë mbart thelbin e Kallmit - një dëshmi e angazhimit tonë për të ruajtur traditat më të mira të Shqipërisë.",
+    "established": "Themeluar",
+    "years": "Vite",
+    "generation": "Brezi",
+    "discoverOverline": "Zbuloni Kallmin",
+    "discoverTitle": "Thesare të Fshehura",
+    "discoverSubtitle": "Ku ullinjtë e lashtë takojnë përqafimin e Adriatikut",
+    "goldenHourTitle": "Magjia e Orës së Artë",
+    "goldenHourText": "Shikoni diellin duke pikturuar Adriatikun me nuanca qelibare dhe trëndafili, duke krijuar momente që jetojnë përgjithmonë në kujtesë",
+    "sunsetOverline": "Teatri i Natyrës",
+    "sunsetTitle1": "Kur Dita Puth",
+    "sunsetTitle2": "Detin për Natën e Mirë",
+    "sunsetText": "Çdo mbrëmje, Adriatiku bëhet një kanavacë ku natyra pikturon kryeveprën e saj më mahnitëse",
+    "sunsetQuote": "Këtu, ku ullinjtë e lashtë kanë dëshmuar perendime të panumërta, çdo mbrëmje sjell një simfoni ngjyrash që na kujton pse Kallmi mbetet sekreti më i mirë i Shqipërisë.",
+    "ctaTitle": "Përjetoni Kallmin",
+    "ctaSubtitle": "Zbuloni përzierjen e përsosur të traditës, natyrës dhe mikpritjes shqiptare",
+    "ctaShop": "Blini Vajin Tonë të Ullirit",
+    "ctaPlan": "Planifikoni Vizitën Tuaj"
+  },
+  "RestaurantSnippet": {
+    "overline": "Përvojë Kulinare",
+    "title": "Hani me Ne",
+    "text1": "Përjetoni shijet autentike të Shqipërisë në restorantin tonë, ku përgatisim pjata sezonale me përbërësit më të freskët vendas, përfshirë vajin tonë të ullirit.",
+    "text2": "Menuja jonë celebron kuzhinën tradicionale shqiptare me një prekje moderne, duke lejuar shijet e pastra të çdo përbërësi të shkëlqejnë. Shijoni vaktin tuaj me pamje panoramike të ullishtave tona dhe bregdetit Adriatik.",
+    "cta": "Eksploroni Menunë Tonë"
+  },
+  "AccommodationsSnippet": {
+    "overline": "Strehim Boutique",
+    "title": "Qëndroni me Ne",
+    "text1": "Zhytuni në bukurinë e qetë të Kallmi Estate me një qëndrim në akomodimet tona boutique, të vendosura mes ullishtave shekullore me pamje mahnitëse të Detit Adriatik.",
+    "text2": "Çdo dhomë është projektuar me kujdes me elemente tradicionale shqiptare dhe komodite moderne, duke ofruar një strehë paqësore pas një dite eksplorimesh. Zgjohuni me këngën e zogjve dhe fëshfërimën e butë të ullishtave.",
+    "cta": "Rezervoni Qëndrimin Tuaj"
+  },
+  "Cart": {
+    "title": "Shporta e Blerjeve",
+    "items": "{count, plural, =1 {1 artikull} other {# artikuj}}",
+    "empty": "Shporta juaj është bosh",
+    "emptyHint": "Shtoni disa produkte për të filluar",
+    "proceedToCheckout": "Vazhdo me Blerjen",
+    "continueShopping": "Vazhdo Blerjet"
+  },
+  "FooterFull": {
+    "brandDescription": "Katër breza pasioni duke prodhuar vajin më të mirë ekstra të virgjër të ullirit në Shqipëri nga ullinjtë e lashtë të puthur nga flladi i Adriatikut.",
+    "est": "Them. 2004",
+    "discover": "Zbuloni",
+    "ourHeritage": "Trashëgimia Jonë",
+    "premiumOils": "Vajra Premium",
+    "fineDining": "Kuzhinë e Zgjedhur",
+    "estateStay": "Qëndrim në Fermë",
+    "visitUs": "Na Vizitoni",
+    "visitTitle": "Vizitoni Fermën Tonë",
+    "stayConnected": "Qëndroni të Lidhur",
+    "newsletterText": "Bashkohuni me familjen tonë dhe merrni përditësime ekskluzive rreth korrjes, produkteve të reja dhe ngjarjeve të fermës.",
+    "emailPlaceholder": "Adresa juaj e email-it",
+    "joinFamily": "Bashkohuni me Familjen Tonë",
+    "thankYou": "Faleminderit!",
+    "socialProof": "Bashkohuni me 2,500+ adhurues të vajit të ullirit",
+    "copyright": "© {year} Kallmi Estate. Punuar me ❤ në Shqipëri.",
+    "developedBy": "Zhvilluar nga",
+    "backToTop": "Kthehu Lart",
+    "quote": "Çdo pikë tregon historinë e tokës sonë, familjes sonë dhe angazhimit tonë të palëkundur për të ruajtur arin e lëngshëm të Shqipërisë."
+  }
+}

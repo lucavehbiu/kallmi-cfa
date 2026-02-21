@@ -1,12 +1,14 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { FadeIn } from '../motion/FadeIn'
 import { Section } from '../layout/Section'
 import { Button } from '../ui/Button'
+import { useTranslations } from 'next-intl'
 
 export default function AccommodationsSnippet() {
+  const t = useTranslations('AccommodationsSnippet')
   return (
     <Section spacing="lg" background="default">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -29,26 +31,22 @@ export default function AccommodationsSnippet() {
         <div className="space-y-6">
           <FadeIn animation="slide-up">
             <div className="space-y-4">
-              <span className="text-overline">Boutique Retreat</span>
+              <span className="text-overline">{t('overline')}</span>
               <div className="divider-accent" />
             </div>
           </FadeIn>
 
           <FadeIn animation="slide-up" delay={0.1}>
-            <h2 className="text-heading text-brand-olive">Stay With Us</h2>
+            <h2 className="text-heading text-brand-olive">{t('title')}</h2>
           </FadeIn>
 
           <FadeIn animation="fade" delay={0.2}>
             <div className="space-y-4 text-body-lg">
               <p>
-                Immerse yourself in the serene beauty of Kallmi Estate with a stay in our
-                boutique accommodations, nestled among centuries-old olive trees with
-                breathtaking views of the Adriatic Sea.
+                {t('text1')}
               </p>
               <p>
-                Each room is thoughtfully designed with traditional Albanian elements and
-                modern comforts, providing a peaceful retreat after a day of exploration.
-                Wake up to birdsong and the gentle rustle of olive groves.
+                {t('text2')}
               </p>
             </div>
           </FadeIn>
@@ -56,7 +54,7 @@ export default function AccommodationsSnippet() {
           <FadeIn animation="slide-up" delay={0.3}>
             <Link href="/stay">
               <Button variant="primary" className="mt-4">
-                Book Your Stay
+                {t('cta')}
               </Button>
             </Link>
           </FadeIn>

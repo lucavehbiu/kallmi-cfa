@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { useState } from 'react'
 import {
   MapPinIcon,
@@ -9,8 +9,10 @@ import {
   HeartIcon,
   ArrowUpIcon
 } from '@heroicons/react/24/outline'
+import { useTranslations } from 'next-intl'
 
 export function Footer() {
+  const t = useTranslations('FooterFull')
   const [email, setEmail] = useState('')
   const [isSubscribed, setIsSubscribed] = useState(false)
 
@@ -52,8 +54,7 @@ export function Footer() {
               </h3>
               <div className="w-16 h-px bg-gradient-to-r from-[#8B7355] to-[#D4AF37] mx-auto md:mx-0" />
               <p className="text-sm lg:text-base text-white/70 leading-relaxed max-w-xs mx-auto md:mx-0">
-                Four generations of passion crafting Albania's finest extra virgin olive oil
-                from ancient groves kissed by the Adriatic breeze.
+                {t('brandDescription')}
               </p>
             </div>
 
@@ -61,7 +62,7 @@ export function Footer() {
             <div className="inline-block backdrop-blur-sm bg-white/5 rounded-2xl px-4 py-3 border border-white/10">
               <div className="flex items-center space-x-2 text-[#D4AF37]">
                 <HeartIcon className="w-4 h-4" />
-                <span className="text-xs font-medium tracking-widest uppercase">Est. 2004</span>
+                <span className="text-xs font-medium tracking-widest uppercase">{t('est')}</span>
               </div>
             </div>
           </div>
@@ -69,15 +70,15 @@ export function Footer() {
           {/* Quick Links */}
           <div className="text-center md:text-left">
             <h4 className="font-cormorant text-xl lg:text-2xl font-light mb-6 text-white/90">
-              Discover
+              {t('discover')}
             </h4>
             <ul className="space-y-4">
               {[
-                { name: 'Our Heritage', href: '/our-story' as const },
-                { name: 'Premium Oils', href: '/shop' as const },
-                { name: 'Fine Dining', href: '/restaurant' as const },
-                { name: 'Estate Stay', href: '/camping' as const },
-                { name: 'Visit Us', href: '/contact' as const }
+                { name: t('ourHeritage'), href: '/our-story' as const },
+                { name: t('premiumOils'), href: '/shop' as const },
+                { name: t('fineDining'), href: '/restaurant' as const },
+                { name: t('estateStay'), href: '/camping' as const },
+                { name: t('visitUs'), href: '/contact' as const }
               ].map((link, index) => (
                 <li key={link.name}>
                   <Link
@@ -95,7 +96,7 @@ export function Footer() {
           {/* Contact Information */}
           <div className="text-center md:text-left">
             <h4 className="font-cormorant text-xl lg:text-2xl font-light mb-6 text-white/90">
-              Visit Our Estate
+              {t('visitTitle')}
             </h4>
             <div className="space-y-4">
               <div className="group">
@@ -134,12 +135,11 @@ export function Footer() {
           {/* Newsletter */}
           <div className="text-center md:text-left">
             <h4 className="font-cormorant text-xl lg:text-2xl font-light mb-6 text-white/90">
-              Stay Connected
+              {t('stayConnected')}
             </h4>
             <div className="space-y-4">
               <p className="text-sm text-white/60 leading-relaxed">
-                Join our family and receive exclusive updates about our harvest,
-                new products, and estate events.
+                {t('newsletterText')}
               </p>
 
               <form onSubmit={handleSubscribe} className="space-y-4 max-w-xs mx-auto md:mx-0">
@@ -148,7 +148,7 @@ export function Footer() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your email address"
+                    placeholder={t('emailPlaceholder')}
                     className="w-full bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-[#8B7355] focus:bg-white/10 transition-all duration-300"
                     required
                   />
@@ -163,17 +163,17 @@ export function Footer() {
                   {isSubscribed ? (
                     <span className="flex items-center justify-center space-x-2">
                       <HeartIcon className="w-4 h-4" />
-                      <span>Thank you!</span>
+                      <span>{t('thankYou')}</span>
                     </span>
                   ) : (
-                    'Join Our Family'
+                    t('joinFamily')
                   )}
                 </button>
               </form>
 
               {/* Social Proof */}
               <div className="text-xs text-white/40 italic">
-                Join 2,500+ olive oil enthusiasts
+                {t('socialProof')}
               </div>
             </div>
           </div>
@@ -208,7 +208,7 @@ export function Footer() {
               onClick={scrollToTop}
               className="group flex items-center space-x-2 text-white/60 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105"
             >
-              <span className="text-sm font-light">Back to Top</span>
+              <span className="text-sm font-light">{t('backToTop')}</span>
               <div className="p-2 rounded-full bg-white/5 group-hover:bg-[#8B7355]/20 transition-all duration-300">
                 <ArrowUpIcon className="w-4 h-4 transform group-hover:-translate-y-1 transition-transform duration-300" />
               </div>
@@ -220,8 +220,7 @@ export function Footer() {
         <div className="mt-12 text-center">
           <div className="inline-block backdrop-blur-sm bg-white/5 rounded-3xl px-8 py-6 border border-white/10 max-w-2xl">
             <p className="text-white/70 italic font-light text-sm lg:text-base leading-relaxed">
-              "Every drop tells the story of our land, our family, and our unwavering
-              commitment to preserving Albania's liquid gold."
+              {t('quote')}
             </p>
             <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mt-4" />
           </div>

@@ -1,12 +1,14 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { FadeIn } from '../motion/FadeIn'
 import { Section } from '../layout/Section'
 import { Button } from '../ui/Button'
+import { useTranslations } from 'next-intl'
 
 export default function RestaurantSnippet() {
+  const t = useTranslations('RestaurantSnippet')
   return (
     <Section spacing="lg" background="secondary">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -14,26 +16,22 @@ export default function RestaurantSnippet() {
         <div className="order-2 lg:order-1 space-y-6">
           <FadeIn animation="slide-up">
             <div className="space-y-4">
-              <span className="text-overline">Culinary Experience</span>
+              <span className="text-overline">{t('overline')}</span>
               <div className="divider-accent" />
             </div>
           </FadeIn>
 
           <FadeIn animation="slide-up" delay={0.1}>
-            <h2 className="text-heading text-brand-olive">Dine With Us</h2>
+            <h2 className="text-heading text-brand-olive">{t('title')}</h2>
           </FadeIn>
 
           <FadeIn animation="fade" delay={0.2}>
             <div className="space-y-4 text-body-lg">
               <p>
-                Experience the authentic flavors of Albania at our estate restaurant, where we
-                craft seasonal dishes using the freshest local ingredients, including our own
-                olive oil harvest.
+                {t('text1')}
               </p>
               <p>
-                Our menu celebrates traditional Albanian cuisine with a modern twist,
-                letting the pure flavors of each ingredient shine. Enjoy your meal with
-                panoramic views of our olive groves and the Adriatic coastline.
+                {t('text2')}
               </p>
             </div>
           </FadeIn>
@@ -41,7 +39,7 @@ export default function RestaurantSnippet() {
           <FadeIn animation="slide-up" delay={0.3}>
             <Link href="/restaurant">
               <Button variant="primary" className="mt-4">
-                Explore Our Menu
+                {t('cta')}
               </Button>
             </Link>
           </FadeIn>

@@ -8,9 +8,11 @@ import WhatsAppButton from './WhatsAppButton'
 import OptimizedImage from './common/OptimizedImage'
 import { Card } from './ui/Card'
 import { Section, SectionHeader } from './layout/Section'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 
 export default function LandingPage() {
+  const t = useTranslations('Landing')
   return (
     <main className="font-cormorant bg-surface-primary">
       <LandingHero />
@@ -22,27 +24,25 @@ export default function LandingPage() {
           <div className="lg:col-span-6 space-y-8 order-2 lg:order-1">
             <FadeIn animation="slide-up">
               <div className="space-y-4">
-                <span className="text-overline">Our Heritage</span>
+                <span className="text-overline">{t('heritageOverline')}</span>
                 <div className="divider-accent" />
               </div>
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.1}>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-brand-olive leading-tight">
-                Generations of
-                <span className="block italic mt-2">Passion</span>
+                {t('heritageTitle1')}
+                <span className="block italic mt-2">{t('heritageTitle2')}</span>
               </h2>
             </FadeIn>
 
             <FadeIn animation="fade" delay={0.2}>
               <div className="space-y-6">
                 <p className="text-body-lg pl-6 border-l-2 border-brand-olive/30">
-                  Where ancient olive trees whisper stories of generations past,
-                  our family has cultivated this sacred land with unwavering devotion.
+                  {t('heritageText1')}
                 </p>
                 <p className="text-body-lg pl-6 border-l-2 border-brand-olive/30">
-                  Each drop carries the essence of Kallmi - a testament to our
-                  commitment to preserving Albania's finest traditions.
+                  {t('heritageText2')}
                 </p>
               </div>
             </FadeIn>
@@ -51,9 +51,9 @@ export default function LandingPage() {
             <FadeIn animation="slide-up" delay={0.3}>
               <div className="grid grid-cols-3 gap-4 pt-8">
                 {[
-                  { number: '2004', label: 'Established' },
-                  { number: '20+', label: 'Years' },
-                  { number: '4th', label: 'Generation' }
+                  { number: '2004', label: t('established') },
+                  { number: '20+', label: t('years') },
+                  { number: '4th', label: t('generation') }
                 ].map((stat, index) => (
                   <Card key={index} variant="subtle" padding="md" className="text-center">
                     <div className="text-2xl sm:text-3xl lg:text-4xl font-light text-brand-olive">
@@ -90,13 +90,13 @@ export default function LandingPage() {
       <Section id="experience" spacing="lg" background="secondary">
         <FadeIn animation="fade">
           <SectionHeader
-            overline="Discover Kallmi"
+            overline={t('discoverOverline')}
             title={
               <h2 className="text-display text-brand-olive">
-                Hidden Treasures
+                {t('discoverTitle')}
               </h2>
             }
-            subtitle="Where ancient olive groves meet the Adriatic's embrace"
+            subtitle={t('discoverSubtitle')}
             align="center"
           />
         </FadeIn>
@@ -122,11 +122,10 @@ export default function LandingPage() {
                 {/* Content - No glass-morphism, clean solid treatment */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 lg:p-14">
                   <h3 className="text-2xl sm:text-4xl lg:text-5xl text-white font-light tracking-wide mb-3">
-                    Golden Hour Magic
+                    {t('goldenHourTitle')}
                   </h3>
                   <p className="text-white/90 text-base sm:text-lg lg:text-xl font-light max-w-2xl">
-                    Watch the sun paint the Adriatic in shades of amber and rose,
-                    creating moments that live forever in memory
+                    {t('goldenHourText')}
                   </p>
                 </div>
               </div>
@@ -145,14 +144,13 @@ export default function LandingPage() {
       <Section id="sunsets" spacing="lg" background="default">
         <FadeIn animation="fade">
           <div className="text-center mb-16 lg:mb-24">
-            <span className="text-overline mb-4 block">Nature's Theater</span>
+            <span className="text-overline mb-4 block">{t('sunsetOverline')}</span>
             <h2 className="text-display text-brand-olive mt-4 mb-6">
-              When Day Kisses
-              <span className="block italic mt-2">the Sea Goodnight</span>
+              {t('sunsetTitle1')}
+              <span className="block italic mt-2">{t('sunsetTitle2')}</span>
             </h2>
             <p className="text-subheading max-w-3xl mx-auto">
-              Every evening, the Adriatic becomes a canvas where nature paints
-              her most breathtaking masterpiece
+              {t('sunsetText')}
             </p>
             <div className="divider-center mt-8" />
           </div>
@@ -193,9 +191,7 @@ export default function LandingPage() {
         <FadeIn animation="fade" delay={0.4}>
           <Card variant="elevated" padding="lg" className="max-w-4xl mx-auto mt-16 text-center">
             <p className="text-xl sm:text-2xl text-text-secondary italic font-light leading-relaxed">
-              "Here, where the ancient olive trees have witnessed countless sunsets,
-              each evening brings a symphony of colors that reminds us why
-              Kallmi remains Albania's best-kept secret."
+              {t('sunsetQuote')}
             </p>
             <div className="divider-accent mx-auto mt-8" />
           </Card>
@@ -207,23 +203,23 @@ export default function LandingPage() {
         <FadeIn animation="fade">
           <div className="text-center">
             <h2 className="text-display text-text-on-dark mb-6">
-              Experience Kallmi
+              {t('ctaTitle')}
             </h2>
             <p className="text-text-on-dark-muted text-xl max-w-2xl mx-auto mb-10">
-              Discover the perfect blend of tradition, nature, and Albanian hospitality
+              {t('ctaSubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/shop"
                 className="btn-primary-on-dark btn-lg"
               >
-                Shop Our Olive Oil
+                {t('ctaShop')}
               </Link>
               <Link
                 href="/contact"
                 className="btn-ghost-on-dark btn-lg"
               >
-                Plan Your Visit
+                {t('ctaPlan')}
               </Link>
             </div>
           </div>

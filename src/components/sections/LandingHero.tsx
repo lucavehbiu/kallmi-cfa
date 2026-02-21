@@ -1,12 +1,14 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { Button } from '@/components/ui'
 import { useEffect, useState } from 'react'
 import { AnimateDiv } from '../motion/MotionWrapper'
+import { useTranslations } from 'next-intl'
 
 export default function LandingHero() {
+  const t = useTranslations('LandingHero')
   const [scrollY, setScrollY] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -72,7 +74,7 @@ export default function LandingHero() {
           >
             <div className="backdrop-blur-md bg-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3 border border-white/20 mb-4 sm:mb-6">
               <span className="text-xs sm:text-sm lg:text-base font-medium tracking-widest uppercase text-white/90">
-                Albania's Hidden Gem
+                {t('badge')}
               </span>
             </div>
           </AnimateDiv>
@@ -111,8 +113,8 @@ export default function LandingHero() {
               delay={1.2}
             >
               <p className="text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic opacity-95 leading-relaxed max-w-4xl mx-auto px-2">
-                Where ancient olive groves whisper secrets to the
-                <span className="text-[#D4AF37]"> Adriatic breeze</span>
+                {t('subtitle1')}
+                <span className="text-[#D4AF37]"> {t('subtitle2')}</span>
               </p>
             </AnimateDiv>
           </div>
@@ -126,8 +128,7 @@ export default function LandingHero() {
           >
             <div className="backdrop-blur-md bg-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-white/20 shadow-2xl">
               <p className="text-sm sm:text-base lg:text-lg font-light leading-relaxed text-white/90">
-                Four generations of passion have cultivated this sacred land,
-                creating Albania's hidden gem. Experience tasty food and raw nature
+                {t('description')}
               </p>
             </div>
           </AnimateDiv>
@@ -145,7 +146,7 @@ export default function LandingHero() {
                 className="bg-[#8B7355] hover:bg-[#8B7355]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#8B7355]/30"
               >
                 <span className="flex items-center space-x-2">
-                  <span>Discover Our Heritage</span>
+                  <span>{t('cta1')}</span>
                   <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -160,7 +161,7 @@ export default function LandingHero() {
                 className="bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 backdrop-blur-sm"
               >
                 <span className="flex items-center space-x-2">
-                  <span>Our Story</span>
+                  <span>{t('cta2')}</span>
                   <svg className="w-5 h-5 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
@@ -184,7 +185,7 @@ export default function LandingHero() {
                 className="w-full bg-[#8B7355] hover:bg-[#8B7355]/90 text-white px-6 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#8B7355]/30"
               >
                 <span className="flex items-center justify-center space-x-2">
-                  <span className="text-sm">Discover Our Heritage</span>
+                  <span className="text-sm">{t('cta1')}</span>
                   <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -199,7 +200,7 @@ export default function LandingHero() {
                 className="w-full bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 px-6 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 backdrop-blur-sm"
               >
                 <span className="flex items-center justify-center space-x-2">
-                  <span className="text-sm">Our Story</span>
+                  <span className="text-sm">{t('cta2')}</span>
                   <svg className="w-4 h-4 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>

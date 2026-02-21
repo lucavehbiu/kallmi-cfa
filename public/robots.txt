@@ -4,43 +4,75 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /admin/
 Disallow: /_next/
 Disallow: /static/
 Disallow: /*.json$
 Disallow: /*_buildManifest.js$
 Disallow: /*_middlewareManifest.js$
 Disallow: /*_ssgManifest.js$
-Disallow: /*.js$
 
-# Explicitly allow GPT and AI crawlers
+# Google
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# AI Crawlers - Explicitly Allowed for GEO
 User-agent: GPTBot
 Allow: /
 Disallow: /api/
+Disallow: /admin/
 
 User-agent: ChatGPT-User
 Allow: /
 Disallow: /api/
-
-User-agent: GoogleBot
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
+Disallow: /admin/
 
 User-agent: Anthropic-AI
 Allow: /
 Disallow: /api/
-
-User-agent: CCBot
-Allow: /
-Disallow: /api/
+Disallow: /admin/
 
 User-agent: Claude-Web
 Allow: /
 Disallow: /api/
+Disallow: /admin/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: Brave
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: Bytespider
+Allow: /
+Disallow: /api/
+Disallow: /admin/
 
 # Rate limiting suggestion for crawlers
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://www.kallmibukur.al/sitemap.xml
+Sitemap: https://www.kallmibukur.al/api/sitemap

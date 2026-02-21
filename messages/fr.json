@@ -1,0 +1,198 @@
+{
+  "Navigation": {
+    "home": "Accueil",
+    "ourStory": "Notre Histoire",
+    "restaurant": "Restaurant",
+    "shop": "Boutique",
+    "stay": "Séjour",
+    "camping": "Camping",
+    "contact": "Contact",
+    "bookNow": "Réserver",
+    "orderNow": "Commander"
+  },
+  "Footer": {
+    "rights": "Tous droits réservés",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "followUs": "Suivez-Nous",
+    "newsletter": "Newsletter",
+    "newsletterPlaceholder": "Entrez votre email",
+    "subscribe": "S'abonner",
+    "address": "Durrës, Albanie",
+    "description": "Un domaine oléicole familial à Durrës, en Albanie, produisant une huile d'olive extra vierge premium depuis plus d'un siècle."
+  },
+  "Metadata": {
+    "home": {
+      "title": "Kallmi Estate | Huile d'Olive Albanaise Premium",
+      "description": "Découvrez la meilleure huile d'olive extra vierge d'Albanie. Récoltée à la main, pressée à froid et élaborée avec des siècles de tradition à Durrës."
+    },
+    "restaurant": {
+      "title": "Restaurant",
+      "description": "Dînez au restaurant farm-to-table de Kallmi Estate à Durrës. Cuisine authentique albanaise et méditerranéenne préparée avec notre huile d'olive."
+    },
+    "stay": {
+      "title": "Séjournez Chez Nous",
+      "description": "Hébergements de luxe nichés parmi des oliveraies centenaires avec une vue imprenable sur la mer Adriatique à Kallmi Estate, Durrës, Albanie."
+    },
+    "camping": {
+      "title": "Campez Chez Nous",
+      "description": "Glamping et camping uniques parmi d'anciennes oliveraies surplombant la mer Adriatique. Une expérience inoubliable à Kallmi Estate, Albanie."
+    },
+    "shop": {
+      "title": "Acheter Huile d'Olive Premium",
+      "description": "Achetez l'huile d'olive extra vierge primée de Kallmi Estate. Pressée à froid à partir d'olives albanaises récoltées à la main, livrée dans le monde entier."
+    },
+    "ourStory": {
+      "title": "Notre Histoire",
+      "description": "Découvrez le patrimoine de Kallmi Estate, une oliveraie familiale à Durrës, Albanie. Quatre générations d'artisanat oléicole depuis 1920."
+    },
+    "contact": {
+      "title": "Contactez-Nous",
+      "description": "Visitez Kallmi Estate à Durrës, Albanie ou contactez-nous. Nous accueillons les demandes concernant notre huile d'olive, restaurant, hébergements et visites."
+    }
+  },
+  "Common": {
+    "learnMore": "En Savoir Plus",
+    "viewMenu": "Voir le Menu",
+    "bookTable": "Réserver une Table",
+    "checkAvailability": "Vérifier la Disponibilité",
+    "addToCart": "Ajouter au Panier",
+    "checkout": "Commander",
+    "total": "Total",
+    "quantity": "Quantité",
+    "price": "Prix",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "tryAgain": "Réessayer",
+    "send": "Envoyer",
+    "name": "Nom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "message": "Message",
+    "submit": "Envoyer",
+    "success": "Succès",
+    "close": "Fermer"
+  },
+  "Hero": {
+    "badge": "Depuis des Générations",
+    "subtitle": "Où les oliveraies centenaires rencontrent la mer Adriatique",
+    "cta": "Explorer le Domaine"
+  },
+  "FAQ": {
+    "home": {
+      "q1": "Qu'est-ce que Kallmi Estate ?",
+      "a1": "Kallmi Estate est un domaine oléicole familial à Durrës, en Albanie, produisant une huile d'olive extra vierge premium depuis plus d'un siècle. Le domaine propose également un restaurant farm-to-table, des hébergements de luxe et du glamping parmi d'anciennes oliveraies surplombant la mer Adriatique.",
+      "q2": "Où se trouve Kallmi Estate ?",
+      "a2": "Kallmi Estate est situé dans la zone de Kallm à Durrës, en Albanie, à environ 30 minutes de l'aéroport international de Tirana. Le domaine surplombe la mer Adriatique et est entouré d'oliveraies centenaires.",
+      "q3": "Quels produits propose Kallmi Estate ?",
+      "a3": "Kallmi Estate produit une huile d'olive extra vierge premium pressée à froid à partir d'olives albanaises récoltées à la main. Nous proposons également des bouteilles en édition limitée, des produits à base d'huile d'olive, un restaurant farm-to-table, des hébergements de luxe et des expériences de glamping."
+    },
+    "restaurant": {
+      "q1": "Quel type de cuisine sert le restaurant de Kallmi Estate ?",
+      "a1": "Notre restaurant farm-to-table sert une cuisine authentique albanaise et méditerranéenne, avec des plats préparés avec notre huile d'olive extra vierge et des ingrédients saisonniers locaux de la région de Durrës.",
+      "q2": "Dois-je réserver pour le restaurant ?",
+      "a2": "Les réservations sont recommandées, surtout pendant la haute saison de juin à septembre. Vous pouvez réserver une table directement via notre site web ou en nous contactant par téléphone ou email.",
+      "q3": "Le restaurant est-il ouvert toute l'année ?",
+      "a3": "Le restaurant fonctionne de manière saisonnière, généralement d'avril à octobre, pour garantir que nous servons uniquement les ingrédients locaux les plus frais. Consultez notre site web ou contactez-nous pour les horaires actuels."
+    },
+    "stay": {
+      "q1": "Quels types d'hébergements sont disponibles à Kallmi Estate ?",
+      "a1": "Kallmi Estate propose des chambres et suites de luxe nichées parmi les oliveraies, chacune avec une vue panoramique époustouflante sur la mer Adriatique. Tous les hébergements disposent d'équipements modernes tout en préservant le charme rustique authentique du domaine.",
+      "q2": "Qu'est-ce qui est inclus dans un séjour à Kallmi Estate ?",
+      "a2": "Chaque séjour comprend un petit-déjeuner méditerranéen avec nos produits à base d'huile d'olive, l'accès au domaine et aux oliveraies, et une dégustation gratuite d'huile d'olive. Les réservations au restaurant et les visites guidées peuvent être organisées.",
+      "q3": "Comment réserver un hébergement à Kallmi Estate ?",
+      "a3": "Vous pouvez réserver directement via notre site web en utilisant le calendrier de disponibilité, ou nous contacter par email ou téléphone. Nous recommandons de réserver bien à l'avance pour les mois d'été (juin-septembre)."
+    },
+    "shop": {
+      "q1": "Comment est produite l'huile d'olive de Kallmi Estate ?",
+      "a1": "Notre huile d'olive extra vierge est pressée à froid dans les heures suivant la récolte manuelle d'oliviers centenaires. L'huile n'est pas filtrée et est produite en petits lots pour garantir la plus haute qualité.",
+      "q2": "Livrez-vous à l'international ?",
+      "a2": "Oui, nous expédions nos produits à base d'huile d'olive dans le monde entier. Les frais de port internationaux et les délais de livraison estimés varient selon la destination.",
+      "q3": "Qu'est-ce qui rend l'huile d'olive albanaise spéciale ?",
+      "a3": "L'Albanie possède l'une des plus anciennes traditions oléicoles de la Méditerranée, remontant à plus de 2 000 ans. Le microclimat unique de la Riviera albanaise, les variétés anciennes de Kallinjot et les méthodes de récolte traditionnelles produisent une huile exceptionnellement savoureuse."
+    },
+    "camping": {
+      "q1": "Quelles options de camping sont disponibles à Kallmi Estate ?",
+      "a1": "Nous proposons à la fois des emplacements de camping traditionnels et des tentes glamping de luxe situées parmi nos oliveraies centenaires. Chaque site offre une vue imprenable sur la mer Adriatique et l'accès à tous les équipements du domaine.",
+      "q2": "Quels équipements sont disponibles pour les campeurs ?",
+      "a2": "Les campeurs ont accès à des sanitaires propres, des branchements électriques, le Wi-Fi, le restaurant du domaine, des dégustations d'huile d'olive et des visites guidées des oliveraies. Nos tentes glamping sont entièrement meublées avec des lits confortables.",
+      "q3": "Quelle est la meilleure période pour camper à Kallmi Estate ?",
+      "a3": "La saison de camping s'étend de mai à septembre, juin et septembre offrant la combinaison idéale de temps chaud, moins de monde et le magnifique paysage méditerranéen à son meilleur."
+    }
+  },
+  "LandingHero": {
+    "badge": "Le Joyau Caché de l'Albanie",
+    "subtitle1": "Où d'anciennes oliveraies murmurent des secrets à la",
+    "subtitle2": "brise adriatique",
+    "description": "Quatre générations de passion ont cultivé cette terre sacrée, créant le joyau caché de l'Albanie. Découvrez une cuisine savoureuse et une nature brute",
+    "cta1": "Découvrez Notre Patrimoine",
+    "cta2": "Notre Histoire"
+  },
+  "Landing": {
+    "heritageOverline": "Notre Patrimoine",
+    "heritageTitle1": "Générations de",
+    "heritageTitle2": "Passion",
+    "heritageText1": "Là où d'anciens oliviers murmurent les histoires des générations passées, notre famille a cultivé cette terre sacrée avec une dévotion inébranlable.",
+    "heritageText2": "Chaque goutte porte l'essence de Kallmi - un témoignage de notre engagement à préserver les plus nobles traditions albanaises.",
+    "established": "Fondé",
+    "years": "Ans",
+    "generation": "Génération",
+    "discoverOverline": "Découvrez Kallmi",
+    "discoverTitle": "Trésors Cachés",
+    "discoverSubtitle": "Où d'anciennes oliveraies rencontrent l'étreinte de l'Adriatique",
+    "goldenHourTitle": "La Magie de l'Heure Dorée",
+    "goldenHourText": "Regardez le soleil peindre l'Adriatique de nuances ambrées et rosées, créant des moments qui vivent à jamais dans la mémoire",
+    "sunsetOverline": "Le Théâtre de la Nature",
+    "sunsetTitle1": "Quand le Jour Embrasse",
+    "sunsetTitle2": "la Mer pour la Bonne Nuit",
+    "sunsetText": "Chaque soir, l'Adriatique devient une toile où la nature peint son chef-d'oeuvre le plus époustouflant",
+    "sunsetQuote": "Ici, où les anciens oliviers ont été témoins d'innombrables couchers de soleil, chaque soir apporte une symphonie de couleurs qui nous rappelle pourquoi Kallmi reste le secret le mieux gardé de l'Albanie.",
+    "ctaTitle": "Vivez Kallmi",
+    "ctaSubtitle": "Découvrez le mélange parfait de tradition, de nature et d'hospitalité albanaise",
+    "ctaShop": "Achetez Notre Huile d'Olive",
+    "ctaPlan": "Planifiez Votre Visite"
+  },
+  "RestaurantSnippet": {
+    "overline": "Expérience Culinaire",
+    "title": "Dînez Chez Nous",
+    "text1": "Découvrez les saveurs authentiques de l'Albanie dans notre restaurant du domaine, où nous préparons des plats de saison avec les ingrédients locaux les plus frais, y compris notre propre récolte d'huile d'olive.",
+    "text2": "Notre menu célèbre la cuisine traditionnelle albanaise avec une touche moderne, laissant les saveurs pures de chaque ingrédient briller. Savourez votre repas avec une vue panoramique sur nos oliveraies et le littoral adriatique.",
+    "cta": "Découvrez Notre Menu"
+  },
+  "AccommodationsSnippet": {
+    "overline": "Refuge Boutique",
+    "title": "Séjournez Chez Nous",
+    "text1": "Plongez dans la beauté sereine de Kallmi Estate avec un séjour dans nos hébergements boutique, nichés parmi des oliviers centenaires avec une vue imprenable sur la mer Adriatique.",
+    "text2": "Chaque chambre est pensée avec soin avec des éléments traditionnels albanais et un confort moderne, offrant un refuge paisible après une journée d'exploration. Réveillez-vous au chant des oiseaux et au doux bruissement des oliveraies.",
+    "cta": "Réservez Votre Séjour"
+  },
+  "Cart": {
+    "title": "Panier",
+    "items": "{count, plural, =1 {1 article} other {# articles}}",
+    "empty": "Votre panier est vide",
+    "emptyHint": "Ajoutez des produits pour commencer",
+    "proceedToCheckout": "Passer à la Caisse",
+    "continueShopping": "Continuer les Achats"
+  },
+  "FooterFull": {
+    "brandDescription": "Quatre générations de passion pour l'élaboration de la meilleure huile d'olive extra vierge d'Albanie, issue d'anciennes oliveraies caressées par la brise adriatique.",
+    "est": "Fond. 2004",
+    "discover": "Découvrir",
+    "ourHeritage": "Notre Patrimoine",
+    "premiumOils": "Huiles Premium",
+    "fineDining": "Haute Cuisine",
+    "estateStay": "Séjour au Domaine",
+    "visitUs": "Visitez-Nous",
+    "visitTitle": "Visitez Notre Domaine",
+    "stayConnected": "Restez Connecté",
+    "newsletterText": "Rejoignez notre famille et recevez des nouvelles exclusives sur notre récolte, nos nouveaux produits et les événements du domaine.",
+    "emailPlaceholder": "Votre adresse email",
+    "joinFamily": "Rejoignez Notre Famille",
+    "thankYou": "Merci !",
+    "socialProof": "Rejoignez 2 500+ passionnés d'huile d'olive",
+    "copyright": "© {year} Kallmi Estate. Élaboré avec ❤ en Albanie.",
+    "developedBy": "Développé par",
+    "backToTop": "Retour en Haut",
+    "quote": "Chaque goutte raconte l'histoire de notre terre, de notre famille et de notre engagement inébranlable à préserver l'or liquide de l'Albanie."
+  }
+}

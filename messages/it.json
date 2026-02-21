@@ -1,0 +1,198 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "ourStory": "La Nostra Storia",
+    "restaurant": "Ristorante",
+    "shop": "Negozio",
+    "stay": "Soggiorno",
+    "camping": "Campeggio",
+    "contact": "Contatti",
+    "bookNow": "Prenota Ora",
+    "orderNow": "Ordina Ora"
+  },
+  "Footer": {
+    "rights": "Tutti i diritti riservati",
+    "privacy": "Informativa sulla Privacy",
+    "terms": "Termini di Servizio",
+    "followUs": "Seguici",
+    "newsletter": "Newsletter",
+    "newsletterPlaceholder": "Inserisci la tua email",
+    "subscribe": "Iscriviti",
+    "address": "Durazzo, Albania",
+    "description": "Una tenuta olivicola a conduzione familiare a Durazzo, Albania, che produce olio extravergine d'oliva premium da oltre un secolo."
+  },
+  "Metadata": {
+    "home": {
+      "title": "Kallmi Estate | Olio d'Oliva Albanese Premium",
+      "description": "Scoprite il miglior olio extravergine d'oliva dall'Albania. Raccolto a mano, spremuto a freddo e lavorato con secoli di tradizione a Durazzo."
+    },
+    "restaurant": {
+      "title": "Ristorante",
+      "description": "Cenate nel ristorante farm-to-table di Kallmi Estate a Durazzo. Autentica cucina albanese e mediterranea preparata con il nostro olio d'oliva."
+    },
+    "stay": {
+      "title": "Soggiornate con Noi",
+      "description": "Alloggi di lusso immersi tra uliveti centenari con vista mozzafiato sul Mare Adriatico a Kallmi Estate, Durazzo, Albania."
+    },
+    "camping": {
+      "title": "Campeggio con Noi",
+      "description": "Glamping e campeggio unico tra antichi uliveti con vista sul Mare Adriatico. Un'esperienza indimenticabile a Kallmi Estate, Albania."
+    },
+    "shop": {
+      "title": "Acquista Olio d'Oliva Premium",
+      "description": "Acquistate l'olio extravergine d'oliva pluripremiato di Kallmi Estate. Spremuto a freddo da olive albanesi raccolte a mano, spedito in tutto il mondo."
+    },
+    "ourStory": {
+      "title": "La Nostra Storia",
+      "description": "Scoprite il patrimonio di Kallmi Estate, un uliveto familiare a Durazzo, Albania. Quattro generazioni di maestria olivicola dal 1920."
+    },
+    "contact": {
+      "title": "Contattaci",
+      "description": "Visitate Kallmi Estate a Durazzo, Albania o contattateci. Accogliamo richieste sul nostro olio d'oliva, ristorante, alloggi e tour della tenuta."
+    }
+  },
+  "Common": {
+    "learnMore": "Scopri di Più",
+    "viewMenu": "Vedi il Menù",
+    "bookTable": "Prenota un Tavolo",
+    "checkAvailability": "Verifica Disponibilità",
+    "addToCart": "Aggiungi al Carrello",
+    "checkout": "Procedi all'Acquisto",
+    "total": "Totale",
+    "quantity": "Quantità",
+    "price": "Prezzo",
+    "loading": "Caricamento...",
+    "error": "Qualcosa è andato storto",
+    "tryAgain": "Riprova",
+    "send": "Invia",
+    "name": "Nome",
+    "email": "Email",
+    "phone": "Telefono",
+    "message": "Messaggio",
+    "submit": "Invia",
+    "success": "Successo",
+    "close": "Chiudi"
+  },
+  "Hero": {
+    "badge": "Da Generazioni",
+    "subtitle": "Dove uliveti centenari incontrano il Mare Adriatico",
+    "cta": "Esplora la Tenuta"
+  },
+  "FAQ": {
+    "home": {
+      "q1": "Cos'è Kallmi Estate?",
+      "a1": "Kallmi Estate è una tenuta olivicola a conduzione familiare a Durazzo, Albania, che produce olio extravergine d'oliva premium da oltre un secolo. La tenuta offre anche un ristorante farm-to-table, alloggi di lusso e glamping tra antichi uliveti con vista sul Mare Adriatico.",
+      "q2": "Dove si trova Kallmi Estate?",
+      "a2": "Kallmi Estate si trova nella zona di Kallm a Durazzo, Albania, a circa 30 minuti dall'Aeroporto Internazionale di Tirana. La tenuta affaccia sul Mare Adriatico ed è circondata da uliveti centenari.",
+      "q3": "Quali prodotti offre Kallmi Estate?",
+      "a3": "Kallmi Estate produce olio extravergine d'oliva premium spremuto a freddo da olive albanesi raccolte a mano. Offriamo anche bottiglie in edizione limitata, prodotti a base di olio d'oliva, un ristorante farm-to-table, alloggi di lusso ed esperienze di glamping."
+    },
+    "restaurant": {
+      "q1": "Che tipo di cucina serve il ristorante di Kallmi Estate?",
+      "a1": "Il nostro ristorante farm-to-table serve autentica cucina albanese e mediterranea, con piatti preparati con il nostro olio extravergine d'oliva e ingredienti stagionali locali della regione di Durazzo.",
+      "q2": "Devo prenotare per il ristorante?",
+      "a2": "Si consiglia la prenotazione, soprattutto durante l'alta stagione da giugno a settembre. Potete prenotare un tavolo direttamente tramite il nostro sito web o contattandoci telefonicamente o via email.",
+      "q3": "Il ristorante è aperto tutto l'anno?",
+      "a3": "Il ristorante opera stagionalmente, tipicamente da aprile a ottobre, per garantire che serviamo solo gli ingredienti locali più freschi. Verificate il nostro sito web o contattateci per gli orari attuali."
+    },
+    "stay": {
+      "q1": "Quali tipi di alloggi sono disponibili a Kallmi Estate?",
+      "a1": "Kallmi Estate offre camere e suite di lusso immerse tra gli uliveti, ognuna con una vista panoramica mozzafiato sul Mare Adriatico. Tutti gli alloggi dispongono di servizi moderni preservando l'autentico fascino rustico della tenuta.",
+      "q2": "Cosa è incluso nel soggiorno a Kallmi Estate?",
+      "a2": "Ogni soggiorno include una colazione mediterranea con i nostri prodotti a base di olio d'oliva, accesso ai terreni della tenuta e agli uliveti, e degustazione gratuita di olio d'oliva. Prenotazioni al ristorante e tour guidati possono essere organizzati.",
+      "q3": "Come posso prenotare un alloggio a Kallmi Estate?",
+      "a3": "Potete prenotare direttamente tramite il nostro sito web utilizzando il calendario disponibilità, o contattarci via email o telefono. Consigliamo di prenotare con largo anticipo per i mesi estivi (giugno-settembre)."
+    },
+    "shop": {
+      "q1": "Come viene prodotto l'olio d'oliva di Kallmi Estate?",
+      "a1": "Il nostro olio extravergine d'oliva viene spremuto a freddo entro poche ore dalla raccolta manuale da ulivi centenari. L'olio non è filtrato e viene prodotto in piccoli lotti per garantire la massima qualità.",
+      "q2": "Effettuate spedizioni internazionali?",
+      "a2": "Sì, spediamo i nostri prodotti a base di olio d'oliva in tutto il mondo. I costi di spedizione internazionale e i tempi di consegna stimati variano in base alla destinazione.",
+      "q3": "Cosa rende speciale l'olio d'oliva albanese?",
+      "a3": "L'Albania ha una delle più antiche tradizioni olivicole del Mediterraneo, risalente a oltre 2.000 anni fa. Il microclima unico della Riviera Albanese, le antiche varietà Kallinjot e i metodi tradizionali di raccolta producono un olio eccezionalmente gustoso."
+    },
+    "camping": {
+      "q1": "Quali opzioni di campeggio sono disponibili a Kallmi Estate?",
+      "a1": "Offriamo sia piazzole per il campeggio tradizionale che tende glamping di lusso situate tra i nostri uliveti centenari. Ogni sito offre una vista mozzafiato sul Mare Adriatico e accesso a tutti i servizi della tenuta.",
+      "q2": "Quali servizi sono disponibili per i campeggiatori?",
+      "a2": "I campeggiatori hanno accesso a servizi igienici puliti, allacci elettrici, Wi-Fi, il ristorante della tenuta, degustazioni di olio d'oliva e tour guidati negli uliveti. Le nostre tende glamping sono completamente arredate con letti confortevoli.",
+      "q3": "Qual è il periodo migliore per campeggiare a Kallmi Estate?",
+      "a3": "La stagione del campeggio va da maggio a settembre, con giugno e settembre che offrono la combinazione ideale di clima caldo, meno folla e il bellissimo paesaggio mediterraneo al suo meglio."
+    }
+  },
+  "LandingHero": {
+    "badge": "Il Gioiello Nascosto dell'Albania",
+    "subtitle1": "Dove antichi uliveti sussurrano segreti alla",
+    "subtitle2": "brezza adriatica",
+    "description": "Quattro generazioni di passione hanno coltivato questa terra sacra, creando il gioiello nascosto dell'Albania. Scoprite cibo gustoso e natura incontaminata",
+    "cta1": "Scoprite il Nostro Patrimonio",
+    "cta2": "La Nostra Storia"
+  },
+  "Landing": {
+    "heritageOverline": "Il Nostro Patrimonio",
+    "heritageTitle1": "Generazioni di",
+    "heritageTitle2": "Passione",
+    "heritageText1": "Dove antichi ulivi sussurrano storie di generazioni passate, la nostra famiglia ha coltivato questa terra sacra con devozione incrollabile.",
+    "heritageText2": "Ogni goccia porta l'essenza di Kallmi - una testimonianza del nostro impegno nel preservare le più nobili tradizioni albanesi.",
+    "established": "Fondato",
+    "years": "Anni",
+    "generation": "Generazione",
+    "discoverOverline": "Scopri Kallmi",
+    "discoverTitle": "Tesori Nascosti",
+    "discoverSubtitle": "Dove antichi uliveti incontrano l'abbraccio dell'Adriatico",
+    "goldenHourTitle": "La Magia dell'Ora Dorata",
+    "goldenHourText": "Guardate il sole dipingere l'Adriatico di sfumature ambrate e rosate, creando momenti che vivono per sempre nella memoria",
+    "sunsetOverline": "Il Teatro della Natura",
+    "sunsetTitle1": "Quando il Giorno Bacia",
+    "sunsetTitle2": "il Mare della Buonanotte",
+    "sunsetText": "Ogni sera, l'Adriatico diventa una tela dove la natura dipinge il suo capolavoro più mozzafiato",
+    "sunsetQuote": "Qui, dove gli antichi ulivi hanno assistito a innumerevoli tramonti, ogni sera porta una sinfonia di colori che ci ricorda perché Kallmi resta il segreto meglio custodito dell'Albania.",
+    "ctaTitle": "Vivete Kallmi",
+    "ctaSubtitle": "Scoprite la perfetta fusione di tradizione, natura e ospitalità albanese",
+    "ctaShop": "Acquista il Nostro Olio d'Oliva",
+    "ctaPlan": "Pianifica la Tua Visita"
+  },
+  "RestaurantSnippet": {
+    "overline": "Esperienza Culinaria",
+    "title": "Cenate con Noi",
+    "text1": "Scoprite i sapori autentici dell'Albania nel nostro ristorante della tenuta, dove prepariamo piatti stagionali con gli ingredienti locali più freschi, incluso il nostro olio d'oliva.",
+    "text2": "Il nostro menù celebra la cucina tradizionale albanese con un tocco moderno, lasciando brillare i sapori puri di ogni ingrediente. Gustate il vostro pasto con vista panoramica sui nostri uliveti e sulla costa adriatica.",
+    "cta": "Esplora il Nostro Menù"
+  },
+  "AccommodationsSnippet": {
+    "overline": "Rifugio Boutique",
+    "title": "Soggiornate con Noi",
+    "text1": "Immergetevi nella serena bellezza di Kallmi Estate con un soggiorno nei nostri alloggi boutique, immersi tra ulivi centenari con vista mozzafiato sul Mare Adriatico.",
+    "text2": "Ogni camera è pensata con cura con elementi tradizionali albanesi e comfort moderni, offrendo un rifugio di pace dopo una giornata di esplorazione. Svegliatevi con il canto degli uccelli e il dolce fruscio degli uliveti.",
+    "cta": "Prenota il Tuo Soggiorno"
+  },
+  "Cart": {
+    "title": "Carrello",
+    "items": "{count, plural, =1 {1 articolo} other {# articoli}}",
+    "empty": "Il tuo carrello è vuoto",
+    "emptyHint": "Aggiungi alcuni prodotti per iniziare",
+    "proceedToCheckout": "Procedi al Pagamento",
+    "continueShopping": "Continua gli Acquisti"
+  },
+  "FooterFull": {
+    "brandDescription": "Quattro generazioni di passione nella produzione del miglior olio extravergine d'oliva albanese da antichi uliveti baciati dalla brezza adriatica.",
+    "est": "Fond. 2004",
+    "discover": "Scopri",
+    "ourHeritage": "Il Nostro Patrimonio",
+    "premiumOils": "Oli Premium",
+    "fineDining": "Alta Cucina",
+    "estateStay": "Soggiorno in Tenuta",
+    "visitUs": "Visitateci",
+    "visitTitle": "Visitate la Nostra Tenuta",
+    "stayConnected": "Resta Connesso",
+    "newsletterText": "Unitevi alla nostra famiglia e ricevete aggiornamenti esclusivi sulla raccolta, nuovi prodotti ed eventi della tenuta.",
+    "emailPlaceholder": "Il tuo indirizzo email",
+    "joinFamily": "Unisciti alla Nostra Famiglia",
+    "thankYou": "Grazie!",
+    "socialProof": "Unisciti a 2.500+ appassionati di olio d'oliva",
+    "copyright": "© {year} Kallmi Estate. Creato con ❤ in Albania.",
+    "developedBy": "Sviluppato da",
+    "backToTop": "Torna in Alto",
+    "quote": "Ogni goccia racconta la storia della nostra terra, della nostra famiglia e del nostro impegno incrollabile nel preservare l'oro liquido dell'Albania."
+  }
+}

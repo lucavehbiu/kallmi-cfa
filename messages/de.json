@@ -1,0 +1,198 @@
+{
+  "Navigation": {
+    "home": "Startseite",
+    "ourStory": "Unsere Geschichte",
+    "restaurant": "Restaurant",
+    "shop": "Shop",
+    "stay": "Übernachten",
+    "camping": "Camping",
+    "contact": "Kontakt",
+    "bookNow": "Jetzt Buchen",
+    "orderNow": "Jetzt Bestellen"
+  },
+  "Footer": {
+    "rights": "Alle Rechte vorbehalten",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "followUs": "Folgen Sie Uns",
+    "newsletter": "Newsletter",
+    "newsletterPlaceholder": "E-Mail-Adresse eingeben",
+    "subscribe": "Abonnieren",
+    "address": "Durrës, Albanien",
+    "description": "Ein familiengeführtes Olivengut in Durrës, Albanien, das seit über einem Jahrhundert erstklassiges natives Olivenöl extra produziert."
+  },
+  "Metadata": {
+    "home": {
+      "title": "Kallmi Estate | Premium Albanisches Olivenöl",
+      "description": "Erleben Sie das feinste native Olivenöl extra aus Albanien. Handgeerntet, kaltgepresst und mit jahrhundertealter Tradition in Durrës hergestellt."
+    },
+    "restaurant": {
+      "title": "Restaurant",
+      "description": "Speisen Sie im Farm-to-Table-Restaurant von Kallmi Estate in Durrës. Authentische albanische und mediterrane Küche mit unserem hauseigenen Olivenöl."
+    },
+    "stay": {
+      "title": "Übernachten Sie bei Uns",
+      "description": "Luxuriöse Unterkünfte inmitten jahrhundertealter Olivenhaine mit atemberaubendem Blick auf die Adria bei Kallmi Estate, Durrës, Albanien."
+    },
+    "camping": {
+      "title": "Camping bei Uns",
+      "description": "Einzigartiges Glamping und Camping unter uralten Olivenbäumen mit Blick auf die Adria. Ein unvergessliches Erlebnis bei Kallmi Estate, Albanien."
+    },
+    "shop": {
+      "title": "Premium Olivenöl Kaufen",
+      "description": "Kaufen Sie das preisgekrönte native Olivenöl extra von Kallmi Estate. Kaltgepresst aus handgeernteten albanischen Oliven, weltweiter Versand."
+    },
+    "ourStory": {
+      "title": "Unsere Geschichte",
+      "description": "Entdecken Sie das Erbe von Kallmi Estate, einem familiengeführten Olivenhain in Durrës, Albanien. Vier Generationen Olivenöl-Handwerkskunst seit 1920."
+    },
+    "contact": {
+      "title": "Kontaktieren Sie Uns",
+      "description": "Besuchen Sie Kallmi Estate in Durrës, Albanien oder nehmen Sie Kontakt auf. Wir beantworten gerne Fragen zu Olivenöl, Restaurant, Unterkünften und Führungen."
+    }
+  },
+  "Common": {
+    "learnMore": "Mehr Erfahren",
+    "viewMenu": "Speisekarte Ansehen",
+    "bookTable": "Tisch Reservieren",
+    "checkAvailability": "Verfügbarkeit Prüfen",
+    "addToCart": "In den Warenkorb",
+    "checkout": "Zur Kasse",
+    "total": "Gesamt",
+    "quantity": "Menge",
+    "price": "Preis",
+    "loading": "Wird geladen...",
+    "error": "Etwas ist schiefgelaufen",
+    "tryAgain": "Erneut Versuchen",
+    "send": "Senden",
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "message": "Nachricht",
+    "submit": "Absenden",
+    "success": "Erfolg",
+    "close": "Schließen"
+  },
+  "Hero": {
+    "badge": "Seit Generationen",
+    "subtitle": "Wo jahrhundertealte Olivenhaine auf die Adria treffen",
+    "cta": "Das Gut Entdecken"
+  },
+  "FAQ": {
+    "home": {
+      "q1": "Was ist Kallmi Estate?",
+      "a1": "Kallmi Estate ist ein familiengeführtes Olivenöl-Gut in Durrës, Albanien, das seit über einem Jahrhundert erstklassiges natives Olivenöl extra produziert. Das Gut bietet auch ein Farm-to-Table-Restaurant, luxuriöse Unterkünfte und Glamping unter uralten Olivenbäumen mit Blick auf die Adria.",
+      "q2": "Wo befindet sich Kallmi Estate?",
+      "a2": "Kallmi Estate liegt im Gebiet Kallm in Durrës, Albanien, etwa 30 Minuten vom internationalen Flughafen Tirana entfernt. Das Gut blickt auf die Adria und ist von jahrhundertealten Olivenhainen umgeben.",
+      "q3": "Welche Produkte bietet Kallmi Estate an?",
+      "a3": "Kallmi Estate produziert erstklassiges kaltgepresstes natives Olivenöl extra aus handgeernteten albanischen Oliven. Wir bieten auch limitierte Editionen, Olivenöl-Produkte, ein Farm-to-Table-Restaurant, luxuriöse Unterkünfte und Glamping-Erlebnisse."
+    },
+    "restaurant": {
+      "q1": "Welche Art von Küche serviert das Restaurant von Kallmi Estate?",
+      "a1": "Unser Farm-to-Table-Restaurant serviert authentische albanische und mediterrane Küche mit Gerichten, die mit unserem hauseigenen nativen Olivenöl extra und saisonalen lokalen Zutaten aus der Region Durrës zubereitet werden.",
+      "q2": "Brauche ich eine Reservierung für das Restaurant?",
+      "a2": "Reservierungen werden empfohlen, besonders während der Hochsaison von Juni bis September. Sie können einen Tisch direkt über unsere Website oder telefonisch bzw. per E-Mail reservieren.",
+      "q3": "Ist das Restaurant ganzjährig geöffnet?",
+      "a3": "Das Restaurant ist saisonal geöffnet, typischerweise von April bis Oktober, um sicherzustellen, dass wir nur die frischesten lokalen Zutaten servieren. Bitte überprüfen Sie unsere Website oder kontaktieren Sie uns für aktuelle Öffnungszeiten."
+    },
+    "stay": {
+      "q1": "Welche Unterkunftsarten gibt es bei Kallmi Estate?",
+      "a1": "Kallmi Estate bietet luxuriöse Zimmer und Suiten inmitten von Olivenhainen, jedes mit atemberaubendem Panoramablick auf die Adria. Alle Unterkünfte verfügen über moderne Annehmlichkeiten und bewahren den authentischen rustikalen Charme des Guts.",
+      "q2": "Was ist in einem Aufenthalt bei Kallmi Estate enthalten?",
+      "a2": "Jeder Aufenthalt beinhaltet ein mediterranes Frühstück mit unseren Olivenöl-Produkten, Zugang zum Gutgelände und den Olivenhainen sowie eine kostenlose Olivenöl-Verkostung. Restaurantreservierungen und geführte Touren können arrangiert werden.",
+      "q3": "Wie kann ich bei Kallmi Estate buchen?",
+      "a3": "Sie können direkt über unsere Website mit dem Verfügbarkeitskalender buchen oder uns per E-Mail oder Telefon kontaktieren. Wir empfehlen, für die Sommermonate (Juni-September) frühzeitig zu buchen."
+    },
+    "shop": {
+      "q1": "Wie wird das Olivenöl von Kallmi Estate hergestellt?",
+      "a1": "Unser natives Olivenöl extra wird innerhalb weniger Stunden nach der Handernte von jahrhundertealten Olivenbäumen kaltgepresst. Das Öl ist ungefiltert und wird in kleinen Chargen produziert, um höchste Qualität zu gewährleisten.",
+      "q2": "Versenden Sie international?",
+      "a2": "Ja, wir versenden unsere Olivenöl-Produkte weltweit. Die internationalen Versandkosten und geschätzten Lieferzeiten variieren je nach Zielort.",
+      "q3": "Was macht albanisches Olivenöl besonders?",
+      "a3": "Albanien hat eine der ältesten Olivenanbautraditionen im Mittelmeerraum, die über 2.000 Jahre zurückreicht. Das einzigartige Mikroklima der albanischen Riviera, die uralten Kallinjot-Sorten und traditionelle Erntemethoden ergeben ein außergewöhnlich aromatisches Öl."
+    },
+    "camping": {
+      "q1": "Welche Campingoptionen gibt es bei Kallmi Estate?",
+      "a1": "Wir bieten sowohl traditionelle Campingplätze als auch luxuriöse Glamping-Zelte inmitten unserer jahrhundertealten Olivenhaine an. Jeder Platz bietet einen atemberaubenden Blick auf die Adria und Zugang zu allen Annehmlichkeiten des Guts.",
+      "q2": "Welche Annehmlichkeiten stehen Campern zur Verfügung?",
+      "a2": "Camper haben Zugang zu sauberen Sanitäranlagen, Stromanschlüssen, WLAN, dem Restaurant des Guts, Olivenöl-Verkostungen und geführten Touren durch die Olivenhaine. Unsere Glamping-Zelte sind komplett eingerichtet mit komfortablen Betten.",
+      "q3": "Wann ist die beste Zeit zum Campen bei Kallmi Estate?",
+      "a3": "Die Campingsaison läuft von Mai bis September, wobei Juni und September die ideale Kombination aus warmem Wetter, weniger Besuchern und der wunderschönen mediterranen Landschaft in ihrer besten Form bieten."
+    }
+  },
+  "LandingHero": {
+    "badge": "Albaniens verborgenes Juwel",
+    "subtitle1": "Wo uralte Olivenhaine der",
+    "subtitle2": "adriatischen Brise Geheimnisse zuflüstern",
+    "description": "Vier Generationen Leidenschaft haben dieses heilige Land kultiviert und Albaniens verborgenes Juwel geschaffen. Erleben Sie köstliches Essen und unberührte Natur",
+    "cta1": "Entdecken Sie Unser Erbe",
+    "cta2": "Unsere Geschichte"
+  },
+  "Landing": {
+    "heritageOverline": "Unser Erbe",
+    "heritageTitle1": "Generationen von",
+    "heritageTitle2": "Leidenschaft",
+    "heritageText1": "Wo uralte Olivenbäume Geschichten vergangener Generationen flüstern, hat unsere Familie dieses heilige Land mit unerschütterlicher Hingabe kultiviert.",
+    "heritageText2": "Jeder Tropfen trägt die Essenz von Kallmi - ein Zeugnis unseres Engagements, Albaniens edelste Traditionen zu bewahren.",
+    "established": "Gegründet",
+    "years": "Jahre",
+    "generation": "Generation",
+    "discoverOverline": "Entdecken Sie Kallmi",
+    "discoverTitle": "Verborgene Schätze",
+    "discoverSubtitle": "Wo uralte Olivenhaine auf die Umarmung der Adria treffen",
+    "goldenHourTitle": "Magie der Goldenen Stunde",
+    "goldenHourText": "Beobachten Sie, wie die Sonne die Adria in Bernstein- und Rosetöne taucht und Momente schafft, die für immer in der Erinnerung leben",
+    "sunsetOverline": "Naturtheater",
+    "sunsetTitle1": "Wenn der Tag das Meer",
+    "sunsetTitle2": "zur Guten Nacht küsst",
+    "sunsetText": "Jeden Abend wird die Adria zur Leinwand, auf der die Natur ihr atemberaubendstes Meisterwerk malt",
+    "sunsetQuote": "Hier, wo die uralten Olivenbäume unzählige Sonnenuntergänge erlebt haben, bringt jeder Abend eine Symphonie der Farben, die uns daran erinnert, warum Kallmi Albaniens bestgehütetes Geheimnis bleibt.",
+    "ctaTitle": "Erleben Sie Kallmi",
+    "ctaSubtitle": "Entdecken Sie die perfekte Mischung aus Tradition, Natur und albanischer Gastfreundschaft",
+    "ctaShop": "Unser Olivenöl Kaufen",
+    "ctaPlan": "Planen Sie Ihren Besuch"
+  },
+  "RestaurantSnippet": {
+    "overline": "Kulinarisches Erlebnis",
+    "title": "Speisen Sie bei Uns",
+    "text1": "Erleben Sie die authentischen Aromen Albaniens in unserem Gutsrestaurant, wo wir saisonale Gerichte mit den frischesten lokalen Zutaten zubereiten, darunter unser eigenes Olivenöl.",
+    "text2": "Unsere Speisekarte feiert die traditionelle albanische Küche mit einem modernen Touch und lässt die reinen Aromen jeder Zutat erstrahlen. Genießen Sie Ihre Mahlzeit mit Panoramablick auf unsere Olivenhaine und die adriatische Küste.",
+    "cta": "Entdecken Sie Unsere Speisekarte"
+  },
+  "AccommodationsSnippet": {
+    "overline": "Boutique-Refugium",
+    "title": "Übernachten Sie bei Uns",
+    "text1": "Tauchen Sie ein in die ruhige Schönheit von Kallmi Estate mit einem Aufenthalt in unseren Boutique-Unterkünften, eingebettet zwischen jahrhundertealten Olivenbäumen mit atemberaubendem Blick auf die Adria.",
+    "text2": "Jedes Zimmer ist liebevoll mit traditionellen albanischen Elementen und modernem Komfort gestaltet und bietet einen friedlichen Rückzugsort nach einem Tag voller Entdeckungen. Erwachen Sie zum Vogelgesang und dem sanften Rascheln der Olivenhaine.",
+    "cta": "Buchen Sie Ihren Aufenthalt"
+  },
+  "Cart": {
+    "title": "Warenkorb",
+    "items": "{count, plural, =1 {1 Artikel} other {# Artikel}}",
+    "empty": "Ihr Warenkorb ist leer",
+    "emptyHint": "Fügen Sie einige Produkte hinzu, um loszulegen",
+    "proceedToCheckout": "Zur Kasse Gehen",
+    "continueShopping": "Weiter Einkaufen"
+  },
+  "FooterFull": {
+    "brandDescription": "Vier Generationen Leidenschaft bei der Herstellung von Albaniens feinstem nativen Olivenöl extra aus uralten Hainen, geküsst von der adriatischen Brise.",
+    "est": "Gegr. 2004",
+    "discover": "Entdecken",
+    "ourHeritage": "Unser Erbe",
+    "premiumOils": "Premium-Öle",
+    "fineDining": "Feine Küche",
+    "estateStay": "Aufenthalt auf dem Gut",
+    "visitUs": "Besuchen Sie Uns",
+    "visitTitle": "Besuchen Sie Unser Gut",
+    "stayConnected": "Bleiben Sie Verbunden",
+    "newsletterText": "Werden Sie Teil unserer Familie und erhalten Sie exklusive Neuigkeiten über unsere Ernte, neue Produkte und Veranstaltungen auf dem Gut.",
+    "emailPlaceholder": "Ihre E-Mail-Adresse",
+    "joinFamily": "Unserer Familie Beitreten",
+    "thankYou": "Vielen Dank!",
+    "socialProof": "Schließen Sie sich 2.500+ Olivenöl-Enthusiasten an",
+    "copyright": "© {year} Kallmi Estate. Mit ❤ in Albanien gefertigt.",
+    "developedBy": "Entwickelt von",
+    "backToTop": "Nach Oben",
+    "quote": "Jeder Tropfen erzählt die Geschichte unseres Landes, unserer Familie und unseres unerschütterlichen Engagements, Albaniens flüssiges Gold zu bewahren."
+  }
+}

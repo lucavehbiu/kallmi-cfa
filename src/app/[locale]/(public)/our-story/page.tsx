@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import Image from 'next/image'
 import { AnimateDiv } from '@/components/motion/MotionWrapper'
 import WhatsAppButton from '@/components/WhatsAppButton'
@@ -14,18 +13,28 @@ import {
   UserGroupIcon,
   TrophyIcon
 } from '@heroicons/react/24/outline'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { generatePageMetadata } from '@/lib/metadata'
+import type { Locale } from '@/i18n/routing'
 
-export const metadata: Metadata = {
-  title: 'Our Story | Kallmi Estate - Premium Albanian Olive Oil Heritage',
-  description: 'Discover the enchanting heritage of Kallmi Estate, a family-owned olive grove in Durrës, Albania. Our century-old tradition of crafting premium olive oil continues through four generations.',
-  openGraph: {
-    title: 'Our Story | Kallmi Estate - Premium Albanian Olive Oil Heritage',
-    description: 'Discover the enchanting heritage of Kallmi Estate, a family-owned olive grove in Durrës, Albania. Our century-old tradition of crafting premium olive oil continues through four generations.',
-    images: ['https://storage.googleapis.com/kallmi/images/entrance.webp'],
-  },
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'Metadata.ourStory' })
+  return generatePageMetadata({
+    page: 'ourStory',
+    locale: locale as Locale,
+    title: t('title'),
+    description: t('description'),
+  })
 }
 
-export default function OurStory() {
+export default async function OurStory({
+  params
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return (
     <main className="min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 font-cormorant relative overflow-hidden">
 
