@@ -553,11 +553,10 @@ export default function Restaurant() {
                 <button
                   key={category.key}
                   onClick={() => setActiveCategory(category.key as typeof activeCategory)}
-                  className={`flex items-center gap-2 px-5 py-2.5 text-sm transition-all duration-200 rounded-lg font-medium whitespace-nowrap ${
-                    activeCategory === category.key
-                      ? 'bg-brand-olive text-white'
-                      : 'text-text-secondary hover:bg-surface-tertiary'
-                  }`}
+                  className={`flex items-center gap-2 px-5 py-2.5 text-sm transition-all duration-200 rounded-lg font-medium whitespace-nowrap ${activeCategory === category.key
+                    ? 'bg-brand-olive text-white'
+                    : 'text-text-secondary hover:bg-surface-tertiary'
+                    }`}
                 >
                   <category.icon className="w-4 h-4" />
                   <span>{category.label}</span>
@@ -567,45 +566,55 @@ export default function Restaurant() {
           </div>
         </FadeIn>
 
-        {/* Menu Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
-          {filteredMenu.map((item, index) => (
-            <FadeIn key={item.id} animation="slide-up" delay={index * 0.05}>
-              <Card variant="elevated" hover padding="none" className="group overflow-hidden">
-                {item.seasonal && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <Badge variant="gold">
-                      <SparklesIcon className="w-3 h-3 mr-1" />
-                      {t('seasonal')}
-                    </Badge>
-                  </div>
-                )}
+        {/* Menu Horizontal Scroll */}
+        <div className="relative mb-12">
+          <div
+            className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden"
+            style={{
+              scrollbarWidth: 'none',
+              WebkitOverflowScrolling: 'touch',
+            }}
+          >
+            {filteredMenu.map((item, index) => (
+              <FadeIn key={item.id} animation="slide-up" delay={index * 0.05}>
+                <div className="snap-start shrink-0 w-[85vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] max-w-[380px]">
+                  <Card variant="elevated" hover padding="none" className="group overflow-hidden h-full">
+                    {item.seasonal && (
+                      <div className="absolute top-4 right-4 z-10">
+                        <Badge variant="gold">
+                          <SparklesIcon className="w-3 h-3 mr-1" />
+                          {t('seasonal')}
+                        </Badge>
+                      </div>
+                    )}
 
-                <div className="relative aspect-[4/3] bg-surface-tertiary">
-                  <Image
-                    src={item.image}
-                    alt={t(item.nameKey)}
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    quality={80}
-                  />
-                </div>
+                    <div className="relative aspect-[4/3] bg-surface-tertiary">
+                      <Image
+                        src={item.image}
+                        alt={t(item.nameKey)}
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        fill
+                        sizes="(max-width: 768px) 85vw, (max-width: 1200px) 45vw, 30vw"
+                        quality={80}
+                      />
+                    </div>
 
-                <div className="p-6 space-y-3">
-                  <div className="flex justify-between items-start">
-                    <h3 className="text-xl font-light text-brand-olive group-hover:text-brand-olive-dark transition-colors">
-                      {t(item.nameKey)}
-                    </h3>
-                    <span className="text-xl font-light text-brand-olive whitespace-nowrap ml-4">
-                      {formatPrice(item.price, item.unitKey ? t(item.unitKey) : undefined)}
-                    </span>
-                  </div>
-                  <p className="text-body">{t(item.descKey)}</p>
+                    <div className="p-6 space-y-3">
+                      <div className="flex justify-between items-start">
+                        <h3 className="text-xl font-light text-brand-olive group-hover:text-brand-olive-dark transition-colors">
+                          {t(item.nameKey)}
+                        </h3>
+                        <span className="text-xl font-light text-brand-olive whitespace-nowrap ml-4">
+                          {formatPrice(item.price, item.unitKey ? t(item.unitKey) : undefined)}
+                        </span>
+                      </div>
+                      <p className="text-body">{t(item.descKey)}</p>
+                    </div>
+                  </Card>
                 </div>
-              </Card>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            ))}
+          </div>
         </div>
 
         {/* Drinks Toggle */}
