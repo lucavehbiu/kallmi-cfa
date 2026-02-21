@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import Script from 'next/script'
+import { useTranslations } from 'next-intl'
 import { FadeIn } from './motion/FadeIn'
 import { Section, SectionHeader } from './layout/Section'
 import { Card } from './ui/Card'
@@ -49,205 +50,15 @@ const COUNTRY_CODES = [
 
 interface MenuItem {
   id: number
-  name: string
-  description: string
+  nameKey: string
+  descKey: string
   price: number
   category: 'featured' | 'salads' | 'fish' | 'farmed-fish' | 'drinks'
   image: string
   seasonal?: boolean
   featured?: boolean
-  unit?: string
+  unitKey?: string
 }
-
-const menu: MenuItem[] = [
-  // Featured Items
-  {
-    id: 1,
-    name: "Sea Bass",
-    description: "Fresh catch from the Adriatic, grilled to perfection with herbs and our estate olive oil",
-    price: 4800,
-    category: "featured",
-    image: "https://storage.googleapis.com/kallmi/images/food/grilled-sea-bass.webp",
-    featured: true,
-    unit: "per KG"
-  },
-  {
-    id: 2,
-    name: "Cold Octopus Salad",
-    description: "Tender octopus with Mediterranean herbs, olive oil, and fresh vegetables",
-    price: 1700,
-    category: "featured",
-    image: "https://storage.googleapis.com/kallmi/images/food/seafood-platter.webp",
-    featured: true
-  },
-  {
-    id: 3,
-    name: "Grilled Vegetables",
-    description: "Red peppers and aubergines with balsamic vinegar and garlic",
-    price: 600,
-    category: "featured",
-    image: "https://storage.googleapis.com/kallmi/images/food/grilled-vegetables.webp",
-    featured: true
-  },
-
-  // Salads
-  {
-    id: 4,
-    name: "Greek Salad",
-    description: "Traditional Greek salad with feta, olives, and fresh vegetables",
-    price: 600,
-    category: "salads",
-    image: "https://storage.googleapis.com/kallmi/images/food/greek-salad.webp"
-  },
-  {
-    id: 5,
-    name: "Green Salad",
-    description: "Fresh mixed greens with our signature olive oil dressing",
-    price: 600,
-    category: "salads",
-    image: "https://storage.googleapis.com/kallmi/images/food/maroulosalata.webp"
-  },
-  {
-    id: 6,
-    name: "Rucola Salad",
-    description: "Peppery arugula with parmesan and balsamic reduction",
-    price: 600,
-    category: "salads",
-    image: "https://storage.googleapis.com/kallmi/images/food/arugula-quinoa.webp"
-  },
-  {
-    id: 7,
-    name: "Cold Octopus Salad",
-    description: "Tender octopus with Mediterranean herbs and olive oil",
-    price: 1700,
-    category: "salads",
-    image: "https://storage.googleapis.com/kallmi/images/food/seafood-platter.webp",
-    seasonal: true
-  },
-  {
-    id: 8,
-    name: "Grilled Potatoes",
-    description: "With oregano, crumbled feta cheese and olive oil",
-    price: 600,
-    category: "salads",
-    image: "https://storage.googleapis.com/kallmi/images/food/baked-potatoes.webp"
-  },
-  {
-    id: 9,
-    name: "Grilled Vegetables",
-    description: "Red peppers and aubergines with balsamic vinegar and garlic",
-    price: 600,
-    category: "salads",
-    image: "https://storage.googleapis.com/kallmi/images/food/grilled-vegetables.webp"
-  },
-  {
-    id: 10,
-    name: "Bruschetta",
-    description: "Toasted bread with fresh tomatoes, basil and garlic",
-    price: 300,
-    category: "salads",
-    image: "https://storage.googleapis.com/kallmi/images/food/bruschetta.webp"
-  },
-
-  // Fresh Fish
-  {
-    id: 11,
-    name: "Sea Bass",
-    description: "Fresh from the Adriatic, grilled with herbs and olive oil",
-    price: 4800,
-    category: "fish",
-    image: "https://storage.googleapis.com/kallmi/images/food/grilled-sea-bass.webp",
-    unit: "per kg"
-  },
-  {
-    id: 12,
-    name: "Koce (Orata)",
-    description: "Premium Mediterranean fish, simply grilled",
-    price: 6500,
-    category: "fish",
-    image: "https://storage.googleapis.com/kallmi/images/food/koce-fish.webp",
-    unit: "per kg"
-  },
-  {
-    id: 13,
-    name: "Shrimps",
-    description: "Fresh Adriatic shrimps, grilled or sautéed (250gr)",
-    price: 1200,
-    category: "fish",
-    image: "https://storage.googleapis.com/kallmi/images/food/grilled-shrimp.webp"
-  },
-  {
-    id: 14,
-    name: "Octopus",
-    description: "Tender grilled octopus with olive oil and herbs",
-    price: 1300,
-    category: "fish",
-    image: "https://storage.googleapis.com/kallmi/images/food/octopus.webp"
-  },
-  {
-    id: 15,
-    name: "Mullet",
-    description: "Local catch, grilled to perfection",
-    price: 1300,
-    category: "fish",
-    image: "https://storage.googleapis.com/kallmi/images/food/grilled-mullets.webp"
-  },
-  {
-    id: 16,
-    name: "Calamari",
-    description: "Fresh squid, grilled or fried",
-    price: 1300,
-    category: "fish",
-    image: "https://storage.googleapis.com/kallmi/images/food/mixed-grill.webp"
-  },
-  {
-    id: 17,
-    name: "Cuttlefish",
-    description: "Fresh cuttlefish, grilled to perfection",
-    price: 1300,
-    category: "fish",
-    image: "https://storage.googleapis.com/kallmi/images/food/cuttlefish.webp"
-  },
-
-  // Farmed Fish
-  {
-    id: 18,
-    name: "Farmed Sea Bass",
-    description: "Quality farmed sea bass, 300gr portion",
-    price: 1200,
-    category: "farmed-fish",
-    image: "https://storage.googleapis.com/kallmi/images/food/grilled-sea-bass.webp"
-  },
-  {
-    id: 19,
-    name: "Farmed Koce",
-    description: "Quality farmed koce, 300gr portion",
-    price: 1200,
-    category: "farmed-fish",
-    image: "https://storage.googleapis.com/kallmi/images/food/koce-fish.webp"
-  }
-]
-
-const drinks = [
-  { name: "Korca", price: 250, category: "beer" },
-  { name: "Corona", price: 500, category: "beer" },
-  { name: "Heineken", price: 300, category: "beer" },
-  { name: "Paulaner", price: 500, category: "beer" },
-  { name: "Mojito", price: 700, category: "cocktail" },
-  { name: "Cuba Libre", price: 700, category: "cocktail" },
-  { name: "Hugo", price: 700, category: "cocktail" },
-  { name: "Aperol Spritz", price: 700, category: "cocktail" },
-  { name: "Caipirinha", price: 700, category: "cocktail" },
-  { name: "Vodka Sour", price: 700, category: "cocktail" },
-  { name: "Cola", price: 250, category: "soft" },
-  { name: "Fanta", price: 250, category: "soft" },
-  { name: "Schweppes", price: 150, category: "soft" },
-  { name: "Water", price: 100, category: "soft" },
-  { name: "Large Water", price: 250, category: "soft" },
-  { name: "Coffee", price: 120, category: "coffee" },
-  { name: "Cappuccino", price: 200, category: "coffee" },
-  { name: "Macchiato", price: 140, category: "coffee" }
-]
 
 const formatPrice = (price: number, unit?: string) => {
   const formatted = new Intl.NumberFormat('en-US', {
@@ -258,8 +69,214 @@ const formatPrice = (price: number, unit?: string) => {
 }
 
 export default function Restaurant() {
+  const t = useTranslations('Restaurant')
   const [activeCategory, setActiveCategory] = useState<'featured' | 'salads' | 'fish' | 'farmed-fish' | 'drinks'>('featured')
   const [showDrinks, setShowDrinks] = useState(false)
+
+  const menu: MenuItem[] = [
+    // Featured Items
+    {
+      id: 1,
+      nameKey: "menuSeaBass",
+      descKey: "menuSeaBassDesc",
+      price: 4800,
+      category: "featured",
+      image: "https://storage.googleapis.com/kallmi/images/food/grilled-sea-bass.webp",
+      featured: true,
+      unitKey: "perKG"
+    },
+    {
+      id: 2,
+      nameKey: "menuColdOctopusSalad",
+      descKey: "menuColdOctopusSaladDesc",
+      price: 1700,
+      category: "featured",
+      image: "https://storage.googleapis.com/kallmi/images/food/seafood-platter.webp",
+      featured: true
+    },
+    {
+      id: 3,
+      nameKey: "menuGrilledVegetables",
+      descKey: "menuGrilledVegetablesDesc",
+      price: 600,
+      category: "featured",
+      image: "https://storage.googleapis.com/kallmi/images/food/grilled-vegetables.webp",
+      featured: true
+    },
+
+    // Salads
+    {
+      id: 4,
+      nameKey: "menuGreekSalad",
+      descKey: "menuGreekSaladDesc",
+      price: 600,
+      category: "salads",
+      image: "https://storage.googleapis.com/kallmi/images/food/greek-salad.webp"
+    },
+    {
+      id: 5,
+      nameKey: "menuGreenSalad",
+      descKey: "menuGreenSaladDesc",
+      price: 600,
+      category: "salads",
+      image: "https://storage.googleapis.com/kallmi/images/food/maroulosalata.webp"
+    },
+    {
+      id: 6,
+      nameKey: "menuRucolaSalad",
+      descKey: "menuRucolaSaladDesc",
+      price: 600,
+      category: "salads",
+      image: "https://storage.googleapis.com/kallmi/images/food/arugula-quinoa.webp"
+    },
+    {
+      id: 7,
+      nameKey: "menuColdOctopusSaladAlt",
+      descKey: "menuColdOctopusSaladAltDesc",
+      price: 1700,
+      category: "salads",
+      image: "https://storage.googleapis.com/kallmi/images/food/seafood-platter.webp",
+      seasonal: true
+    },
+    {
+      id: 8,
+      nameKey: "menuGrilledPotatoes",
+      descKey: "menuGrilledPotatoesDesc",
+      price: 600,
+      category: "salads",
+      image: "https://storage.googleapis.com/kallmi/images/food/baked-potatoes.webp"
+    },
+    {
+      id: 9,
+      nameKey: "menuGrilledVegetablesAlt",
+      descKey: "menuGrilledVegetablesAltDesc",
+      price: 600,
+      category: "salads",
+      image: "https://storage.googleapis.com/kallmi/images/food/grilled-vegetables.webp"
+    },
+    {
+      id: 10,
+      nameKey: "menuBruschetta",
+      descKey: "menuBruschettaDesc",
+      price: 300,
+      category: "salads",
+      image: "https://storage.googleapis.com/kallmi/images/food/bruschetta.webp"
+    },
+
+    // Fresh Fish
+    {
+      id: 11,
+      nameKey: "menuSeaBassFish",
+      descKey: "menuSeaBassFishDesc",
+      price: 4800,
+      category: "fish",
+      image: "https://storage.googleapis.com/kallmi/images/food/grilled-sea-bass.webp",
+      unitKey: "perKg"
+    },
+    {
+      id: 12,
+      nameKey: "menuKoce",
+      descKey: "menuKoceDesc",
+      price: 6500,
+      category: "fish",
+      image: "https://storage.googleapis.com/kallmi/images/food/koce-fish.webp",
+      unitKey: "perKg"
+    },
+    {
+      id: 13,
+      nameKey: "menuShrimps",
+      descKey: "menuShrimpsDesc",
+      price: 1200,
+      category: "fish",
+      image: "https://storage.googleapis.com/kallmi/images/food/grilled-shrimp.webp"
+    },
+    {
+      id: 14,
+      nameKey: "menuOctopus",
+      descKey: "menuOctopusDesc",
+      price: 1300,
+      category: "fish",
+      image: "https://storage.googleapis.com/kallmi/images/food/octopus.webp"
+    },
+    {
+      id: 15,
+      nameKey: "menuMullet",
+      descKey: "menuMulletDesc",
+      price: 1300,
+      category: "fish",
+      image: "https://storage.googleapis.com/kallmi/images/food/grilled-mullets.webp"
+    },
+    {
+      id: 16,
+      nameKey: "menuCalamari",
+      descKey: "menuCalamariDesc",
+      price: 1300,
+      category: "fish",
+      image: "https://storage.googleapis.com/kallmi/images/food/mixed-grill.webp"
+    },
+    {
+      id: 17,
+      nameKey: "menuCuttlefish",
+      descKey: "menuCuttlefishDesc",
+      price: 1300,
+      category: "fish",
+      image: "https://storage.googleapis.com/kallmi/images/food/cuttlefish.webp"
+    },
+
+    // Farmed Fish
+    {
+      id: 18,
+      nameKey: "menuFarmedSeaBass",
+      descKey: "menuFarmedSeaBassDesc",
+      price: 1200,
+      category: "farmed-fish",
+      image: "https://storage.googleapis.com/kallmi/images/food/grilled-sea-bass.webp"
+    },
+    {
+      id: 19,
+      nameKey: "menuFarmedKoce",
+      descKey: "menuFarmedKoceDesc",
+      price: 1200,
+      category: "farmed-fish",
+      image: "https://storage.googleapis.com/kallmi/images/food/koce-fish.webp"
+    }
+  ]
+
+  const drinkNameMap: Record<string, string> = {
+    "Water": "drinkWater",
+    "Large Water": "drinkLargeWater",
+    "Coffee": "drinkCoffee",
+    "Cappuccino": "drinkCappuccino",
+    "Macchiato": "drinkMacchiato"
+  }
+
+  const drinks = [
+    { name: "Korca", price: 250, category: "beer" },
+    { name: "Corona", price: 500, category: "beer" },
+    { name: "Heineken", price: 300, category: "beer" },
+    { name: "Paulaner", price: 500, category: "beer" },
+    { name: "Mojito", price: 700, category: "cocktail" },
+    { name: "Cuba Libre", price: 700, category: "cocktail" },
+    { name: "Hugo", price: 700, category: "cocktail" },
+    { name: "Aperol Spritz", price: 700, category: "cocktail" },
+    { name: "Caipirinha", price: 700, category: "cocktail" },
+    { name: "Vodka Sour", price: 700, category: "cocktail" },
+    { name: "Cola", price: 250, category: "soft" },
+    { name: "Fanta", price: 250, category: "soft" },
+    { name: "Schweppes", price: 150, category: "soft" },
+    { name: "Water", price: 100, category: "soft" },
+    { name: "Large Water", price: 250, category: "soft" },
+    { name: "Coffee", price: 120, category: "coffee" },
+    { name: "Cappuccino", price: 200, category: "coffee" },
+    { name: "Macchiato", price: 140, category: "coffee" }
+  ]
+
+  const drinkCategoryLabels: Record<string, string> = {
+    beer: t('drinkCatBeers'),
+    cocktail: t('drinkCatCocktails'),
+    soft: t('drinkCatSoftDrinks'),
+    coffee: t('drinkCatCoffees')
+  }
 
   // Reservation form state
   const [reservationForm, setReservationForm] = useState({
@@ -294,13 +311,13 @@ export default function Restaurant() {
     // Email validation
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     if (!emailRegex.test(reservationForm.email)) {
-      errors.email = 'Please enter a valid email address'
+      errors.email = t('validationEmail')
     }
 
     // Phone validation (digits only, 6-15 digits)
     const phoneDigits = reservationForm.phone.replace(/\D/g, '')
     if (phoneDigits.length < 6 || phoneDigits.length > 15) {
-      errors.phone = 'Please enter a valid phone number'
+      errors.phone = t('validationPhone')
     }
 
     // Date must be in the future (not today)
@@ -308,7 +325,7 @@ export default function Restaurant() {
     today.setHours(0, 0, 0, 0)
     const reservationDate = new Date(reservationForm.date)
     if (reservationDate <= today) {
-      errors.date = 'Reservation must be for a future date'
+      errors.date = t('validationDate')
     }
 
     setReservationErrors(errors)
@@ -344,15 +361,15 @@ export default function Restaurant() {
 
       if (response.ok) {
         setReservationStatus('success')
-        setReservationMessage(data.message || 'Reservation request submitted! Please await confirmation — our team will get back to you shortly.')
+        setReservationMessage(data.message || t('reservationSuccessDefault'))
         setReservationForm({ name: '', email: '', countryCode: '+355', phone: '', date: '', time: '', guests: '', specialRequests: '' })
       } else {
         setReservationStatus('error')
-        setReservationMessage(data.error || 'Something went wrong. Please try again.')
+        setReservationMessage(data.error || t('reservationErrorDefault'))
       }
     } catch {
       setReservationStatus('error')
-      setReservationMessage('Network error. Please try again.')
+      setReservationMessage(t('reservationErrorNetwork'))
     }
   }
 
@@ -394,15 +411,15 @@ export default function Restaurant() {
           <div className="max-w-4xl space-y-6">
             <FadeIn animation="fade" delay={0.2}>
               <Badge variant="neutral" className="bg-white/10 text-white border border-white/20">
-                Mediterranean Cuisine
+                {t('heroBadge')}
               </Badge>
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.3}>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide">
-                Kallmi
+                {t('heroTitle')}
                 <span className="block text-3xl sm:text-5xl lg:text-6xl italic text-brand-gold mt-2">
-                  Restaurant
+                  {t('heroTitleAccent')}
                 </span>
               </h1>
             </FadeIn>
@@ -417,8 +434,7 @@ export default function Restaurant() {
 
             <FadeIn animation="slide-up" delay={0.6}>
               <p className="text-lg sm:text-xl lg:text-2xl font-light opacity-90 max-w-2xl mx-auto">
-                Where <span className="text-brand-gold">authentic Albanian cuisine</span> meets
-                contemporary elegance, overlooking the sparkling Adriatic Sea
+                {t('heroDescription')}
               </p>
             </FadeIn>
 
@@ -426,9 +442,9 @@ export default function Restaurant() {
             <FadeIn animation="slide-up" delay={0.8}>
               <div className="flex flex-wrap justify-center gap-4 mt-8">
                 {[
-                  { icon: ClockIcon, text: "13:00 - 16:00" },
-                  { icon: MapPinIcon, text: "Seaside Terrace" },
-                  { icon: SparklesIcon, text: "Daily Fresh Seafood" },
+                  { icon: ClockIcon, text: t('infoHours') },
+                  { icon: MapPinIcon, text: t('infoLocation') },
+                  { icon: SparklesIcon, text: t('infoFresh') },
                 ].map((item, index) => (
                   <Card key={index} variant="on-dark" padding="sm" className="min-w-[120px] text-center">
                     <item.icon className="w-5 h-5 text-brand-gold mx-auto mb-1" />
@@ -446,26 +462,24 @@ export default function Restaurant() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7 space-y-6 order-2 lg:order-1">
             <FadeIn animation="slide-up">
-              <span className="text-overline">Culinary Heritage</span>
+              <span className="text-overline">{t('introOverline')}</span>
               <div className="divider-accent mt-3" />
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.1}>
               <h2 className="text-heading text-brand-olive">
-                A Journey Through
-                <span className="block italic mt-1">Albanian Flavors</span>
+                {t('introTitle')}
+                <span className="block italic mt-1">{t('introTitleAccent')}</span>
               </h2>
             </FadeIn>
 
             <FadeIn animation="fade" delay={0.2}>
               <div className="space-y-4 text-body-lg">
                 <p className="pl-6 border-l-2 border-brand-olive/30">
-                  Every dish tells a story of our land, featuring the freshest catch from the Adriatic
-                  and ingredients from our own gardens, all enhanced by our estate's liquid gold.
+                  {t('introText1')}
                 </p>
                 <p className="pl-6 border-l-2 border-brand-olive/30">
-                  Dine with panoramic views of olive groves and the sparkling sea as your backdrop,
-                  creating memories that last a lifetime.
+                  {t('introText2')}
                 </p>
               </div>
             </FadeIn>
@@ -473,9 +487,9 @@ export default function Restaurant() {
             <FadeIn animation="slide-up" delay={0.3}>
               <div className="grid grid-cols-3 gap-4 pt-6">
                 {[
-                  { number: '15+', label: 'Fresh Dishes' },
-                  { number: '4.8★', label: 'Guest Rating' },
-                  { number: 'Daily', label: 'Fresh Catch' }
+                  { number: '15+', label: t('statDishes') },
+                  { number: '4.8\u2605', label: t('statRating') },
+                  { number: 'Daily', label: t('statCatch') }
                 ].map((stat, index) => (
                   <Card key={index} variant="subtle" padding="sm" className="text-center">
                     <div className="text-2xl font-light text-brand-olive">{stat.number}</div>
@@ -519,9 +533,9 @@ export default function Restaurant() {
       <Section spacing="lg" background="secondary">
         <FadeIn animation="fade">
           <SectionHeader
-            overline="Fresh Daily Selection"
-            title={<h2 className="text-display text-brand-olive">Our Menu</h2>}
-            subtitle="Discover our carefully curated selection of fresh Adriatic seafood, vibrant salads, and traditional Albanian specialties"
+            overline={t('menuOverline')}
+            title={<h2 className="text-display text-brand-olive">{t('menuTitle')}</h2>}
+            subtitle={t('menuSubtitle')}
             align="center"
           />
         </FadeIn>
@@ -531,10 +545,10 @@ export default function Restaurant() {
           <div className="flex justify-center mb-12 overflow-x-auto pb-2">
             <div className="flex gap-2 p-1 bg-surface-secondary rounded-xl border border-border-light">
               {[
-                { key: 'featured', label: 'Featured', icon: SparklesIcon },
-                { key: 'salads', label: 'Salads', icon: HeartIcon },
-                { key: 'fish', label: 'Fresh Fish', icon: StarIcon },
-                { key: 'farmed-fish', label: 'Farmed Fish', icon: StarIcon }
+                { key: 'featured', label: t('catFeatured'), icon: SparklesIcon },
+                { key: 'salads', label: t('catSalads'), icon: HeartIcon },
+                { key: 'fish', label: t('catFish'), icon: StarIcon },
+                { key: 'farmed-fish', label: t('catFarmedFish'), icon: StarIcon }
               ].map((category) => (
                 <button
                   key={category.key}
@@ -562,7 +576,7 @@ export default function Restaurant() {
                   <div className="absolute top-4 right-4 z-10">
                     <Badge variant="gold">
                       <SparklesIcon className="w-3 h-3 mr-1" />
-                      Seasonal
+                      {t('seasonal')}
                     </Badge>
                   </div>
                 )}
@@ -570,7 +584,7 @@ export default function Restaurant() {
                 <div className="relative aspect-[4/3] bg-surface-tertiary">
                   <Image
                     src={item.image}
-                    alt={item.name}
+                    alt={t(item.nameKey)}
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -581,13 +595,13 @@ export default function Restaurant() {
                 <div className="p-6 space-y-3">
                   <div className="flex justify-between items-start">
                     <h3 className="text-xl font-light text-brand-olive group-hover:text-brand-olive-dark transition-colors">
-                      {item.name}
+                      {t(item.nameKey)}
                     </h3>
                     <span className="text-xl font-light text-brand-olive whitespace-nowrap ml-4">
-                      {formatPrice(item.price, item.unit)}
+                      {formatPrice(item.price, item.unitKey ? t(item.unitKey) : undefined)}
                     </span>
                   </div>
-                  <p className="text-body">{item.description}</p>
+                  <p className="text-body">{t(item.descKey)}</p>
                 </div>
               </Card>
             </FadeIn>
@@ -603,7 +617,7 @@ export default function Restaurant() {
               className="group"
             >
               <HeartIcon className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
-              {showDrinks ? 'Hide' : 'View'} Drinks Menu
+              {showDrinks ? t('drinksToggleHide') : t('drinksToggleShow')}
             </Button>
           </div>
         </FadeIn>
@@ -612,20 +626,22 @@ export default function Restaurant() {
         {showDrinks && (
           <FadeIn animation="slide-up">
             <Card variant="elevated" padding="lg" className="mt-8">
-              <h3 className="text-heading text-brand-olive mb-8 text-center">Beverages</h3>
+              <h3 className="text-heading text-brand-olive mb-8 text-center">{t('beveragesTitle')}</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {['beer', 'cocktail', 'soft', 'coffee'].map((category) => (
                   <div key={category}>
                     <h4 className="text-lg font-medium text-brand-olive capitalize border-b border-border-light pb-2 mb-4">
-                      {category === 'soft' ? 'Soft Drinks' : category}s
+                      {drinkCategoryLabels[category]}
                     </h4>
                     <div className="space-y-2">
                       {drinks
                         .filter(drink => drink.category === category)
                         .map((drink, index) => (
                           <div key={index} className="flex justify-between items-center">
-                            <span className="text-text-secondary">{drink.name}</span>
+                            <span className="text-text-secondary">
+                              {drinkNameMap[drink.name] ? t(drinkNameMap[drink.name]) : drink.name}
+                            </span>
                             <span className="text-brand-olive font-medium">{formatPrice(drink.price)}</span>
                           </div>
                         ))}
@@ -642,14 +658,14 @@ export default function Restaurant() {
       <Section spacing="lg" background="default">
         <FadeIn animation="fade">
           <SectionHeader
-            overline="Reserve Your Table"
+            overline={t('reservationOverline')}
             title={
               <h2 className="text-display text-brand-olive">
-                Join Us for an
-                <span className="block italic">Unforgettable Experience</span>
+                {t('reservationTitle')}
+                <span className="block italic">{t('reservationTitleAccent')}</span>
               </h2>
             }
-            subtitle="Secure your table overlooking the Adriatic Sea and let us create a memorable dining experience for you and your loved ones."
+            subtitle={t('reservationSubtitle')}
             align="center"
           />
         </FadeIn>
@@ -661,14 +677,14 @@ export default function Restaurant() {
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
                   <HeartIcon className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-2xl font-light text-brand-olive">Thank You!</h3>
+                <h3 className="text-2xl font-light text-brand-olive">{t('reservationThankYou')}</h3>
                 <p className="text-body max-w-md mx-auto">{reservationMessage}</p>
                 <Button
                   variant="outline"
                   onClick={() => setReservationStatus('idle')}
                   className="mt-4"
                 >
-                  Make Another Reservation
+                  {t('reservationMakeAnother')}
                 </Button>
               </div>
             ) : (
@@ -679,7 +695,7 @@ export default function Restaurant() {
                     name="name"
                     value={reservationForm.name}
                     onChange={handleReservationChange}
-                    placeholder="Your Name"
+                    placeholder={t('reservationNamePlaceholder')}
                     className="input-field"
                     required
                   />
@@ -689,7 +705,7 @@ export default function Restaurant() {
                       name="email"
                       value={reservationForm.email}
                       onChange={handleReservationChange}
-                      placeholder="Email Address"
+                      placeholder={t('reservationEmailPlaceholder')}
                       className={`input-field ${reservationErrors.email ? 'border-red-400 focus:border-red-400' : ''}`}
                       required
                     />
@@ -715,7 +731,7 @@ export default function Restaurant() {
                       name="phone"
                       value={reservationForm.phone}
                       onChange={handleReservationChange}
-                      placeholder="Phone Number"
+                      placeholder={t('reservationPhonePlaceholder')}
                       required
                       className={`input-field flex-1 ${reservationErrors.phone ? 'border-red-400 focus:border-red-400' : ''}`}
                     />
@@ -743,7 +759,7 @@ export default function Restaurant() {
                     className="select-field"
                     required
                   >
-                    <option value="">Select Time</option>
+                    <option value="">{t('reservationSelectTime')}</option>
                     <option value="12:00">12:00 PM</option>
                     <option value="12:30">12:30 PM</option>
                     <option value="13:00">1:00 PM</option>
@@ -760,15 +776,15 @@ export default function Restaurant() {
                     className="select-field"
                     required
                   >
-                    <option value="">Guests</option>
-                    <option value="1">1 Guest</option>
-                    <option value="2">2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4">4 Guests</option>
-                    <option value="5">5 Guests</option>
-                    <option value="6">6 Guests</option>
-                    <option value="7">7 Guests</option>
-                    <option value="8">8+ Guests</option>
+                    <option value="">{t('reservationGuests')}</option>
+                    <option value="1">{t('reservationGuest1')}</option>
+                    <option value="2">{t('reservationGuest2')}</option>
+                    <option value="3">{t('reservationGuest3')}</option>
+                    <option value="4">{t('reservationGuest4')}</option>
+                    <option value="5">{t('reservationGuest5')}</option>
+                    <option value="6">{t('reservationGuest6')}</option>
+                    <option value="7">{t('reservationGuest7')}</option>
+                    <option value="8">{t('reservationGuest8')}</option>
                   </select>
                 </div>
 
@@ -776,7 +792,7 @@ export default function Restaurant() {
                   name="specialRequests"
                   value={reservationForm.specialRequests}
                   onChange={handleReservationChange}
-                  placeholder="Special Requests or Dietary Requirements"
+                  placeholder={t('reservationSpecialRequests')}
                   className="textarea-field mb-4"
                 />
 
@@ -793,11 +809,11 @@ export default function Restaurant() {
                   type="submit"
                   disabled={reservationStatus === 'loading'}
                 >
-                  {reservationStatus === 'loading' ? 'Sending...' : 'Request Reservation'}
+                  {reservationStatus === 'loading' ? t('reservationSending') : t('reservationSubmit')}
                 </Button>
 
                 <p className="text-center text-caption mt-3">
-                  Please await confirmation — our team will get back to you shortly.
+                  {t('reservationDisclaimer')}
                 </p>
               </form>
             )}
@@ -806,7 +822,7 @@ export default function Restaurant() {
 
         <FadeIn animation="fade" delay={0.4}>
           <p className="text-center text-text-tertiary mt-6">
-            For large groups or special events, please contact us at{' '}
+            {t('reservationLargeGroup')}{' '}
             <a href="tel:+355682450851" className="link">+355 68 24 50 851</a>
           </p>
         </FadeIn>
@@ -817,26 +833,24 @@ export default function Restaurant() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7 space-y-6 order-2 lg:order-1">
             <FadeIn animation="slide-up">
-              <span className="text-overline">Special Occasions</span>
+              <span className="text-overline">{t('eventsOverline')}</span>
               <div className="divider-accent mt-3" />
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.1}>
               <h2 className="text-heading text-brand-olive">
-                Private Events &
-                <span className="block italic">Celebrations</span>
+                {t('eventsTitle')}
+                <span className="block italic">{t('eventsTitleAccent')}</span>
               </h2>
             </FadeIn>
 
             <FadeIn animation="fade" delay={0.2}>
               <div className="space-y-4 text-body-lg">
                 <p className="pl-6 border-l-2 border-brand-olive/30">
-                  Celebrate life's most precious moments in the stunning setting of Kallmi Estate,
-                  where every detail is crafted to perfection.
+                  {t('eventsText1')}
                 </p>
                 <p className="pl-6 border-l-2 border-brand-olive/30">
-                  From intimate anniversaries to grand weddings, our team creates bespoke experiences
-                  with customized menus and impeccable service.
+                  {t('eventsText2')}
                 </p>
               </div>
             </FadeIn>
@@ -845,7 +859,7 @@ export default function Restaurant() {
               <Link href="/contact">
                 <Button variant="primary" className="mt-4">
                   <HeartIcon className="w-5 h-5 mr-2" />
-                  Plan Your Event
+                  {t('eventsCta')}
                 </Button>
               </Link>
             </FadeIn>
@@ -872,9 +886,9 @@ export default function Restaurant() {
       <Section spacing="lg" background="default">
         <FadeIn animation="fade">
           <SectionHeader
-            overline="Awards & Recognition"
-            title={<h2 className="text-display text-brand-olive">Celebrated Excellence</h2>}
-            subtitle="Kallmi i Bukur has been recognized for our commitment to culinary excellence and outstanding dining experience."
+            overline={t('awardsOverline')}
+            title={<h2 className="text-display text-brand-olive">{t('awardsTitle')}</h2>}
+            subtitle={t('awardsSubtitle')}
             align="center"
           />
         </FadeIn>
@@ -898,8 +912,8 @@ export default function Restaurant() {
                 />
               </a>
               <Card variant="subtle" padding="sm" className="mt-4 text-center">
-                <p className="text-brand-olive font-medium">Sluurpy 2025</p>
-                <p className="text-caption">Certificate of Excellence</p>
+                <p className="text-brand-olive font-medium">{t('awardsSluurpy')}</p>
+                <p className="text-caption">{t('awardsSluurpyLabel')}</p>
               </Card>
             </div>
           </FadeIn>
@@ -918,8 +932,8 @@ export default function Restaurant() {
                 <span className="b-circledLeaves27__name">Kallmi i Bukur</span>
               </a>
               <Card variant="subtle" padding="sm" className="mt-4 text-center">
-                <p className="text-brand-olive font-medium">Restaurant Guru 2025</p>
-                <p className="text-caption">Recommendation</p>
+                <p className="text-brand-olive font-medium">{t('awardsGuru')}</p>
+                <p className="text-caption">{t('awardsGuruLabel')}</p>
               </Card>
             </div>
           </FadeIn>
@@ -928,8 +942,7 @@ export default function Restaurant() {
         <FadeIn animation="fade" delay={0.4}>
           <Card variant="elevated" padding="lg" className="max-w-2xl mx-auto mt-12 text-center">
             <p className="text-xl text-text-secondary italic font-light leading-relaxed">
-              "We're honored to be recognized for our commitment to authentic Albanian cuisine
-              and the unforgettable experiences we create for our guests."
+              &ldquo;{t('awardsQuote')}&rdquo;
             </p>
             <div className="divider-accent mx-auto mt-6" />
           </Card>

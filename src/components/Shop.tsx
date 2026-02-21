@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { FadeIn } from './motion/FadeIn'
 import { useCart } from '@/context/CartContext'
 import { Section, SectionHeader } from './layout/Section'
@@ -16,47 +17,47 @@ import {
 
 interface Product {
   id: number
-  name: string
+  nameKey: string
+  descriptionKey: string
   year: number
   size: string
   price: number
   image: string
   inStock?: boolean
-  description?: string
   featured?: boolean
 }
 
 const products: Product[] = [
   {
     id: 1,
-    name: "Estate Reserve",
+    nameKey: "productEstateReserve",
+    descriptionKey: "productEstateReserveDesc",
     year: 2024,
     size: "500ml",
     price: 8,
     image: "https://storage.googleapis.com/kallmi/images/product.webp",
     inStock: false,
-    description: "Our flagship blend from century-old olive trees",
     featured: true
   },
   {
     id: 2,
-    name: "Limited Harvest",
+    nameKey: "productLimitedHarvest",
+    descriptionKey: "productLimitedHarvestDesc",
     year: 2024,
     size: "750ml",
     price: 12,
     image: "https://storage.googleapis.com/kallmi/images/product.webp",
-    inStock: true,
-    description: "Small-batch artisanal pressing from select groves"
+    inStock: true
   },
   {
     id: 3,
-    name: "Premium Selection",
+    nameKey: "productPremiumSelection",
+    descriptionKey: "productPremiumSelectionDesc",
     year: 2024,
     size: "1000ml",
     price: 16,
     image: "https://storage.googleapis.com/kallmi/images/product.webp",
-    inStock: false,
-    description: "Our finest extra virgin olive oil for connoisseurs"
+    inStock: false
   }
 ]
 
@@ -68,6 +69,7 @@ const formatPrice = (price: number) => {
 }
 
 export default function Shop() {
+  const t = useTranslations('Shop')
   const { addToCart } = useCart()
   const [showFilters, setShowFilters] = useState(false)
   const [addedToCart, setAddedToCart] = useState<number | null>(null)
@@ -100,7 +102,12 @@ export default function Shop() {
   }
 
   const handleAddToCart = (product: Product) => {
-    addToCart(product)
+    addToCart({
+      id: product.id,
+      name: t(product.nameKey as any),
+      price: product.price,
+      image: product.image
+    })
     setAddedToCart(product.id)
     setTimeout(() => setAddedToCart(null), 2000)
   }
@@ -113,7 +120,7 @@ export default function Shop() {
         {/* Background */}
         <Image
           src="https://storage.googleapis.com/kallmi/images/hand-harvested.webp"
-          alt="Artisanal Olive Oil Collection"
+          alt={t('heroImageAlt')}
           className="object-cover object-center"
           fill
           priority
@@ -129,19 +136,19 @@ export default function Shop() {
           <div className="max-w-3xl">
             <FadeIn animation="fade" delay={0.2}>
               <span className="text-overline text-white/80 block mb-4">
-                2024 Collection
+                {t('heroOverline')}
               </span>
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.4}>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-tight mb-6">
-                Liquid Gold
+                {t('heroTitle')}
               </h1>
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.6}>
               <p className="text-lg sm:text-xl font-light opacity-90 max-w-2xl mx-auto">
-                Premium extra virgin olive oils, cold-pressed from our heritage groves
+                {t('heroSubtitle')}
               </p>
             </FadeIn>
           </div>
@@ -171,9 +178,9 @@ export default function Shop() {
         <FadeIn animation="fade" className="mb-16">
           <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-2xl mx-auto">
             {[
-              { number: '3', label: 'Premium Oils' },
-              { number: '2024', label: 'Fresh Harvest' },
-              { number: '100%', label: 'Extra Virgin' }
+              { number: '3', label: t('statPremiumOils') },
+              { number: '2024', label: t('statFreshHarvest') },
+              { number: '100%', label: t('statExtraVirgin') }
             ].map((stat, index) => (
               <Card key={index} variant="elevated" className="text-center p-4 sm:p-6">
                 <div
@@ -217,7 +224,7 @@ export default function Shop() {
                   style={{ color: 'var(--color-brand-olive)' }}
                 >
                   <FunnelIcon className="w-5 h-5" />
-                  <span>Refine</span>
+                  <span>{t('filterRefine')}</span>
                 </h3>
                 {showFilters && (
                   <button
@@ -236,7 +243,7 @@ export default function Shop() {
                   className="text-sm font-medium uppercase tracking-wide mb-4"
                   style={{ color: 'var(--color-text-secondary)' }}
                 >
-                  Harvest Year
+                  {t('filterHarvestYear')}
                 </h4>
                 <div className="space-y-3">
                   {filterOptions.years.map(year => (
@@ -268,7 +275,7 @@ export default function Shop() {
                   className="text-sm font-medium uppercase tracking-wide mb-4"
                   style={{ color: 'var(--color-text-secondary)' }}
                 >
-                  Bottle Size
+                  {t('filterBottleSize')}
                 </h4>
                 <div className="space-y-3">
                   {filterOptions.sizes.map(size => (
@@ -316,7 +323,7 @@ export default function Shop() {
                         className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-medium text-white"
                         style={{ backgroundColor: 'var(--color-brand-gold)' }}
                       >
-                        Featured
+                        {t('featured')}
                       </div>
                     )}
 
@@ -327,7 +334,7 @@ export default function Shop() {
                     >
                       <Image
                         src={product.image}
-                        alt={product.name}
+                        alt={t(product.nameKey as any)}
                         fill
                         className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -342,22 +349,20 @@ export default function Shop() {
                           className="text-xl font-light"
                           style={{ color: 'var(--color-text-primary)' }}
                         >
-                          {product.name}
+                          {t(product.nameKey as any)}
                         </h2>
                         <p
                           className="text-sm"
                           style={{ color: 'var(--color-text-tertiary)' }}
                         >
-                          {product.year} Harvest • {product.size}
+                          {product.year} {t('harvest')} • {product.size}
                         </p>
-                        {product.description && (
-                          <p
-                            className="text-sm leading-relaxed"
-                            style={{ color: 'var(--color-text-secondary)' }}
-                          >
-                            {product.description}
-                          </p>
-                        )}
+                        <p
+                          className="text-sm leading-relaxed"
+                          style={{ color: 'var(--color-text-secondary)' }}
+                        >
+                          {t(product.descriptionKey as any)}
+                        </p>
                       </div>
 
                       {/* Price and Action */}
@@ -382,12 +387,12 @@ export default function Shop() {
                             {addedToCart === product.id ? (
                               <span className="flex items-center gap-2">
                                 <CheckCircleIcon className="w-4 h-4" />
-                                <span>Added</span>
+                                <span>{t('added')}</span>
                               </span>
                             ) : (
                               <span className="flex items-center gap-2">
                                 <ShoppingCartIcon className="w-4 h-4" />
-                                <span>Add</span>
+                                <span>{t('add')}</span>
                               </span>
                             )}
                           </Button>
@@ -399,7 +404,7 @@ export default function Shop() {
                               color: 'var(--color-text-tertiary)'
                             }}
                           >
-                            Coming Soon
+                            {t('comingSoon')}
                           </span>
                         )}
                       </div>
@@ -421,10 +426,10 @@ export default function Shop() {
                     className="text-lg font-light mb-2"
                     style={{ color: 'var(--color-text-primary)' }}
                   >
-                    No products found
+                    {t('noProductsFound')}
                   </h3>
                   <p style={{ color: 'var(--color-text-secondary)' }}>
-                    Try adjusting your filters
+                    {t('tryAdjustingFilters')}
                   </p>
                 </Card>
               </FadeIn>

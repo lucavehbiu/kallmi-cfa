@@ -2,7 +2,8 @@
 
 import { useState, ReactNode } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 import {
   SparklesIcon,
   HeartIcon,
@@ -41,52 +42,52 @@ const AnimateDiv = ({
 
 interface CampSite {
   id: number
-  name: string
-  description: string
+  nameKey: string
+  descriptionKey: string
   price: number
   capacity: number
-  amenities: string[]
+  amenityKeys: string[]
   images: string[]
   featured?: boolean
 }
 
-const campsites: CampSite[] = [
+const campsiteData: CampSite[] = [
   {
     id: 1,
-    name: "Olive Grove Campsite",
-    description: "Experience camping under ancient olive trees with partial views of the Adriatic Sea. Each site includes a cleared area for your tent and access to shared facilities.",
+    nameKey: "site1Name",
+    descriptionKey: "site1Description",
     price: 35,
     capacity: 4,
-    amenities: ["Fire pit", "Picnic table", "Shared bathrooms", "Drinking water", "BBQ area", "Wifi hotspot"],
+    amenityKeys: ["amenityFirePit", "amenityPicnicTable", "amenitySharedBathrooms", "amenityDrinkingWater", "amenityBBQ", "amenityWifi"],
     images: ["https://storage.googleapis.com/kallmi/images/room-olive-1.webp", "https://storage.googleapis.com/kallmi/images/room-olive-2.webp"],
     featured: true
   },
   {
     id: 2,
-    name: "Seaside Pitch",
-    description: "Premium camping spots with direct sea views and private beach access. Enjoy the sounds of the waves as you fall asleep under the stars.",
+    nameKey: "site2Name",
+    descriptionKey: "site2Description",
     price: 45,
     capacity: 4,
-    amenities: ["Private beach access", "Fire pit", "Picnic table", "Shared bathrooms", "Drinking water", "Hammock"],
+    amenityKeys: ["amenityPrivateBeach", "amenityFirePit", "amenityPicnicTable", "amenitySharedBathrooms", "amenityDrinkingWater", "amenityHammock"],
     images: ["https://storage.googleapis.com/kallmi/images/room-garden-1.webp", "https://storage.googleapis.com/kallmi/images/room-garden-2.webp"],
     featured: true
   },
   {
     id: 3,
-    name: "Forest Retreat",
-    description: "Secluded camping spots nestled in a small forest area of the estate. Perfect for those seeking shade and privacy.",
+    nameKey: "site3Name",
+    descriptionKey: "site3Description",
     price: 30,
     capacity: 6,
-    amenities: ["Fire pit", "Picnic table", "Shared bathrooms", "Drinking water", "Extra shade", "Wildlife viewing"],
+    amenityKeys: ["amenityFirePit", "amenityPicnicTable", "amenitySharedBathrooms", "amenityDrinkingWater", "amenityExtraShade", "amenityWildlife"],
     images: ["https://storage.googleapis.com/kallmi/images/room-family-1.webp", "https://storage.googleapis.com/kallmi/images/room-family-2.webp"]
   },
   {
     id: 4,
-    name: "Glamping Tent",
-    description: "Pre-set luxury bell tents with comfortable beds, linens, and furnishings. The perfect blend of camping and comfort.",
+    nameKey: "site4Name",
+    descriptionKey: "site4Description",
     price: 75,
     capacity: 2,
-    amenities: ["Real bed", "Linens provided", "Solar lighting", "Private bathroom", "Outdoor lounge", "Breakfast included"],
+    amenityKeys: ["amenityRealBed", "amenityLinens", "amenitySolarLighting", "amenityPrivateBathroom", "amenityOutdoorLounge", "amenityBreakfast"],
     images: ["https://storage.googleapis.com/kallmi/images/room-heritage-1.webp", "https://storage.googleapis.com/kallmi/images/room-heritage-2.webp"],
     featured: true
   }
@@ -100,6 +101,7 @@ const formatPrice = (price: number) => {
 }
 
 export default function Camping() {
+  const t = useTranslations('CampingPage')
   const [selectedSite, setSelectedSite] = useState<CampSite | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
@@ -126,15 +128,15 @@ export default function Camping() {
             <AnimateDiv animation="fade" duration={1.0} delay={0.2}>
               <div className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 text-white border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium tracking-wide">
                 <FireIcon className="w-4 h-4" />
-                Wild & Free
+                {t('heroBadge')}
               </div>
             </AnimateDiv>
 
             <AnimateDiv animation="slide-up" duration={1.2} delay={0.3}>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide">
-                Kallmi
+                {t('heroTitle')}
                 <span className="block text-3xl sm:text-5xl lg:text-6xl italic text-[#D4AF37] mt-2">
-                  Camping
+                  {t('heroTitleAccent')}
                 </span>
               </h1>
             </AnimateDiv>
@@ -149,8 +151,7 @@ export default function Camping() {
 
             <AnimateDiv animation="slide-up" duration={1.2} delay={0.6}>
               <p className="text-lg sm:text-xl lg:text-2xl font-light opacity-90 max-w-2xl mx-auto">
-                Sleep under <span className="text-[#D4AF37]">ancient olive trees</span> and wake to
-                breathtaking Adriatic sunrises
+                {t('heroSubtitle')} <span className="text-[#D4AF37]">{t('heroSubtitleAccent')}</span>
               </p>
             </AnimateDiv>
 
@@ -158,9 +159,9 @@ export default function Camping() {
             <AnimateDiv animation="slide-up" duration={1.0} delay={0.8}>
               <div className="flex flex-wrap justify-center gap-4 mt-8">
                 {[
-                  { icon: HomeIcon, text: "Olive Grove Sites" },
-                  { icon: SunIcon, text: "Sea Views" },
-                  { icon: MoonIcon, text: "Stargazing" },
+                  { icon: HomeIcon, text: t('heroCard1') },
+                  { icon: SunIcon, text: t('heroCard2') },
+                  { icon: MoonIcon, text: t('heroCard3') },
                 ].map((item, index) => (
                   <div key={index} className="backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl px-4 py-3 min-w-[120px] text-center">
                     <item.icon className="w-5 h-5 text-[#D4AF37] mx-auto mb-1" />
@@ -187,37 +188,34 @@ export default function Camping() {
               <div className="space-y-4 sm:space-y-6">
                 <div className="inline-block">
                   <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
-                    Wild Adventure
+                    {t('introOverline')}
                   </span>
                   <div className="w-16 h-px bg-[#8B7355] mt-2" />
                 </div>
                 <h2 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-extralight text-[#8B7355] leading-tight">
-                  Camping Among
-                  <span className="block italic mt-1 sm:mt-2">Ancient Olives</span>
+                  {t('introTitle')}
+                  <span className="block italic mt-1 sm:mt-2">{t('introTitleAccent')}</span>
                 </h2>
               </div>
 
               <div className="space-y-4 sm:space-y-6 text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed font-light">
                 <p className="relative pl-4 sm:pl-6 border-l-2 border-[#8B7355]/30">
-                  Immerse yourself in nature's embrace where centuries-old olive trees whisper stories
-                  of the past while the Adriatic Sea serenades you to sleep under a blanket of stars.
+                  {t('introText1')}
                 </p>
                 <p className="relative pl-4 sm:pl-6 border-l-2 border-[#8B7355]/30">
-                  From rustic tent sites to luxury glamping, experience the perfect balance of adventure
-                  and comfort in Albania's most pristine coastal setting.
+                  {t('introText2')}
                 </p>
                 <p className="relative pl-4 sm:pl-6 border-l-2 border-[#8B7355]/30">
-                  Wake to stunning sunrises, explore hidden beaches, and create memories that will
-                  last a lifetime in this untouched paradise.
+                  {t('introText3')}
                 </p>
               </div>
 
               {/* Experience Stats */}
               <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-6 sm:pt-8">
                 {[
-                  { number: '4', label: 'Unique Sites' },
-                  { number: '5★', label: 'Experience' },
-                  { number: '24/7', label: 'Nature' }
+                  { number: t('statNumber1'), label: t('statLabel1') },
+                  { number: t('statNumber2'), label: t('statLabel2') },
+                  { number: t('statNumber3'), label: t('statLabel3') }
                 ].map((stat, index) => (
                   <AnimateDiv
                     key={index}
@@ -283,21 +281,20 @@ export default function Camping() {
           <div className="text-center mb-12 sm:mb-20">
             <AnimateDiv animation="slide-up" delay={0.2}>
               <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
-                Choose Your Adventure
+                {t('campsitesOverline')}
               </span>
               <h2 className="text-3xl sm:text-6xl font-extralight text-[#8B7355] mt-4 mb-6 leading-tight">
-                Our Campsites
+                {t('campsitesTitle')}
               </h2>
               <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
-                From rustic tent pitches under ancient olives to luxury glamping with all amenities,
-                find your perfect camping experience
+                {t('campsitesSubtitle')}
               </p>
             </AnimateDiv>
           </div>
 
           {/* Campsites Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            {campsites.map((site, index) => (
+            {campsiteData.map((site, index) => (
               <AnimateDiv
                 key={site.id}
                 animation="slide-up"
@@ -312,7 +309,7 @@ export default function Camping() {
                     <div className="absolute top-4 right-4 z-10">
                       <div className="bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] text-white px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
                         <SparklesIcon className="w-3 h-3" />
-                        <span>Featured</span>
+                        <span>{t('featured')}</span>
                       </div>
                     </div>
                   )}
@@ -321,7 +318,7 @@ export default function Camping() {
                   <div className="relative aspect-[4/3] bg-gradient-to-br from-stone-50 to-stone-100">
                     <Image
                       src={site.images[0]}
-                      alt={site.name}
+                      alt={t(site.nameKey)}
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
@@ -336,30 +333,30 @@ export default function Camping() {
                   <div className="p-6 lg:p-8 space-y-4">
                     <div className="flex justify-between items-start">
                       <h3 className="text-xl lg:text-2xl font-light text-[#8B7355] group-hover:text-[#A0845C] transition-colors duration-300">
-                        {site.name}
+                        {t(site.nameKey)}
                       </h3>
                       <span className="text-xl lg:text-2xl font-light text-[#8B7355] whitespace-nowrap ml-4">
-                        €{formatPrice(site.price)} / night
+                        €{formatPrice(site.price)} {t('perNight')}
                       </span>
                     </div>
 
                     <p className="text-sm lg:text-base text-gray-600 leading-relaxed font-light">
-                      {site.description}
+                      {t(site.descriptionKey)}
                     </p>
 
                     {/* Capacity & Amenities Preview */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       <span className="text-xs bg-[#8B7355]/10 text-[#8B7355] px-3 py-1 rounded-full font-medium">
-                        Up to {site.capacity} people
+                        {t('upToPeople', { capacity: site.capacity })}
                       </span>
-                      {site.amenities.slice(0, 2).map((amenity, index) => (
+                      {site.amenityKeys.slice(0, 2).map((amenityKey, index) => (
                         <span key={index} className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
-                          {amenity}
+                          {t(amenityKey)}
                         </span>
                       ))}
-                      {site.amenities.length > 2 && (
+                      {site.amenityKeys.length > 2 && (
                         <span className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
-                          +{site.amenities.length - 2} more
+                          {t('moreAmenities', { count: site.amenityKeys.length - 2 })}
                         </span>
                       )}
                     </div>
@@ -371,7 +368,7 @@ export default function Camping() {
                       }}
                       className="w-full px-6 py-3 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg"
                     >
-                      View Details & Book
+                      {t('viewDetails')}
                     </button>
                   </div>
                 </div>
@@ -391,15 +388,14 @@ export default function Camping() {
         >
           <div className="space-y-6 mb-12">
             <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
-              Book Your Adventure
+              {t('bookingOverline')}
             </span>
             <h2 className="text-3xl sm:text-5xl font-extralight text-[#8B7355] leading-tight">
-              Reserve Your
-              <span className="block italic">Perfect Campsite</span>
+              {t('bookingTitle')}
+              <span className="block italic">{t('bookingTitleAccent')}</span>
             </h2>
             <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed font-light">
-              Secure your spot under the stars and create unforgettable memories
-              in Albania's most enchanting camping destination.
+              {t('bookingSubtitle')}
             </p>
           </div>
 
@@ -408,7 +404,7 @@ export default function Camping() {
               <div className="relative group">
                 <input
                   type="text"
-                  placeholder="Your Name"
+                  placeholder={t('formName')}
                   className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
@@ -416,7 +412,7 @@ export default function Camping() {
               <div className="relative group">
                 <input
                   type="email"
-                  placeholder="Email Address"
+                  placeholder={t('formEmail')}
                   className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
@@ -426,21 +422,21 @@ export default function Camping() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
               <div className="relative group">
                 <select className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light">
-                  <option value="">Select Campsite Type</option>
-                  {campsites.map(site => (
-                    <option key={site.id} value={site.id}>{site.name}</option>
+                  <option value="">{t('formCampsiteType')}</option>
+                  {campsiteData.map(site => (
+                    <option key={site.id} value={site.id}>{t(site.nameKey)}</option>
                   ))}
                 </select>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
               <div className="relative group">
                 <select className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light">
-                  <option value="">Number of Campers</option>
-                  <option value="1">1 Person</option>
-                  <option value="2">2 People</option>
-                  <option value="3">3 People</option>
-                  <option value="4">4 People</option>
-                  <option value="5+">5+ People</option>
+                  <option value="">{t('formCampers')}</option>
+                  <option value="1">{t('formCampers1')}</option>
+                  <option value="2">{t('formCampers2')}</option>
+                  <option value="3">{t('formCampers3')}</option>
+                  <option value="4">{t('formCampers4')}</option>
+                  <option value="5+">{t('formCampers5')}</option>
                 </select>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
@@ -448,7 +444,7 @@ export default function Camping() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
               <div className="relative group">
-                <label className="block text-gray-700 text-sm font-medium mb-2 text-left">Check-in Date</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2 text-left">{t('formCheckin')}</label>
                 <input
                   type="date"
                   className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
@@ -456,7 +452,7 @@ export default function Camping() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </div>
               <div className="relative group">
-                <label className="block text-gray-700 text-sm font-medium mb-2 text-left">Check-out Date</label>
+                <label className="block text-gray-700 text-sm font-medium mb-2 text-left">{t('formCheckout')}</label>
                 <input
                   type="date"
                   className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
@@ -467,19 +463,19 @@ export default function Camping() {
 
             <div className="mb-8 relative group">
               <textarea
-                placeholder="Special Requests or Equipment Needs"
+                placeholder={t('formSpecialRequests')}
                 className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 h-32 resize-none font-light"
               ></textarea>
               <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
             </div>
 
             <button className="w-full px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg text-lg">
-              Check Availability
+              {t('formSubmit')}
             </button>
           </div>
 
           <p className="mt-8 text-gray-500 font-light">
-            For group bookings or special arrangements, contact us at{' '}
+            {t('bookingContact')}{' '}
             <a href="mailto:reservations@kallmibukur.al" className="text-[#8B7355] hover:text-[#A0845C] transition-colors duration-300">
               reservations@kallmibukur.al
             </a>
@@ -497,14 +493,13 @@ export default function Camping() {
           <div className="text-center mb-12 sm:mb-20">
             <AnimateDiv animation="slide-up" delay={0.2}>
               <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
-                Adventure Awaits
+                {t('activitiesOverline')}
               </span>
               <h2 className="text-3xl sm:text-6xl font-extralight text-[#8B7355] mt-4 mb-6 leading-tight">
-                Outdoor Activities
+                {t('activitiesTitle')}
               </h2>
               <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
-                Discover endless adventures from hiking ancient trails to stargazing
-                under pristine Albanian skies
+                {t('activitiesSubtitle')}
               </p>
             </AnimateDiv>
           </div>
@@ -513,20 +508,20 @@ export default function Camping() {
             {[
               {
                 icon: MapPinIcon,
-                title: "Hiking Trails",
-                description: "Explore scenic trails through olive groves, along the coastline, and into nearby mountains with spectacular panoramic views.",
+                title: t('activity1Title'),
+                description: t('activity1Description'),
                 delay: 0.1
               },
               {
                 icon: SunIcon,
-                title: "Beach Access",
-                description: "Enjoy private access to pristine Adriatic beaches, perfect for swimming, snorkeling, and sunbathing during your stay.",
+                title: t('activity2Title'),
+                description: t('activity2Description'),
                 delay: 0.2
               },
               {
                 icon: MoonIcon,
-                title: "Stargazing",
-                description: "Experience the magic of unpolluted night skies with guided stargazing sessions and astronomy talks.",
+                title: t('activity3Title'),
+                description: t('activity3Description'),
                 delay: 0.3
               }
             ].map((activity, index) => (
@@ -558,7 +553,7 @@ export default function Camping() {
               className="group inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
             >
               <HeartIcon className="w-5 h-5 transition-transform group-hover:scale-110" />
-              <span>Plan Your Adventure</span>
+              <span>{t('planAdventure')}</span>
             </Link>
           </div>
         </AnimateDiv>
@@ -571,7 +566,7 @@ export default function Camping() {
             <div className="relative h-80">
               <Image
                 src={selectedSite.images[currentImageIndex]}
-                alt={selectedSite.name}
+                alt={t(selectedSite.nameKey)}
                 className="object-cover"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
@@ -619,34 +614,34 @@ export default function Camping() {
 
             <div className="p-8 lg:p-12">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#8B7355]">{selectedSite.name}</h3>
-                <span className="text-2xl lg:text-3xl font-light text-[#8B7355]">€{formatPrice(selectedSite.price)} / night</span>
+                <h3 className="text-2xl lg:text-3xl font-light text-[#8B7355]">{t(selectedSite.nameKey)}</h3>
+                <span className="text-2xl lg:text-3xl font-light text-[#8B7355]">€{formatPrice(selectedSite.price)} {t('perNight')}</span>
               </div>
 
               <div className="flex flex-wrap gap-3 mb-6">
                 <span className="text-sm bg-[#8B7355]/10 text-[#8B7355] px-4 py-2 rounded-full font-medium">
-                  Up to {selectedSite.capacity} people
+                  {t('upToPeople', { capacity: selectedSite.capacity })}
                 </span>
                 {selectedSite.featured && (
                   <span className="text-sm bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] text-white px-4 py-2 rounded-full font-medium">
-                    Featured Site
+                    {t('modalFeaturedSite')}
                   </span>
                 )}
               </div>
 
-              <p className="text-gray-700 mb-8 text-lg leading-relaxed font-light">{selectedSite.description}</p>
+              <p className="text-gray-700 mb-8 text-lg leading-relaxed font-light">{t(selectedSite.descriptionKey)}</p>
 
               <div className="mb-8">
-                <h4 className="text-xl text-[#8B7355] mb-4 font-light">Amenities & Features</h4>
+                <h4 className="text-xl text-[#8B7355] mb-4 font-light">{t('modalAmenities')}</h4>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {selectedSite.amenities.map((amenity, index) => (
+                  {selectedSite.amenityKeys.map((amenityKey, index) => (
                     <li key={index} className="flex items-center gap-3">
                       <div className="w-5 h-5 bg-[#8B7355]/10 rounded-full flex items-center justify-center flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <span className="text-gray-700 font-light">{amenity}</span>
+                      <span className="text-gray-700 font-light">{t(amenityKey)}</span>
                     </li>
                   ))}
                 </ul>
@@ -660,7 +655,7 @@ export default function Camping() {
                   document.querySelector('.booking-section')?.scrollIntoView({ behavior: 'smooth' })
                 }}
               >
-                Book This Campsite
+                {t('modalBook')}
               </button>
             </div>
           </div>

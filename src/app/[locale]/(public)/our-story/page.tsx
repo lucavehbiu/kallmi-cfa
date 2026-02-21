@@ -35,6 +35,7 @@ export default async function OurStory({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const t = await getTranslations({ locale, namespace: 'OurStory' })
   return (
     <main className="min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 font-cormorant relative overflow-hidden">
 
@@ -58,15 +59,15 @@ export default async function OurStory({
             <AnimateDiv animation="fade" duration={1.0} delay={0.2}>
               <div className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 text-white border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium tracking-wide">
                 <SparklesIcon className="w-4 h-4" />
-                Four Generations of Excellence
+                {t('heroBadge')}
               </div>
             </AnimateDiv>
 
             <AnimateDiv animation="slide-up" duration={1.2} delay={0.3}>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide">
-                Our
+                {t('heroTitle')}
                 <span className="block text-3xl sm:text-5xl lg:text-6xl italic text-[#D4AF37] mt-2">
-                  Story
+                  {t('heroTitleAccent')}
                 </span>
               </h1>
             </AnimateDiv>
@@ -81,9 +82,9 @@ export default async function OurStory({
 
             <AnimateDiv animation="slide-up" duration={1.2} delay={0.6}>
               <p className="text-lg sm:text-xl lg:text-2xl font-light opacity-90 max-w-2xl mx-auto">
-                A <span className="text-[#D4AF37]">century of tradition</span>,
-                a lifetime of passion, and the eternal pursuit of
-                <span className="text-[#D4AF37]"> liquid gold</span>
+                {t('heroDescription1')}<span className="text-[#D4AF37]">{t('heroDescriptionAccent1')}</span>
+                {t('heroDescription2')}
+                <span className="text-[#D4AF37]">{t('heroDescriptionAccent2')}</span>
               </p>
             </AnimateDiv>
 
@@ -91,9 +92,9 @@ export default async function OurStory({
             <AnimateDiv animation="slide-up" duration={1.0} delay={0.8}>
               <div className="flex flex-wrap justify-center gap-4 mt-8">
                 {[
-                  { icon: ClockIcon, text: "20+ Years" },
-                  { icon: MapPinIcon, text: "Durrës, Albania" },
-                  { icon: UserGroupIcon, text: "4th Generation" },
+                  { icon: ClockIcon, text: t('infoYears') },
+                  { icon: MapPinIcon, text: t('infoLocation') },
+                  { icon: UserGroupIcon, text: t('infoGeneration') },
                 ].map((item, index) => (
                   <div key={index} className="backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl px-4 py-3 min-w-[120px] text-center">
                     <item.icon className="w-5 h-5 text-[#D4AF37] mx-auto mb-1" />
@@ -121,13 +122,13 @@ export default async function OurStory({
                 <div className="inline-block group">
                   <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase flex items-center space-x-2 group-hover:text-[#A0845C] transition-colors duration-300">
                     <MapPinIcon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-                    <span>Durrës, Albania</span>
+                    <span>{t('heritageOverline')}</span>
                   </span>
                   <div className="w-20 h-px bg-gradient-to-r from-[#8B7355] to-[#D4AF37] mt-3 group-hover:w-32 transition-all duration-500" />
                 </div>
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extralight text-[#8B7355] leading-tight">
-                  Our
-                  <span className="block italic text-[#D4AF37] mt-2">Heritage</span>
+                  {t('heritageTitle')}
+                  <span className="block italic text-[#D4AF37] mt-2">{t('heritageTitleAccent')}</span>
                 </h2>
               </div>
 
@@ -135,27 +136,21 @@ export default async function OurStory({
                 <div className="relative group">
                   <div className="absolute -left-6 top-0 w-1 h-full bg-gradient-to-b from-[#8B7355] to-[#D4AF37] rounded-full opacity-30 group-hover:opacity-60 transition-opacity duration-500" />
                   <p className="relative pl-8 group-hover:text-gray-800 transition-colors duration-300">
-                    Nestled in the sun-kissed hills of <span className="text-[#8B7355] font-medium">Durrës, Albania</span>, Kallmi Estate has been a testament
-                    to the art of olive oil making for over a century. Our story began with our ancestors,
-                    who recognized the unique potential of this <span className="text-[#D4AF37] font-medium">fertile land</span>.
+                    {t('heritageText1')}
                   </p>
                 </div>
 
                 <div className="relative group">
                   <div className="absolute -left-6 top-0 w-1 h-full bg-gradient-to-b from-[#D4AF37] to-[#8B7355] rounded-full opacity-30 group-hover:opacity-60 transition-opacity duration-500" />
                   <p className="relative pl-8 group-hover:text-gray-800 transition-colors duration-300">
-                    They planted the first olive trees that would become our <span className="text-[#8B7355] font-medium">legacy</span>, understanding that
-                    this sacred land would nurture generations of <span className="text-[#D4AF37] font-medium">liquid gold</span>. Each tree tells a story
-                    of patience, wisdom, and unwavering dedication.
+                    {t('heritageText2')}
                   </p>
                 </div>
 
                 <div className="relative group">
                   <div className="absolute -left-6 top-0 w-1 h-full bg-gradient-to-b from-[#8B7355] to-[#D4AF37] rounded-full opacity-30 group-hover:opacity-60 transition-opacity duration-500" />
                   <p className="relative pl-8 group-hover:text-gray-800 transition-colors duration-300">
-                    Today, we continue to honor their wisdom by maintaining <span className="text-[#8B7355] font-medium">traditional methods</span> while
-                    embracing modern techniques. Each bottle carries not just the pure essence of our olives,
-                    but the <span className="text-[#D4AF37] font-medium">rich history</span> of our land and the soul of our people.
+                    {t('heritageText3')}
                   </p>
                 </div>
               </div>
@@ -163,10 +158,10 @@ export default async function OurStory({
               {/* Enhanced Heritage Timeline */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8">
                 {[
-                  { year: '1920', event: 'Family Legacy Begins', icon: HeartIcon },
-                  { year: '2004', event: 'Estate Founded', icon: StarIcon },
-                  { year: '2007', event: 'Restaurant Opens', icon: SunIcon },
-                  { year: '2025', event: 'Thriving Heritage', icon: TrophyIcon }
+                  { year: t('milestone1Year'), event: t('milestone1Event'), icon: HeartIcon },
+                  { year: t('milestone2Year'), event: t('milestone2Event'), icon: StarIcon },
+                  { year: t('milestone3Year'), event: t('milestone3Event'), icon: SunIcon },
+                  { year: t('milestone4Year'), event: t('milestone4Event'), icon: TrophyIcon }
                 ].map((milestone, index) => (
                   <AnimateDiv
                     key={index}
@@ -204,14 +199,14 @@ export default async function OurStory({
 
                   {/* Enhanced Floating Heritage Badge */}
                   <div className="absolute top-6 left-6 backdrop-blur-xl bg-white/20 rounded-2xl p-4 border border-white/30 group-hover:bg-white/30 transition-all duration-500">
-                    <div className="text-white text-sm sm:text-base font-medium">Est. 2004</div>
-                    <div className="text-white/80 text-xs sm:text-sm">Albania's Heritage</div>
+                    <div className="text-white text-sm sm:text-base font-medium">{t('imageBadgeEst')}</div>
+                    <div className="text-white/80 text-xs sm:text-sm">{t('imageBadgeHeritage')}</div>
                   </div>
 
                   {/* Floating Stats Badge */}
                   <div className="absolute bottom-6 right-6 backdrop-blur-xl bg-black/20 rounded-2xl p-4 border border-white/20 group-hover:bg-black/30 transition-all duration-500">
-                    <div className="text-[#D4AF37] text-sm sm:text-base font-medium">100+ Years</div>
-                    <div className="text-white/80 text-xs sm:text-sm">Of Tradition</div>
+                    <div className="text-[#D4AF37] text-sm sm:text-base font-medium">{t('imageBadgeYears')}</div>
+                    <div className="text-white/80 text-xs sm:text-sm">{t('imageBadgeTradition')}</div>
                   </div>
                 </div>
 
@@ -243,15 +238,15 @@ export default async function OurStory({
             <AnimateDiv animation="slide-up" delay={0.2}>
               <div className="inline-block group mb-6">
                 <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase group-hover:text-[#A0845C] transition-colors duration-300">
-                  Core Principles
+                  {t('valuesOverline')}
                 </span>
                 <div className="w-16 h-px bg-gradient-to-r from-[#8B7355] to-[#D4AF37] mx-auto mt-3 group-hover:w-24 transition-all duration-500" />
               </div>
               <h2 className="text-3xl sm:text-6xl lg:text-7xl xl:text-8xl font-extralight text-[#8B7355] mb-6 leading-tight">
-                Our Values
+                {t('valuesTitle')}
               </h2>
               <p className="text-base sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
-                The timeless principles that guide every drop of <span className="text-[#D4AF37] font-medium">liquid gold</span> we create
+                {t('valuesSubtitle')}
               </p>
             </AnimateDiv>
           </div>
@@ -261,22 +256,22 @@ export default async function OurStory({
             {[
               {
                 icon: ClockIcon,
-                title: "Tradition",
-                description: "We preserve century-old methods passed down through generations, ensuring each bottle tells our story of heritage and craftsmanship that spans over 100 years.",
+                title: t('valueTraditionTitle'),
+                description: t('valueTraditionDesc'),
                 color: "from-[#8B7355] to-[#A0845C]",
                 accent: "text-[#8B7355]"
               },
               {
                 icon: StarIcon,
-                title: "Quality",
-                description: "From harvest to bottle, we maintain the highest standards of excellence, producing olive oil that meets the most discerning palates and exceeds expectations.",
+                title: t('valueQualityTitle'),
+                description: t('valueQualityDesc'),
                 color: "from-[#D4AF37] to-[#F4D03F]",
                 accent: "text-[#D4AF37]"
               },
               {
                 icon: BeakerIcon,
-                title: "Sustainability",
-                description: "We are committed to sustainable farming practices that protect our environment and ensure our olive groves thrive for future generations to come.",
+                title: t('valueSustainabilityTitle'),
+                description: t('valueSustainabilityDesc'),
                 color: "from-[#8B7355] to-[#D4AF37]",
                 accent: "text-[#8B7355]"
               }
@@ -334,15 +329,15 @@ export default async function OurStory({
             <AnimateDiv animation="slide-up" delay={0.2}>
               <div className="inline-block group mb-6">
                 <span className="text-sm sm:text-base text-[#D4AF37] font-medium tracking-widest uppercase group-hover:text-[#F4D03F] transition-colors duration-300">
-                  Artisanal Craftsmanship
+                  {t('processOverline')}
                 </span>
                 <div className="w-20 h-px bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] mx-auto mt-3 group-hover:w-32 transition-all duration-500" />
               </div>
               <h2 className="text-3xl sm:text-6xl lg:text-7xl xl:text-8xl font-extralight mb-6 leading-tight">
-                Our Process
+                {t('processTitle')}
               </h2>
               <p className="text-base sm:text-xl lg:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light">
-                Where ancient wisdom meets modern precision in every <span className="text-[#D4AF37] font-medium">golden drop</span>
+                {t('processSubtitle')}
               </p>
             </AnimateDiv>
           </div>
@@ -369,14 +364,14 @@ export default async function OurStory({
 
                   {/* Enhanced Process Badge */}
                   <div className="absolute bottom-6 left-6 backdrop-blur-xl bg-black/20 rounded-2xl p-4 border border-white/30 group-hover:bg-black/30 transition-all duration-500">
-                    <div className="text-[#D4AF37] text-sm sm:text-base font-medium">Cold-Pressed</div>
-                    <div className="text-white/80 text-xs sm:text-sm">Within Hours</div>
+                    <div className="text-[#D4AF37] text-sm sm:text-base font-medium">{t('processBadgeColdPressed')}</div>
+                    <div className="text-white/80 text-xs sm:text-sm">{t('processBadgeWithinHours')}</div>
                   </div>
 
                   {/* Quality Badge */}
                   <div className="absolute top-6 right-6 backdrop-blur-xl bg-white/10 rounded-2xl p-4 border border-white/20 group-hover:bg-white/20 transition-all duration-500">
-                    <div className="text-white text-sm sm:text-base font-medium">Extra Virgin</div>
-                    <div className="text-white/80 text-xs sm:text-sm">Premium Quality</div>
+                    <div className="text-white text-sm sm:text-base font-medium">{t('processBadgeExtraVirgin')}</div>
+                    <div className="text-white/80 text-xs sm:text-sm">{t('processBadgePremiumQuality')}</div>
                   </div>
                 </div>
 
@@ -394,20 +389,20 @@ export default async function OurStory({
                 {[
                   {
                     icon: SunIcon,
-                    title: "Hand-Picked Harvest",
-                    description: "We carefully hand-pick our olives at the optimal moment of ripeness, ensuring each fruit contributes to the exceptional quality of our liquid gold.",
+                    title: t('processStep1Title'),
+                    description: t('processStep1Desc'),
                     color: "from-[#D4AF37] to-[#F4D03F]"
                   },
                   {
                     icon: SparklesIcon,
-                    title: "Cold-Pressed Excellence",
-                    description: "Within hours of harvest, the olives are cold-pressed in our state-of-the-art facility, preserving their natural flavors and nutritional benefits.",
+                    title: t('processStep2Title'),
+                    description: t('processStep2Desc'),
                     color: "from-[#F4D03F] to-[#D4AF37]"
                   },
                   {
                     icon: HeartIcon,
-                    title: "Pure Perfection",
-                    description: "This careful process results in an extra virgin olive oil of remarkable purity and character, carrying the essence of our Albanian heritage.",
+                    title: t('processStep3Title'),
+                    description: t('processStep3Desc'),
                     color: "from-[#D4AF37] to-[#F4D03F]"
                   }
                 ].map((step, index) => (
@@ -456,13 +451,13 @@ export default async function OurStory({
             <AnimateDiv animation="slide-up" delay={0.2}>
               <div className="inline-block group mb-6">
                 <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase group-hover:text-[#A0845C] transition-colors duration-300">
-                  Generational Wisdom
+                  {t('legacyOverline')}
                 </span>
                 <div className="w-20 h-px bg-gradient-to-r from-[#8B7355] to-[#D4AF37] mx-auto mt-3 group-hover:w-32 transition-all duration-500" />
               </div>
               <h2 className="text-3xl sm:text-6xl lg:text-7xl xl:text-8xl font-extralight text-[#8B7355] mb-6 leading-tight">
-                A Family
-                <span className="block italic text-[#D4AF37] mt-2">Legacy</span>
+                {t('legacyTitle')}
+                <span className="block italic text-[#D4AF37] mt-2">{t('legacyTitleAccent')}</span>
               </h2>
             </AnimateDiv>
 
@@ -479,17 +474,13 @@ export default async function OurStory({
 
               <AnimateDiv animation="slide-up" delay={0.6}>
                 <p className="text-lg sm:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-light mb-8 group-hover:text-gray-800 transition-colors duration-300">
-                  Through generations, our family has been the <span className="text-[#8B7355] font-medium">custodian</span> of these ancient olive groves.
-                  Each generation has added its own chapter to our story while maintaining the <span className="text-[#D4AF37] font-medium">core values</span>
-                  that make Kallmi Estate special.
+                  {t('legacyText1')}
                 </p>
               </AnimateDiv>
 
               <AnimateDiv animation="slide-up" delay={0.8}>
                 <p className="text-lg sm:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-light mb-12 group-hover:text-gray-800 transition-colors duration-300">
-                  Today, we invite you to be part of our continuing story. Every bottle of Kallmi Estate
-                  olive oil is more than just a product – it's a piece of our <span className="text-[#8B7355] font-medium">heritage</span>, a taste of our
-                  <span className="text-[#D4AF37] font-medium"> tradition</span>, and a promise of our commitment to excellence.
+                  {t('legacyText2')}
                 </p>
               </AnimateDiv>
 
@@ -497,7 +488,7 @@ export default async function OurStory({
               <AnimateDiv animation="slide-up" delay={1.0}>
                 <div className="inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg cursor-pointer group-hover:shadow-xl">
                   <HeartIcon className="w-5 h-5 transition-transform group-hover:scale-110" />
-                  <span>Join Our Legacy</span>
+                  <span>{t('legacyCta')}</span>
                 </div>
               </AnimateDiv>
             </div>
@@ -508,12 +499,11 @@ export default async function OurStory({
                 <div className="backdrop-blur-sm bg-gradient-to-r from-[#8B7355]/5 via-white/60 to-[#D4AF37]/5 rounded-3xl p-8 lg:p-12 border border-white/40 group hover:border-[#8B7355]/30 transition-all duration-500">
                   <SparklesIcon className="w-10 sm:w-12 h-10 sm:h-12 text-[#D4AF37] mx-auto mb-6 group-hover:scale-110 transition-transform duration-300" />
                   <blockquote className="text-xl sm:text-2xl lg:text-3xl italic text-[#8B7355] font-light leading-relaxed group-hover:text-[#A0845C] transition-colors duration-300">
-                    "Every drop tells a story, every bottle carries a legacy,
-                    every taste connects you to our Albanian soul."
+                    &ldquo;{t('legacyQuote')}&rdquo;
                   </blockquote>
                   <div className="w-16 h-px bg-gradient-to-r from-[#8B7355] to-[#D4AF37] mx-auto mt-6 group-hover:w-24 transition-all duration-500" />
                   <p className="text-sm sm:text-base text-gray-600 font-medium mt-4 group-hover:text-gray-700 transition-colors duration-300">
-                    — The Vehbiu Family
+                    {t('legacyQuoteAuthor')}
                   </p>
                 </div>
               </div>

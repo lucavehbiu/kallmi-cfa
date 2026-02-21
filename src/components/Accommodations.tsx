@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 import { DayPicker, type DateRange } from 'react-day-picker'
 import 'react-day-picker/style.css'
 import { FadeIn } from './motion/FadeIn'
@@ -13,12 +14,12 @@ import { CheckCircleIcon, XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@
 
 interface Room {
   id: number
-  name: string
-  description: string
+  nameKey: string
+  descriptionKey: string
   price: number
   size: string
   capacity: number
-  amenities: string[]
+  amenityKeys: string[]
   images: string[]
   featured?: boolean
 }
@@ -55,12 +56,12 @@ const COUNTRY_CODES = [
 const rooms: Room[] = [
   {
     id: 1,
-    name: "West Room - Sea View",
-    description: "Beautiful room on the west side of the estate with stunning views of the Adriatic Sea. Features a comfortable bed, ensuite bathroom, and private balcony.",
+    nameKey: "roomWestName",
+    descriptionKey: "roomWestDescription",
     price: 120,
     size: "30 m²",
     capacity: 2,
-    amenities: ["Double bed", "Sea view", "Private balcony", "Ensuite bathroom", "Air conditioning"],
+    amenityKeys: ["amenityDoubleBed", "amenitySeaView", "amenityPrivateBalcony", "amenityEnsuiteBathroom", "amenityAirConditioning"],
     images: [
       "https://storage.googleapis.com/kallmi/images/stay/room_view.webp",
       "https://storage.googleapis.com/kallmi/images/stay/room_design.webp",
@@ -77,12 +78,12 @@ const rooms: Room[] = [
   },
   {
     id: 2,
-    name: "East Room - Sea View",
-    description: "Charming room on the east side of the estate with panoramic sea views. Features a comfortable bed, ensuite bathroom, and morning sunshine.",
+    nameKey: "roomEastName",
+    descriptionKey: "roomEastDescription",
     price: 120,
     size: "30 m²",
     capacity: 2,
-    amenities: ["Double bed", "Sea view", "Ensuite bathroom", "Air conditioning"],
+    amenityKeys: ["amenityDoubleBed", "amenitySeaView", "amenityEnsuiteBathroom", "amenityAirConditioning"],
     images: [
       "https://storage.googleapis.com/kallmi/images/stay/room_view.webp",
       "https://storage.googleapis.com/kallmi/images/stay/room_design.webp",
@@ -107,6 +108,7 @@ const formatPrice = (price: number) => {
 }
 
 export default function Accommodations() {
+  const t = useTranslations('Accommodations')
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [formData, setFormData] = useState({
@@ -273,13 +275,13 @@ export default function Accommodations() {
     // Email validation
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     if (!emailRegex.test(formData.email)) {
-      errors.email = 'Please enter a valid email address'
+      errors.email = t('errorEmail')
     }
 
     // Phone validation (digits only, 6-15 digits)
     const phoneDigits = formData.phone.replace(/\D/g, '')
     if (phoneDigits.length < 6 || phoneDigits.length > 15) {
-      errors.phone = 'Please enter a valid phone number'
+      errors.phone = t('errorPhone')
     }
 
     // Date validation - must be in the future (not today)
@@ -287,17 +289,17 @@ export default function Accommodations() {
     today.setHours(0, 0, 0, 0)
     const checkIn = new Date(formData.checkIn)
     if (checkIn <= today) {
-      errors.checkIn = 'Check-in must be a future date'
+      errors.checkIn = t('errorCheckIn')
     }
 
     const checkOut = new Date(formData.checkOut)
     if (checkOut <= checkIn) {
-      errors.checkOut = 'Check-out must be after check-in'
+      errors.checkOut = t('errorCheckOut')
     }
 
     // Age confirmation
     if (!formData.ageConfirm) {
-      errors.ageConfirm = 'You must confirm all guests are 13 or older'
+      errors.ageConfirm = t('errorAgeConfirm')
     }
 
     setFormErrors(errors)
@@ -314,7 +316,10 @@ export default function Accommodations() {
 
     try {
       const selectedIds = formData.roomId.split(',').filter(Boolean)
-      const roomNames = selectedIds.map(id => rooms.find(r => r.id.toString() === id)?.name || 'Unknown').join(' & ')
+      const roomNames = selectedIds.map(id => {
+        const room = rooms.find(r => r.id.toString() === id)
+        return room ? t(room.nameKey) : 'Unknown'
+      }).join(' & ')
       const fullPhone = `${formData.countryCode} ${formData.phone}`
 
       const response = await fetch('/api/booking', {
@@ -338,7 +343,7 @@ export default function Accommodations() {
       const data = await response.json()
 
       if (response.ok) {
-        setSubmitMessage({ type: 'success', text: data.message || 'Booking request submitted! Please await confirmation — our team will get back to you shortly.' })
+        setSubmitMessage({ type: 'success', text: data.message || t('bookingSuccess') })
         setPriceEstimate(null)
         setDateRange(undefined)
         setFormData({
@@ -354,10 +359,10 @@ export default function Accommodations() {
           ageConfirm: false
         })
       } else {
-        setSubmitMessage({ type: 'error', text: data.error || 'Failed to submit booking request' })
+        setSubmitMessage({ type: 'error', text: data.error || t('bookingError') })
       }
     } catch {
-      setSubmitMessage({ type: 'error', text: 'An error occurred. Please try again.' })
+      setSubmitMessage({ type: 'error', text: t('bookingGenericError') })
     } finally {
       setIsSubmitting(false)
     }
@@ -381,19 +386,19 @@ export default function Accommodations() {
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10 px-4">
           <FadeIn animation="fade" delay={0.2}>
             <span className="text-overline text-white/80 block mb-4 text-center">
-              Boutique Hospitality
+              {t('heroOverline')}
             </span>
           </FadeIn>
 
           <FadeIn animation="slide-up" delay={0.4}>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-tight mb-6 text-center">
-              Stay With Us
+              {t('heroTitle')}
             </h1>
           </FadeIn>
 
           <FadeIn animation="slide-up" delay={0.6}>
             <p className="text-lg sm:text-xl font-light opacity-90 max-w-2xl text-center">
-              Experience authentic Albanian hospitality in our boutique accommodations
+              {t('heroSubtitle')}
             </p>
           </FadeIn>
         </div>
@@ -405,17 +410,14 @@ export default function Accommodations() {
           <FadeIn animation="slide-up">
             <div className="space-y-6">
               <h2 className="text-heading" style={{ color: 'var(--color-brand-olive)' }}>
-                Your Home in Albania
+                {t('introTitle')}
               </h2>
               <div className="space-y-4 text-body-lg">
                 <p>
-                  At Kallmi Estate, we invite you to experience the genuine warmth of Albanian
-                  hospitality in our thoughtfully designed accommodations. Each room is a perfect
-                  blend of traditional elements and modern comforts.
+                  {t('introText1')}
                 </p>
                 <p>
-                  Nestled among centuries-old olive trees with breathtaking views of the Adriatic Sea,
-                  our accommodations offer a peaceful retreat from the bustle of everyday life.
+                  {t('introText2')}
                 </p>
               </div>
             </div>
@@ -451,9 +453,9 @@ export default function Accommodations() {
       {/* Our Rooms Section */}
       <Section background="default" spacing="lg">
         <SectionHeader
-          overline="Accommodations"
-          title="Our Rooms"
-          subtitle="Choose from our selection of comfortable rooms and suites"
+          overline={t('roomsOverline')}
+          title={t('roomsTitle')}
+          subtitle={t('roomsSubtitle')}
           align="center"
         />
 
@@ -468,7 +470,7 @@ export default function Accommodations() {
                 <div className="relative h-64">
                   <Image
                     src={room.images[0]}
-                    alt={room.name}
+                    alt={t(room.nameKey)}
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -479,7 +481,7 @@ export default function Accommodations() {
                       className="absolute top-4 right-4 px-3 py-1 rounded-full text-sm text-white"
                       style={{ backgroundColor: 'var(--color-brand-olive)' }}
                     >
-                      Featured
+                      {t('featured')}
                     </div>
                   )}
                 </div>
@@ -489,18 +491,18 @@ export default function Accommodations() {
                       className="text-2xl font-light"
                       style={{ color: 'var(--color-brand-olive)' }}
                     >
-                      {room.name}
+                      {t(room.nameKey)}
                     </h3>
                     <span
                       className="text-lg font-light"
                       style={{ color: 'var(--color-brand-olive)' }}
                     >
-                      From {formatPrice(80)} / night
+                      {t('fromPrice', { price: formatPrice(80) })}
                     </span>
                   </div>
 
                   <p style={{ color: 'var(--color-text-secondary)' }}>
-                    {room.description}
+                    {t(room.descriptionKey)}
                   </p>
 
                   <div className="flex flex-wrap gap-2">
@@ -514,15 +516,15 @@ export default function Accommodations() {
                       className="text-sm px-2 py-1 rounded"
                       style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
                     >
-                      Sleeps {room.capacity}
+                      {t('sleeps', { capacity: room.capacity })}
                     </span>
-                    {room.amenities.slice(0, 2).map((amenity, i) => (
+                    {room.amenityKeys.slice(0, 2).map((amenityKey, i) => (
                       <span
                         key={i}
                         className="text-sm px-2 py-1 rounded"
                         style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
                       >
-                        {amenity}
+                        {t(amenityKey)}
                       </span>
                     ))}
                   </div>
@@ -535,7 +537,7 @@ export default function Accommodations() {
                     variant="primary"
                     fullWidth
                   >
-                    View Details & Book
+                    {t('viewDetailsAndBook')}
                   </Button>
                 </CardBody>
               </Card>
@@ -548,9 +550,9 @@ export default function Accommodations() {
       <Section background="secondary" spacing="lg">
         <div className="max-w-3xl mx-auto">
           <SectionHeader
-            overline="Reservations"
-            title="Book Your Stay"
-            subtitle="Experience the serenity of Kallmi Estate. Reserve your accommodation and create lasting memories with us."
+            overline={t('reservationsOverline')}
+            title={t('reservationsTitle')}
+            subtitle={t('reservationsSubtitle')}
             align="center"
           />
 
@@ -575,7 +577,7 @@ export default function Accommodations() {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    placeholder="Your Name"
+                    placeholder={t('yourName')}
                     required
                     className="input-field"
                   />
@@ -585,7 +587,7 @@ export default function Accommodations() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="Email Address"
+                      placeholder={t('emailAddress')}
                       required
                       className={`input-field ${formErrors.email ? 'border-red-400 focus:border-red-400' : ''}`}
                     />
@@ -611,7 +613,7 @@ export default function Accommodations() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      placeholder="Phone Number"
+                      placeholder={t('phoneNumber')}
                       required
                       className={`input-field flex-1 ${formErrors.phone ? 'border-red-400 focus:border-red-400' : ''}`}
                     />
@@ -628,11 +630,11 @@ export default function Accommodations() {
                       required
                       className="select-field"
                     >
-                      <option value="">Select Room</option>
+                      <option value="">{t('selectRoom')}</option>
                       {rooms.map(room => (
-                        <option key={room.id} value={room.id.toString()}>{room.name}</option>
+                        <option key={room.id} value={room.id.toString()}>{t(room.nameKey)}</option>
                       ))}
-                      <option value={rooms.map(r => r.id).join(',')}>Both Rooms</option>
+                      <option value={rooms.map(r => r.id).join(',')}>{t('bothRooms')}</option>
                     </select>
                   </div>
                   <div>
@@ -643,15 +645,15 @@ export default function Accommodations() {
                       required
                       className="select-field"
                     >
-                      <option value="">Number of Guests</option>
-                      <option value="1">1 Guest</option>
-                      <option value="2">2 Guests</option>
-                      {getMaxGuests() >= 3 && <option value="3">3 Guests</option>}
-                      {getMaxGuests() >= 4 && <option value="4">4 Guests</option>}
+                      <option value="">{t('numberOfGuests')}</option>
+                      <option value="1">{t('guest', { count: 1 })}</option>
+                      <option value="2">{t('guest', { count: 2 })}</option>
+                      {getMaxGuests() >= 3 && <option value="3">{t('guest', { count: 3 })}</option>}
+                      {getMaxGuests() >= 4 && <option value="4">{t('guest', { count: 4 })}</option>}
                     </select>
                     {formData.roomId && (
                       <p className="text-xs mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
-                        Max {getMaxGuests()} guests for {formData.roomId.includes(',') ? 'both rooms' : 'one room'}
+                        {t('maxGuests', { max: getMaxGuests(), roomType: formData.roomId.includes(',') ? t('maxGuestsBothRooms') : t('maxGuestsOneRoom') })}
                       </p>
                     )}
                   </div>
@@ -663,14 +665,14 @@ export default function Accommodations() {
                     className="block text-sm font-medium mb-2"
                     style={{ color: 'var(--color-text-secondary)' }}
                   >
-                    Select Dates
+                    {t('selectDates')}
                   </label>
                   {!formData.roomId ? (
                     <div
                       className="p-6 rounded-xl text-center text-sm"
                       style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-tertiary)' }}
                     >
-                      Please select a room first to see availability
+                      {t('selectRoomFirst')}
                     </div>
                   ) : (
                     <div className="kallmi-calendar-wrapper">
@@ -703,32 +705,32 @@ export default function Accommodations() {
                       />
                       {loadingAvailability && (
                         <p className="text-xs text-center mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
-                          Loading availability...
+                          {t('loadingAvailability')}
                         </p>
                       )}
                       <div className="flex flex-wrap items-center gap-3 mt-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
                         <span className="flex items-center gap-1">
                           <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: 'rgba(139, 115, 85, 0.15)' }} />
-                          Selected
+                          {t('legendSelected')}
                         </span>
                         <span className="flex items-center gap-1">
                           <span className="inline-block w-3 h-3 rounded-sm bg-red-100 border border-red-200" />
-                          Booked
+                          {t('legendBooked')}
                         </span>
                         <span className="flex items-center gap-1">
                           <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: '#fef3c7', border: '1px solid #fcd34d' }} />
-                          1 room left
+                          {t('legendLimited')}
                         </span>
                       </div>
                       {dateRange?.from && (
                         <div className="flex gap-4 mt-3 text-sm" style={{ color: 'var(--color-text-secondary)' }}>
                           <span>
-                            <strong>Check-in:</strong>{' '}
+                            <strong>{t('checkInLabel')}</strong>{' '}
                             {dateRange.from.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                           </span>
                           {dateRange.to && (
                             <span>
-                              <strong>Check-out:</strong>{' '}
+                              <strong>{t('checkOutLabel')}</strong>{' '}
                               {dateRange.to.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                             </span>
                           )}
@@ -743,18 +745,18 @@ export default function Accommodations() {
                 {/* Price Estimate */}
                 {loadingPrice && (
                   <div className="p-4 rounded-xl text-center text-sm" style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}>
-                    Calculating price...
+                    {t('calculatingPrice')}
                   </div>
                 )}
                 {priceEstimate && !loadingPrice && (
                   <div className="p-4 rounded-xl space-y-2" style={{ backgroundColor: 'rgba(139, 115, 85, 0.08)' }}>
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>
-                        {priceEstimate.nights} night{priceEstimate.nights !== 1 ? 's' : ''}
+                        {t('nightCount', { count: priceEstimate.nights })}
                       </span>
                       <span className="text-lg font-light" style={{ color: 'var(--color-brand-olive)' }}>
                         {formatPrice(priceEstimate.totalAmount)}
-                        {formData.roomId.includes(',') && ' per room'}
+                        {formData.roomId.includes(',') && ` ${t('perRoom')}`}
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-x-4 gap-y-1">
@@ -766,7 +768,7 @@ export default function Accommodations() {
                     </div>
                     {formData.roomId.includes(',') && (
                       <p className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
-                        Total for both rooms: {formatPrice(priceEstimate.totalAmount * 2)}
+                        {t('totalBothRooms', { price: formatPrice(priceEstimate.totalAmount * 2) })}
                       </p>
                     )}
                   </div>
@@ -776,7 +778,7 @@ export default function Accommodations() {
                   name="specialRequests"
                   value={formData.specialRequests}
                   onChange={handleInputChange}
-                  placeholder="Special Requests"
+                  placeholder={t('specialRequests')}
                   className="textarea-field"
                 />
 
@@ -790,7 +792,7 @@ export default function Accommodations() {
                       className="mt-1 rounded border-gray-300 text-[#8B7355] focus:ring-[#8B7355]"
                     />
                     <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                      I confirm that all guests are <strong>13 years of age or older</strong>. Kallmi Estate does not accommodate children under 13.
+                      {t('ageConfirmText')}
                     </span>
                   </label>
                   {formErrors.ageConfirm && <p className="text-red-500 text-xs mt-1 ml-7">{formErrors.ageConfirm}</p>}
@@ -803,14 +805,14 @@ export default function Accommodations() {
                   fullWidth
                   size="lg"
                 >
-                  {isSubmitting ? 'Submitting...' : 'Request Booking'}
+                  {isSubmitting ? t('submitting') : t('requestBooking')}
                 </Button>
               </form>
 
               <p className="mt-6 text-center text-caption">
-                Please await confirmation for your booking — our team will get back to you shortly.
+                {t('bookingConfirmation')}
                 <br />
-                For special arrangements, contact us at{' '}
+                {t('bookingContact')}{' '}
                 <span style={{ color: 'var(--color-brand-olive)' }}>reservations@kallmibukur.al</span>
               </p>
             </Card>
@@ -821,17 +823,17 @@ export default function Accommodations() {
       {/* Experiences Section */}
       <Section background="default" spacing="lg">
         <SectionHeader
-          overline="Experiences"
-          title="Guest Activities"
-          subtitle="Make the most of your stay with our curated experiences"
+          overline={t('experiencesOverline')}
+          title={t('experiencesTitle')}
+          subtitle={t('experiencesSubtitle')}
           align="center"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
           {[
             {
-              title: 'Olive Oil Tasting',
-              description: 'Join our experts for a guided tasting of our estate-produced olive oils.',
+              titleKey: 'oliveOilTasting',
+              descriptionKey: 'oliveOilTastingDesc',
               icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -839,8 +841,8 @@ export default function Accommodations() {
               )
             },
             {
-              title: 'Cooking Workshops',
-              description: 'Learn the secrets of traditional Albanian cuisine in our hands-on cooking classes.',
+              titleKey: 'cookingWorkshops',
+              descriptionKey: 'cookingWorkshopsDesc',
               icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -849,8 +851,8 @@ export default function Accommodations() {
               )
             },
             {
-              title: 'Local Excursions',
-              description: 'Explore the stunning Albanian coastline and historic sites with our guided tours.',
+              titleKey: 'localExcursions',
+              descriptionKey: 'localExcursionsDesc',
               icon: (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
@@ -870,10 +872,10 @@ export default function Accommodations() {
                   className="text-xl font-light mb-4"
                   style={{ color: 'var(--color-brand-olive)' }}
                 >
-                  {experience.title}
+                  {t(experience.titleKey)}
                 </h3>
                 <p style={{ color: 'var(--color-text-secondary)' }}>
-                  {experience.description}
+                  {t(experience.descriptionKey)}
                 </p>
               </Card>
             </FadeIn>
@@ -884,7 +886,7 @@ export default function Accommodations() {
           <div className="text-center mt-12">
             <Link href="/contact">
               <Button variant="primary">
-                Inquire About Activities
+                {t('inquireAboutActivities')}
               </Button>
             </Link>
           </div>
@@ -905,7 +907,7 @@ export default function Accommodations() {
             <div className="relative h-[50vh] min-h-[300px]">
               <Image
                 src={selectedRoom.images[currentImageIndex]}
-                alt={selectedRoom.name}
+                alt={t(selectedRoom.nameKey)}
                 className="object-cover"
                 fill
                 sizes="800px"
@@ -959,17 +961,17 @@ export default function Accommodations() {
                   className="text-3xl font-light"
                   style={{ color: 'var(--color-brand-olive)' }}
                 >
-                  {selectedRoom.name}
+                  {t(selectedRoom.nameKey)}
                 </h3>
                 <span
                   className="text-lg font-light"
                   style={{ color: 'var(--color-brand-olive)' }}
                 >
-                  From {formatPrice(80)} / night
+                  {t('fromPrice', { price: formatPrice(80) })}
                 </span>
               </div>
               <p className="text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
-                Price varies by season. Select dates below for exact pricing.
+                {t('priceVariesBySeason')}
               </p>
 
               <div className="flex flex-wrap gap-3">
@@ -983,12 +985,12 @@ export default function Accommodations() {
                   className="text-sm px-3 py-1 rounded-full"
                   style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
                 >
-                  Sleeps {selectedRoom.capacity}
+                  {t('sleeps', { capacity: selectedRoom.capacity })}
                 </span>
               </div>
 
               <p style={{ color: 'var(--color-text-secondary)' }}>
-                {selectedRoom.description}
+                {t(selectedRoom.descriptionKey)}
               </p>
 
               <div>
@@ -996,16 +998,16 @@ export default function Accommodations() {
                   className="text-xl font-light mb-3"
                   style={{ color: 'var(--color-brand-olive)' }}
                 >
-                  Amenities
+                  {t('amenities')}
                 </h4>
                 <ul className="grid grid-cols-2 gap-2">
-                  {selectedRoom.amenities.map((amenity, index) => (
+                  {selectedRoom.amenityKeys.map((amenityKey, index) => (
                     <li key={index} className="flex items-center gap-2">
                       <CheckCircleIcon
                         className="h-5 w-5 flex-shrink-0"
                         style={{ color: 'var(--color-brand-olive)' }}
                       />
-                      <span style={{ color: 'var(--color-text-primary)' }}>{amenity}</span>
+                      <span style={{ color: 'var(--color-text-primary)' }}>{t(amenityKey)}</span>
                     </li>
                   ))}
                 </ul>
@@ -1020,7 +1022,7 @@ export default function Accommodations() {
                   document.querySelector('.booking-section')?.scrollIntoView({ behavior: 'smooth' })
                 }}
               >
-                Book This Room
+                {t('bookThisRoom')}
               </Button>
             </div>
           </div>

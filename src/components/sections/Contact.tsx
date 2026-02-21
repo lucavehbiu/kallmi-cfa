@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { AnimateDiv } from '../motion/MotionWrapper'
 import {
   EnvelopeIcon,
@@ -11,8 +11,10 @@ import {
   ClockIcon
 } from '@heroicons/react/24/outline'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 export default function ContactSection() {
+  const t = useTranslations('ContactPage')
   return (
     <section id="contact" className="relative min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 font-cormorant overflow-hidden">
 
@@ -36,15 +38,15 @@ export default function ContactSection() {
             <AnimateDiv animation="fade" duration={1.0} delay={0.2}>
               <div className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 text-white border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium tracking-wide">
                 <EnvelopeIcon className="w-4 h-4" />
-                Get in Touch
+                {t('heroBadge')}
               </div>
             </AnimateDiv>
 
             <AnimateDiv animation="slide-up" duration={1.2} delay={0.3}>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide">
-                Contact
+                {t('heroTitle')}
                 <span className="block text-3xl sm:text-5xl lg:text-6xl italic text-[#D4AF37] mt-2">
-                  Us
+                  {t('heroTitleAccent')}
                 </span>
               </h1>
             </AnimateDiv>
@@ -59,8 +61,7 @@ export default function ContactSection() {
 
             <AnimateDiv animation="slide-up" duration={1.2} delay={0.6}>
               <p className="text-lg sm:text-xl lg:text-2xl font-light opacity-90 max-w-2xl mx-auto">
-                Visit our estate in the heart of Albania's olive country and discover
-                the <span className="text-[#D4AF37]">timeless traditions</span> behind our liquid gold
+                {t('heroDescription')}
               </p>
             </AnimateDiv>
 
@@ -68,9 +69,9 @@ export default function ContactSection() {
             <AnimateDiv animation="slide-up" duration={1.0} delay={0.8}>
               <div className="flex flex-wrap justify-center gap-4 mt-8">
                 {[
-                  { icon: MapPinIcon, text: "Durrës, Albania" },
-                  { icon: ClockIcon, text: "Open Daily" },
-                  { icon: SparklesIcon, text: "Estate Tours" },
+                  { icon: MapPinIcon, text: t('infoLocation') },
+                  { icon: ClockIcon, text: t('infoHours') },
+                  { icon: SparklesIcon, text: t('infoTours') },
                 ].map((item, index) => (
                   <div key={index} className="backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl px-4 py-3 min-w-[120px] text-center">
                     <item.icon className="w-5 h-5 text-[#D4AF37] mx-auto mb-1" />
@@ -97,13 +98,13 @@ export default function ContactSection() {
               <div className="space-y-4 sm:space-y-6">
                 <div className="inline-block">
                   <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
-                    Connect With Us
+                    {t('connectOverline')}
                   </span>
                   <div className="w-16 h-px bg-[#8B7355] mt-2" />
                 </div>
                 <h2 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-extralight text-[#8B7355] leading-tight">
-                  Visit Our
-                  <span className="block italic mt-1 sm:mt-2">Estate</span>
+                  {t('connectTitle')}
+                  <span className="block italic mt-1 sm:mt-2">{t('connectTitleAccent')}</span>
                 </h2>
               </div>
 
@@ -122,7 +123,7 @@ export default function ContactSection() {
                       <EnvelopeIcon className="w-6 sm:w-8 h-6 sm:h-8 text-[#8B7355]" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm sm:text-base text-gray-600 font-light">Email Us</p>
+                      <p className="text-sm sm:text-base text-gray-600 font-light">{t('emailLabel')}</p>
                       <p className="text-base sm:text-lg lg:text-xl text-[#8B7355] font-light group-hover:text-[#A0845C] transition-colors duration-300">
                         kallmibukur@gmail.com
                       </p>
@@ -143,7 +144,7 @@ export default function ContactSection() {
                       <PhoneIcon className="w-6 sm:w-8 h-6 sm:h-8 text-[#8B7355]" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm sm:text-base text-gray-600 font-light">Call Us</p>
+                      <p className="text-sm sm:text-base text-gray-600 font-light">{t('callLabel')}</p>
                       <p className="text-base sm:text-lg lg:text-xl text-[#8B7355] font-light group-hover:text-[#A0845C] transition-colors duration-300">
                         +355 682 450 851
                       </p>
@@ -168,7 +169,7 @@ export default function ContactSection() {
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm sm:text-base text-gray-600 font-light">Follow Us</p>
+                      <p className="text-sm sm:text-base text-gray-600 font-light">{t('followLabel')}</p>
                       <p className="text-base sm:text-lg lg:text-xl text-[#8B7355] font-light group-hover:text-[#A0845C] transition-colors duration-300">
                         @kallmi_bukur
                       </p>
@@ -184,14 +185,14 @@ export default function ContactSection() {
                   className="group inline-flex items-center justify-center space-x-3 px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                 >
                   <MapPinIcon className="w-5 h-5 transition-transform group-hover:scale-110" />
-                  <span>Visit Our Estate</span>
+                  <span>{t('visitEstateButton')}</span>
                 </Link>
                 <Link
                   href="/contact"
                   className="group inline-flex items-center justify-center space-x-3 px-8 py-4 backdrop-blur-sm bg-white/60 border border-white/40 hover:border-[#8B7355]/30 text-[#8B7355] hover:text-[#A0845C] rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                 >
                   <HeartIcon className="w-5 h-5 transition-transform group-hover:scale-110" />
-                  <span>Contact Us</span>
+                  <span>{t('contactUsButton')}</span>
                 </Link>
               </div>
             </div>
@@ -234,13 +235,11 @@ export default function ContactSection() {
           <div className="backdrop-blur-sm bg-white/60 rounded-3xl p-8 lg:p-12 border border-white/40">
             <SparklesIcon className="w-12 h-12 text-[#D4AF37] mx-auto mb-6" />
             <blockquote className="text-lg sm:text-xl lg:text-2xl text-gray-700 italic font-light leading-relaxed mb-6">
-              "Every drop of our olive oil carries the essence of Albanian soil,
-              the warmth of Mediterranean sun, and the love of generations who have
-              tended these ancient groves."
+              &ldquo;{t('quote')}&rdquo;
             </blockquote>
             <div className="w-16 h-px bg-[#8B7355] mx-auto mb-4" />
             <p className="text-sm sm:text-base text-gray-600 font-medium">
-              Vehbiu Family
+              {t('quoteAuthor')}
             </p>
           </div>
         </AnimateDiv>

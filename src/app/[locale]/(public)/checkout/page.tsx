@@ -5,10 +5,12 @@ import Image from 'next/image'
 import { useCart } from '@/context/CartContext'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 
 export default function Checkout() {
   const { cartItems, removeFromCart } = useCart()
   const [isProcessing, setIsProcessing] = useState(false)
+  const t = useTranslations('Checkout')
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('de-DE', {
@@ -34,10 +36,10 @@ export default function Checkout() {
     return (
       <div className="min-h-screen bg-stone-50 pt-32 pb-16 px-4 font-cormorant">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl text-[#8B7355] mb-6">Your Cart is Empty</h1>
-          <p className="text-gray-600 mb-8">Looks like you haven't added any items yet.</p>
+          <h1 className="text-4xl text-[#8B7355] mb-6">{t('emptyCartTitle')}</h1>
+          <p className="text-gray-600 mb-8">{t('emptyCartText')}</p>
           <Link href="/shop" className="inline-block px-8 py-3 bg-[#8B7355] text-white rounded hover:bg-[#6B563F] transition-colors">
-            Continue Shopping
+            {t('continueShopping')}
           </Link>
         </div>
       </div>
@@ -47,12 +49,12 @@ export default function Checkout() {
   return (
     <div className="min-h-screen bg-stone-50 pt-32 pb-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl text-[#8B7355] mb-12 font-cormorant text-center">Checkout</h1>
+        <h1 className="text-4xl text-[#8B7355] mb-12 font-cormorant text-center">{t('title')}</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Order Summary */}
           <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h2 className="text-2xl text-[#8B7355] mb-6 font-cormorant">Order Summary</h2>
+            <h2 className="text-2xl text-[#8B7355] mb-6 font-cormorant">{t('orderSummary')}</h2>
             <div className="space-y-6">
               {cartItems.map((item) => (
                 <div key={item.id} className="flex items-center space-x-4">
@@ -82,15 +84,15 @@ export default function Checkout() {
 
             <div className="mt-8 pt-8 border-t border-gray-200 space-y-2">
               <div className="flex justify-between text-gray-600">
-                <span>Subtotal</span>
+                <span>{t('subtotal')}</span>
                 <span>{formatPrice(subtotal)}</span>
               </div>
               <div className="flex justify-between text-gray-600">
-                <span>Shipping</span>
+                <span>{t('shipping')}</span>
                 <span>{formatPrice(shipping)}</span>
               </div>
               <div className="flex justify-between text-xl text-[#8B7355] pt-4">
-                <span>Total</span>
+                <span>{t('total')}</span>
                 <span>{formatPrice(total)}</span>
               </div>
             </div>
@@ -98,11 +100,11 @@ export default function Checkout() {
 
           {/* Checkout Form */}
           <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h2 className="text-2xl text-[#8B7355] mb-6 font-cormorant">Payment Details</h2>
+            <h2 className="text-2xl text-[#8B7355] mb-6 font-cormorant">{t('paymentDetails')}</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="email" className="block text-gray-700 mb-2">Email</label>
+                  <label htmlFor="email" className="block text-gray-700 mb-2">{t('emailLabel')}</label>
                   <input
                     type="email"
                     id="email"
@@ -111,7 +113,7 @@ export default function Checkout() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="name" className="block text-gray-700 mb-2">Full Name</label>
+                  <label htmlFor="name" className="block text-gray-700 mb-2">{t('fullNameLabel')}</label>
                   <input
                     type="text"
                     id="name"
@@ -120,7 +122,7 @@ export default function Checkout() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="address" className="block text-gray-700 mb-2">Shipping Address</label>
+                  <label htmlFor="address" className="block text-gray-700 mb-2">{t('shippingAddressLabel')}</label>
                   <textarea
                     id="address"
                     required
@@ -129,33 +131,33 @@ export default function Checkout() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="card" className="block text-gray-700 mb-2">Card Number</label>
+                  <label htmlFor="card" className="block text-gray-700 mb-2">{t('cardNumberLabel')}</label>
                   <input
                     type="text"
                     id="card"
                     required
-                    placeholder="1234 1234 1234 1234"
+                    placeholder={t('cardNumberPlaceholder')}
                     className="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#8B7355] focus:border-transparent"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="expiry" className="block text-gray-700 mb-2">Expiry Date</label>
+                    <label htmlFor="expiry" className="block text-gray-700 mb-2">{t('expiryDateLabel')}</label>
                     <input
                       type="text"
                       id="expiry"
                       required
-                      placeholder="MM/YY"
+                      placeholder={t('expiryDatePlaceholder')}
                       className="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#8B7355] focus:border-transparent"
                     />
                   </div>
                   <div>
-                    <label htmlFor="cvc" className="block text-gray-700 mb-2">CVC</label>
+                    <label htmlFor="cvc" className="block text-gray-700 mb-2">{t('cvcLabel')}</label>
                     <input
                       type="text"
                       id="cvc"
                       required
-                      placeholder="123"
+                      placeholder={t('cvcPlaceholder')}
                       className="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-[#8B7355] focus:border-transparent"
                     />
                   </div>
@@ -171,7 +173,7 @@ export default function Checkout() {
                     : 'bg-[#8B7355] hover:bg-[#6B563F]'}
                   transition-colors duration-200`}
               >
-                {isProcessing ? 'Processing...' : `Pay ${formatPrice(total)}`}
+                {isProcessing ? t('processing') : t('pay', { amount: formatPrice(total) })}
               </button>
             </form>
           </div>
@@ -179,4 +181,4 @@ export default function Checkout() {
       </div>
     </div>
   )
-} 
+}
