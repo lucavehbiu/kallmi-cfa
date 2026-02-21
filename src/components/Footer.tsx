@@ -192,9 +192,9 @@ export function Footer() {
               </p>
               <p className="text-xs text-white/40">
                 Developed by{' '}
-                <a 
-                  href="https://lucavehbiu.com" 
-                  target="_blank" 
+                <a
+                  href="https://lucavehbiu.com"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#8B7355] hover:text-[#D4AF37] transition-colors duration-300"
                 >
@@ -216,15 +216,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Floating Quote */}
-        <div className="mt-12 text-center">
-          <div className="inline-block backdrop-blur-sm bg-white/5 rounded-3xl px-8 py-6 border border-white/10 max-w-2xl">
-            <p className="text-white/70 italic font-light text-sm lg:text-base leading-relaxed">
-              {t('quote')}
-            </p>
-            <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mt-4" />
-          </div>
-        </div>
+
       </div>
 
       {/* Bottom Glow Effect */}

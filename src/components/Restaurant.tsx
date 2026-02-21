@@ -79,7 +79,7 @@ export default function Restaurant() {
       id: 1,
       nameKey: "menuSeaBass",
       descKey: "menuSeaBassDesc",
-      price: 4800,
+      price: 6000,
       category: "featured",
       image: "https://storage.googleapis.com/kallmi/images/food/grilled-sea-bass.webp",
       featured: true,
