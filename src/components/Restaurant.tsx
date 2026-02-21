@@ -453,6 +453,17 @@ export default function Restaurant() {
                 ))}
               </div>
             </FadeIn>
+
+            <FadeIn animation="slide-up" delay={1.0}>
+              <Button
+                variant="primary"
+                size="lg"
+                className="mt-8"
+                onClick={() => document.getElementById('reservation-section')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {t('heroBookNow')}
+              </Button>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -664,7 +675,7 @@ export default function Restaurant() {
       </Section>
 
       {/* Reservation Section */}
-      <Section spacing="lg" background="default">
+      <Section spacing="lg" background="default" id="reservation-section">
         <FadeIn animation="fade">
           <SectionHeader
             overline={t('reservationOverline')}

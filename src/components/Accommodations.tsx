@@ -401,6 +401,17 @@ export default function Accommodations() {
               {t('heroSubtitle')}
             </p>
           </FadeIn>
+
+          <FadeIn animation="slide-up" delay={0.8}>
+            <Button
+              variant="primary"
+              size="lg"
+              className="mt-8"
+              onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              {t('heroBookNow')}
+            </Button>
+          </FadeIn>
         </div>
       </div>
 
@@ -547,7 +558,7 @@ export default function Accommodations() {
       </Section>
 
       {/* Reservation Section */}
-      <Section background="secondary" spacing="lg">
+      <Section background="secondary" spacing="lg" id="booking-section">
         <div className="max-w-3xl mx-auto">
           <SectionHeader
             overline={t('reservationsOverline')}
