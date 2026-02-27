@@ -1,5 +1,5 @@
 // Default seasonal rates (fallback if Supabase table is empty)
-const DEFAULT_RATES: Record<number, number> = {
+export const DEFAULT_RATES: Record<number, number> = {
   1: 80,    // January
   2: 80,    // February
   3: 90,    // March
