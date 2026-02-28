@@ -125,8 +125,9 @@
     "subtitle1": "Wo uralte Olivenhaine der",
     "subtitle2": "adriatischen Brise Geheimnisse zuflüstern",
     "description": "Vier Generationen Leidenschaft haben dieses heilige Land kultiviert und Albaniens verborgenes Juwel geschaffen. Erleben Sie köstliches Essen und unberührte Natur",
-    "cta1": "Entdecken Sie Unser Erbe",
-    "cta2": "Unsere Geschichte"
+    "cta1": "Zimmer Buchen",
+    "cta2": "Bei Uns Speisen",
+    "cta3": "Shop"
   },
   "Landing": {
     "heritageOverline": "Unser Erbe",
@@ -149,6 +150,8 @@
     "sunsetQuote": "Hier, wo die uralten Olivenbäume unzählige Sonnenuntergänge erlebt haben, bringt jeder Abend eine Symphonie der Farben, die uns daran erinnert, warum Kallmi Albaniens bestgehütetes Geheimnis bleibt.",
     "ctaTitle": "Erleben Sie Kallmi",
     "ctaSubtitle": "Entdecken Sie die perfekte Mischung aus Tradition, Natur und albanischer Gastfreundschaft",
+    "ctaBook": "Zimmer Buchen",
+    "ctaDine": "Bei Uns Speisen",
     "ctaShop": "Unser Olivenöl Kaufen",
     "ctaPlan": "Planen Sie Ihren Besuch"
   },

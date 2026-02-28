@@ -125,8 +125,9 @@
     "subtitle1": "Où d'anciennes oliveraies murmurent des secrets à la",
     "subtitle2": "brise adriatique",
     "description": "Quatre générations de passion ont cultivé cette terre sacrée, créant le joyau caché de l'Albanie. Découvrez une cuisine savoureuse et une nature brute",
-    "cta1": "Découvrez Notre Patrimoine",
-    "cta2": "Notre Histoire"
+    "cta1": "Réservez une Chambre",
+    "cta2": "Dînez Chez Nous",
+    "cta3": "Boutique"
   },
   "Landing": {
     "heritageOverline": "Notre Patrimoine",
@@ -149,6 +150,8 @@
     "sunsetQuote": "Ici, où les anciens oliviers ont été témoins d'innombrables couchers de soleil, chaque soir apporte une symphonie de couleurs qui nous rappelle pourquoi Kallmi reste le secret le mieux gardé de l'Albanie.",
     "ctaTitle": "Vivez Kallmi",
     "ctaSubtitle": "Découvrez le mélange parfait de tradition, de nature et d'hospitalité albanaise",
+    "ctaBook": "Réservez une Chambre",
+    "ctaDine": "Dînez Chez Nous",
     "ctaShop": "Achetez Notre Huile d'Olive",
     "ctaPlan": "Planifiez Votre Visite"
   },

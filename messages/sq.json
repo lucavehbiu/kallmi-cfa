@@ -125,8 +125,9 @@
     "subtitle1": "Ku ullinjtë e lashtë pëshpërisin sekrete në",
     "subtitle2": "flladin e Adriatikut",
     "description": "Katër breza pasioni kanë kultivuar këtë tokë të shenjtë, duke krijuar gurin e fshehur të Shqipërisë. Përjetoni ushqim të shijshëm dhe natyrë të paprekur",
-    "cta1": "Zbuloni Trashëgiminë Tonë",
-    "cta2": "Historia Jonë"
+    "cta1": "Rezervoni një Dhomë",
+    "cta2": "Darkoni me Ne",
+    "cta3": "Dyqani"
   },
   "Landing": {
     "heritageOverline": "Trashëgimia Jonë",
@@ -149,6 +150,8 @@
     "sunsetQuote": "Këtu, ku ullinjtë e lashtë kanë dëshmuar perendime të panumërta, çdo mbrëmje sjell një simfoni ngjyrash që na kujton pse Kallmi mbetet sekreti më i mirë i Shqipërisë.",
     "ctaTitle": "Përjetoni Kallmin",
     "ctaSubtitle": "Zbuloni përzierjen e përsosur të traditës, natyrës dhe mikpritjes shqiptare",
+    "ctaBook": "Rezervoni një Dhomë",
+    "ctaDine": "Darkoni me Ne",
     "ctaShop": "Blini Vajin Tonë të Ullirit",
     "ctaPlan": "Planifikoni Vizitën Tuaj"
   },

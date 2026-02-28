@@ -208,18 +208,24 @@ export default function LandingPage() {
             <p className="text-text-on-dark-muted text-xl max-w-2xl mx-auto mb-10">
               {t('ctaSubtitle')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
               <Link
-                href="/shop"
+                href="/stay"
                 className="btn-primary-on-dark btn-lg"
               >
-                {t('ctaShop')}
+                {t('ctaBook')}
               </Link>
               <Link
-                href="/contact"
+                href="/restaurant"
                 className="btn-ghost-on-dark btn-lg"
               >
-                {t('ctaPlan')}
+                {t('ctaDine')}
+              </Link>
+              <Link
+                href="/shop"
+                className="btn-ghost-on-dark btn-lg"
+              >
+                {t('ctaShop')}
               </Link>
             </div>
           </div>

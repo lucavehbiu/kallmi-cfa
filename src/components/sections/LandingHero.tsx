@@ -140,21 +140,18 @@ export default function LandingHero() {
             delay={1.8}
             className="hidden sm:flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center items-center pt-4"
           >
-            <Link href="/shop" className="group">
+            <Link href="/stay" className="group">
               <Button
                 size="lg"
                 className="bg-[#8B7355] hover:bg-[#8B7355]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#8B7355]/30"
               >
                 <span className="flex items-center space-x-2">
                   <span>{t('cta1')}</span>
-                  <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
                 </span>
               </Button>
             </Link>
 
-            <Link href="/our-story" className="group">
+            <Link href="/restaurant" className="group">
               <Button
                 variant="secondary"
                 size="lg"
@@ -162,12 +159,21 @@ export default function LandingHero() {
               >
                 <span className="flex items-center space-x-2">
                   <span>{t('cta2')}</span>
-                  <svg className="w-5 h-5 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
                 </span>
-            </Button>
-          </Link>
+              </Button>
+            </Link>
+
+            <Link href="/shop" className="group">
+              <Button
+                variant="secondary"
+                size="lg"
+                className="bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 backdrop-blur-sm"
+              >
+                <span className="flex items-center space-x-2">
+                  <span>{t('cta3')}</span>
+                </span>
+              </Button>
+            </Link>
           </AnimateDiv>
         </div>
 
@@ -177,36 +183,36 @@ export default function LandingHero() {
             animation="slide-up"
             duration={1.0}
             delay={1.8}
-            className="flex flex-col gap-3 justify-center items-center"
+            className="flex flex-row gap-2 justify-center items-center"
           >
-            <Link href="/shop" className="group w-full">
+            <Link href="/stay" className="group flex-1">
               <Button
                 size="lg"
-                className="w-full bg-[#8B7355] hover:bg-[#8B7355]/90 text-white px-6 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#8B7355]/30"
+                className="w-full bg-[#8B7355] hover:bg-[#8B7355]/90 text-white px-4 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#8B7355]/30"
               >
-                <span className="flex items-center justify-center space-x-2">
-                  <span className="text-sm">{t('cta1')}</span>
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </span>
+                <span className="text-sm">{t('cta1')}</span>
               </Button>
             </Link>
 
-            <Link href="/our-story" className="group w-full">
+            <Link href="/restaurant" className="group flex-1">
               <Button
                 variant="secondary"
                 size="lg"
-                className="w-full bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 px-6 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 backdrop-blur-sm"
+                className="w-full bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 px-4 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 backdrop-blur-sm"
               >
-                <span className="flex items-center justify-center space-x-2">
-                  <span className="text-sm">{t('cta2')}</span>
-                  <svg className="w-4 h-4 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                </span>
-            </Button>
-          </Link>
+                <span className="text-sm">{t('cta2')}</span>
+              </Button>
+            </Link>
+
+            <Link href="/shop" className="group flex-1">
+              <Button
+                variant="secondary"
+                size="lg"
+                className="w-full bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 px-4 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 backdrop-blur-sm"
+              >
+                <span className="text-sm">{t('cta3')}</span>
+              </Button>
+            </Link>
           </AnimateDiv>
         </div>
       </div>

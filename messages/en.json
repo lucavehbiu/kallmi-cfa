@@ -125,8 +125,9 @@
     "subtitle1": "Where ancient olive groves whisper secrets to the",
     "subtitle2": "Adriatic breeze",
     "description": "Four generations of passion have cultivated this sacred land, creating Albania's hidden gem. Experience tasty food and raw nature",
-    "cta1": "Discover Our Heritage",
-    "cta2": "Our Story"
+    "cta1": "Book a Room",
+    "cta2": "Dine With Us",
+    "cta3": "Shop"
   },
   "Landing": {
     "heritageOverline": "Our Heritage",
@@ -149,6 +150,8 @@
     "sunsetQuote": "Here, where the ancient olive trees have witnessed countless sunsets, each evening brings a symphony of colors that reminds us why Kallmi remains Albania's best-kept secret.",
     "ctaTitle": "Experience Kallmi",
     "ctaSubtitle": "Discover the perfect blend of tradition, nature, and Albanian hospitality",
+    "ctaBook": "Book a Room",
+    "ctaDine": "Dine With Us",
     "ctaShop": "Shop Our Olive Oil",
     "ctaPlan": "Plan Your Visit"
   },
