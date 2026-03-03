@@ -54,11 +54,13 @@ export function Header() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pt-4 px-4 sm:px-6 lg:px-8 transition-all duration-500 ease-out">
-      <nav className={`max-w-7xl mx-auto transition-all duration-500 ease-out
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out
+      ${scrolled ? 'bg-white/90 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/5' : 'bg-transparent'}
+      lg:bg-transparent lg:pt-4 lg:px-8`}>
+      <nav className={`max-w-7xl mx-auto px-4 lg:px-0 transition-all duration-500 ease-out
         ${scrolled
-          ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-black/5 rounded-none border-b border-white/20 -mt-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8'
-          : 'bg-white/15 backdrop-blur-md border border-white/25 rounded-full px-6 lg:px-10 shadow-lg'
+          ? 'lg:bg-white/90 lg:backdrop-blur-xl lg:shadow-lg lg:rounded-none lg:border-b lg:border-white/20 lg:px-8'
+          : 'lg:bg-white/15 lg:backdrop-blur-md lg:border lg:border-white/25 lg:rounded-full lg:px-10 lg:shadow-lg'
         }`}>
         <div className="flex justify-between items-center h-16 lg:h-20">
 
@@ -70,7 +72,7 @@ export function Header() {
               <img
                 src={scrolled ? '/kallmi-black.svg' : '/kallmi-white.svg'}
                 alt="Kallmi Estate"
-                style={{ width: '160px', height: '47px', objectFit: 'contain' }}
+                style={{ width: '120px', height: '35px', objectFit: 'contain' }}
                 className="transition-all duration-300 group-hover:opacity-90"
               />
               </div>
@@ -259,28 +261,27 @@ export function Header() {
           </div>
         </div>
 
-        {/* Enhanced Mobile Menu */}
+        {/* Mobile Menu - Frosted glass dark */}
         <div
-          className={`lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-white/20 shadow-xl
+          className={`lg:hidden absolute top-full left-0 right-0 backdrop-blur-xl bg-black/60 border-t border-white/10 shadow-xl
             transition-all duration-500 ease-out overflow-hidden
             ${isOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'}`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="py-6 space-y-2">
+          <div className="py-6 space-y-1">
             {navItems.map((item, index) => (
               <div
                 key={item.name}
-                className="px-6 py-2"
+                className="px-6"
                 style={{
-                  animationDelay: isOpen ? `${index * 100}ms` : '0ms',
+                  animationDelay: isOpen ? `${index * 60}ms` : '0ms',
                   animation: isOpen ? 'slideInLeft 0.3s ease-out forwards' : 'none'
                 }}
               >
                 <Link
                   href={item.href}
-                  className="block text-gray-800 hover:text-[#8B7355] transition-all duration-300
-                    text-lg font-medium py-2 px-4 rounded-xl hover:bg-[#8B7355]/5
-                    transform hover:translate-x-2 hover:scale-105"
+                  className="block text-white/90 hover:text-white transition-all duration-300
+                    text-xl font-light tracking-wide py-3 px-4 rounded-xl hover:bg-white/10 border-b border-white/5"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}

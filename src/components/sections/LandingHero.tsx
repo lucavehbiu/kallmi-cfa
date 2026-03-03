@@ -143,7 +143,7 @@ export default function LandingHero() {
             <Link href="/stay" className="group">
               <Button
                 size="lg"
-                className="bg-[#8B7355] hover:bg-[#8B7355]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#8B7355]/30"
+                className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#D4AF37]/30"
               >
                 <span className="flex items-center space-x-2">
                   <span>{t('cta1')}</span>
@@ -183,36 +183,26 @@ export default function LandingHero() {
             animation="slide-up"
             duration={1.0}
             delay={1.8}
-            className="flex flex-row gap-2 justify-center items-center"
+            className="flex flex-col gap-4 justify-center items-center w-full px-4"
           >
-            <Link href="/stay" className="group flex-1">
+            <Link href="/stay" className="group w-full max-w-xs">
               <Button
                 size="lg"
-                className="w-full bg-[#8B7355] hover:bg-[#8B7355]/90 text-white px-4 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#8B7355]/30"
+                className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-white px-6 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#D4AF37]/30"
               >
                 <span className="text-sm">{t('cta1')}</span>
               </Button>
             </Link>
 
-            <Link href="/restaurant" className="group flex-1">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="w-full bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 px-4 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 backdrop-blur-sm"
-              >
-                <span className="text-sm">{t('cta2')}</span>
-              </Button>
-            </Link>
-
-            <Link href="/shop" className="group flex-1">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="w-full bg-white/10 hover:bg-white/20 text-white border-white/30 hover:border-white/50 px-4 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 backdrop-blur-sm"
-              >
-                <span className="text-sm">{t('cta3')}</span>
-              </Button>
-            </Link>
+            <div className="flex items-center gap-6">
+              <Link href="/restaurant" className="text-white/80 hover:text-white text-sm font-light tracking-wide transition-colors duration-300">
+                {t('cta2')}
+              </Link>
+              <span className="text-white/30">·</span>
+              <Link href="/shop" className="text-white/80 hover:text-white text-sm font-light tracking-wide transition-colors duration-300">
+                {t('cta3')}
+              </Link>
+            </div>
           </AnimateDiv>
         </div>
       </div>
