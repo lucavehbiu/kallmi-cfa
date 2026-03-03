@@ -488,8 +488,7 @@
   },
   "Restaurant": {
     "heroBadge": "Cucina Mediterranea",
-    "heroTitle": "Kallmi",
-    "heroTitleAccent": "Ristorante",
+    "heroDineTitle": "Cena con Noi",
     "heroDescription": "Dove la cucina albanese autentica incontra l'eleganza contemporanea, con vista sul Mar Adriatico scintillante",
     "heroBookNow": "Prenota un Tavolo",
     "heroDescAccent": "cucina albanese autentica",

@@ -45,11 +45,11 @@ export function Header() {
   }, [isOpen, isCartOpen])
 
   const navItems: Array<{ name: string; href: string }> = [
-    { name: t('ourStory'), href: '/our-story' },
     { name: t('stay'), href: '/stay' },
     { name: t('restaurant'), href: '/restaurant' },
-    { name: t('camping'), href: '/camping' },
     { name: t('shop'), href: '/shop' },
+    { name: t('camping'), href: '/camping' },
+    { name: t('ourStory'), href: '/our-story' },
     { name: t('contact'), href: '/contact' }
   ]
 

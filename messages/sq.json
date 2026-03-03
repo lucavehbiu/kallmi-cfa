@@ -488,8 +488,7 @@
   },
   "Restaurant": {
     "heroBadge": "Kuzhinë Mesdhetare",
-    "heroTitle": "Kallmi",
-    "heroTitleAccent": "Restoranti",
+    "heroDineTitle": "Darkoni me Ne",
     "heroDescription": "Ku kuzhina autentike shqiptare takon elegancën bashkëkohore, me pamje nga Deti Adriatik i shkëlqyer",
     "heroBookNow": "Rezervo Tavolinë",
     "heroDescAccent": "kuzhina autentike shqiptare",

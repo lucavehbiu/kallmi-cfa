@@ -417,11 +417,8 @@ export default function Restaurant() {
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.3}>
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide">
-                {t('heroTitle')}
-                <span className="block text-3xl sm:text-5xl lg:text-6xl italic text-brand-gold mt-2">
-                  {t('heroTitleAccent')}
-                </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-tight">
+                {t('heroDineTitle')}
               </h1>
             </FadeIn>
 

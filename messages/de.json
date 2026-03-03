@@ -488,8 +488,7 @@
   },
   "Restaurant": {
     "heroBadge": "Mediterrane Kuche",
-    "heroTitle": "Kallmi",
-    "heroTitleAccent": "Restaurant",
+    "heroDineTitle": "Bei Uns Speisen",
     "heroDescription": "Wo authentische albanische Kuche auf zeitgenossische Eleganz trifft, mit Blick auf die funkelnde Adria",
     "heroBookNow": "Einen Tisch Buchen",
     "heroDescAccent": "authentische albanische Kuche",
