@@ -54,35 +54,25 @@ export function Header() {
   ]
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out
+    <header className="fixed top-0 left-0 right-0 z-50 pt-4 px-4 sm:px-6 lg:px-8 transition-all duration-500 ease-out">
+      <nav className={`max-w-7xl mx-auto transition-all duration-500 ease-out
         ${scrolled
-          ? 'bg-white/90 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-black/5'
-          : 'bg-transparent'
-        }`}
-    >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 lg:h-24">
+          ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-black/5 rounded-none border-b border-white/20 -mt-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8'
+          : 'bg-white/15 backdrop-blur-md border border-white/25 rounded-full px-6 lg:px-10 shadow-lg'
+        }`}>
+        <div className="flex justify-between items-center h-16 lg:h-20">
 
           {/* Logo */}
           <div className="group transition-all duration-300 hover:scale-105">
-            <Link href="/" className="flex items-center space-x-3">
+            <Link href="/" className="flex items-center">
               <div className="relative">
-              <Image
-                src="https://storage.googleapis.com/kallmi/images/logo.webp"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={scrolled ? '/kallmi-black.svg' : '/kallmi-white.svg'}
                 alt="Kallmi Estate"
-                  width={48}
-                  height={48}
-                  className={`w-auto h-8 transition-all duration-300 group-hover:opacity-90
-                    ${scrolled ? 'brightness-0' : 'brightness-0 invert'}`}
-                />
-                {/* Floating glow effect */}
-                <div className="absolute inset-0 bg-[#D4AF37]/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-              </div>
-              <div className={`hidden sm:block transition-colors duration-300
-                ${scrolled ? 'text-[#8B7355]' : 'text-white'}`}>
-                <div className="text-lg font-light tracking-wider">KALLMI</div>
-                <div className="text-xs font-medium tracking-widest uppercase opacity-70">Estate</div>
+                style={{ width: '160px', height: '47px', objectFit: 'contain' }}
+                className="transition-all duration-300 group-hover:opacity-90"
+              />
               </div>
             </Link>
           </div>

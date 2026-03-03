@@ -410,9 +410,10 @@ export default function Restaurant() {
         <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6 py-20">
           <div className="max-w-4xl space-y-6">
             <FadeIn animation="fade" delay={0.2}>
-              <Badge variant="neutral" className="bg-white/10 text-white border border-white/20">
-                {t('heroBadge')}
-              </Badge>
+              <div className="mb-4 inline-block">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/kallmi-bukur-white.svg" alt="Kallmi Bukur" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
+              </div>
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.3}>

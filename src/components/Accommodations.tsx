@@ -385,9 +385,10 @@ export default function Accommodations() {
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10 px-4">
           <FadeIn animation="fade" delay={0.2}>
-            <span className="text-overline text-white/80 block mb-4 text-center">
-              {t('heroOverline')}
-            </span>
+            <div className="mb-6 inline-block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/kallmi-view-white.svg" alt="Kallmi View" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
+            </div>
           </FadeIn>
 
           <FadeIn animation="slide-up" delay={0.4}>

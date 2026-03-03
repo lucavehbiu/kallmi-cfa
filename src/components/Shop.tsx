@@ -135,9 +135,10 @@ export default function Shop() {
         <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4">
           <div className="max-w-3xl">
             <FadeIn animation="fade" delay={0.2}>
-              <span className="text-overline text-white/80 block mb-4">
-                {t('heroOverline')}
-              </span>
+              <div className="mb-6 inline-block">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/kallmi-oil-white.svg" alt="Kallmi Oil" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
+              </div>
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.4}>
