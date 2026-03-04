@@ -75,8 +75,10 @@ export default {
       },
       // Font families
       fontFamily: {
-        'cormorant': ['Cormorant Garamond', 'Georgia', 'serif'],
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'serif': ['var(--font-instrument-serif)', 'Georgia', 'serif'],
+        'sans': ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        // Keep cormorant alias so existing font-cormorant classes still work
+        'cormorant': ['var(--font-instrument-serif)', 'Georgia', 'serif'],
       },
       // Border radius
       borderRadius: {
