@@ -8,7 +8,9 @@ export function Footer() {
   const t = useTranslations('FooterFull')
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   const navLinks: Array<{ label: string; href: string }> = [
@@ -152,6 +154,7 @@ export function Footer() {
 
           {/* Back to top */}
           <button
+            type="button"
             onClick={scrollToTop}
             className="group flex items-center gap-2 text-xs font-sans tracking-widest uppercase transition-colors duration-300 hover:text-white"
             style={{ color: 'rgba(250,250,248,0.40)' }}

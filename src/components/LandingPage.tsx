@@ -4,7 +4,6 @@ import { FadeIn } from './motion/FadeIn'
 import LandingHero from './sections/LandingHero'
 import RestaurantSnippet from './sections/RestaurantSnippet'
 import AccommodationsSnippet from './sections/AccommodationsSnippet'
-import WhatsAppButton from './WhatsAppButton'
 import OptimizedImage from './common/OptimizedImage'
 import { Card } from './ui/Card'
 import { Section, SectionHeader } from './layout/Section'
@@ -232,7 +231,6 @@ export default function LandingPage() {
         </FadeIn>
       </Section>
 
-      <WhatsAppButton />
     </main>
   )
 }

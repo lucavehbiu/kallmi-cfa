@@ -46,7 +46,9 @@ export default function Camping() {
             </div>
 
             <p className="text-lg sm:text-xl font-sans font-light opacity-90 max-w-2xl mx-auto">
-              {t('heroSubtitle')} <span className="text-[#D4AF37]">{t('heroSubtitleAccent')}</span>
+              {t.rich('heroSubtitle', {
+                accent: (chunks) => <span className="text-[#D4AF37]">{chunks}</span>
+              })}
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mt-8">
