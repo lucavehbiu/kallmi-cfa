@@ -1,4 +1,4 @@
-import { Cormorant } from 'next/font/google'
+import { Instrument_Serif, DM_Sans } from 'next/font/google'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
@@ -6,10 +6,19 @@ import { setRequestLocale, getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 
-const cormorant = Cormorant({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
   display: 'swap',
-  variable: '--font-cormorant'
+  variable: '--font-instrument-serif'
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
+  variable: '--font-dm-sans'
 })
 
 export const metadata: Metadata = {
@@ -80,7 +89,7 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={cormorant.variable}>
+    <html lang={locale} className={`${instrumentSerif.variable} ${dmSans.variable}`}>
       <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-5BC0XC4J09"
