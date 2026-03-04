@@ -393,7 +393,7 @@ export default function Restaurant() {
     <div className="min-h-screen bg-surface-primary font-cormorant">
 
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] lg:min-h-[60vh] overflow-hidden pt-20">
+      <section className="relative min-h-screen overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="https://storage.googleapis.com/kallmi/images/restaurant_snippet.webp"
@@ -404,63 +404,43 @@ export default function Restaurant() {
             sizes="100vw"
             quality={90}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/20 via-transparent to-[#8B7355]/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
         </div>
 
-        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 sm:px-6 py-20">
-          <div className="max-w-4xl space-y-6">
-            <FadeIn animation="fade" delay={0.2}>
-              <div className="mb-4 inline-block">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/kallmi-bukur-white.svg" alt="Kallmi Bukur" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
-              </div>
+        <div className="relative z-10 flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 pt-24 lg:pt-32 pb-16">
+          <div className="max-w-5xl space-y-6 sm:space-y-8">
+            <FadeIn animation="fade" delay={0.2} className="inline-block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/kallmi-bukur-white.svg" alt="Kallmi Bukur" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.3}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-[0.05em] sm:tracking-[0.1em]">
                 {t('heroDineTitle')}
               </h1>
             </FadeIn>
 
-            <FadeIn animation="fade" delay={0.5}>
-              <div className="flex items-center justify-center gap-4">
-                <div className="w-16 h-px bg-white/40" />
-                <HeartIcon className="w-5 h-5 text-brand-gold" />
-                <div className="w-16 h-px bg-white/40" />
-              </div>
+            <FadeIn animation="fade" delay={0.5} className="flex items-center justify-center space-x-3">
+              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              <div className="w-1.5 h-1.5 bg-[#C4A862] rounded-full" />
+              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.6}>
-              <p className="text-lg sm:text-xl lg:text-2xl font-light opacity-90 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl font-light italic opacity-90 max-w-2xl mx-auto">
                 {t('heroDescription')}
               </p>
             </FadeIn>
 
-            {/* Info Cards */}
             <FadeIn animation="slide-up" delay={0.8}>
-              <div className="flex flex-wrap justify-center gap-4 mt-8">
-                {[
-                  { icon: ClockIcon, text: t('infoHours') },
-                  { icon: MapPinIcon, text: t('infoLocation') },
-                  { icon: SparklesIcon, text: t('infoFresh') },
-                ].map((item, index) => (
-                  <Card key={index} variant="on-dark" padding="sm" className="min-w-[120px] text-center">
-                    <item.icon className="w-5 h-5 text-brand-gold mx-auto mb-1" />
-                    <p className="text-white/90 text-sm">{item.text}</p>
-                  </Card>
-                ))}
-              </div>
-            </FadeIn>
-
-            <FadeIn animation="slide-up" delay={1.0}>
-              <Button
-                variant="primary"
-                size="lg"
-                className="mt-8"
+              <button
+                className="bg-[#C4A862] hover:bg-[#C4A862]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform hover:scale-105 hover:shadow-2xl backdrop-blur-sm border border-[#C4A862]/30 text-base"
                 onClick={() => document.getElementById('reservation-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 {t('heroBookNow')}
-              </Button>
+              </button>
             </FadeIn>
           </div>
         </div>

@@ -102,7 +102,7 @@ export default function LandingHero() {
               className="flex items-center justify-center space-x-3 sm:space-x-4"
             >
               <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-              <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-[#D4AF37] rounded-full" />
+              <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-[#C4A862] rounded-full" />
               <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </AnimateDiv>
 
@@ -143,7 +143,7 @@ export default function LandingHero() {
             <Link href="/stay" className="group">
               <Button
                 size="lg"
-                className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#D4AF37]/30"
+                className="bg-[#C4A862] hover:bg-[#C4A862]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#D4AF37]/30"
               >
                 <span className="flex items-center space-x-2">
                   <span>{t('cta1')}</span>
@@ -188,7 +188,7 @@ export default function LandingHero() {
             <Link href="/stay" className="group w-full max-w-xs">
               <Button
                 size="lg"
-                className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-white px-6 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#D4AF37]/30"
+                className="w-full bg-[#C4A862] hover:bg-[#C4A862]/90 text-white px-6 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#D4AF37]/30"
               >
                 <span className="text-sm">{t('cta1')}</span>
               </Button>

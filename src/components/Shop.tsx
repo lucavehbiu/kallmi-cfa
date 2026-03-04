@@ -115,46 +115,50 @@ export default function Shop() {
   return (
     <div className="min-h-screen bg-[var(--color-surface-primary)] font-cormorant">
 
-      {/* Hero Section - Clean, Product-Focused */}
-      <div className="relative h-[60vh] min-h-[500px] overflow-hidden">
-        {/* Background */}
-        <Image
-          src="https://storage.googleapis.com/kallmi/images/hand-harvested.webp"
-          alt={t('heroImageAlt')}
-          className="object-cover object-center"
-          fill
-          priority
-          sizes="100vw"
-          quality={90}
-        />
+      {/* Hero Section */}
+      <section className="relative min-h-screen overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://storage.googleapis.com/kallmi/images/hand-harvested.webp"
+            alt={t('heroImageAlt')}
+            className="object-cover object-center"
+            fill
+            priority
+            sizes="100vw"
+            quality={90}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/20 via-transparent to-[#8B7355]/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+        </div>
 
-        {/* Single Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
-
-        {/* Hero Content */}
-        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4">
-          <div className="max-w-3xl">
-            <FadeIn animation="fade" delay={0.2}>
-              <div className="mb-6 inline-block">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/kallmi-oil-white.svg" alt="Kallmi Oil" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
-              </div>
+        <div className="relative z-10 flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 pt-24 lg:pt-32 pb-16">
+          <div className="max-w-5xl space-y-6 sm:space-y-8">
+            <FadeIn animation="fade" delay={0.2} className="inline-block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/kallmi-oil-white.svg" alt="Kallmi Oil" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.4}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-tight mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-[0.05em] sm:tracking-[0.1em]">
                 {t('heroTitle')}
               </h1>
             </FadeIn>
 
-            <FadeIn animation="slide-up" delay={0.6}>
-              <p className="text-lg sm:text-xl font-light opacity-90 max-w-2xl mx-auto">
+            <FadeIn animation="fade" delay={0.6} className="flex items-center justify-center space-x-3">
+              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              <div className="w-1.5 h-1.5 bg-[#C4A862] rounded-full" />
+              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+            </FadeIn>
+
+            <FadeIn animation="slide-up" delay={0.7}>
+              <p className="text-lg sm:text-xl font-light italic opacity-90 max-w-2xl mx-auto">
                 {t('heroSubtitle')}
               </p>
             </FadeIn>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Filter Toggle - Mobile */}
       <button

@@ -59,8 +59,8 @@ export function Header() {
       lg:bg-transparent lg:pt-4 lg:px-8`}>
       <nav className={`max-w-7xl mx-auto px-4 lg:px-0 transition-all duration-500 ease-out
         ${scrolled
-          ? 'lg:bg-white/90 lg:backdrop-blur-xl lg:shadow-lg lg:rounded-none lg:border-b lg:border-white/20 lg:px-8'
-          : 'lg:bg-white/15 lg:backdrop-blur-md lg:border lg:border-white/25 lg:rounded-full lg:px-10 lg:shadow-lg'
+          ? 'lg:bg-white/90 lg:backdrop-blur-xl lg:shadow-lg lg:rounded-none lg:border-b lg:border-white/20 lg:px-10'
+          : 'lg:bg-white/15 lg:backdrop-blur-md lg:border lg:border-white/25 lg:rounded-full lg:px-14 lg:shadow-lg'
         }`}>
         <div className="flex justify-between items-center h-16 lg:h-20">
 
