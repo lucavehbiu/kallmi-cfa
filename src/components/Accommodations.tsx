@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback, useMemo } from 'react'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
-import { DayPicker, type DateRange } from 'react-day-picker'
+import { DayPicker, type DateRange, type DayButtonProps } from 'react-day-picker'
+import { DEFAULT_RATES } from '@/lib/pricing'
 import 'react-day-picker/style.css'
 import { FadeIn } from './motion/FadeIn'
 import { Section, SectionHeader } from './layout/Section'
@@ -105,6 +106,32 @@ const formatPrice = (price: number) => {
     style: 'currency',
     currency: 'EUR'
   }).format(price)
+}
+
+const formatDayPrice = (price: number) => `€${price}`
+
+function getNightlyRateForDay(date: Date): number {
+  const month = date.getMonth() + 1
+  return DEFAULT_RATES[month] || 100
+}
+
+function PricedDayButton({ day, modifiers, children, ...props }: DayButtonProps) {
+  const isOutside = modifiers.outside
+  const isDisabled = modifiers.disabled
+  const price = getNightlyRateForDay(day.date)
+
+  return (
+    <button {...props} style={{ ...props.style, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', padding: '2px 0' }}>
+      <span style={{ lineHeight: 1.2, fontSize: '0.875rem', fontWeight: modifiers.today ? 600 : 400 }}>
+        {children}
+      </span>
+      {!isOutside && !isDisabled && (
+        <span style={{ fontSize: '0.6rem', lineHeight: 1, color: 'var(--color-brand-olive)', opacity: 0.8, marginTop: '1px' }}>
+          {formatDayPrice(price)}
+        </span>
+      )}
+    </button>
+  )
 }
 
 export default function Accommodations() {
@@ -548,7 +575,7 @@ export default function Accommodations() {
                     </span>
                   </div>
 
-                  <p style={{ color: 'var(--color-text-secondary)' }}>
+                  <p className="font-sans" style={{ color: 'var(--color-text-secondary)' }}>
                     {t(room.descriptionKey)}
                   </p>
 
@@ -749,6 +776,7 @@ export default function Accommodations() {
                           fullyBooked: 'kallmi-fully-booked-day',
                           limited: 'kallmi-limited-day'
                         }}
+                        components={{ DayButton: PricedDayButton }}
                       />
                       {loadingAvailability && (
                         <p className="text-xs text-center mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
@@ -920,7 +948,7 @@ export default function Accommodations() {
                 >
                   {t(experience.titleKey)}
                 </h3>
-                <p style={{ color: 'var(--color-text-secondary)' }}>
+                <p className="font-sans" style={{ color: 'var(--color-text-secondary)' }}>
                   {t(experience.descriptionKey)}
                 </p>
               </Card>
@@ -1035,7 +1063,7 @@ export default function Accommodations() {
                 </span>
               </div>
 
-              <p style={{ color: 'var(--color-text-secondary)' }}>
+              <p className="font-sans" style={{ color: 'var(--color-text-secondary)' }}>
                 {t(selectedRoom.descriptionKey)}
               </p>
 

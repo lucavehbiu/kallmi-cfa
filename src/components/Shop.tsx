@@ -430,7 +430,7 @@ export default function Shop() {
                   >
                     {t('noProductsFound')}
                   </h3>
-                  <p style={{ color: 'var(--color-text-secondary)' }}>
+                  <p className="font-sans" style={{ color: 'var(--color-text-secondary)' }}>
                     {t('tryAdjustingFilters')}
                   </p>
                 </Card>

@@ -234,7 +234,7 @@ export default function ContactSection() {
         >
           <div className="backdrop-blur-sm bg-white/60 rounded-3xl p-8 lg:p-12 border border-white/40">
             <SparklesIcon className="w-12 h-12 text-[#D4AF37] mx-auto mb-6" />
-            <blockquote className="text-lg sm:text-xl lg:text-2xl text-gray-700 italic font-light leading-relaxed mb-6">
+            <blockquote className="text-lg sm:text-xl lg:text-2xl text-gray-700 italic font-light leading-relaxed mb-6 font-sans">
               &ldquo;{t('quote')}&rdquo;
             </blockquote>
             <div className="w-16 h-px bg-[#8B7355] mx-auto mb-4" />

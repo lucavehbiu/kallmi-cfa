@@ -69,6 +69,10 @@ h1, h2, h3, h4 {
   font-family: var(--font-instrument-serif), Georgia, serif;
 }
 
+p, li, blockquote, address {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
 /* ============================================
    HEADER STYLES
    ============================================ */
@@ -382,11 +386,13 @@ h1, h2, h3, h4 {
 
   .text-body {
     @apply text-base leading-relaxed;
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
     color: var(--color-text-secondary);
   }
 
   .text-body-lg {
     @apply text-lg leading-relaxed;
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
     color: var(--color-text-secondary);
   }
 
@@ -565,9 +571,11 @@ html::-webkit-scrollbar {
 .kallmi-calendar-wrapper .rdp-root {
   --rdp-accent-color: #8B7355;
   --rdp-accent-background-color: rgba(139, 115, 85, 0.15);
-  --rdp-day_button-border-radius: 8px;
-  --rdp-day_button-height: 44px;
-  --rdp-day_button-width: 44px;
+  --rdp-day_button-border-radius: 6px;
+  --rdp-day_button-height: 56px;
+  --rdp-day_button-width: 56px;
+  --rdp-day-height: 60px;
+  --rdp-day-width: calc((100%) / 7);
   --rdp-selected-border: 2px solid #8B7355;
   --rdp-disabled-opacity: 0.35;
   --rdp-range_middle-background-color: rgba(139, 115, 85, 0.08);
@@ -587,6 +595,35 @@ html::-webkit-scrollbar {
 
 .kallmi-calendar-wrapper .rdp-months {
   justify-content: center;
+  width: 100%;
+}
+
+.kallmi-calendar-wrapper .rdp-month_grid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.kallmi-calendar-wrapper .rdp-weekdays {
+  width: 100%;
+}
+
+.kallmi-calendar-wrapper .rdp-weekday {
+  width: calc(100% / 7);
+}
+
+.kallmi-calendar-wrapper .rdp-week {
+  width: 100%;
+}
+
+.kallmi-calendar-wrapper .rdp-day {
+  width: calc(100% / 7);
+  padding: 2px;
+}
+
+.kallmi-calendar-wrapper .rdp-day_button {
+  width: 100% !important;
+  height: 56px !important;
 }
 
 .kallmi-calendar-wrapper .rdp-month_caption {

@@ -965,7 +965,7 @@ export default function Restaurant() {
 
         <FadeIn animation="fade" delay={0.4}>
           <Card variant="elevated" padding="lg" className="max-w-2xl mx-auto mt-12 text-center">
-            <p className="text-xl text-text-secondary italic font-light leading-relaxed">
+            <p className="text-xl text-text-secondary italic font-light leading-relaxed font-sans">
               &ldquo;{t('awardsQuote')}&rdquo;
             </p>
             <div className="divider-accent mx-auto mt-6" />

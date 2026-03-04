@@ -38,7 +38,7 @@ export default function TastingNotes() {
                   </div>
                 </div>
                 <h3 className="text-2xl text-[#8B7355] mb-3">{note.title}</h3>
-                <p className="text-gray-600 italic">{note.description}</p>
+                <p className="text-gray-600 italic font-sans">{note.description}</p>
               </div>
             )
           })}

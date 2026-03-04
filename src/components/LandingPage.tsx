@@ -190,7 +190,7 @@ export default function LandingPage() {
         {/* Quote - Clean card, no glass-morphism */}
         <FadeIn animation="fade" delay={0.4}>
           <Card variant="elevated" padding="lg" className="max-w-4xl mx-auto mt-16 text-center">
-            <p className="text-xl sm:text-2xl text-text-secondary italic font-light leading-relaxed">
+            <p className="text-xl sm:text-2xl text-text-secondary italic font-light leading-relaxed font-sans">
               {t('sunsetQuote')}
             </p>
             <div className="divider-accent mx-auto mt-8" />
