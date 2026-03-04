@@ -477,7 +477,7 @@ export default function Restaurant() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7 space-y-6 order-2 lg:order-1">
             <FadeIn animation="slide-up">
-              <span className="text-overline">{t('introOverline')}</span>
+              <span className="label-eyebrow text-overline">{t('introOverline')}</span>
               <div className="divider-accent mt-3" />
             </FadeIn>
 
@@ -857,7 +857,7 @@ export default function Restaurant() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7 space-y-6 order-2 lg:order-1">
             <FadeIn animation="slide-up">
-              <span className="text-overline">{t('eventsOverline')}</span>
+              <span className="label-eyebrow text-overline">{t('eventsOverline')}</span>
               <div className="divider-accent mt-3" />
             </FadeIn>
 

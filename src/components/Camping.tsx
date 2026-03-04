@@ -187,7 +187,7 @@ export default function Camping() {
             <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
               <div className="space-y-4 sm:space-y-6">
                 <div className="inline-block">
-                  <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+                  <span className="label-eyebrow text-[#8B7355]">
                     {t('introOverline')}
                   </span>
                   <div className="w-16 h-px bg-[#8B7355] mt-2" />
@@ -280,7 +280,7 @@ export default function Camping() {
           {/* Section Header */}
           <div className="text-center mb-12 sm:mb-20">
             <AnimateDiv animation="slide-up" delay={0.2}>
-              <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+              <span className="label-eyebrow text-[#8B7355]">
                 {t('campsitesOverline')}
               </span>
               <h2 className="text-3xl sm:text-6xl font-extralight text-[#8B7355] mt-4 mb-6 leading-tight">
@@ -387,7 +387,7 @@ export default function Camping() {
           duration={1.0}
         >
           <div className="space-y-6 mb-12">
-            <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+            <span className="label-eyebrow text-[#8B7355]">
               {t('bookingOverline')}
             </span>
             <h2 className="text-3xl sm:text-5xl font-extralight text-[#8B7355] leading-tight">
@@ -492,7 +492,7 @@ export default function Camping() {
         >
           <div className="text-center mb-12 sm:mb-20">
             <AnimateDiv animation="slide-up" delay={0.2}>
-              <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+              <span className="label-eyebrow text-[#8B7355]">
                 {t('activitiesOverline')}
               </span>
               <h2 className="text-3xl sm:text-6xl font-extralight text-[#8B7355] mt-4 mb-6 leading-tight">

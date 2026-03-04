@@ -97,7 +97,7 @@ export default function ContactSection() {
             <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
               <div className="space-y-4 sm:space-y-6">
                 <div className="inline-block">
-                  <span className="text-sm sm:text-base text-[#8B7355] font-medium tracking-widest uppercase">
+                  <span className="label-eyebrow text-[#8B7355]">
                     {t('connectOverline')}
                   </span>
                   <div className="w-16 h-px bg-[#8B7355] mt-2" />

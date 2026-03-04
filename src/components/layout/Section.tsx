@@ -80,7 +80,7 @@ export function SectionHeader({
   return (
     <div className={`mb-12 sm:mb-16 ${alignClasses} ${className}`}>
       {overline && (
-        <span className="text-overline block mb-4">{overline}</span>
+        <span className="label-eyebrow text-overline block mb-4">{overline}</span>
       )}
       {typeof title === 'string' ? (
         <h2 className="text-heading text-brand-olive">{title}</h2>

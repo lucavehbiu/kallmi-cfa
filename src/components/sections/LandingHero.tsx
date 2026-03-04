@@ -73,7 +73,7 @@ export default function LandingHero() {
             className="inline-block"
           >
             <div className="backdrop-blur-md bg-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3 border border-white/20 mb-4 sm:mb-6">
-              <span className="text-xs sm:text-sm lg:text-base font-medium tracking-widest uppercase text-white/90">
+              <span className="label-eyebrow text-white/90">
                 {t('badge')}
               </span>
             </div>

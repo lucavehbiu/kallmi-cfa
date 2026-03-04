@@ -397,7 +397,17 @@ h1, h2, h3, h4 {
 
   .text-overline {
     @apply text-sm font-medium tracking-widest uppercase;
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
     color: var(--color-brand-olive);
+  }
+
+  /* Section eyebrow labels */
+  .label-eyebrow {
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
   }
 
   /* --------------------------------------------

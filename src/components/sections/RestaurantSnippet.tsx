@@ -16,7 +16,7 @@ export default function RestaurantSnippet() {
         <div className="order-2 lg:order-1 space-y-6">
           <FadeIn animation="slide-up">
             <div className="space-y-4">
-              <span className="text-overline">{t('overline')}</span>
+              <span className="label-eyebrow text-overline">{t('overline')}</span>
               <div className="divider-accent" />
             </div>
           </FadeIn>

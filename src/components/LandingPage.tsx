@@ -24,7 +24,7 @@ export default function LandingPage() {
           <div className="lg:col-span-6 space-y-8 order-2 lg:order-1">
             <FadeIn animation="slide-up">
               <div className="space-y-4">
-                <span className="text-overline">{t('heritageOverline')}</span>
+                <span className="label-eyebrow text-overline">{t('heritageOverline')}</span>
                 <div className="divider-accent" />
               </div>
             </FadeIn>
@@ -144,7 +144,7 @@ export default function LandingPage() {
       <Section id="sunsets" spacing="lg" background="default">
         <FadeIn animation="fade">
           <div className="text-center mb-16 lg:mb-24">
-            <span className="text-overline mb-4 block">{t('sunsetOverline')}</span>
+            <span className="label-eyebrow text-overline mb-4 block">{t('sunsetOverline')}</span>
             <h2 className="text-display text-brand-olive mt-4 mb-6">
               {t('sunsetTitle1')}
               <span className="block italic mt-2">{t('sunsetTitle2')}</span>
