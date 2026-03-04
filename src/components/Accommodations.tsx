@@ -533,88 +533,74 @@ export default function Accommodations() {
           align="center"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
           {rooms.map((room, index) => (
             <FadeIn
               key={room.id}
               animation="slide-up"
               delay={index * 0.1}
             >
-              <Card variant="elevated" hover className="overflow-hidden">
-                <div className="relative h-64">
+              <button
+                onClick={() => {
+                  setSelectedRoom(room)
+                  setCurrentImageIndex(0)
+                }}
+                className="w-full text-left group"
+              >
+                {/* Image — tall, full bleed, with gradient overlay */}
+                <div className="relative w-full rounded-2xl overflow-hidden" style={{ aspectRatio: '3/4' }}>
                   <Image
                     src={room.images[0]}
                     alt={t(room.nameKey)}
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={75}
+                    quality={80}
                   />
-                  {room.featured && (
-                    <div
-                      className="absolute top-4 right-4 px-3 py-1 rounded-full text-sm text-white"
-                      style={{ backgroundColor: 'var(--color-brand-olive)' }}
-                    >
-                      {t('featured')}
-                    </div>
-                  )}
-                </div>
-                <CardBody className="space-y-4">
-                  <div className="flex justify-between items-start">
-                    <h3
-                      className="text-2xl font-light"
-                      style={{ color: 'var(--color-brand-olive)' }}
-                    >
+                  {/* Gradient — strong at bottom, subtle at top */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/10" />
+
+                  {/* Price chip — top right */}
+                  <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-medium text-white backdrop-blur-md"
+                    style={{ backgroundColor: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                    {t('fromPrice', { price: formatPrice(80) })}
+                  </div>
+
+                  {/* Room name + amenity pills — bottom overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 pb-6">
+                    <h3 className="text-2xl font-light text-white mb-3 leading-tight">
                       {t(room.nameKey)}
                     </h3>
-                    <span
-                      className="text-lg font-light"
-                      style={{ color: 'var(--color-brand-olive)' }}
-                    >
-                      {t('fromPrice', { price: formatPrice(80) })}
-                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      <span className="text-xs px-2.5 py-1 rounded-full text-white/90 border border-white/25 backdrop-blur-sm">
+                        {room.size}
+                      </span>
+                      <span className="text-xs px-2.5 py-1 rounded-full text-white/90 border border-white/25 backdrop-blur-sm">
+                        {t('sleeps', { capacity: room.capacity })}
+                      </span>
+                      {room.amenityKeys.slice(0, 2).map((amenityKey, i) => (
+                        <span key={i} className="text-xs px-2.5 py-1 rounded-full text-white/90 border border-white/25 backdrop-blur-sm">
+                          {t(amenityKey)}
+                        </span>
+                      ))}
+                    </div>
                   </div>
+                </div>
 
-                  <p className="font-sans" style={{ color: 'var(--color-text-secondary)' }}>
+                {/* Description + CTA below image */}
+                <div className="pt-4 pb-2 space-y-2.5">
+                  <p className="text-sm font-sans leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
                     {t(room.descriptionKey)}
                   </p>
-
-                  <div className="flex flex-wrap gap-2">
-                    <span
-                      className="text-sm px-2 py-1 rounded"
-                      style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
-                    >
-                      {room.size}
-                    </span>
-                    <span
-                      className="text-sm px-2 py-1 rounded"
-                      style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
-                    >
-                      {t('sleeps', { capacity: room.capacity })}
-                    </span>
-                    {room.amenityKeys.slice(0, 2).map((amenityKey, i) => (
-                      <span
-                        key={i}
-                        className="text-sm px-2 py-1 rounded"
-                        style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}
-                      >
-                        {t(amenityKey)}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Button
-                    onClick={() => {
-                      setSelectedRoom(room)
-                      setCurrentImageIndex(0)
-                    }}
-                    variant="primary"
-                    fullWidth
-                  >
+                  <div className="flex items-center gap-1.5 text-sm font-medium transition-opacity duration-200 group-hover:opacity-60"
+                    style={{ color: 'var(--color-brand-olive)' }}>
                     {t('viewDetailsAndBook')}
-                  </Button>
-                </CardBody>
-              </Card>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </button>
             </FadeIn>
           ))}
         </div>
