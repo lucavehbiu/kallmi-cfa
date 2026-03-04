@@ -34,6 +34,10 @@
   --color-border-light: #EBE7E0;
   --color-border: #D4CFC4;
   --color-border-dark: #B8B4AC;
+
+  /* Typography semantic roles */
+  --font-display: var(--font-instrument-serif), Georgia, serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
 }
 
 /* ============================================
@@ -55,9 +59,14 @@ body {
   color: var(--color-text-primary);
   line-height: 1.618;
   background-color: var(--color-surface-primary);
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 1rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-instrument-serif), Georgia, serif;
 }
 
 /* ============================================
