@@ -61,7 +61,7 @@ export function Header() {
       <nav className={`max-w-7xl mx-auto px-4 lg:px-0 transition-all duration-500 ease-out
         ${scrolled
           ? 'lg:bg-white/90 lg:backdrop-blur-xl lg:shadow-lg lg:rounded-none lg:border-b lg:border-white/20 lg:px-10'
-          : 'lg:bg-white/15 lg:backdrop-blur-md lg:border lg:border-white/25 lg:rounded-full lg:px-14 lg:shadow-lg'
+          : 'lg:bg-black/30 lg:backdrop-blur-[8px] lg:rounded-full lg:px-14'
         }`}>
         <div className="flex justify-between items-center h-16 lg:h-20">
 
