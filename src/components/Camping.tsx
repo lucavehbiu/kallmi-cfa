@@ -378,105 +378,51 @@ export default function Camping() {
         </AnimateDiv>
       </section>
 
-      {/* Enhanced Reservation Section */}
-      <section className="relative py-16 sm:py-24 bg-gradient-to-b from-white to-stone-50">
-        <div className="absolute inset-0 bg-[url('https://storage.googleapis.com/kallmi/images/pattern.webp')] opacity-5"></div>
+      {/* Contact Section */}
+      <section className="relative py-16 sm:py-24" style={{ backgroundColor: 'var(--color-surface-secondary)' }}>
         <AnimateDiv
-          className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10"
+          className="max-w-xl mx-auto px-4 sm:px-6 text-center"
           animation="fade"
           duration={1.0}
         >
-          <div className="space-y-6 mb-12">
-            <span className="label-eyebrow text-[#8B7355]">
-              {t('bookingOverline')}
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-extralight text-[#8B7355] leading-tight">
-              {t('bookingTitle')}
-              <span className="block italic">{t('bookingTitleAccent')}</span>
-            </h2>
-            <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed font-light">
-              {t('bookingSubtitle')}
-            </p>
-          </div>
+          <span className="label-eyebrow text-[#8B7355]">{t('bookingOverline')}</span>
+          <h2 className="text-3xl sm:text-4xl font-extralight text-[#8B7355] mt-4 mb-3 leading-tight">
+            {t('bookingTitle')}
+          </h2>
+          <p className="text-base text-gray-600 font-sans mb-10 font-light">
+            {t('bookingSubtitle')}
+          </p>
 
-          <div className="backdrop-blur-sm bg-white/80 rounded-3xl p-8 lg:p-12 shadow-2xl border border-white/30">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              <div className="relative group">
-                <input
-                  type="text"
-                  placeholder={t('formName')}
-                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
-              </div>
-              <div className="relative group">
-                <input
-                  type="email"
-                  placeholder={t('formEmail')}
-                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              <div className="relative group">
-                <select className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light">
-                  <option value="">{t('formCampsiteType')}</option>
-                  {campsiteData.map(site => (
-                    <option key={site.id} value={site.id}>{t(site.nameKey)}</option>
-                  ))}
-                </select>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
-              </div>
-              <div className="relative group">
-                <select className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light">
-                  <option value="">{t('formCampers')}</option>
-                  <option value="1">{t('formCampers1')}</option>
-                  <option value="2">{t('formCampers2')}</option>
-                  <option value="3">{t('formCampers3')}</option>
-                  <option value="4">{t('formCampers4')}</option>
-                  <option value="5+">{t('formCampers5')}</option>
-                </select>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              <div className="relative group">
-                <label className="block text-gray-700 text-sm font-medium mb-2 text-left">{t('formCheckin')}</label>
-                <input
-                  type="date"
-                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
-              </div>
-              <div className="relative group">
-                <label className="block text-gray-700 text-sm font-medium mb-2 text-left">{t('formCheckout')}</label>
-                <input
-                  type="date"
-                  className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 font-light"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
-              </div>
-            </div>
-
-            <div className="mb-8 relative group">
-              <textarea
-                placeholder={t('formSpecialRequests')}
-                className="w-full px-6 py-4 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:border-[#8B7355] focus:bg-white/80 transition-all duration-300 h-32 resize-none font-light"
-              ></textarea>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/10 to-[#D4AF37]/10 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
-            </div>
-
-            <button className="w-full px-8 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] hover:from-[#A0845C] hover:to-[#8B7355] text-white rounded-2xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg text-lg">
+          <div className="space-y-4 text-left">
+            <input
+              type="text"
+              placeholder={t('formName')}
+              className="w-full px-5 py-3.5 rounded-xl border font-sans text-sm focus:outline-none focus:border-[#8B7355] transition-colors"
+              style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface-primary)', color: 'var(--color-text-primary)' }}
+            />
+            <input
+              type="email"
+              placeholder={t('formEmail')}
+              className="w-full px-5 py-3.5 rounded-xl border font-sans text-sm focus:outline-none focus:border-[#8B7355] transition-colors"
+              style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface-primary)', color: 'var(--color-text-primary)' }}
+            />
+            <textarea
+              placeholder={t('formSpecialRequests')}
+              rows={4}
+              className="w-full px-5 py-3.5 rounded-xl border font-sans text-sm focus:outline-none focus:border-[#8B7355] transition-colors resize-none"
+              style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface-primary)', color: 'var(--color-text-primary)' }}
+            />
+            <button
+              className="w-full py-3.5 rounded-xl text-white font-sans font-medium text-sm transition-opacity hover:opacity-80"
+              style={{ backgroundColor: 'var(--color-brand-olive)' }}
+            >
               {t('formSubmit')}
             </button>
           </div>
 
-          <p className="mt-8 text-gray-500 font-light">
-            {t('bookingContact')}{' '}
-            <a href="mailto:reservations@kallmibukur.al" className="text-[#8B7355] hover:text-[#A0845C] transition-colors duration-300">
+          <p className="mt-6 text-sm font-sans" style={{ color: 'var(--color-text-tertiary)' }}>
+            Or email us directly at{' '}
+            <a href="mailto:reservations@kallmibukur.al" className="underline" style={{ color: 'var(--color-brand-olive)' }}>
               reservations@kallmibukur.al
             </a>
           </p>
