@@ -138,19 +138,16 @@ export default function Shop() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/kallmi-oil-white.svg" alt="Kallmi Oil" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
             </FadeIn>
-
             <FadeIn animation="slide-up" delay={0.4}>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-[0.05em] sm:tracking-[0.1em]">
                 {t('heroTitle')}
               </h1>
             </FadeIn>
-
             <FadeIn animation="fade" delay={0.6} className="flex items-center justify-center space-x-3">
               <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
               <div className="w-1.5 h-1.5 bg-[#C4A862] rounded-full" />
               <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </FadeIn>
-
             <FadeIn animation="slide-up" delay={0.7}>
               <p className="text-lg sm:text-xl font-light italic opacity-90 max-w-2xl mx-auto">
                 {t('heroSubtitle')}

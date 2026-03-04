@@ -143,7 +143,7 @@ export default function LandingHero() {
             <Link href="/stay" className="group">
               <Button
                 size="lg"
-                className="bg-[#C4A862] hover:bg-[#C4A862]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#D4AF37]/30"
+                className="bg-gradient-to-br from-[#E2BC6A] via-[#C4A862] to-[#9A7D3A] text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 shadow-[0_4px_24px_rgba(196,168,98,0.45)] group-hover:shadow-[0_6px_32px_rgba(196,168,98,0.65)] border border-white/20 backdrop-blur-sm ring-1 ring-[#E2BC6A]/30"
               >
                 <span className="flex items-center space-x-2">
                   <span>{t('cta1')}</span>
@@ -188,9 +188,9 @@ export default function LandingHero() {
             <Link href="/stay" className="group w-full max-w-xs">
               <Button
                 size="lg"
-                className="w-full bg-[#C4A862] hover:bg-[#C4A862]/90 text-white px-6 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-2xl backdrop-blur-sm border border-[#D4AF37]/30"
+                className="w-full bg-gradient-to-br from-[#E2BC6A] via-[#C4A862] to-[#9A7D3A] text-white px-6 py-3 rounded-xl font-medium tracking-wide transition-all duration-300 transform group-hover:scale-105 shadow-[0_4px_24px_rgba(196,168,98,0.45)] group-hover:shadow-[0_6px_32px_rgba(196,168,98,0.65)] border border-white/20 backdrop-blur-sm ring-1 ring-[#E2BC6A]/30"
               >
-                <span className="text-sm">{t('cta1')}</span>
+                <span className="text-sm drop-shadow-sm">{t('cta1')}</span>
               </Button>
             </Link>
 

@@ -387,34 +387,61 @@ export default function Accommodations() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
         </div>
 
-        <div className="relative z-10 flex items-center justify-center min-h-screen text-center text-white px-4 sm:px-6 pt-24 lg:pt-32 pb-16">
+        {/* Desktop + tablet content - centered */}
+        <div className="relative z-10 hidden sm:flex items-center justify-center min-h-screen text-center text-white px-6 pt-32 pb-16">
           <div className="max-w-5xl space-y-6 sm:space-y-8">
             <FadeIn animation="fade" delay={0.2} className="inline-block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/kallmi-view-white.svg" alt="Kallmi View" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
             </FadeIn>
-
             <FadeIn animation="slide-up" delay={0.4}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-[0.05em] sm:tracking-[0.1em]">
-                {t('heroTitle')}
-              </h1>
+              <h1 className="text-5xl lg:text-6xl font-extralight tracking-[0.1em]">{t('heroTitle')}</h1>
             </FadeIn>
-
             <FadeIn animation="fade" delay={0.6} className="flex items-center justify-center space-x-3">
-              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
               <div className="w-1.5 h-1.5 bg-[#C4A862] rounded-full" />
-              <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </FadeIn>
-
             <FadeIn animation="slide-up" delay={0.7}>
-              <p className="text-lg sm:text-xl font-light italic opacity-90 max-w-2xl mx-auto">
-                {t('heroSubtitle')}
-              </p>
+              <p className="text-xl font-light italic opacity-90 max-w-2xl mx-auto">{t('heroSubtitle')}</p>
             </FadeIn>
-
             <FadeIn animation="slide-up" delay={0.9}>
               <button
-                className="bg-[#C4A862] hover:bg-[#C4A862]/90 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform hover:scale-105 hover:shadow-2xl backdrop-blur-sm border border-[#C4A862]/30 text-base"
+                className="bg-gradient-to-br from-[#E2BC6A] via-[#C4A862] to-[#9A7D3A] text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform hover:scale-105 shadow-[0_4px_24px_rgba(196,168,98,0.45)] hover:shadow-[0_6px_32px_rgba(196,168,98,0.65)] border border-white/20 backdrop-blur-sm ring-1 ring-[#E2BC6A]/30 text-base drop-shadow-sm"
+                onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {t('heroBookNow')}
+              </button>
+            </FadeIn>
+          </div>
+        </div>
+
+        {/* Mobile content - title centered, button pinned to bottom */}
+        <div className="sm:hidden relative z-10 flex flex-col min-h-screen text-center text-white px-4 pt-24">
+          <div className="flex-1 flex items-center justify-center">
+            <div className="space-y-5">
+              <FadeIn animation="fade" delay={0.2} className="inline-block">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/kallmi-view-white.svg" alt="Kallmi View" style={{ width: '200px', height: '45px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
+              </FadeIn>
+              <FadeIn animation="slide-up" delay={0.4}>
+                <h1 className="text-4xl font-extralight tracking-[0.05em]">{t('heroTitle')}</h1>
+              </FadeIn>
+              <FadeIn animation="fade" delay={0.6} className="flex items-center justify-center space-x-3">
+                <div className="w-12 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+                <div className="w-1.5 h-1.5 bg-[#C4A862] rounded-full" />
+                <div className="w-12 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              </FadeIn>
+              <FadeIn animation="slide-up" delay={0.7}>
+                <p className="text-lg font-light italic opacity-90 max-w-xs mx-auto">{t('heroSubtitle')}</p>
+              </FadeIn>
+            </div>
+          </div>
+          {/* Bottom button */}
+          <div className="pb-8 px-4">
+            <FadeIn animation="slide-up" delay={0.9} className="w-full max-w-xs mx-auto">
+              <button
+                className="w-full bg-gradient-to-br from-[#E2BC6A] via-[#C4A862] to-[#9A7D3A] text-white px-6 py-4 rounded-xl font-medium tracking-wide transition-all duration-300 shadow-[0_4px_24px_rgba(196,168,98,0.45)] border border-white/20 backdrop-blur-sm ring-1 ring-[#E2BC6A]/30 text-sm drop-shadow-sm"
                 onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 {t('heroBookNow')}
