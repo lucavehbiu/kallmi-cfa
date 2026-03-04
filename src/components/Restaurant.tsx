@@ -557,8 +557,8 @@ export default function Restaurant() {
 
         {/* Category Tabs */}
         <FadeIn animation="slide-up" delay={0.1}>
-          <div className="flex justify-center mb-12 overflow-x-auto pb-2">
-            <div className="flex gap-2 p-1 bg-surface-secondary rounded-xl border border-border-light">
+          <div className="flex mb-12 overflow-x-auto pb-2 px-4 sm:px-0 sm:justify-center">
+            <div className="flex gap-2 p-1 bg-surface-secondary rounded-xl border border-border-light shrink-0">
               {[
                 { key: 'featured', label: t('catFeatured'), icon: SparklesIcon },
                 { key: 'salads', label: t('catSalads'), icon: HeartIcon },
