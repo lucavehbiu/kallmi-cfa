@@ -69,7 +69,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h4 className="font-cormorant text-xl lg:text-2xl font-light mb-6 text-white/90">
+            <h4 className="font-sans font-medium tracking-widest uppercase text-xs mb-6 text-white/90">
               {t('discover')}
             </h4>
             <ul className="space-y-4">
@@ -95,7 +95,7 @@ export function Footer() {
 
           {/* Contact Information */}
           <div className="text-center md:text-left">
-            <h4 className="font-cormorant text-xl lg:text-2xl font-light mb-6 text-white/90">
+            <h4 className="font-sans font-medium tracking-widest uppercase text-xs mb-6 text-white/90">
               {t('visitTitle')}
             </h4>
             <div className="space-y-4">
@@ -134,7 +134,7 @@ export function Footer() {
 
           {/* Newsletter */}
           <div className="text-center md:text-left">
-            <h4 className="font-cormorant text-xl lg:text-2xl font-light mb-6 text-white/90">
+            <h4 className="font-sans font-medium tracking-widest uppercase text-xs mb-6 text-white/90">
               {t('stayConnected')}
             </h4>
             <div className="space-y-4">

@@ -43,7 +43,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   ref
 ) {
   const baseClasses = `
-    inline-flex items-center justify-center font-medium
+    inline-flex items-center justify-center font-sans font-medium
     transition-all duration-300 ease-out
     hover:-translate-y-0.5 active:translate-y-0
     focus:outline-none focus:ring-2 focus:ring-offset-2
