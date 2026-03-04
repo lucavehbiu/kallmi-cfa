@@ -16,7 +16,7 @@ import { useTranslations } from 'next-intl'
 export default function ContactSection() {
   const t = useTranslations('ContactPage')
   return (
-    <section id="contact" className="relative min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 font-cormorant overflow-hidden">
+    <section id="contact" className="relative min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 overflow-hidden">
 
       {/* Hero Section - matching restaurant style */}
       <section className="relative min-h-[70vh] lg:min-h-[60vh] overflow-hidden pt-20">

@@ -369,7 +369,7 @@ export default function Accommodations() {
   }
 
   return (
-    <div className="min-h-screen font-cormorant" style={{ backgroundColor: 'var(--color-surface-primary)' }}>
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-surface-primary)' }}>
       {/* Hero Section */}
       <section className="relative min-h-screen overflow-hidden">
         <div className="absolute inset-0">

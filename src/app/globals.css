@@ -11,9 +11,9 @@
   --color-brand-olive: #8B7355;
   --color-brand-olive-light: #A0845C;
   --color-brand-olive-dark: #6B563F;
-  --color-brand-gold: #D4AF37;
-  --color-brand-gold-light: #E5C766;
-  --color-brand-gold-dark: #B8962F;
+  --color-brand-gold: #C4A862;
+  --color-brand-gold-light: #E2BC6A;
+  --color-brand-gold-dark: #9A7D3A;
 
   /* Surface colors */
   --color-surface-primary: #FAFAF8;
@@ -575,7 +575,7 @@ html::-webkit-scrollbar {
   --rdp-range_end-color: white;
   --rdp-range_start-background: #8B7355;
   --rdp-range_end-background: #8B7355;
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
   width: 100%;
   max-width: 100%;
   margin: 0 auto;

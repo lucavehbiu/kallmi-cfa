@@ -113,7 +113,7 @@ export default function Shop() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-surface-primary)] font-cormorant">
+    <div className="min-h-screen bg-[var(--color-surface-primary)]">
 
       {/* Hero Section */}
       <section className="relative min-h-screen overflow-hidden">

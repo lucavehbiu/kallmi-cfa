@@ -37,7 +37,7 @@ export default async function OurStory({
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'OurStory' })
   return (
-    <main className="min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 font-cormorant relative overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-b from-stone-50 via-white to-stone-50 relative overflow-hidden">
 
       {/* Hero Section - matching restaurant style */}
       <section className="relative min-h-[70vh] lg:min-h-[60vh] overflow-hidden pt-20">

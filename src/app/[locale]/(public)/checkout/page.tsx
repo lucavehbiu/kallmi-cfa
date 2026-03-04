@@ -34,7 +34,7 @@ export default function Checkout() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen bg-stone-50 pt-32 pb-16 px-4 font-cormorant">
+      <div className="min-h-screen bg-stone-50 pt-32 pb-16 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl text-[#8B7355] mb-6">{t('emptyCartTitle')}</h1>
           <p className="text-gray-600 mb-8">{t('emptyCartText')}</p>

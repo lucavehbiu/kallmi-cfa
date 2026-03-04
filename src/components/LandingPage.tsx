@@ -14,7 +14,7 @@ import { useTranslations } from 'next-intl'
 export default function LandingPage() {
   const t = useTranslations('Landing')
   return (
-    <main className="font-cormorant bg-surface-primary">
+    <main className="bg-surface-primary">
       <LandingHero />
 
       {/* Story Section - Clean editorial style */}
