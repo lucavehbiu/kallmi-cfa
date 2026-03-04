@@ -112,7 +112,7 @@ export default function LandingHero() {
               duration={1.0}
               delay={1.2}
             >
-              <p className="text-base sm:text-xl md:text-2xl lg:text-3xl font-light italic opacity-95 leading-relaxed max-w-4xl mx-auto px-2">
+              <p className="text-base sm:text-xl md:text-2xl lg:text-3xl font-serif font-light italic opacity-95 leading-relaxed max-w-4xl mx-auto px-2">
                 {t('subtitle1')}
                 <span className="text-[#D4AF37]"> {t('subtitle2')}</span>
               </p>
