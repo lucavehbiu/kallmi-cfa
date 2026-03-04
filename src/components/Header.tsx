@@ -2,7 +2,8 @@
 
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { XMarkIcon, Bars3Icon, ShoppingCartIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline'
+import Hamburger from 'hamburger-react'
 import { useCart } from '@/context/CartContext'
 import { Link } from '@/i18n/navigation'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
@@ -132,87 +133,6 @@ export function Header() {
                 {/* Floating glow */}
                 <div className="absolute inset-0 bg-[#D4AF37]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
               </button>
-
-              {/* Enhanced Mini Cart Dropdown */}
-              {isCartOpen && (
-                <div
-                  className="absolute right-0 mt-4 w-96 max-w-[90vw] bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 z-50 overflow-hidden transform transition-all duration-300 ease-out"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {/* Header */}
-                  <div className="bg-gradient-to-r from-[#8B7355] to-[#A0845C] p-6 text-white">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-medium">{tCart('title')}</h3>
-                      <button
-                        onClick={() => setIsCartOpen(false)}
-                        className="p-1 hover:bg-white/20 rounded-full transition-colors duration-200"
-                      >
-                        <XMarkIcon className="w-5 h-5" />
-                      </button>
-                    </div>
-                    {cartCount > 0 && (
-                      <p className="text-white/80 text-sm mt-1">{cartCount} item{cartCount !== 1 ? 's' : ''}</p>
-                    )}
-                  </div>
-
-                  <div className="p-6">
-                    {cartItems.length === 0 ? (
-                      <div className="text-center py-8">
-                        <ShoppingCartIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                        <p className="text-gray-500 font-medium">{tCart('empty')}</p>
-                        <p className="text-gray-400 text-sm mt-1">{tCart('emptyHint')}</p>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="space-y-4 max-h-80 overflow-auto custom-scrollbar">
-                          {cartItems.map((item) => (
-                            <div key={item.id} className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors duration-200 group">
-                              <div className="relative w-16 h-16 rounded-xl overflow-hidden shadow-md">
-                                <Image
-                                  src={item.image}
-                                  alt={item.name}
-                                  fill
-                                  className="object-cover group-hover:scale-110 transition-transform duration-300"
-                                />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <h4 className="text-sm font-medium text-gray-900 truncate">{item.name}</h4>
-                                <p className="text-sm text-gray-500 mt-1">
-                                  {item.quantity} × {formatPrice(item.price)}
-                                </p>
-                              </div>
-                              <button
-                                onClick={() => removeFromCart(item.id)}
-                                className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200"
-                              >
-                                <XMarkIcon className="w-4 h-4" />
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-
-                        <div className="mt-6 pt-6 border-t border-gray-200">
-                          <div className="flex justify-between text-lg font-medium text-gray-900 mb-4">
-                            <p>Total</p>
-                            <p className="text-[#8B7355]">
-                              {formatPrice(
-                                cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
-                              )}
-                            </p>
-                          </div>
-                            <Link
-                              href="/checkout"
-                            className="w-full flex justify-center items-center px-6 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] text-white rounded-2xl font-medium hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300"
-                            onClick={() => setIsCartOpen(false)}
-                            >
-                            {tCart('proceedToCheckout')}
-                            </Link>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
 
@@ -221,43 +141,17 @@ export function Header() {
             {/* Mobile Language Switcher */}
             <LanguageSwitcher scrolled={scrolled} />
 
-            {/* Mobile Cart Icon */}
-            <div className="relative">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setIsCartOpen(!isCartOpen)
-                }}
-                className={`p-2 rounded-xl transition-all duration-300
-                  ${scrolled ? 'text-gray-700' : 'text-white'}`}
-              >
-                <ShoppingCartIcon className="w-6 h-6" />
-              {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
-              </button>
-            </div>
-
             {/* Hamburger Menu */}
-            <button
-              className={`p-2 rounded-xl transition-all duration-300 hover:scale-95 active:scale-90
-                ${scrolled ? 'hover:bg-gray-100 text-gray-700' : 'hover:bg-white/10 text-white'}`}
-              onClick={(e) => {
-                e.stopPropagation()
-                setIsOpen(!isOpen)
-              }}
-            >
-              <div className="relative w-6 h-6">
-                <span className={`absolute top-1 left-0 w-6 h-0.5 bg-current transform transition-all duration-300 origin-center
-                  ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
-                <span className={`absolute top-3 left-0 w-6 h-0.5 bg-current transition-all duration-300
-                  ${isOpen ? 'opacity-0' : ''}`} />
-                <span className={`absolute top-5 left-0 w-6 h-0.5 bg-current transform transition-all duration-300 origin-center
-                  ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-              </div>
-            </button>
+            <div onClick={(e) => e.stopPropagation()}>
+              <Hamburger
+                toggled={isOpen}
+                toggle={setIsOpen}
+                size={22}
+                color={scrolled ? '#374151' : '#ffffff'}
+                rounded
+                label="Toggle menu"
+              />
+            </div>
           </div>
         </div>
 
@@ -288,9 +182,115 @@ export function Header() {
                 </Link>
               </div>
             ))}
+
+            {/* Cart in mobile menu */}
+            <div className="px-6 pt-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setIsOpen(false)
+                  setIsCartOpen(true)
+                }}
+                className="flex items-center space-x-3 w-full text-white/90 hover:text-white transition-all duration-300 text-xl font-light tracking-wide py-3 px-4 rounded-xl hover:bg-white/10"
+              >
+                <ShoppingCartIcon className="w-6 h-6" />
+                <span>{tCart('title')}</span>
+                {cartCount > 0 && (
+                  <span className="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
+
+      {/* Cart Panel - fixed overlay, works on both mobile and desktop */}
+      {isCartOpen && (
+        <div
+          className="fixed inset-0 z-[60]"
+          onClick={() => setIsCartOpen(false)}
+        >
+          <div
+            className="absolute right-4 top-20 w-96 max-w-[calc(100vw-2rem)] bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="bg-gradient-to-r from-[#8B7355] to-[#A0845C] p-6 text-white">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-medium">{tCart('title')}</h3>
+                <button
+                  onClick={() => setIsCartOpen(false)}
+                  className="p-1 hover:bg-white/20 rounded-full transition-colors duration-200"
+                >
+                  <XMarkIcon className="w-5 h-5" />
+                </button>
+              </div>
+              {cartCount > 0 && (
+                <p className="text-white/80 text-sm mt-1">{cartCount} item{cartCount !== 1 ? 's' : ''}</p>
+              )}
+            </div>
+
+            <div className="p-6">
+              {cartItems.length === 0 ? (
+                <div className="text-center py-8">
+                  <ShoppingCartIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 font-medium">{tCart('empty')}</p>
+                  <p className="text-gray-400 text-sm mt-1">{tCart('emptyHint')}</p>
+                </div>
+              ) : (
+                <>
+                  <div className="space-y-4 max-h-80 overflow-auto custom-scrollbar">
+                    {cartItems.map((item) => (
+                      <div key={item.id} className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors duration-200 group">
+                        <div className="relative w-16 h-16 rounded-xl overflow-hidden shadow-md">
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-sm font-medium text-gray-900 truncate">{item.name}</h4>
+                          <p className="text-sm text-gray-500 mt-1">
+                            {item.quantity} × {formatPrice(item.price)}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200"
+                        >
+                          <XMarkIcon className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <div className="flex justify-between text-lg font-medium text-gray-900 mb-4">
+                      <p>Total</p>
+                      <p className="text-[#8B7355]">
+                        {formatPrice(
+                          cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
+                        )}
+                      </p>
+                    </div>
+                    <Link
+                      href="/checkout"
+                      className="w-full flex justify-center items-center px-6 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] text-white rounded-2xl font-medium hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300"
+                      onClick={() => setIsCartOpen(false)}
+                    >
+                      {tCart('proceedToCheckout')}
+                    </Link>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Custom Scrollbar Styles */}
       <style jsx>{`
