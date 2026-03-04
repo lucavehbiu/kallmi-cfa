@@ -369,7 +369,7 @@ export default function Accommodations() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-surface-primary)' }}>
+    <div className="min-h-screen font-cormorant" style={{ backgroundColor: 'var(--color-surface-primary)' }}>
       {/* Hero Section */}
       <section className="relative min-h-screen overflow-hidden">
         <div className="absolute inset-0">
@@ -395,7 +395,7 @@ export default function Accommodations() {
               <img src="/kallmi-view-white.svg" alt="Kallmi View" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.4}>
-              <h1 className="text-5xl lg:text-6xl font-extralight tracking-[0.1em]">{t('heroTitle')}</h1>
+              <h1 className="text-5xl lg:text-6xl font-extralight tracking-[0]">{t('heroTitle')}</h1>
             </FadeIn>
             <FadeIn animation="fade" delay={0.6} className="flex items-center justify-center space-x-3">
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
@@ -403,11 +403,11 @@ export default function Accommodations() {
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.7}>
-              <p className="text-xl font-light italic opacity-90 max-w-2xl mx-auto">{t('heroSubtitle')}</p>
+              <p className="text-xl font-sans font-light italic opacity-90 max-w-2xl mx-auto">{t('heroSubtitle')}</p>
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.9}>
               <button
-                className="bg-gradient-to-br from-[#E2BC6A] via-[#C4A862] to-[#9A7D3A] text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 transform hover:scale-105 shadow-[0_4px_24px_rgba(196,168,98,0.45)] hover:shadow-[0_6px_32px_rgba(196,168,98,0.65)] border border-white/20 backdrop-blur-sm ring-1 ring-[#E2BC6A]/30 text-base drop-shadow-sm"
+                className="bg-[#C4A862] hover:bg-[#B89852] text-[#1C1B18] px-8 py-4 rounded font-medium tracking-wide transition-all duration-200 text-base"
                 onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 {t('heroBookNow')}
@@ -425,7 +425,7 @@ export default function Accommodations() {
                 <img src="/kallmi-view-white.svg" alt="Kallmi View" style={{ width: '200px', height: '45px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
               </FadeIn>
               <FadeIn animation="slide-up" delay={0.4}>
-                <h1 className="text-4xl font-extralight tracking-[0.05em]">{t('heroTitle')}</h1>
+                <h1 className="text-4xl font-extralight tracking-[0]">{t('heroTitle')}</h1>
               </FadeIn>
               <FadeIn animation="fade" delay={0.6} className="flex items-center justify-center space-x-3">
                 <div className="w-12 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
@@ -433,7 +433,7 @@ export default function Accommodations() {
                 <div className="w-12 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
               </FadeIn>
               <FadeIn animation="slide-up" delay={0.7}>
-                <p className="text-lg font-light italic opacity-90 max-w-xs mx-auto">{t('heroSubtitle')}</p>
+                <p className="text-lg font-sans font-light italic opacity-90 max-w-xs mx-auto">{t('heroSubtitle')}</p>
               </FadeIn>
             </div>
           </div>
@@ -441,7 +441,7 @@ export default function Accommodations() {
           <div className="pb-8 px-4">
             <FadeIn animation="slide-up" delay={0.9} className="w-full max-w-xs mx-auto">
               <button
-                className="w-full bg-gradient-to-br from-[#E2BC6A] via-[#C4A862] to-[#9A7D3A] text-white px-6 py-4 rounded-xl font-medium tracking-wide transition-all duration-300 shadow-[0_4px_24px_rgba(196,168,98,0.45)] border border-white/20 backdrop-blur-sm ring-1 ring-[#E2BC6A]/30 text-sm drop-shadow-sm"
+                className="w-full bg-[#C4A862] hover:bg-[#B89852] text-[#1C1B18] px-6 py-4 rounded font-medium tracking-wide transition-all duration-200 text-sm"
                 onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 {t('heroBookNow')}

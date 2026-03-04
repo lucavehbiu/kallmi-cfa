@@ -425,7 +425,7 @@ export default function Restaurant() {
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.6}>
-              <p className="text-xl font-light italic opacity-90 max-w-2xl mx-auto">{t('heroDescription')}</p>
+              <p className="text-xl font-sans font-light italic opacity-90 max-w-2xl mx-auto">{t('heroDescription')}</p>
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.8}>
               <button
@@ -455,7 +455,7 @@ export default function Restaurant() {
                 <div className="w-12 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
               </FadeIn>
               <FadeIn animation="slide-up" delay={0.6}>
-                <p className="text-lg font-light italic opacity-90 max-w-xs mx-auto">{t('heroDescription')}</p>
+                <p className="text-lg font-sans font-light italic opacity-90 max-w-xs mx-auto">{t('heroDescription')}</p>
               </FadeIn>
             </div>
           </div>
