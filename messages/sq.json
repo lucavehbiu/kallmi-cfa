@@ -122,12 +122,11 @@
   },
   "LandingHero": {
     "badge": "Guri i Çmuar i Fshehur i Shqipërisë",
-    "subtitle1": "Ku ullinjtë e lashtë pëshpërisin sekrete në",
-    "subtitle2": "flladin e Adriatikut",
     "description": "Katër breza pasioni kanë kultivuar këtë tokë të shenjtë, duke krijuar gurin e fshehur të Shqipërisë. Përjetoni ushqim të shijshëm dhe natyrë të paprekur",
     "cta1": "Rezervoni një Dhomë",
     "cta2": "Darkoni me Ne",
-    "cta3": "Dyqani"
+    "cta3": "Dyqani",
+    "tagline": "Ancient groves, Adriatic breeze"
   },
   "Landing": {
     "heritageOverline": "Trashëgimia Jonë",

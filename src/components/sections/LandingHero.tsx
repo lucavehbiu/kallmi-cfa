@@ -52,9 +52,8 @@ export default function LandingHero() {
           </AnimateDiv>
 
           <AnimateDiv animation="slide-up" duration={1.2} delay={0.4}>
-            <h1 className="text-5xl lg:text-7xl font-extralight tracking-[0] leading-tight">
-              {t('subtitle1')}
-              <span className="block font-serif italic text-[#C4A862] mt-2">{t('subtitle2')}</span>
+            <h1 className="text-5xl lg:text-7xl font-extralight tracking-[0] leading-tight font-serif italic text-[#C4A862]">
+              {t('tagline')}
             </h1>
           </AnimateDiv>
 
@@ -94,9 +93,8 @@ export default function LandingHero() {
             </AnimateDiv>
 
             <AnimateDiv animation="slide-up" duration={1.2} delay={0.4}>
-              <h1 className="text-4xl font-extralight tracking-[0] leading-tight">
-                {t('subtitle1')}
-                <span className="block font-serif italic text-[#C4A862] mt-1">{t('subtitle2')}</span>
+              <h1 className="text-4xl font-extralight tracking-[0] leading-tight font-serif italic text-[#C4A862]">
+                {t('tagline')}
               </h1>
             </AnimateDiv>
 

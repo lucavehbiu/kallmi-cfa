@@ -122,12 +122,11 @@
   },
   "LandingHero": {
     "badge": "Albaniens verborgenes Juwel",
-    "subtitle1": "Wo uralte Olivenhaine der",
-    "subtitle2": "adriatischen Brise Geheimnisse zuflüstern",
     "description": "Vier Generationen Leidenschaft haben dieses heilige Land kultiviert und Albaniens verborgenes Juwel geschaffen. Erleben Sie köstliches Essen und unberührte Natur",
     "cta1": "Zimmer Buchen",
     "cta2": "Bei Uns Speisen",
-    "cta3": "Shop"
+    "cta3": "Shop",
+    "tagline": "Ancient groves, Adriatic breeze"
   },
   "Landing": {
     "heritageOverline": "Unser Erbe",

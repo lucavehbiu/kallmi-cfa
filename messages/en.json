@@ -122,12 +122,11 @@
   },
   "LandingHero": {
     "badge": "Albania's Hidden Gem",
-    "subtitle1": "Where ancient olive groves whisper secrets to the",
-    "subtitle2": "Adriatic breeze",
     "description": "Four generations of passion have cultivated this sacred land, creating Albania's hidden gem. Experience tasty food and raw nature",
     "cta1": "Book a Room",
     "cta2": "Dine With Us",
-    "cta3": "Shop"
+    "cta3": "Shop",
+    "tagline": "Ancient groves, Adriatic breeze"
   },
   "Landing": {
     "heritageOverline": "Our Heritage",

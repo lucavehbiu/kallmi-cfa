@@ -122,12 +122,11 @@
   },
   "LandingHero": {
     "badge": "Le Joyau Caché de l'Albanie",
-    "subtitle1": "Où d'anciennes oliveraies murmurent des secrets à la",
-    "subtitle2": "brise adriatique",
     "description": "Quatre générations de passion ont cultivé cette terre sacrée, créant le joyau caché de l'Albanie. Découvrez une cuisine savoureuse et une nature brute",
     "cta1": "Réservez une Chambre",
     "cta2": "Dînez Chez Nous",
-    "cta3": "Boutique"
+    "cta3": "Boutique",
+    "tagline": "Ancient groves, Adriatic breeze"
   },
   "Landing": {
     "heritageOverline": "Notre Patrimoine",

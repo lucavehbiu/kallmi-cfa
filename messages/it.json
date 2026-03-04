@@ -122,12 +122,11 @@
   },
   "LandingHero": {
     "badge": "Il Gioiello Nascosto dell'Albania",
-    "subtitle1": "Dove antichi uliveti sussurrano segreti alla",
-    "subtitle2": "brezza adriatica",
     "description": "Quattro generazioni di passione hanno coltivato questa terra sacra, creando il gioiello nascosto dell'Albania. Scoprite cibo gustoso e natura incontaminata",
     "cta1": "Prenota una Camera",
     "cta2": "Cena con Noi",
-    "cta3": "Shop"
+    "cta3": "Shop",
+    "tagline": "Ancient groves, Adriatic breeze"
   },
   "Landing": {
     "heritageOverline": "Il Nostro Patrimonio",
