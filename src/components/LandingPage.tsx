@@ -37,29 +37,32 @@ export default function LandingPage() {
 
             <FadeIn animation="fade" delay={0.2}>
               <div className="space-y-6">
-                <p className="text-body-lg pl-6 border-l-2 border-brand-olive/30">
+                <p className="text-body-lg">
                   {t('heritageText1')}
                 </p>
-                <p className="text-body-lg pl-6 border-l-2 border-brand-olive/30">
+                <p className="text-body-lg">
                   {t('heritageText2')}
                 </p>
               </div>
             </FadeIn>
 
-            {/* Stats - Clean cards instead of glass-morphism */}
+            {/* Stats - Editorial hairline band, lighter than boxed cards on mobile */}
             <FadeIn animation="slide-up" delay={0.3}>
-              <div className="grid grid-cols-3 gap-4 pt-8">
+              <div className="flex items-stretch mt-8 border-y border-brand-olive/15">
                 {[
                   { number: '2004', label: t('established') },
                   { number: '20+', label: t('years') },
                   { number: '4th', label: t('generation') }
                 ].map((stat, index) => (
-                  <Card key={index} variant="subtle" padding="md" className="text-center">
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-light text-brand-olive">
+                  <div
+                    key={index}
+                    className={`flex-1 text-center py-5 ${index > 0 ? 'border-l border-brand-olive/15' : ''}`}
+                  >
+                    <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-brand-olive leading-none">
                       {stat.number}
                     </div>
-                    <div className="text-caption mt-1">{stat.label}</div>
-                  </Card>
+                    <div className="text-caption mt-2">{stat.label}</div>
+                  </div>
                 ))}
               </div>
             </FadeIn>
@@ -207,22 +210,22 @@ export default function LandingPage() {
             <p className="text-text-on-dark-muted text-xl max-w-2xl mx-auto mb-10">
               {t('ctaSubtitle')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center sm:flex-wrap max-w-sm sm:max-w-none mx-auto">
               <Link
                 href="/stay"
-                className="btn-primary-on-dark btn-lg"
+                className="btn-primary-on-dark btn-lg w-full sm:w-auto text-center"
               >
                 {t('ctaBook')}
               </Link>
               <Link
                 href="/restaurant"
-                className="btn-ghost-on-dark btn-lg"
+                className="btn-ghost-on-dark btn-lg w-full sm:w-auto text-center"
               >
                 {t('ctaDine')}
               </Link>
               <Link
                 href="/shop"
-                className="btn-ghost-on-dark btn-lg"
+                className="btn-ghost-on-dark btn-lg w-full sm:w-auto text-center"
               >
                 {t('ctaShop')}
               </Link>

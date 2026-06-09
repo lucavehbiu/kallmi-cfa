@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import Script from 'next/script'
@@ -72,6 +72,7 @@ export default function Restaurant() {
   const t = useTranslations('Restaurant')
   const [activeCategory, setActiveCategory] = useState<'featured' | 'salads' | 'fish' | 'farmed-fish' | 'drinks'>('featured')
   const [showDrinks, setShowDrinks] = useState(false)
+  const heroParallaxRef = useRef<HTMLDivElement>(null)
 
   const menu: MenuItem[] = [
     // Featured Items
@@ -375,6 +376,32 @@ export default function Restaurant() {
 
   const filteredMenu = menu.filter(item => item.category === activeCategory)
 
+  // Subtle hero parallax — GPU-only, desktop-only, respects reduced motion.
+  // Writes straight to the node via rAF (no React re-render, no inline-state churn).
+  useEffect(() => {
+    const el = heroParallaxRef.current
+    if (!el) return
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const isDesktop = window.matchMedia('(min-width: 640px)').matches
+    if (reduceMotion || !isDesktop) return
+
+    let ticking = false
+    const update = () => {
+      el.style.transform = `translate3d(0, ${window.scrollY * 0.4}px, 0) scale(1.1)`
+      ticking = false
+    }
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true
+        requestAnimationFrame(update)
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const link = document.createElement('link')
@@ -395,15 +422,21 @@ export default function Restaurant() {
       {/* Hero Section */}
       <section className="relative min-h-screen overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="https://storage.googleapis.com/kallmi/images/restaurant_snippet.webp"
-            alt="Kallmi Estate Restaurant - Adriatic Dining Experience"
-            className="object-cover object-center"
-            fill
-            priority
-            sizes="100vw"
-            quality={90}
-          />
+          <div
+            ref={heroParallaxRef}
+            className="absolute inset-0 will-change-transform"
+            style={{ transform: 'scale(1.1)' }}
+          >
+            <Image
+              src="https://storage.googleapis.com/kallmi/images/restaurant_snippet.webp"
+              alt="Kallmi Estate Restaurant - Adriatic Dining Experience"
+              className="object-cover object-center"
+              fill
+              priority
+              sizes="100vw"
+              quality={90}
+            />
+          </div>
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/70" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#8B7355]/20 via-transparent to-[#8B7355]/10" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
@@ -490,26 +523,28 @@ export default function Restaurant() {
 
             <FadeIn animation="fade" delay={0.2}>
               <div className="space-y-4 text-body-lg">
-                <p className="pl-6 border-l-2 border-brand-olive/30">
-                  {t('introText1')}
-                </p>
-                <p className="pl-6 border-l-2 border-brand-olive/30">
-                  {t('introText2')}
-                </p>
+                <p>{t('introText1')}</p>
+                <p>{t('introText2')}</p>
               </div>
             </FadeIn>
 
+            {/* Stats - Editorial hairline band, lighter than boxed cards on mobile */}
             <FadeIn animation="slide-up" delay={0.3}>
-              <div className="grid grid-cols-3 gap-4 pt-6">
+              <div className="flex items-stretch mt-8 border-y border-brand-olive/15">
                 {[
                   { number: '15+', label: t('statDishes') },
                   { number: '4.8\u2605', label: t('statRating') },
                   { number: 'Daily', label: t('statCatch') }
                 ].map((stat, index) => (
-                  <Card key={index} variant="subtle" padding="sm" className="text-center">
-                    <div className="text-2xl font-light text-brand-olive">{stat.number}</div>
-                    <div className="text-caption mt-1">{stat.label}</div>
-                  </Card>
+                  <div
+                    key={index}
+                    className={`flex-1 text-center py-5 ${index > 0 ? 'border-l border-brand-olive/15' : ''}`}
+                  >
+                    <div className="text-3xl sm:text-4xl lg:text-5xl font-light text-brand-olive leading-none">
+                      {stat.number}
+                    </div>
+                    <div className="text-caption mt-2">{stat.label}</div>
+                  </div>
                 ))}
               </div>
             </FadeIn>
@@ -526,6 +561,7 @@ export default function Restaurant() {
                     fill
                     sizes="(max-width: 768px) 50vw, 25vw"
                     quality={85}
+                    loading="lazy"
                   />
                 </div>
                 <div className="aspect-[3/4] relative rounded-xl overflow-hidden shadow-lg mt-8">
@@ -536,6 +572,7 @@ export default function Restaurant() {
                     fill
                     sizes="(max-width: 768px) 50vw, 25vw"
                     quality={85}
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -557,7 +594,10 @@ export default function Restaurant() {
 
         {/* Category Tabs */}
         <FadeIn animation="slide-up" delay={0.1}>
-          <div className="flex mb-12 overflow-x-auto pb-2 px-4 sm:px-0 sm:justify-center">
+          <div
+            className="flex mb-12 overflow-x-auto pb-2 px-4 sm:px-0 sm:justify-center [&::-webkit-scrollbar]:hidden"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             <div className="flex gap-2 p-1 bg-surface-secondary rounded-xl border border-border-light shrink-0">
               {[
                 { key: 'featured', label: t('catFeatured'), icon: SparklesIcon },
@@ -569,7 +609,7 @@ export default function Restaurant() {
                   key={category.key}
                   onClick={() => setActiveCategory(category.key as typeof activeCategory)}
                   className={`flex items-center gap-2 px-5 py-2.5 text-sm transition-all duration-200 rounded-lg font-medium whitespace-nowrap ${activeCategory === category.key
-                    ? 'bg-brand-olive text-white'
+                    ? 'bg-brand-olive text-white shadow-sm'
                     : 'text-text-secondary hover:bg-surface-tertiary'
                     }`}
                 >
@@ -581,55 +621,46 @@ export default function Restaurant() {
           </div>
         </FadeIn>
 
-        {/* Menu Horizontal Scroll */}
-        <div className="relative mb-12">
-          <div
-            className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden"
-            style={{
-              scrollbarWidth: 'none',
-              WebkitOverflowScrolling: 'touch',
-            }}
-          >
-            {filteredMenu.map((item, index) => (
-              <FadeIn key={item.id} animation="slide-up" delay={index * 0.05}>
-                <div className="snap-start shrink-0 w-[85vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] max-w-[380px]">
-                  <Card variant="elevated" hover padding="none" className="group overflow-hidden h-full">
-                    {item.seasonal && (
-                      <div className="absolute top-4 right-4 z-10">
-                        <Badge variant="gold">
-                          <SparklesIcon className="w-3 h-3 mr-1" />
-                          {t('seasonal')}
-                        </Badge>
-                      </div>
-                    )}
+        {/* Menu Grid — vertical & scannable on mobile, images lazy-loaded */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 mb-12">
+          {filteredMenu.map((item, index) => (
+            <FadeIn key={item.id} animation="slide-up" delay={Math.min(index * 0.05, 0.3)}>
+              <Card variant="elevated" hover padding="none" className="group relative overflow-hidden h-full">
+                {item.seasonal && (
+                  <div className="absolute top-4 right-4 z-10">
+                    <Badge variant="gold">
+                      <SparklesIcon className="w-3 h-3 mr-1" />
+                      {t('seasonal')}
+                    </Badge>
+                  </div>
+                )}
 
-                    <div className="relative aspect-[4/3] bg-surface-tertiary">
-                      <Image
-                        src={item.image}
-                        alt={t(item.nameKey)}
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                        fill
-                        sizes="(max-width: 768px) 85vw, (max-width: 1200px) 45vw, 30vw"
-                        quality={80}
-                      />
-                    </div>
-
-                    <div className="p-6 space-y-3">
-                      <div className="flex justify-between items-start">
-                        <h3 className="text-xl font-light text-brand-olive group-hover:text-brand-olive-dark transition-colors">
-                          {t(item.nameKey)}
-                        </h3>
-                        <span className="text-xl font-light text-brand-olive whitespace-nowrap ml-4">
-                          {formatPrice(item.price, item.unitKey ? t(item.unitKey) : undefined)}
-                        </span>
-                      </div>
-                      <p className="text-body">{t(item.descKey)}</p>
-                    </div>
-                  </Card>
+                <div className="relative aspect-[4/3] bg-surface-tertiary">
+                  <Image
+                    src={item.image}
+                    alt={t(item.nameKey)}
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    quality={80}
+                    loading="lazy"
+                  />
                 </div>
-              </FadeIn>
-            ))}
-          </div>
+
+                <div className="p-6 space-y-3">
+                  <div className="flex justify-between items-start gap-4">
+                    <h3 className="text-xl font-light text-brand-olive group-hover:text-brand-olive-dark transition-colors">
+                      {t(item.nameKey)}
+                    </h3>
+                    <span className="text-xl font-light text-brand-olive whitespace-nowrap">
+                      {formatPrice(item.price, item.unitKey ? t(item.unitKey) : undefined)}
+                    </span>
+                  </div>
+                  <p className="text-body">{t(item.descKey)}</p>
+                </div>
+              </Card>
+            </FadeIn>
+          ))}
         </div>
 
         {/* Drinks Toggle */}
@@ -743,8 +774,8 @@ export default function Restaurant() {
                       name="countryCode"
                       value={reservationForm.countryCode}
                       onChange={handleReservationChange}
-                      className="select-field"
-                      style={{ width: '160px', minWidth: '160px', backgroundPosition: 'right 0.5rem center' }}
+                      className="select-field w-[120px] min-w-[120px] sm:w-[160px] sm:min-w-[160px]"
+                      style={{ backgroundPosition: 'right 0.5rem center' }}
                     >
                       {COUNTRY_CODES.map(cc => (
                         <option key={cc.code} value={cc.code}>{cc.label}</option>
@@ -870,18 +901,14 @@ export default function Restaurant() {
 
             <FadeIn animation="fade" delay={0.2}>
               <div className="space-y-4 text-body-lg">
-                <p className="pl-6 border-l-2 border-brand-olive/30">
-                  {t('eventsText1')}
-                </p>
-                <p className="pl-6 border-l-2 border-brand-olive/30">
-                  {t('eventsText2')}
-                </p>
+                <p>{t('eventsText1')}</p>
+                <p>{t('eventsText2')}</p>
               </div>
             </FadeIn>
 
             <FadeIn animation="slide-up" delay={0.3}>
-              <Link href="/contact">
-                <Button variant="primary" className="mt-4">
+              <Link href="/contact" className="block sm:inline-block">
+                <Button variant="primary" fullWidth className="mt-4 sm:w-auto">
                   <HeartIcon className="w-5 h-5 mr-2" />
                   {t('eventsCta')}
                 </Button>
@@ -899,6 +926,7 @@ export default function Restaurant() {
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   quality={85}
+                  loading="lazy"
                 />
               </div>
             </FadeIn>

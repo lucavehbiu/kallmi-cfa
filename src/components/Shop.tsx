@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { FadeIn } from './motion/FadeIn'
 import { useCart } from '@/context/CartContext'
-import { Section, SectionHeader } from './layout/Section'
+import { Section } from './layout/Section'
 import { Card, CardBody } from './ui/Card'
 import { Button } from './ui/Button'
 import {
@@ -112,10 +112,65 @@ export default function Shop() {
     setTimeout(() => setAddedToCart(null), 2000)
   }
 
+  // Filter panel content shared between desktop sidebar and mobile drawer.
+  const filterGroups = (
+    <>
+      <div className="mb-8">
+        <h4 className="label-eyebrow mb-4 text-[var(--color-text-tertiary)]">
+          {t('filterHarvestYear')}
+        </h4>
+        <div className="space-y-3">
+          {filterOptions.years.map(year => (
+            <label key={year} className="flex items-center gap-3 cursor-pointer group min-h-[36px]">
+              <input
+                type="checkbox"
+                checked={filters.years.includes(year)}
+                onChange={() => handleFilterChange('years', year)}
+                className="w-4 h-4 rounded"
+                style={{ accentColor: 'var(--color-brand-olive)' }}
+              />
+              <span
+                className="text-body transition-colors duration-200 group-hover:text-[var(--color-brand-olive)]"
+                style={{ color: 'var(--color-text-primary)' }}
+              >
+                {year}
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h4 className="label-eyebrow mb-4 text-[var(--color-text-tertiary)]">
+          {t('filterBottleSize')}
+        </h4>
+        <div className="space-y-3">
+          {filterOptions.sizes.map(size => (
+            <label key={size} className="flex items-center gap-3 cursor-pointer group min-h-[36px]">
+              <input
+                type="checkbox"
+                checked={filters.sizes.includes(size)}
+                onChange={() => handleFilterChange('sizes', size)}
+                className="w-4 h-4 rounded"
+                style={{ accentColor: 'var(--color-brand-olive)' }}
+              />
+              <span
+                className="text-body transition-colors duration-200 group-hover:text-[var(--color-brand-olive)]"
+                style={{ color: 'var(--color-text-primary)' }}
+              >
+                {size}
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+    </>
+  )
+
   return (
     <div className="min-h-screen bg-[var(--color-surface-primary)]">
 
-      {/* Hero Section */}
+      {/* Hero Section — LCP image, kept static (no parallax cost) */}
       <section className="relative min-h-screen overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -157,36 +212,33 @@ export default function Shop() {
         </div>
       </section>
 
-      {/* Filter Toggle - Mobile */}
+      {/* Filter Toggle — Mobile floating action */}
       <button
         onClick={() => setShowFilters(!showFilters)}
-        className="md:hidden fixed bottom-6 right-6 z-50"
+        aria-label={t('filterRefine')}
+        className="lg:hidden fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
+        style={{ backgroundColor: 'var(--color-brand-olive)', color: 'white' }}
       >
-        <div
-          className="p-4 rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-0.5"
-          style={{ backgroundColor: 'var(--color-brand-olive)', color: 'white' }}
-        >
-          {showFilters ? (
-            <XMarkIcon className="w-6 h-6" />
-          ) : (
-            <FunnelIcon className="w-6 h-6" />
-          )}
-        </div>
+        {showFilters ? (
+          <XMarkIcon className="w-6 h-6" />
+        ) : (
+          <FunnelIcon className="w-6 h-6" />
+        )}
       </button>
 
       {/* Main Content */}
       <Section background="default" spacing="lg">
-        {/* Collection Stats - Clean Cards */}
-        <FadeIn animation="fade" className="mb-16">
-          <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-2xl mx-auto">
+        {/* Collection Stats */}
+        <FadeIn animation="fade" className="mb-14 sm:mb-20">
+          <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-2xl mx-auto">
             {[
               { number: '3', label: t('statPremiumOils') },
               { number: '2024', label: t('statFreshHarvest') },
               { number: '100%', label: t('statExtraVirgin') }
             ].map((stat, index) => (
-              <Card key={index} variant="elevated" className="text-center p-4 sm:p-6">
+              <div key={index} className="text-center">
                 <div
-                  className="text-2xl sm:text-3xl font-light mb-1"
+                  className="text-3xl sm:text-4xl font-light mb-1"
                   style={{ color: 'var(--color-brand-olive)' }}
                 >
                   {stat.number}
@@ -197,117 +249,57 @@ export default function Shop() {
                 >
                   {stat.label}
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
+          <div className="divider-accent mx-auto mt-8" />
         </FadeIn>
 
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
 
-          {/* Filter Sidebar */}
-          <aside className={`
-            lg:w-72 flex-shrink-0 transition-all duration-300
-            ${showFilters
-              ? 'fixed inset-0 z-40 bg-black/30 lg:relative lg:bg-transparent'
-              : 'hidden lg:block'
-            }
-          `}>
-            <Card
-              variant="elevated"
-              className={`
-                ${showFilters ? 'absolute right-0 top-0 h-full w-80 max-w-[90vw] rounded-none lg:rounded-2xl' : ''}
-                p-6 lg:p-8
-              `}
+          {/* Filter Sidebar — desktop */}
+          <aside className="hidden lg:block lg:w-64 flex-shrink-0">
+            <div className="sticky top-28">
+              <h3 className="text-heading flex items-center gap-2 mb-8 text-[var(--color-brand-olive)]">
+                <FunnelIcon className="w-5 h-5" />
+                <span>{t('filterRefine')}</span>
+              </h3>
+              {filterGroups}
+            </div>
+          </aside>
+
+          {/* Filter Drawer — mobile */}
+          {showFilters && (
+            <div
+              className="lg:hidden fixed inset-0 z-40 bg-black/40"
+              onClick={() => setShowFilters(false)}
             >
-              {/* Filter Header */}
-              <div className="flex items-center justify-between mb-8">
-                <h3
-                  className="text-xl font-light flex items-center gap-2"
-                  style={{ color: 'var(--color-brand-olive)' }}
-                >
-                  <FunnelIcon className="w-5 h-5" />
-                  <span>{t('filterRefine')}</span>
-                </h3>
-                {showFilters && (
+              <div
+                className="absolute right-0 top-0 h-full w-80 max-w-[90vw] bg-[var(--color-surface-primary)] p-6 overflow-y-auto shadow-xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between mb-8">
+                  <h3 className="text-xl font-light flex items-center gap-2 text-[var(--color-brand-olive)]">
+                    <FunnelIcon className="w-5 h-5" />
+                    <span>{t('filterRefine')}</span>
+                  </h3>
                   <button
                     onClick={() => setShowFilters(false)}
-                    className="lg:hidden p-2 rounded-lg transition-colors duration-200"
+                    aria-label={t('filterRefine')}
+                    className="flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200"
                     style={{ color: 'var(--color-text-tertiary)' }}
                   >
-                    <XMarkIcon className="w-5 h-5" />
+                    <XMarkIcon className="w-6 h-6" />
                   </button>
-                )}
-              </div>
-
-              {/* Harvest Year Filter */}
-              <div className="mb-8">
-                <h4
-                  className="text-sm font-medium uppercase tracking-wide mb-4"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  {t('filterHarvestYear')}
-                </h4>
-                <div className="space-y-3">
-                  {filterOptions.years.map(year => (
-                    <label key={year} className="flex items-center gap-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        checked={filters.years.includes(year)}
-                        onChange={() => handleFilterChange('years', year)}
-                        className="w-4 h-4 rounded transition-colors"
-                        style={{
-                          accentColor: 'var(--color-brand-olive)',
-                          borderColor: 'var(--color-border)'
-                        }}
-                      />
-                      <span
-                        className="transition-colors duration-200 group-hover:text-[var(--color-brand-olive)]"
-                        style={{ color: 'var(--color-text-primary)' }}
-                      >
-                        {year}
-                      </span>
-                    </label>
-                  ))}
                 </div>
+                {filterGroups}
               </div>
-
-              {/* Bottle Size Filter */}
-              <div>
-                <h4
-                  className="text-sm font-medium uppercase tracking-wide mb-4"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  {t('filterBottleSize')}
-                </h4>
-                <div className="space-y-3">
-                  {filterOptions.sizes.map(size => (
-                    <label key={size} className="flex items-center gap-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        checked={filters.sizes.includes(size)}
-                        onChange={() => handleFilterChange('sizes', size)}
-                        className="w-4 h-4 rounded transition-colors"
-                        style={{
-                          accentColor: 'var(--color-brand-olive)',
-                          borderColor: 'var(--color-border)'
-                        }}
-                      />
-                      <span
-                        className="transition-colors duration-200 group-hover:text-[var(--color-brand-olive)]"
-                        style={{ color: 'var(--color-text-primary)' }}
-                      >
-                        {size}
-                      </span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </Card>
-          </aside>
+            </div>
+          )}
 
           {/* Products Grid */}
           <div className="flex-1">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
               {filteredProducts.map((product, index) => (
                 <FadeIn
                   key={product.id}
@@ -317,7 +309,8 @@ export default function Shop() {
                   <Card
                     variant="elevated"
                     hover
-                    className="overflow-hidden group"
+                    padding="none"
+                    className="relative overflow-hidden group h-full flex flex-col"
                   >
                     {/* Featured Badge */}
                     {product.featured && (
@@ -329,7 +322,7 @@ export default function Shop() {
                       </div>
                     )}
 
-                    {/* Product Image - Clean Background */}
+                    {/* Product Image */}
                     <div
                       className="relative aspect-[3/4] p-8"
                       style={{ backgroundColor: 'var(--color-surface-secondary)' }}
@@ -338,14 +331,15 @@ export default function Shop() {
                         src={product.image}
                         alt={t(product.nameKey as any)}
                         fill
-                        className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        loading="lazy"
+                        className="object-contain transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                         quality={90}
                       />
                     </div>
 
                     {/* Product Info */}
-                    <CardBody className="space-y-4">
+                    <CardBody className="flex flex-col flex-1 p-6 space-y-4">
                       <div className="space-y-2">
                         <h2
                           className="text-xl font-light"
@@ -359,19 +353,13 @@ export default function Shop() {
                         >
                           {product.year} {t('harvest')} • {product.size}
                         </p>
-                        <p
-                          className="text-sm leading-relaxed"
-                          style={{ color: 'var(--color-text-secondary)' }}
-                        >
+                        <p className="text-body text-sm">
                           {t(product.descriptionKey as any)}
                         </p>
                       </div>
 
                       {/* Price and Action */}
-                      <div
-                        className="flex items-center justify-between pt-4"
-                        style={{ borderTop: '1px solid var(--color-border-light)' }}
-                      >
+                      <div className="mt-auto pt-4 border-t border-border-light flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                         <span
                           className="text-2xl font-light"
                           style={{ color: 'var(--color-brand-olive)' }}
@@ -385,14 +373,15 @@ export default function Shop() {
                             disabled={addedToCart === product.id}
                             variant="primary"
                             size="sm"
+                            className="w-full sm:w-auto"
                           >
                             {addedToCart === product.id ? (
-                              <span className="flex items-center gap-2">
+                              <span className="flex items-center justify-center gap-2">
                                 <CheckCircleIcon className="w-4 h-4" />
                                 <span>{t('added')}</span>
                               </span>
                             ) : (
-                              <span className="flex items-center gap-2">
+                              <span className="flex items-center justify-center gap-2">
                                 <ShoppingCartIcon className="w-4 h-4" />
                                 <span>{t('add')}</span>
                               </span>
@@ -400,7 +389,7 @@ export default function Shop() {
                           </Button>
                         ) : (
                           <span
-                            className="text-sm px-4 py-2 rounded-lg"
+                            className="text-sm text-center px-4 py-2 rounded-lg w-full sm:w-auto"
                             style={{
                               backgroundColor: 'var(--color-surface-tertiary)',
                               color: 'var(--color-text-tertiary)'
@@ -430,7 +419,7 @@ export default function Shop() {
                   >
                     {t('noProductsFound')}
                   </h3>
-                  <p className="font-sans" style={{ color: 'var(--color-text-secondary)' }}>
+                  <p className="text-body" style={{ color: 'var(--color-text-secondary)' }}>
                     {t('tryAdjustingFilters')}
                   </p>
                 </Card>

@@ -9,7 +9,7 @@ import { DEFAULT_RATES } from '@/lib/pricing'
 import 'react-day-picker/style.css'
 import { FadeIn } from './motion/FadeIn'
 import { Section, SectionHeader } from './layout/Section'
-import { Card, CardBody } from './ui/Card'
+import { Card } from './ui/Card'
 import { Button } from './ui/Button'
 import { CheckCircleIcon, XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 
@@ -486,6 +486,7 @@ export default function Accommodations() {
               <h2 className="text-heading" style={{ color: 'var(--color-brand-olive)' }}>
                 {t('introTitle')}
               </h2>
+              <div className="divider-accent" />
               <div className="space-y-4 text-body-lg">
                 <p>
                   {t('introText1')}
@@ -507,6 +508,7 @@ export default function Accommodations() {
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
                   quality={80}
+                  loading="lazy"
                 />
               </div>
               <div className="aspect-[3/4] relative rounded-xl overflow-hidden mt-8">
@@ -517,6 +519,7 @@ export default function Accommodations() {
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
                   quality={80}
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -556,6 +559,7 @@ export default function Accommodations() {
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     quality={80}
+                    loading="lazy"
                   />
                   {/* Gradient — strong at bottom, subtle at top */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/10" />
@@ -890,13 +894,13 @@ export default function Accommodations() {
           align="center"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 mt-12 border-y border-brand-olive/15">
           {[
             {
               titleKey: 'oliveOilTasting',
               descriptionKey: 'oliveOilTastingDesc',
               icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               )
@@ -905,7 +909,7 @@ export default function Accommodations() {
               titleKey: 'waterActivities',
               descriptionKey: 'waterActivitiesDesc',
               icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 17c3-4 6-6 9-6s6 2 9 6M5 17h14M12 11V3M9 5l3-2 3 2" />
                 </svg>
               )
@@ -914,30 +918,29 @@ export default function Accommodations() {
               titleKey: 'localExcursions',
               descriptionKey: 'localExcursionsDesc',
               icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
                 </svg>
               )
             }
           ].map((experience, index) => (
             <FadeIn key={index} animation="slide-up" delay={index * 0.1}>
-              <Card variant="subtle" className="text-center p-8">
-                <div
-                  className="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: 'rgba(139, 115, 85, 0.1)', color: 'var(--color-brand-olive)' }}
-                >
+              <div
+                className={`h-full px-2 py-8 sm:px-6 sm:py-10 ${index > 0 ? 'md:border-l border-brand-olive/15 border-t md:border-t-0' : ''}`}
+              >
+                <div style={{ color: 'var(--color-brand-olive)' }}>
                   {experience.icon}
                 </div>
                 <h3
-                  className="text-xl font-light mb-4"
+                  className="text-xl font-light mt-5 mb-3"
                   style={{ color: 'var(--color-brand-olive)' }}
                 >
                   {t(experience.titleKey)}
                 </h3>
-                <p className="font-sans" style={{ color: 'var(--color-text-secondary)' }}>
+                <p className="font-sans text-body" style={{ color: 'var(--color-text-secondary)' }}>
                   {t(experience.descriptionKey)}
                 </p>
-              </Card>
+              </div>
             </FadeIn>
           ))}
         </div>
@@ -970,12 +973,14 @@ export default function Accommodations() {
                 alt={t(selectedRoom.nameKey)}
                 className="object-cover"
                 fill
-                sizes="800px"
+                sizes="(max-width: 768px) 100vw, 800px"
                 quality={85}
+                loading="lazy"
               />
               <button
                 onClick={() => setSelectedRoom(null)}
-                className="absolute top-4 right-4 p-2 rounded-full transition-colors"
+                aria-label="Close"
+                className="absolute top-4 right-4 p-2.5 rounded-full transition-colors hover:bg-black/70"
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
               >
                 <XMarkIcon className="h-6 w-6" />
@@ -985,14 +990,16 @@ export default function Accommodations() {
                 <>
                   <button
                     onClick={() => setCurrentImageIndex(prev => (prev > 0 ? prev - 1 : selectedRoom.images.length - 1))}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors"
+                    aria-label="Previous image"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full transition-colors hover:bg-black/70"
                     style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
                   >
                     <ChevronLeftIcon className="h-6 w-6" />
                   </button>
                   <button
                     onClick={() => setCurrentImageIndex(prev => (prev < selectedRoom.images.length - 1 ? prev + 1 : 0))}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors"
+                    aria-label="Next image"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full transition-colors hover:bg-black/70"
                     style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
                   >
                     <ChevronRightIcon className="h-6 w-6" />
@@ -1001,13 +1008,16 @@ export default function Accommodations() {
                     <span className="text-white text-sm font-sans drop-shadow-lg">
                       {currentImageIndex + 1} / {selectedRoom.images.length}
                     </span>
-                    <div className="flex justify-center gap-1.5">
+                    <div className="flex justify-center">
                       {selectedRoom.images.map((_, index) => (
                         <button
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
-                          className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === index ? 'bg-white scale-125' : 'bg-white/50'}`}
-                        />
+                          aria-label={`Go to image ${index + 1}`}
+                          className="p-1.5 flex items-center justify-center"
+                        >
+                          <span className={`block w-2 h-2 rounded-full transition-all ${currentImageIndex === index ? 'bg-white scale-125' : 'bg-white/50'}`} />
+                        </button>
                       ))}
                     </div>
                   </div>

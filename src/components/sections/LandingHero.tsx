@@ -2,18 +2,39 @@
 
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { AnimateDiv } from '../motion/MotionWrapper'
 import { useTranslations } from 'next-intl'
 
 export default function LandingHero() {
   const t = useTranslations('LandingHero')
-  const [scrollY, setScrollY] = useState(0)
+  const parallaxRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const el = parallaxRef.current
+    if (!el) return
+
+    // Skip the parallax entirely where it costs more than it gives: small/touch
+    // screens and users who prefer reduced motion. The hero stays static there.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const isDesktop = window.matchMedia('(min-width: 640px)').matches
+    if (reduceMotion || !isDesktop) return
+
+    let ticking = false
+    const update = () => {
+      // Write straight to the node (no React re-render) and stay on the GPU.
+      el.style.transform = `translate3d(0, ${window.scrollY * 0.4}px, 0) scale(1.1)`
+      ticking = false
+    }
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true
+        requestAnimationFrame(update)
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
@@ -21,8 +42,9 @@ export default function LandingHero() {
       {/* Background with subtle parallax */}
       <div className="absolute inset-0">
         <div
-          className="absolute inset-0 scale-110"
-          style={{ transform: `translateY(${scrollY * 0.4}px) scale(1.1)` }}
+          ref={parallaxRef}
+          className="absolute inset-0 will-change-transform"
+          style={{ transform: 'scale(1.1)' }}
         >
           <Image
             src="https://storage.googleapis.com/kallmi/images/hero.webp"

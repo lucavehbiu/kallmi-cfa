@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline'
 import Hamburger from 'hamburger-react'
 import { useCart } from '@/context/CartContext'
-import { Link } from '@/i18n/navigation'
+import { Link, usePathname } from '@/i18n/navigation'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { useTranslations } from 'next-intl'
 
@@ -16,6 +16,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const { cartCount, cartItems, removeFromCart } = useCart()
+  const pathname = usePathname()
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('de-DE', {
@@ -155,54 +156,67 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu - Frosted glass dark */}
+        {/* Mobile Menu — editorial drawer */}
         <div
-          className={`lg:hidden absolute top-full left-0 right-0 backdrop-blur-xl bg-black/60 border-t border-white/10 shadow-xl
-            transition-all duration-500 ease-out overflow-hidden
-            ${isOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'}`}
+          className={`lg:hidden absolute top-full left-0 right-0 overflow-hidden
+            bg-[#1C1B18]/95 backdrop-blur-2xl border-t border-[#D4AF37]/15 shadow-2xl
+            transition-all duration-500 ease-out
+            ${isOpen ? 'max-h-[36rem] opacity-100' : 'max-h-0 opacity-0'}`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="py-6 space-y-1">
-            {navItems.map((item, index) => (
-              <div
-                key={item.name}
-                className="px-6"
-                style={{
-                  animationDelay: isOpen ? `${index * 60}ms` : '0ms',
-                  animation: isOpen ? 'slideInLeft 0.3s ease-out forwards' : 'none'
-                }}
-              >
-                <Link
-                  href={item.href}
-                  className="block text-white/90 hover:text-white transition-all duration-300
-                    text-xl font-light tracking-wide py-3 px-4 rounded-xl hover:bg-white/10 border-b border-white/5"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              </div>
-            ))}
+          <nav className="px-6 py-5">
+            <ul className="divide-y divide-white/[0.06]">
+              {navItems.map((item, index) => {
+                const active = pathname === item.href
+                return (
+                  <li
+                    key={item.name}
+                    style={{
+                      animationDelay: isOpen ? `${index * 55}ms` : '0ms',
+                      animation: isOpen ? 'slideInLeft 0.35s ease-out both' : 'none',
+                    }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className="group flex items-center justify-between py-4"
+                    >
+                      <span className="flex items-baseline gap-4">
+                        <span className={`font-mono text-[11px] tracking-widest transition-colors duration-300
+                          ${active ? 'text-[#D4AF37]' : 'text-white/30'}`}>
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <span className={`font-serif text-2xl tracking-wide transition-colors duration-300
+                          ${active ? 'text-[#D4AF37]' : 'text-white/90 group-hover:text-white'}`}>
+                          {item.name}
+                        </span>
+                      </span>
+                      <span className={`h-px transition-all duration-300
+                        ${active ? 'w-10 bg-[#D4AF37]' : 'w-6 bg-white/20 group-hover:w-10 group-hover:bg-white/50'}`} />
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
 
-            {/* Cart in mobile menu */}
-            <div className="px-6 pt-2">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setIsOpen(false)
-                  setIsCartOpen(true)
-                }}
-                className="flex items-center space-x-3 w-full text-white/90 hover:text-white transition-all duration-300 text-xl font-light tracking-wide py-3 px-4 rounded-xl hover:bg-white/10"
-              >
-                <ShoppingCartIcon className="w-6 h-6" />
-                <span>{tCart('title')}</span>
-                {cartCount > 0 && (
-                  <span className="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
-                    {cartCount}
-                  </span>
-                )}
-              </button>
-            </div>
-          </div>
+            {/* Cart row */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setIsOpen(false)
+                setIsCartOpen(true)
+              }}
+              className="mt-5 flex items-center gap-3 w-full py-4 border-t border-white/[0.06] text-white/75 hover:text-white transition-colors duration-300"
+            >
+              <ShoppingCartIcon className="w-5 h-5" />
+              <span className="font-serif text-lg tracking-wide">{tCart('title')}</span>
+              {cartCount > 0 && (
+                <span className="ml-auto bg-[#D4AF37] text-[#1C1B18] text-xs rounded-full h-5 min-w-[1.25rem] px-1.5 flex items-center justify-center font-semibold">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+          </nav>
         </div>
       </nav>
 
