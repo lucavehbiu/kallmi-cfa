@@ -17,6 +17,9 @@ interface Booking {
   special_requests: string | null
   status: string
   created_at: string
+  nights: number
+  total_amount: number
+  deposit_amount: number
 }
 
 interface Reservation {
@@ -309,6 +312,13 @@ export default function AdminDashboardClient({
                         <span className="text-[#8B7355] text-xs uppercase tracking-wider">Guests</span>
                         <p>{booking.guests}</p>
                       </div>
+                    </div>
+                    <div className="mt-3 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                      <span className="text-[#8B7355] text-xs uppercase tracking-wider">
+                        Total ({booking.nights} {booking.nights === 1 ? 'night' : 'nights'})
+                      </span>
+                      <span className="text-xl font-medium text-[#333]">€{booking.total_amount}</span>
+                      <span className="text-sm text-[#999]">50% deposit €{booking.deposit_amount}</span>
                     </div>
                     <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-sm text-[#666]">
                       <span>{booking.email}</span>
