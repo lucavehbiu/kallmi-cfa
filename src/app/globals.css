@@ -62,9 +62,11 @@
   box-sizing: border-box;
 }
 
+/* clip, not hidden: hidden turns <body> into the scroll container, so
+   window.scrollY stays 0 and every scroll listener on window goes dead */
 html, body {
   height: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -508,7 +510,7 @@ p, li, blockquote, address {
 
   .badge-gold {
     @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
-    background-color: rgba(212, 175, 55, 0.1);
+    background-color: rgba(196, 168, 98, 0.1);
     color: var(--color-brand-gold-dark);
   }
 

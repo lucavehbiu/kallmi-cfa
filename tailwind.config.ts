@@ -17,7 +17,7 @@ export default {
           olive: '#8B7355',
           'olive-light': '#A0845C',
           'olive-dark': '#6B563F',
-          gold: '#D4AF37',
+          gold: '#C4A862',
           'gold-light': '#E5C766',
           'gold-dark': '#B8962F',
         },

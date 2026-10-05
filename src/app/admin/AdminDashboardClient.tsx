@@ -202,7 +202,7 @@ export default function AdminDashboardClient({
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <p className="text-xs tracking-[4px] text-[#D4AF37] uppercase mb-1">Kallmi Estate</p>
+          <p className="text-xs tracking-[4px] text-[#C4A862] uppercase mb-1">Kallmi Estate</p>
           <h1 className="text-2xl font-light text-[#333] tracking-wide">Admin Dashboard</h1>
         </div>
         <div className="flex items-center gap-4">

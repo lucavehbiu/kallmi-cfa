@@ -92,7 +92,7 @@ export default async function OurStory({
             <AnimateDiv animation="slide-up" duration={1.0} delay={0.2}>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extralight tracking-wide leading-[1.05]">
                 {t('heroTitle')}
-                <span className="block text-3xl sm:text-5xl lg:text-6xl italic text-[#D4AF37] mt-2">
+                <span className="block text-3xl sm:text-5xl lg:text-6xl italic text-[#C4A862] mt-2">
                   {t('heroTitleAccent')}
                 </span>
               </h1>
@@ -108,9 +108,9 @@ export default async function OurStory({
 
             <AnimateDiv animation="slide-up" duration={1.0} delay={0.5}>
               <p className="text-lg sm:text-xl font-light text-white/90 max-w-xl mx-auto leading-relaxed">
-                {t('heroDescription1')}<span className="text-[#D4AF37]">{t('heroDescriptionAccent1')}</span>
+                {t('heroDescription1')}<span className="text-[#C4A862]">{t('heroDescriptionAccent1')}</span>
                 {t('heroDescription2')}
-                <span className="text-[#D4AF37]">{t('heroDescriptionAccent2')}</span>
+                <span className="text-[#C4A862]">{t('heroDescriptionAccent2')}</span>
               </p>
             </AnimateDiv>
 
@@ -122,7 +122,7 @@ export default async function OurStory({
                     key={index}
                     className={`flex-1 py-4 px-2 text-center ${index > 0 ? 'border-l border-white/20' : ''}`}
                   >
-                    <item.icon className="w-5 h-5 text-[#D4AF37] mx-auto mb-2" />
+                    <item.icon className="w-5 h-5 text-[#C4A862] mx-auto mb-2" />
                     <p className="text-white/90 text-xs sm:text-sm leading-snug">{item.text}</p>
                   </div>
                 ))}
@@ -151,7 +151,7 @@ export default async function OurStory({
             <AnimateDiv animation="slide-up" delay={0.1}>
               <h2 className="text-display text-brand-olive leading-tight mt-6">
                 {t('heritageTitle')}
-                <span className="block italic text-[#D4AF37] mt-2">{t('heritageTitleAccent')}</span>
+                <span className="block italic text-[#C4A862] mt-2">{t('heritageTitleAccent')}</span>
               </h2>
             </AnimateDiv>
 
@@ -176,7 +176,7 @@ export default async function OurStory({
                       index !== 0 ? 'sm:border-l sm:border-brand-olive/15' : ''
                     }`}
                   >
-                    <milestone.icon className="w-6 h-6 text-[#D4AF37] mx-auto mb-3" />
+                    <milestone.icon className="w-6 h-6 text-[#C4A862] mx-auto mb-3" />
                     <div className="text-2xl lg:text-3xl font-light text-brand-olive leading-none">
                       {milestone.year}
                     </div>
@@ -207,7 +207,7 @@ export default async function OurStory({
                     <div className="text-white/75 text-xs">{t('imageBadgeHeritage')}</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[#D4AF37] text-sm font-medium">{t('imageBadgeYears')}</div>
+                    <div className="text-[#C4A862] text-sm font-medium">{t('imageBadgeYears')}</div>
                     <div className="text-white/75 text-xs">{t('imageBadgeTradition')}</div>
                   </div>
                 </div>
@@ -257,12 +257,12 @@ export default async function OurStory({
       <Section spacing="lg" background="inverse" containerWidth="md">
         <AnimateDiv animation="fade">
           <div className="text-center mb-14 sm:mb-20">
-            <span className="text-overline text-[#D4AF37] block mb-4">{t('processOverline')}</span>
+            <span className="text-overline text-[#C4A862] block mb-4">{t('processOverline')}</span>
             <h2 className="text-display text-text-on-dark">{t('processTitle')}</h2>
             <p className="text-text-on-dark-muted text-lg sm:text-xl font-light max-w-2xl mx-auto mt-5 leading-relaxed">
               {t('processSubtitle')}
             </p>
-            <div className="w-16 h-px bg-[#D4AF37] mx-auto mt-7" />
+            <div className="w-16 h-px bg-[#C4A862] mx-auto mt-7" />
           </div>
         </AnimateDiv>
 
@@ -284,7 +284,7 @@ export default async function OurStory({
                 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/55 to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
                   <div>
-                    <div className="text-[#D4AF37] text-sm font-medium">{t('processBadgeColdPressed')}</div>
+                    <div className="text-[#C4A862] text-sm font-medium">{t('processBadgeColdPressed')}</div>
                     <div className="text-white/75 text-xs">{t('processBadgeWithinHours')}</div>
                   </div>
                   <div className="text-right">
@@ -306,12 +306,12 @@ export default async function OurStory({
                   delay={0.3 + index * 0.15}
                 >
                   <div className="flex items-start gap-5 py-7 group">
-                    <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 text-[#D4AF37] transition-colors duration-300 group-hover:bg-[#D4AF37] group-hover:text-[#6B563F]">
+                    <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 text-[#C4A862] transition-colors duration-300 group-hover:bg-[#C4A862] group-hover:text-[#6B563F]">
                       <step.icon className="w-6 h-6" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-baseline gap-3">
-                        <span className="text-[#D4AF37]/70 text-sm font-light tabular-nums">
+                        <span className="text-[#C4A862]/70 text-sm font-light tabular-nums">
                           0{index + 1}
                         </span>
                         <h3 className="text-xl lg:text-2xl font-light text-text-on-dark">
@@ -337,7 +337,7 @@ export default async function OurStory({
             <span className="text-overline block mb-4">{t('legacyOverline')}</span>
             <h2 className="text-display text-brand-olive leading-tight">
               {t('legacyTitle')}
-              <span className="block italic text-[#D4AF37] mt-2">{t('legacyTitleAccent')}</span>
+              <span className="block italic text-[#C4A862] mt-2">{t('legacyTitleAccent')}</span>
             </h2>
           </AnimateDiv>
 
@@ -372,7 +372,7 @@ export default async function OurStory({
         {/* Pull quote - centered, no glass, hairline framing */}
         <AnimateDiv animation="fade" delay={0.5}>
           <figure className="max-w-3xl mx-auto mt-20 text-center">
-            <SparklesIcon className="w-10 h-10 text-[#D4AF37] mx-auto mb-6" />
+            <SparklesIcon className="w-10 h-10 text-[#C4A862] mx-auto mb-6" />
             <blockquote className="text-2xl sm:text-3xl italic text-brand-olive font-light leading-relaxed">
               &ldquo;{t('legacyQuote')}&rdquo;
             </blockquote>
