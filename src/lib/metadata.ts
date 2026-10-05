@@ -51,10 +51,10 @@ export function generatePageMetadata({
       type: page === 'home' ? 'website' : 'article',
       images: [
         {
-          url: `${BASE_URL}/images/hero.webp`,
+          url: `${BASE_URL}/og-kallmi.png`,
           width: 1200,
           height: 630,
-          alt: 'Kallmi Estate - Albanian Olive Oil',
+          alt: 'Kallmi Estate',
         },
       ],
     },
@@ -62,7 +62,7 @@ export function generatePageMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`${BASE_URL}/images/hero.webp`],
+      images: [`${BASE_URL}/og-kallmi.png`],
     },
     robots: {
       index: true,

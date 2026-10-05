@@ -72,9 +72,12 @@ export function Header() {
               <div className="relative">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={scrolled ? '/kallmi-black.svg' : '/kallmi-white.svg'}
+                src={scrolled ? '/kallmi-black-horizontal.svg' : '/kallmi-white-horizontal.svg'}
                 alt="Kallmi Estate"
-                style={{ width: '120px', height: '35px', objectFit: 'contain' }}
+                width={130}
+                height={36}
+                fetchPriority="high"
+                style={{ width: '130px', height: 'auto' }}
                 className="transition-all duration-300 group-hover:opacity-90"
               />
               </div>
