@@ -49,7 +49,9 @@ export function Footer() {
               <img
                 src="/kallmi-white.svg"
                 alt="Kallmi Estate"
-                style={{ width: '180px', height: '52px', objectFit: 'contain' }}
+                width={127}
+                height={90}
+                style={{ width: '127px', height: 'auto' }}
               />
             </Link>
 

@@ -7,6 +7,18 @@
    ============================================ */
 
 :root {
+  /* Kallmi brand kit tokens (solar disc identity).
+     Fonts are namespaced so they don't override --font-display above. */
+  --kallmi-black: #141311;
+  --kallmi-ink: #1A1814;
+  --kallmi-cream: #F8F5EF;
+  --kallmi-paper: #F2F0EB;
+  --kallmi-gold: #C4A862;
+  --kallmi-gold-print: #A88B45;
+  --kallmi-font-display: "Bodoni Moda", "Didot", "Bodoni MT", serif;
+  --kallmi-font-ui: "Jost", "Futura", system-ui, sans-serif;
+  --kallmi-tracking-label: 0.25em;
+
   /* Brand colors */
   --color-brand-olive: #8B7355;
   --color-brand-olive-light: #A0845C;
