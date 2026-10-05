@@ -447,7 +447,7 @@ export default function Restaurant() {
           <div className="max-w-5xl space-y-6 sm:space-y-8">
             <FadeIn animation="fade" delay={0.2} className="inline-block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/kallmi-bukur-white.svg" alt="Kallmi Bukur" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
+              <img src="/kallmi-bukur-white.svg" alt="Kallmi Bukur" width={215} height={100} style={{ width: 'auto', height: '100px' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.3}>
               <h1 className="text-5xl lg:text-6xl font-extralight tracking-[0]">{t('heroDineTitle')}</h1>
@@ -477,7 +477,7 @@ export default function Restaurant() {
             <div className="space-y-5">
               <FadeIn animation="fade" delay={0.2} className="inline-block">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/kallmi-bukur-white.svg" alt="Kallmi Bukur" style={{ width: '200px', height: '45px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
+                <img src="/kallmi-bukur-white.svg" alt="Kallmi Bukur" width={189} height={88} style={{ width: 'auto', height: '88px' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
               </FadeIn>
               <FadeIn animation="slide-up" delay={0.3}>
                 <h1 className="text-4xl font-extralight tracking-[0]">{t('heroDineTitle')}</h1>

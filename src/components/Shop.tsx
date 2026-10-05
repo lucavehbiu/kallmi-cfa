@@ -191,7 +191,7 @@ export default function Shop() {
           <div className="max-w-5xl space-y-6 sm:space-y-8">
             <FadeIn animation="fade" delay={0.2} className="inline-block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/kallmi-oil-white.svg" alt="Kallmi Oil" style={{ width: '220px', height: '50px', objectFit: 'contain' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
+              <img src="/kallmi-oil-white.svg" alt="Kallmi Oil" width={185} height={100} style={{ width: 'auto', height: '100px' }} className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" />
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.4}>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extralight tracking-[0]">
