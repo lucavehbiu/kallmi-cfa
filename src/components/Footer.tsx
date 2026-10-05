@@ -47,7 +47,7 @@ export function Footer() {
             <Link href="/" className="block opacity-90 hover:opacity-100 transition-opacity duration-300">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/kallmi-white.svg"
+                src="/kallmi-white-stacked.svg"
                 alt="Kallmi Estate"
                 width={127}
                 height={90}

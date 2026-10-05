@@ -14,6 +14,7 @@ import {
   ShoppingCartIcon,
   CheckCircleIcon
 } from '@heroicons/react/24/outline'
+import { SunMark } from '@/components/ui/SunMark'
 
 interface Product {
   id: number
@@ -200,7 +201,7 @@ export default function Shop() {
             </FadeIn>
             <FadeIn animation="fade" delay={0.6} className="flex items-center justify-center space-x-3">
               <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-              <div className="w-1.5 h-1.5 bg-[#C4A862] rounded-full" />
+              <SunMark />
               <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.7}>

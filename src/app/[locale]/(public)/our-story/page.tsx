@@ -10,13 +10,13 @@ import {
   StarIcon,
   BeakerIcon,
   SunIcon,
-  GlobeAltIcon,
   UserGroupIcon,
   TrophyIcon
 } from '@heroicons/react/24/outline'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { generatePageMetadata } from '@/lib/metadata'
 import type { Locale } from '@/i18n/routing'
+import { SunMark } from '@/components/ui/SunMark'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
@@ -84,8 +84,7 @@ export default async function OurStory({
         <div className="relative z-10 w-full text-center text-white px-5 sm:px-6 py-20">
           <div className="max-w-3xl mx-auto space-y-7">
             <AnimateDiv animation="fade" duration={1.0} delay={0.1}>
-              <span className="inline-flex items-center gap-2 text-overline text-white/80">
-                <SparklesIcon className="w-4 h-4 text-[#D4AF37]" />
+              <span className="inline-flex items-center text-overline text-white/80">
                 {t('heroBadge')}
               </span>
             </AnimateDiv>
@@ -102,7 +101,7 @@ export default async function OurStory({
             <AnimateDiv animation="fade" duration={1.0} delay={0.4}>
               <div className="flex items-center justify-center gap-4">
                 <div className="w-12 h-px bg-white/40" />
-                <HeartIcon className="w-5 h-5 text-[#D4AF37]" />
+                <SunMark size={20} />
                 <div className="w-12 h-px bg-white/40" />
               </div>
             </AnimateDiv>
@@ -345,7 +344,7 @@ export default async function OurStory({
           <AnimateDiv animation="fade" delay={0.2}>
             <div className="flex items-center justify-center gap-4 mt-10 mb-10">
               <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent to-brand-olive/40" />
-              <GlobeAltIcon className="w-8 h-8 text-[#D4AF37]" />
+              <SunMark size={32} />
               <div className="w-16 sm:w-24 h-px bg-gradient-to-l from-transparent to-brand-olive/40" />
             </div>
           </AnimateDiv>

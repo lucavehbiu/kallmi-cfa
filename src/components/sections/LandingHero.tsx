@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation'
 import { useEffect, useRef } from 'react'
 import { AnimateDiv } from '../motion/MotionWrapper'
 import { useTranslations } from 'next-intl'
+import { SunMark } from '@/components/ui/SunMark'
 
 export default function LandingHero() {
   const t = useTranslations('LandingHero')
@@ -69,9 +70,7 @@ export default function LandingHero() {
       <div className="relative z-10 hidden sm:flex items-center justify-center min-h-screen text-center text-white px-6 pt-32 pb-16">
         <div className="max-w-5xl space-y-6 sm:space-y-8">
           <AnimateDiv animation="fade" duration={1.0} delay={0.2} className="inline-block">
-            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="12" cy="12" r="12" fill="#C4A862" />
-            </svg>
+            <SunMark size={48} />
           </AnimateDiv>
 
           <AnimateDiv animation="slide-up" duration={1.2} delay={0.4}>
@@ -82,7 +81,7 @@ export default function LandingHero() {
 
           <AnimateDiv animation="fade" duration={0.8} delay={0.7} className="flex items-center justify-center space-x-3">
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-            <div className="w-1.5 h-1.5 bg-[#C4A862] rounded-full" />
+            <SunMark />
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
           </AnimateDiv>
 
@@ -111,9 +110,7 @@ export default function LandingHero() {
         <div className="flex-1 flex items-center justify-center">
           <div className="space-y-5">
             <AnimateDiv animation="fade" duration={1.0} delay={0.2} className="inline-block">
-              <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="9" cy="9" r="9" fill="#C4A862" />
-              </svg>
+              <SunMark size={40} />
             </AnimateDiv>
 
             <AnimateDiv animation="slide-up" duration={1.2} delay={0.4}>
@@ -124,7 +121,7 @@ export default function LandingHero() {
 
             <AnimateDiv animation="fade" duration={0.8} delay={0.7} className="flex items-center justify-center space-x-3">
               <div className="w-12 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-              <div className="w-1.5 h-1.5 bg-[#C4A862] rounded-full" />
+              <SunMark />
               <div className="w-12 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </AnimateDiv>
 

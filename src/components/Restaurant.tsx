@@ -18,6 +18,7 @@ import {
   PhoneIcon,
   StarIcon
 } from '@heroicons/react/24/outline'
+import { SunMark } from '@/components/ui/SunMark'
 
 const COUNTRY_CODES = [
   { code: '+355', country: 'AL', label: 'Albania (+355)' },
@@ -454,7 +455,7 @@ export default function Restaurant() {
             </FadeIn>
             <FadeIn animation="fade" delay={0.5} className="flex items-center justify-center space-x-3">
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-              <div className="w-1.5 h-1.5 bg-[#C4A862] rounded-full" />
+              <SunMark />
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.6}>
@@ -484,7 +485,7 @@ export default function Restaurant() {
               </FadeIn>
               <FadeIn animation="fade" delay={0.5} className="flex items-center justify-center space-x-3">
                 <div className="w-12 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-                <div className="w-1.5 h-1.5 bg-[#C4A862] rounded-full" />
+                <SunMark />
                 <div className="w-12 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
               </FadeIn>
               <FadeIn animation="slide-up" delay={0.6}>

@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { FireIcon, HomeIcon, SunIcon, MoonIcon } from '@heroicons/react/24/outline'
 import { AnimateDiv } from './motion/MotionWrapper'
+import { SunMark } from '@/components/ui/SunMark'
 
 export default function Camping() {
   const t = useTranslations('CampingPage')
@@ -90,7 +91,7 @@ export default function Camping() {
 
             <AnimateDiv animation="fade" duration={0.8} delay={0.55} className="flex items-center justify-center gap-3">
               <span className="h-px w-12 bg-gradient-to-r from-transparent to-white/50 sm:w-16" />
-              <HomeIcon className="h-5 w-5 text-[#D4AF37]" />
+              <SunMark size={20} />
               <span className="h-px w-12 bg-gradient-to-l from-transparent to-white/50 sm:w-16" />
             </AnimateDiv>
 
