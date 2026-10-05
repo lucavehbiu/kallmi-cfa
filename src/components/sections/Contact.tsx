@@ -15,6 +15,7 @@ import {
 } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { SunMark } from '@/components/ui/SunMark'
 
 export default function ContactSection() {
   const t = useTranslations('ContactPage')
@@ -83,7 +84,7 @@ export default function ContactSection() {
 
             <AnimateDiv animation="fade" duration={0.8} delay={0.4} className="flex items-center justify-center gap-3">
               <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-              <div className="w-1.5 h-1.5 rounded-full bg-[#C4A862]" />
+              <SunMark />
               <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
             </AnimateDiv>
 
