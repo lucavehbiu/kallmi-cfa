@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { AnimateDiv } from './motion/MotionWrapper'
+import { buttonClasses } from '@/components/ui/buttonStyles'
 import { SparklesIcon } from '@heroicons/react/24/outline'
 
 const limitedEditionDetails = {
@@ -73,7 +74,7 @@ export default function LimitedEditionPage() {
             </ul>
             <button
               onClick={() => setIsReserving(true)}
-              className="bg-[#8B7355] text-white px-8 py-4 text-lg tracking-wider hover:bg-[#725f46] transition-colors duration-300"
+              className={buttonClasses({ size: 'lg' })}
             >
               RESERVE YOUR BOTTLE
             </button>

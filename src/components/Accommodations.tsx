@@ -9,6 +9,7 @@ import { DEFAULT_RATES } from '@/lib/pricing'
 import 'react-day-picker/style.css'
 import { FadeIn } from './motion/FadeIn'
 import { StickyBookingBar } from './StickyBookingBar'
+import { buttonClasses } from '@/components/ui/buttonStyles'
 import { Section, SectionHeader } from './layout/Section'
 import { Card } from './ui/Card'
 import { Button } from './ui/Button'
@@ -436,7 +437,7 @@ export default function Accommodations() {
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.9}>
               <button
-                className="bg-[#C4A862] hover:bg-[#B89852] text-[#1C1B18] px-8 py-4 rounded font-sans font-medium tracking-wide transition-all duration-200 text-base"
+                className={buttonClasses({ variant: 'primary-on-dark', size: 'lg' })}
                 onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 {t('heroBookNow')}
@@ -470,7 +471,7 @@ export default function Accommodations() {
           <div className="pb-8 px-4">
             <FadeIn animation="slide-up" delay={0.9} className="w-full max-w-xs mx-auto">
               <button
-                className="w-full bg-[#C4A862] hover:bg-[#B89852] text-[#1C1B18] px-6 py-4 rounded font-sans font-medium tracking-wide transition-all duration-200 text-sm"
+                className={buttonClasses({ variant: 'primary-on-dark', size: 'lg', fullWidth: true })}
                 onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 {t('heroBookNow')}
