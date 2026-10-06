@@ -371,7 +371,7 @@ export default async function OurStory({
         {/* Pull quote - centered, no glass, hairline framing */}
         <AnimateDiv animation="fade" delay={0.5}>
           <figure className="max-w-3xl mx-auto mt-20 text-center">
-            <SparklesIcon className="w-10 h-10 text-[#C4A862] mx-auto mb-6" />
+            <SunMark size={40} className="mx-auto mb-6" />
             <blockquote className="text-2xl sm:text-3xl italic text-brand-olive font-light leading-relaxed">
               &ldquo;{t('legacyQuote')}&rdquo;
             </blockquote>
