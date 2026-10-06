@@ -58,7 +58,7 @@ export function Footer() {
             <p
               className="text-center lg:text-left text-sm leading-relaxed italic"
               style={{
-                fontFamily: 'var(--font-instrument-serif), Georgia, serif',
+                fontFamily: 'var(--font-serif-display), Georgia, serif',
                 color: 'rgba(250,250,248,0.60)',
               }}
             >

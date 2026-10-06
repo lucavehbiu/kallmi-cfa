@@ -53,7 +53,7 @@ export default async function AccommodationsPage({
     >
       <JsonLd data={[lodgingSchema(locale as Locale), faqSchema(faqData)]} />
       <Accommodations />
-      <WhatsAppButton />
+      <WhatsAppButton hideOnMobile />
     </Suspense>
   )
 }

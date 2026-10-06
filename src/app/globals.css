@@ -48,7 +48,7 @@
   --color-border-dark: #B8B4AC;
 
   /* Typography semantic roles */
-  --font-display: var(--font-instrument-serif), Georgia, serif;
+  --font-display: var(--font-serif-display), Georgia, serif;
   --font-body: var(--font-dm-sans), system-ui, sans-serif;
 }
 
@@ -69,6 +69,12 @@ html, body {
   overflow-x: clip;
 }
 
+/* Dark behind the page: iOS Safari tints its toolbar and overscroll from
+   this, matching the dark hero and footer. body keeps its own light bg. */
+html {
+  background-color: #141311;
+}
+
 body {
   color: var(--color-text-primary);
   line-height: 1.618;
@@ -80,7 +86,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-family: var(--font-serif-display), Georgia, serif;
 }
 
 p, li, blockquote, address {

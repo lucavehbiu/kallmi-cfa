@@ -6,6 +6,7 @@ import { Link } from '@/i18n/navigation'
 import Script from 'next/script'
 import { useTranslations } from 'next-intl'
 import { FadeIn } from './motion/FadeIn'
+import { StickyBookingBar } from './StickyBookingBar'
 import { Section, SectionHeader } from './layout/Section'
 import { Card } from './ui/Card'
 import { Button } from './ui/Button'
@@ -1001,6 +1002,7 @@ export default function Restaurant() {
           </Card>
         </FadeIn>
       </Section>
+      <StickyBookingBar brand="Kallmi Bukur" cta={t('heroBookNow')} targetId="reservation-section" />
     </div>
   )
 }

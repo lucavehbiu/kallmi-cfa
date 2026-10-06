@@ -4,10 +4,13 @@ import React, { useEffect, useState } from 'react';
 
 interface WhatsAppButtonProps {
   phoneNumber?: string;
+  /** Hide on phones where a StickyBookingBar already offers WhatsApp */
+  hideOnMobile?: boolean;
 }
 
 const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
-  phoneNumber = "355682450851" // Default phone number
+  phoneNumber = "355682450851", // Default phone number
+  hideOnMobile = false
 }) => {
   // Stay out of the way on the hero; appear once the visitor starts reading
   const [visible, setVisible] = useState(false);
@@ -26,8 +29,8 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
       tabIndex={visible ? 0 : -1}
-      className={`fixed right-4 sm:right-6 bottom-[calc(1rem+env(safe-area-inset-bottom))] sm:bottom-6 z-[100]
-                  flex h-12 w-12 items-center justify-center rounded-full
+      className={`${hideOnMobile ? 'hidden sm:flex' : 'flex'} fixed right-4 sm:right-6 bottom-[calc(1rem+env(safe-area-inset-bottom))] sm:bottom-6 z-[100]
+                  h-12 w-12 items-center justify-center rounded-full
                   bg-[#141311]/85 backdrop-blur-md border border-[#C4A862]/40 shadow-lg shadow-black/20
                   transition-all duration-500 ease-out hover:border-[#C4A862] hover:bg-[#141311]
                   focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C4A862] focus-visible:ring-offset-2

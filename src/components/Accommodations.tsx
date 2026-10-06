@@ -8,6 +8,7 @@ import { DayPicker, type DateRange, type DayButtonProps } from 'react-day-picker
 import { DEFAULT_RATES } from '@/lib/pricing'
 import 'react-day-picker/style.css'
 import { FadeIn } from './motion/FadeIn'
+import { StickyBookingBar } from './StickyBookingBar'
 import { Section, SectionHeader } from './layout/Section'
 import { Card } from './ui/Card'
 import { Button } from './ui/Button'
@@ -1099,6 +1100,7 @@ export default function Accommodations() {
           </div>
         </div>
       )}
+      <StickyBookingBar brand="Kallmi View" cta={t('heroBookNow')} targetId="booking-section" />
     </div>
   )
 }

@@ -1,17 +1,19 @@
-import { Instrument_Serif, DM_Sans } from 'next/font/google'
-import type { Metadata } from 'next'
+import { Bodoni_Moda, DM_Sans } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { setRequestLocale, getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: '400',
+// Headings: Bodoni Moda (brand kit), same high-contrast style as the logo.
+// The opsz axis lets large headlines use the finer display cut.
+const bodoniModa = Bodoni_Moda({
+  subsets: ['latin', 'latin-ext'],
   style: ['normal', 'italic'],
+  axes: ['opsz'],
   display: 'swap',
-  variable: '--font-instrument-serif'
+  variable: '--font-serif-display'
 })
 
 const dmSans = DM_Sans({
@@ -20,6 +22,12 @@ const dmSans = DM_Sans({
   display: 'swap',
   variable: '--font-dm-sans'
 })
+
+// Dark browser chrome so the toolbar blends into the hero instead of a white strip
+export const viewport: Viewport = {
+  themeColor: '#141311',
+  viewportFit: 'cover',
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.kallmibukur.al'),
@@ -86,7 +94,7 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={`${instrumentSerif.variable} ${dmSans.variable}`}>
+    <html lang={locale} className={`${bodoniModa.variable} ${dmSans.variable}`}>
       <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-5BC0XC4J09"
