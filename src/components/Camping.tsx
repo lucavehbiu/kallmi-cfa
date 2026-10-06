@@ -75,7 +75,7 @@ export default function Camping() {
           <div className="max-w-3xl space-y-6 sm:space-y-7">
             <AnimateDiv animation="fade" duration={1.0} delay={0.15} className="inline-flex">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.15em] backdrop-blur-sm">
-                <FireIcon className="h-3.5 w-3.5 text-[#D4AF37]" />
+                <FireIcon className="h-3.5 w-3.5 text-[#C4A862]" />
                 {t('heroBadge')}
               </span>
             </AnimateDiv>
@@ -83,7 +83,7 @@ export default function Camping() {
             <AnimateDiv animation="slide-up" duration={1.1} delay={0.3}>
               <h1 className="font-serif text-5xl font-extralight leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
                 {t('heroTitle')}
-                <span className="mt-2 block italic text-[#D4AF37]">
+                <span className="mt-2 block italic text-[#C4A862]">
                   {t('heroTitleAccent')}
                 </span>
               </h1>
@@ -98,7 +98,7 @@ export default function Camping() {
             <AnimateDiv animation="slide-up" duration={1.0} delay={0.7}>
               <p className="mx-auto max-w-xl text-base font-light leading-relaxed opacity-90 sm:text-lg">
                 {t.rich('heroSubtitle', {
-                  accent: (chunks) => <span className="text-[#D4AF37]">{chunks}</span>,
+                  accent: (chunks) => <span className="text-[#C4A862]">{chunks}</span>,
                 })}
               </p>
             </AnimateDiv>
@@ -110,7 +110,7 @@ export default function Camping() {
                     key={index}
                     className="flex flex-col items-center gap-1.5 rounded-2xl border border-white/15 bg-white/[0.08] px-2 py-4 text-center backdrop-blur-sm"
                   >
-                    <item.icon className="h-5 w-5 text-[#D4AF37]" />
+                    <item.icon className="h-5 w-5 text-[#C4A862]" />
                     <span className="text-xs font-light leading-tight text-white/90 sm:text-sm">{item.text}</span>
                   </li>
                 ))}

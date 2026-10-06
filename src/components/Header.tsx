@@ -135,7 +135,7 @@ export function Header() {
                 )}
 
                 {/* Floating glow */}
-                <div className="absolute inset-0 bg-[#D4AF37]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                <div className="absolute inset-0 bg-[#C4A862]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
               </button>
             </div>
           </div>
@@ -162,7 +162,7 @@ export function Header() {
         {/* Mobile Menu — editorial drawer */}
         <div
           className={`lg:hidden absolute top-full left-0 right-0 overflow-hidden
-            bg-[#1C1B18]/95 backdrop-blur-2xl border-t border-[#D4AF37]/15 shadow-2xl
+            bg-[#1C1B18]/95 backdrop-blur-2xl border-t border-[#C4A862]/15 shadow-2xl
             transition-all duration-500 ease-out
             ${isOpen ? 'max-h-[36rem] opacity-100' : 'max-h-0 opacity-0'}`}
           onClick={(e) => e.stopPropagation()}
@@ -186,16 +186,16 @@ export function Header() {
                     >
                       <span className="flex items-baseline gap-4">
                         <span className={`font-mono text-[11px] tracking-widest transition-colors duration-300
-                          ${active ? 'text-[#D4AF37]' : 'text-white/30'}`}>
+                          ${active ? 'text-[#C4A862]' : 'text-white/30'}`}>
                           {String(index + 1).padStart(2, '0')}
                         </span>
                         <span className={`font-serif text-2xl tracking-wide transition-colors duration-300
-                          ${active ? 'text-[#D4AF37]' : 'text-white/90 group-hover:text-white'}`}>
+                          ${active ? 'text-[#C4A862]' : 'text-white/90 group-hover:text-white'}`}>
                           {item.name}
                         </span>
                       </span>
                       <span className={`h-px transition-all duration-300
-                        ${active ? 'w-10 bg-[#D4AF37]' : 'w-6 bg-white/20 group-hover:w-10 group-hover:bg-white/50'}`} />
+                        ${active ? 'w-10 bg-[#C4A862]' : 'w-6 bg-white/20 group-hover:w-10 group-hover:bg-white/50'}`} />
                     </Link>
                   </li>
                 )
@@ -214,7 +214,7 @@ export function Header() {
               <ShoppingCartIcon className="w-5 h-5" />
               <span className="font-serif text-lg tracking-wide">{tCart('title')}</span>
               {cartCount > 0 && (
-                <span className="ml-auto bg-[#D4AF37] text-[#1C1B18] text-xs rounded-full h-5 min-w-[1.25rem] px-1.5 flex items-center justify-center font-semibold">
+                <span className="ml-auto bg-[#C4A862] text-[#1C1B18] text-xs rounded-full h-5 min-w-[1.25rem] px-1.5 flex items-center justify-center font-semibold">
                   {cartCount}
                 </span>
               )}

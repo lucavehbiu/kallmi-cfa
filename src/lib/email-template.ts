@@ -54,7 +54,7 @@ const C = {
   hairline: '#ece6dd',
   olive: '#8B7355',
   deepOlive: '#6B563F',
-  gold: '#D4AF37',
+  gold: '#C4A862',
   body: '#4a4a4a',
   muted: '#999999',
   heading: '#333333',

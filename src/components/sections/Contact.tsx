@@ -208,7 +208,7 @@ export default function ContactSection() {
       <Section spacing="lg" background="secondary" containerWidth="sm">
         <FadeIn animation="fade">
           <Card variant="elevated" padding="lg" className="max-w-4xl mx-auto text-center">
-            <SparklesIcon className="w-10 h-10 text-[#D4AF37] mx-auto mb-6" />
+            <SparklesIcon className="w-10 h-10 text-[#C4A862] mx-auto mb-6" />
             <blockquote className="text-xl sm:text-2xl text-text-secondary italic font-light leading-relaxed font-sans">
               &ldquo;{t('quote')}&rdquo;
             </blockquote>

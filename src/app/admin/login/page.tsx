@@ -42,9 +42,9 @@ function LoginForm() {
     <div className="min-h-screen flex items-center justify-center bg-[#faf8f5] px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <p className="text-xs tracking-[4px] text-[#D4AF37] uppercase mb-2">Kallmi Estate</p>
+          <p className="text-xs tracking-[4px] text-[#C4A862] uppercase mb-2">Kallmi Estate</p>
           <h1 className="text-3xl font-light text-[#333] tracking-wide">Admin Dashboard</h1>
-          <div className="w-12 h-px bg-[#D4AF37] mx-auto mt-4"></div>
+          <div className="w-12 h-px bg-[#C4A862] mx-auto mt-4"></div>
         </div>
 
         <form onSubmit={handleLogin} className="bg-white rounded-2xl shadow-lg p-8 border border-[#ece6dd]">
