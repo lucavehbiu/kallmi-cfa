@@ -53,7 +53,7 @@ export default async function RestaurantPage({
     >
       <JsonLd data={[restaurantSchema(locale as Locale), faqSchema(faqData)]} />
       <Restaurant />
-      <WhatsAppButton />
+      <WhatsAppButton hideOnMobile />
     </Suspense>
   )
 }
