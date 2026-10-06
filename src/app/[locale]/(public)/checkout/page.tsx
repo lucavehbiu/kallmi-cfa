@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useCart } from '@/context/CartContext'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from '@/i18n/navigation'
+import { buttonClasses } from '@/components/ui/buttonStyles'
 import { useTranslations } from 'next-intl'
 
 export default function Checkout() {
@@ -38,7 +39,7 @@ export default function Checkout() {
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl text-[#8B7355] mb-6">{t('emptyCartTitle')}</h1>
           <p className="text-gray-600 mb-8">{t('emptyCartText')}</p>
-          <Link href="/shop" className="inline-block px-8 py-3 bg-[#8B7355] text-white rounded hover:bg-[#6B563F] transition-colors">
+          <Link href="/shop" className={buttonClasses()}>
             {t('continueShopping')}
           </Link>
         </div>
@@ -167,11 +168,7 @@ export default function Checkout() {
               <button
                 type="submit"
                 disabled={isProcessing}
-                className={`w-full py-3 px-6 text-white rounded
-                  ${isProcessing
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-[#8B7355] hover:bg-[#6B563F]'}
-                  transition-colors duration-200`}
+                className={buttonClasses({ size: 'lg', fullWidth: true })}
               >
                 {isProcessing ? t('processing') : t('pay', { amount: formatPrice(total) })}
               </button>

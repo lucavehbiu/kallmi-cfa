@@ -7,6 +7,7 @@ import Script from 'next/script'
 import { useTranslations } from 'next-intl'
 import { FadeIn } from './motion/FadeIn'
 import { StickyBookingBar } from './StickyBookingBar'
+import { buttonClasses } from '@/components/ui/buttonStyles'
 import { Section, SectionHeader } from './layout/Section'
 import { Card } from './ui/Card'
 import { Button } from './ui/Button'
@@ -464,7 +465,7 @@ export default function Restaurant() {
             </FadeIn>
             <FadeIn animation="slide-up" delay={0.8}>
               <button
-                className="bg-[#C4A862] hover:bg-[#B89852] text-[#1C1B18] px-8 py-4 rounded font-sans font-medium tracking-wide transition-all duration-200 text-base"
+                className={buttonClasses({ variant: 'primary-on-dark', size: 'lg' })}
                 onClick={() => document.getElementById('reservation-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 {t('heroBookNow')}
@@ -497,7 +498,7 @@ export default function Restaurant() {
           <div className="pb-8 px-4">
             <FadeIn animation="slide-up" delay={0.8} className="w-full max-w-xs mx-auto">
               <button
-                className="w-full bg-[#C4A862] hover:bg-[#B89852] text-[#1C1B18] px-6 py-4 rounded font-sans font-medium tracking-wide transition-all duration-200 text-sm"
+                className={buttonClasses({ variant: 'primary-on-dark', size: 'lg', fullWidth: true })}
                 onClick={() => document.getElementById('reservation-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 {t('heroBookNow')}

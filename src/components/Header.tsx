@@ -8,6 +8,7 @@ import { useCart } from '@/context/CartContext'
 import { Link, usePathname } from '@/i18n/navigation'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { useTranslations } from 'next-intl'
+import { buttonClasses } from '@/components/ui/buttonStyles'
 
 export function Header() {
   const t = useTranslations('Navigation')
@@ -296,7 +297,7 @@ export function Header() {
                     </div>
                     <Link
                       href="/checkout"
-                      className="w-full flex justify-center items-center px-6 py-4 bg-gradient-to-r from-[#8B7355] to-[#A0845C] text-white rounded-2xl font-medium hover:shadow-lg transform hover:scale-[1.02] transition-all duration-300"
+                      className={buttonClasses({ size: 'lg', fullWidth: true })}
                       onClick={() => setIsCartOpen(false)}
                     >
                       {tCart('proceedToCheckout')}

@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react'
 import { AnimateDiv } from '../motion/MotionWrapper'
 import { useTranslations } from 'next-intl'
 import { SunMark } from '@/components/ui/SunMark'
+import { buttonClasses } from '@/components/ui/buttonStyles'
 
 export default function LandingHero() {
   const t = useTranslations('LandingHero')
@@ -90,15 +91,13 @@ export default function LandingHero() {
           </AnimateDiv>
 
           <AnimateDiv animation="slide-up" duration={1.0} delay={1.1} className="flex flex-row gap-4 justify-center items-center pt-2">
-            <Link href="/stay">
-              <button className="bg-[#C4A862] hover:bg-[#B89852] text-[#1C1B18] px-8 py-4 rounded font-medium tracking-wide transition-all duration-200 text-base">
-                {t('cta1')}
-              </button>
+            <Link href="/stay" className={buttonClasses({ variant: 'primary-on-dark', size: 'lg' })}>
+              {t('cta1')}
             </Link>
-            <Link href="/restaurant" className="text-white/80 hover:text-white text-sm font-light tracking-wide transition-colors duration-300 px-4 py-4">
+            <Link href="/restaurant" className="text-white/85 hover:text-[#C4A862] text-[11px] uppercase tracking-[0.2em] underline decoration-[#C4A862]/70 decoration-1 underline-offset-[7px] transition-colors duration-300 px-4 py-4">
               {t('cta2')}
             </Link>
-            <Link href="/shop" className="text-white/80 hover:text-white text-sm font-light tracking-wide transition-colors duration-300 px-4 py-4">
+            <Link href="/shop" className="text-white/85 hover:text-[#C4A862] text-[11px] uppercase tracking-[0.2em] underline decoration-[#C4A862]/70 decoration-1 underline-offset-[7px] transition-colors duration-300 px-4 py-4">
               {t('cta3')}
             </Link>
           </AnimateDiv>
@@ -133,17 +132,15 @@ export default function LandingHero() {
 
         <div className="pb-8 px-4">
           <AnimateDiv animation="slide-up" duration={1.0} delay={1.1} className="flex flex-col gap-4 items-center w-full">
-            <Link href="/stay" className="w-full max-w-xs">
-              <button className="w-full bg-[#C4A862] hover:bg-[#B89852] text-[#1C1B18] px-6 py-4 rounded font-medium tracking-wide transition-all duration-200 text-sm">
-                {t('cta1')}
-              </button>
+            <Link href="/stay" className={buttonClasses({ variant: 'primary-on-dark', size: 'lg', fullWidth: true, className: 'max-w-xs' })}>
+              {t('cta1')}
             </Link>
             <div className="flex items-center gap-6">
-              <Link href="/restaurant" className="text-white/80 hover:text-white text-sm font-light tracking-wide transition-colors duration-300">
+              <Link href="/restaurant" className="text-white/85 hover:text-[#C4A862] text-[11px] uppercase tracking-[0.2em] underline decoration-[#C4A862]/70 decoration-1 underline-offset-[7px] transition-colors duration-300">
                 {t('cta2')}
               </Link>
               <span className="text-white/30">·</span>
-              <Link href="/shop" className="text-white/80 hover:text-white text-sm font-light tracking-wide transition-colors duration-300">
+              <Link href="/shop" className="text-white/85 hover:text-[#C4A862] text-[11px] uppercase tracking-[0.2em] underline decoration-[#C4A862]/70 decoration-1 underline-offset-[7px] transition-colors duration-300">
                 {t('cta3')}
               </Link>
             </div>
