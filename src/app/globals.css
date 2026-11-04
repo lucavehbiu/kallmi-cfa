@@ -646,6 +646,63 @@ html::-webkit-scrollbar {
   height: 56px !important;
 }
 
+/* Per-room availability markers inside each day: W = West, E = East */
+.kallmi-room-pills {
+  display: inline-flex;
+  gap: 2px;
+  line-height: 1;
+}
+
+.kallmi-room-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 13px;
+  height: 13px;
+  padding: 0 2px;
+  border-radius: 2px;
+  border: 1px solid rgba(139, 115, 85, 0.45);
+  color: var(--color-brand-olive);
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.kallmi-room-pill.is-booked {
+  border-color: rgba(153, 27, 27, 0.25);
+  color: rgba(153, 27, 27, 0.55);
+  background: rgba(254, 226, 226, 0.7);
+  text-decoration: line-through;
+}
+
+.rdp-selected .kallmi-room-pill,
+.rdp-range_start .kallmi-room-pill,
+.rdp-range_end .kallmi-room-pill {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+}
+
+.rdp-range_start .kallmi-room-pill.is-booked,
+.rdp-range_end .kallmi-room-pill.is-booked {
+  background: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.kallmi-calendar-wrapper .rdp-day_button:disabled .kallmi-room-pill {
+  opacity: 0.6;
+}
+
+@media (max-width: 420px) {
+  .kallmi-calendar-wrapper .rdp-root {
+    --rdp-day_button-height: 50px;
+    --rdp-day-height: 54px;
+  }
+  .kallmi-calendar-wrapper .rdp-day_button {
+    height: 50px !important;
+  }
+}
+
 .kallmi-calendar-wrapper .rdp-month_caption {
   color: var(--color-brand-olive);
   font-size: 1.1rem;

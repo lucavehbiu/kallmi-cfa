@@ -483,7 +483,14 @@
     "errorAgeConfirm": "Vous devez confirmer que tous les hotes ont au moins 13 ans",
     "bookingSuccess": "Demande de reservation envoyee ! Veuillez attendre la confirmation — notre equipe vous recontactera sous peu.",
     "bookingError": "Echec de l'envoi de la demande de reservation",
-    "bookingGenericError": "Une erreur est survenue. Veuillez reessayer."
+    "bookingGenericError": "Une erreur est survenue. Veuillez reessayer.",
+    "calendarHintAll": "Disponibilites des deux chambres",
+    "calendarHintRoom": "Disponibilites de votre chambre",
+    "legendRoomFree": "Chambre libre",
+    "legendRoomTaken": "Chambre occupee",
+    "bookingPanelTitle": "Votre sejour",
+    "bookingPanelFrom": "des {price} / nuit",
+    "pickNightsHint": "Choisissez vos nuits d'arrivee et de depart dans le calendrier."
   },
   "Restaurant": {
     "heroBadge": "Cuisine Mediterraneenne",
