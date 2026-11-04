@@ -12,11 +12,16 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode
 }) {
+  // /admin lives outside the [locale] segment, so this layout owns <html> and <body>.
   return (
-    <ClerkProvider signInUrl="/admin/login" signInFallbackRedirectUrl="/admin">
-      <div className="min-h-screen bg-[#faf8f5]">
-        {children}
-      </div>
-    </ClerkProvider>
+    <html lang="en">
+      <body>
+        <ClerkProvider signInUrl="/admin/login" signInFallbackRedirectUrl="/admin">
+          <div className="min-h-screen bg-[#faf8f5]">
+            {children}
+          </div>
+        </ClerkProvider>
+      </body>
+    </html>
   )
 }
