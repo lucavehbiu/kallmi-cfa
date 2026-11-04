@@ -42,3 +42,4 @@ next-env.d.ts
 
 # Clerk keyless-mode dev credentials
 .clerk/
+.neon
