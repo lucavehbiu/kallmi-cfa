@@ -2,10 +2,10 @@
 
 import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { createBrowserClient } from '@supabase/ssr'
+import { useClerk } from '@clerk/nextjs'
 
 interface Booking {
-  id: number
+  id: string
   name: string
   email: string
   phone: string
@@ -23,7 +23,7 @@ interface Booking {
 }
 
 interface Reservation {
-  id: number
+  id: string
   name: string
   email: string
   phone: string
@@ -48,16 +48,13 @@ export default function AdminDashboardClient({
 }) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'bookings' | 'reservations'>('bookings')
-  const [loadingId, setLoadingId] = useState<number | null>(null)
+  const [loadingId, setLoadingId] = useState<string | null>(null)
   const [loadingAction, setLoadingAction] = useState<string | null>(null)
   const [toast, setToast] = useState<{ message: string; type: ToastType } | null>(null)
   const [bookingFilter, setBookingFilter] = useState<'upcoming' | 'past' | 'all'>('upcoming')
   const [reservationFilter, setReservationFilter] = useState<'upcoming' | 'past' | 'all'>('upcoming')
 
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  const { signOut } = useClerk()
 
   const showToast = useCallback((message: string, type: ToastType) => {
     setToast({ message, type })
@@ -65,12 +62,10 @@ export default function AdminDashboardClient({
   }, [])
 
   async function handleLogout() {
-    await supabase.auth.signOut()
-    router.push('/admin/login')
-    router.refresh()
+    await signOut({ redirectUrl: '/admin/login' })
   }
 
-  async function requestPayment(id: number) {
+  async function requestPayment(id: string) {
     setLoadingId(id)
     setLoadingAction('requesting')
     try {
@@ -94,7 +89,7 @@ export default function AdminDashboardClient({
     }
   }
 
-  async function confirmBooking(id: number) {
+  async function confirmBooking(id: string) {
     setLoadingId(id)
     setLoadingAction('confirming')
     try {
@@ -118,7 +113,7 @@ export default function AdminDashboardClient({
     }
   }
 
-  async function confirmReservation(id: number) {
+  async function confirmReservation(id: string) {
     setLoadingId(id)
     setLoadingAction('confirming')
     try {
@@ -178,7 +173,7 @@ export default function AdminDashboardClient({
     return `${displayHour}:${minutes} ${ampm}`
   }
 
-  function isLoading(id: number, action: string) {
+  function isLoading(id: string, action: string) {
     return loadingId === id && loadingAction === action
   }
 

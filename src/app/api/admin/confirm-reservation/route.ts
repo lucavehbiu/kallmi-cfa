@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { createSupabaseServerClient } from '@/lib/supabase-server'
-import { getSupabaseAdmin } from '@/lib/supabase-admin'
+import { auth, currentUser } from '@clerk/nextjs/server'
+import { getSql } from '@/lib/db'
 import { renderEmail } from '@/lib/email-template'
 import Mailjet from 'node-mailjet'
 
@@ -11,15 +11,16 @@ const mailjet = Mailjet.apiConnect(
 
 export async function POST(request: Request) {
   try {
-    // Verify auth via cookie-based client
-    const authClient = await createSupabaseServerClient()
-    const { data: { user } } = await authClient.auth.getUser()
-    if (!user) {
+    // Verify auth via Clerk
+    const { userId } = await auth()
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const user = await currentUser()
+    const userEmail = user?.primaryEmailAddress?.emailAddress || ''
     const adminEmails = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase())
-    if (!adminEmails.includes(user.email?.toLowerCase() || '')) {
+    if (!userEmail || !adminEmails.includes(userEmail.toLowerCase())) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
 
@@ -28,16 +29,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Reservation ID required' }, { status: 400 })
     }
 
-    // Use service role client for DB operations (bypasses RLS)
-    const admin = getSupabaseAdmin()
-    const { data, error: fetchError } = await admin
-      .from('restaurant_reservations')
-      .select('*')
-      .eq('id', id)
-      .single()
-
-    if (fetchError || !data) {
+    const sql = getSql()
+    const [data] = await sql`select * from restaurant_reservations where id = ${id}`.catch((fetchError) => {
       console.error('Fetch reservation error:', fetchError)
+      return []
+    })
+
+    if (!data) {
       return NextResponse.json({ error: 'Reservation not found' }, { status: 404 })
     }
 
@@ -48,12 +46,9 @@ export async function POST(request: Request) {
     }
 
     // Update status
-    const { error: updateError } = await admin
-      .from('restaurant_reservations')
-      .update({ status: 'confirmed' })
-      .eq('id', id)
-
-    if (updateError) {
+    try {
+      await sql`update restaurant_reservations set status = 'confirmed' where id = ${id}`
+    } catch (updateError) {
       console.error('Update error:', updateError)
       return NextResponse.json({ error: 'Failed to update reservation' }, { status: 500 })
     }
@@ -108,7 +103,7 @@ export async function POST(request: Request) {
       preheader: `Confirmed: ${reservation.name} — ${reservationDate} at ${displayTime}.`,
       eyebrow: 'Reservation Confirmed',
       title: `${reservationDate} at ${displayTime}`,
-      intro: `This reservation has been confirmed by ${user.email}.`,
+      intro: `This reservation has been confirmed by ${userEmail}.`,
       details: { heading: 'Reservation Details', rows: ownerDetailRows },
       footerWordmark: 'KALLMI RESTAURANT',
     })
