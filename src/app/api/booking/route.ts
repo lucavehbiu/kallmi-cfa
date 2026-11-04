@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import Mailjet from 'node-mailjet'
 import { supabase } from '@/lib/supabase'
-import { getBookedDates } from '@/lib/google-calendar'
+import { getAllBookedDates } from '@/lib/availability'
 import { renderEmail } from '@/lib/email-template'
 
 const mailjet = Mailjet.apiConnect(
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
 
     // Check availability against Google Calendar
     try {
-      const bookedEntries = await getBookedDates(checkIn, checkOut)
+      const bookedEntries = await getAllBookedDates(checkIn, checkOut)
       const selectedIds = roomId.split(',').filter(Boolean)
       const isBothRooms = selectedIds.length === 2
 

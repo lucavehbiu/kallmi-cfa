@@ -70,6 +70,19 @@ Create a `.env.local` file with:
 # Mailjet API (for contact forms)
 MJ_APIKEY_PUBLIC=your_public_key
 MJ_APIKEY_PRIVATE=your_private_key
+
+# Google Calendar (direct bookings, source of truth for availability)
+GOOGLE_CALENDAR_ID=...
+GOOGLE_APPLICATION_CREDENTIALS_JSON=...   # or GOOGLE_SERVICE_ACCOUNT_EMAIL + GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY
+
+# Booking.com two-way iCal sync
+# Site -> Booking.com: import these URLs in the extranet (Rates & availability -> Sync calendars)
+#   https://www.kallmibukur.al/api/ical/west?token=<ICAL_FEED_TOKEN>
+#   https://www.kallmibukur.al/api/ical/east?token=<ICAL_FEED_TOKEN>
+ICAL_FEED_TOKEN=long_random_string
+# Booking.com -> site: the export link of each room's calendar connection
+BOOKING_ICAL_URL_WEST=https://ical.booking.com/v1/export?t=...
+BOOKING_ICAL_URL_EAST=https://ical.booking.com/v1/export?t=...
 ```
 
 ## Playwright MCP (Browser Automation)

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { getBookedDates } from '@/lib/google-calendar'
+import { getAllBookedDates } from '@/lib/availability'
 
 export async function GET(request: NextRequest) {
   try {
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
     const startStr = startDate.toISOString().split('T')[0]
     const endStr = endDate.toISOString().split('T')[0]
 
-    const bookedEntries = await getBookedDates(startStr, endStr)
+    const bookedEntries = await getAllBookedDates(startStr, endStr)
 
     // Build a map: date -> array of booked room IDs
     const dateMap: Record<string, string[]> = {}

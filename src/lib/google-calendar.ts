@@ -115,12 +115,21 @@ export async function createBookingCalendarEvent(booking: BookingData) {
   return event.data
 }
 
-interface BookedDateEntry {
+export interface BookedDateEntry {
   date: string   // YYYY-MM-DD
   roomId: string // "1" (West) or "2" (East)
 }
 
-export async function getBookedDates(startDate: string, endDate: string): Promise<BookedDateEntry[]> {
+export interface RoomEvent {
+  id: string
+  summary: string
+  start: string   // YYYY-MM-DD inclusive
+  end: string     // YYYY-MM-DD exclusive
+  roomIds: string[]
+}
+
+/** Room bookings from Google Calendar. Room is derived from "west"/"east" in the event title. */
+export async function listRoomEvents(startDate: string, endDate: string): Promise<RoomEvent[]> {
   const creds = getGoogleCredentials()
 
   if (!creds) {
@@ -147,37 +156,43 @@ export async function getBookedDates(startDate: string, endDate: string): Promis
   })
 
   const events = response.data.items || []
-  const entries: BookedDateEntry[] = []
+  const result: RoomEvent[] = []
 
   for (const event of events) {
-    const summary = (event.summary || '').toLowerCase()
+    const summary = event.summary || ''
+    const lower = summary.toLowerCase()
 
-    // Determine which rooms this event covers
     // A "Both Rooms" booking has BOTH "west" and "east" in the title
     const roomIds: string[] = []
-    if (summary.includes('west')) roomIds.push('1')
-    if (summary.includes('east')) roomIds.push('2')
-
-    // If no room can be determined, skip this event
+    if (lower.includes('west')) roomIds.push('1')
+    if (lower.includes('east')) roomIds.push('2')
     if (roomIds.length === 0) continue
 
-    // Get date range from event
-    const eventStart = event.start?.date || event.start?.dateTime?.split('T')[0]
-    const eventEnd = event.end?.date || event.end?.dateTime?.split('T')[0]
-    if (!eventStart || !eventEnd) continue
+    const start = event.start?.date || event.start?.dateTime?.split('T')[0]
+    const end = event.end?.date || event.end?.dateTime?.split('T')[0]
+    if (!start || !end) continue
 
-    // Generate all dates in the range [start, end) — end date is exclusive for all-day events
-    const current = new Date(eventStart + 'T12:00:00Z')
-    const end = new Date(eventEnd + 'T12:00:00Z')
+    result.push({ id: event.id || `${start}-${roomIds.join('')}`, summary, start, end, roomIds })
+  }
 
+  return result
+}
+
+/** Expand [start, end) of every event into one entry per date per room. */
+export function expandToDates(events: Pick<RoomEvent, 'start' | 'end' | 'roomIds'>[]): BookedDateEntry[] {
+  const entries: BookedDateEntry[] = []
+  for (const ev of events) {
+    const current = new Date(ev.start + 'T12:00:00Z')
+    const end = new Date(ev.end + 'T12:00:00Z')
     while (current < end) {
-      const dateStr = current.toISOString().split('T')[0]
-      for (const roomId of roomIds) {
-        entries.push({ date: dateStr, roomId })
-      }
+      const date = current.toISOString().split('T')[0]
+      for (const roomId of ev.roomIds) entries.push({ date, roomId })
       current.setUTCDate(current.getUTCDate() + 1)
     }
   }
-
   return entries
+}
+
+export async function getBookedDates(startDate: string, endDate: string): Promise<BookedDateEntry[]> {
+  return expandToDates(await listRoomEvents(startDate, endDate))
 }
