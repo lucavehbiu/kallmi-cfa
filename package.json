@@ -10,9 +10,9 @@
     "optimize-images": "node scripts/optimize-images.js"
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.9.24",
     "@heroicons/react": "^2.2.0",
-    "@supabase/ssr": "^0.8.0",
-    "@supabase/supabase-js": "^2.117.2",
+    "@neondatabase/serverless": "^1.2.0",
     "googleapis": "^171.4.0",
     "hamburger-react": "^2.5.2",
     "next": "^15.5.27",

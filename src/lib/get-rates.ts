@@ -1,13 +1,15 @@
-import { getSupabaseAdmin } from './supabase-admin'
+import { getSql } from './db'
 
 export async function getSeasonalRates(): Promise<Record<number, number> | undefined> {
   try {
-    const admin = getSupabaseAdmin()
-    const { data, error } = await admin
-      .from('seasonal_rates')
-      .select('month, rate')
+    const sql = getSql()
+    const data = await sql`
+      select month
+      ,      rate
+      from   seasonal_rates
+    `
 
-    if (error || !data || data.length === 0) {
+    if (data.length === 0) {
       return undefined // will use default hardcoded rates
     }
 

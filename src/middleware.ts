@@ -1,14 +1,15 @@
-import { createServerClient } from '@supabase/ssr'
+import { clerkMiddleware } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
 import createIntlMiddleware from 'next-intl/middleware'
 import { routing } from '@/i18n/routing'
 
 const intlMiddleware = createIntlMiddleware(routing)
 
-export async function middleware(request: NextRequest) {
+export default clerkMiddleware(async (auth, request) => {
   const { pathname } = request.nextUrl
 
+  // /api/admin/* only needs the Clerk context; each route does its own
+  // 401 (no session) / 403 (not in ADMIN_EMAILS) checks.
   // Skip i18n for API routes and static files
   if (
     pathname.startsWith('/api/') ||
@@ -33,67 +34,21 @@ export async function middleware(request: NextRequest) {
       }
     }
 
-    const isLoginPage = adminPath === '/admin/login'
-
-    let supabaseResponse = NextResponse.next({ request })
-
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return request.cookies.getAll()
-          },
-          setAll(cookiesToSet) {
-            cookiesToSet.forEach(({ name, value }) =>
-              request.cookies.set(name, value)
-            )
-            supabaseResponse = NextResponse.next({ request })
-            cookiesToSet.forEach(({ name, value, options }) =>
-              supabaseResponse.cookies.set(name, value, options)
-            )
-          },
-        },
-      }
-    )
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-
+    // The sign-in page (and Clerk's sub-steps under it) stays public.
+    // The ADMIN_EMAILS allowlist is enforced in the admin page and API routes,
+    // since the email is not in the session token.
+    const isLoginPage = adminPath === '/admin/login' || adminPath.startsWith('/admin/login/')
     if (!isLoginPage) {
-      if (!user) {
-        const url = request.nextUrl.clone()
-        url.pathname = '/admin/login'
-        return NextResponse.redirect(url)
-      }
-
-      const adminEmails = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase())
-      if (!adminEmails.includes(user.email?.toLowerCase() || '')) {
-        const url = request.nextUrl.clone()
-        url.pathname = '/admin/login'
-        url.searchParams.set('error', 'unauthorized')
-        return NextResponse.redirect(url)
-      }
+      await auth.protect({ unauthenticatedUrl: new URL('/admin/login', request.url).toString() })
     }
 
-    if (isLoginPage && user) {
-      const adminEmails = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase())
-      if (adminEmails.includes(user.email?.toLowerCase() || '')) {
-        const url = request.nextUrl.clone()
-        url.pathname = '/admin'
-        return NextResponse.redirect(url)
-      }
-    }
-
-    return supabaseResponse
+    return NextResponse.next()
   }
 
   // For all non-admin routes, use next-intl middleware
   return intlMiddleware(request)
-}
+})
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)', '/admin/:path*'],
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)', '/admin/:path*', '/api/admin/:path*'],
 }

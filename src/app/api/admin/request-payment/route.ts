@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { createSupabaseServerClient } from '@/lib/supabase-server'
-import { getSupabaseAdmin } from '@/lib/supabase-admin'
+import { auth, currentUser } from '@clerk/nextjs/server'
+import { getSql } from '@/lib/db'
 import { calculateStayTotal } from '@/lib/pricing'
 import { getSeasonalRates } from '@/lib/get-rates'
 import { renderEmail } from '@/lib/email-template'
@@ -13,15 +13,16 @@ const mailjet = Mailjet.apiConnect(
 
 export async function POST(request: Request) {
   try {
-    // Verify auth
-    const authClient = await createSupabaseServerClient()
-    const { data: { user } } = await authClient.auth.getUser()
-    if (!user) {
+    // Verify auth via Clerk
+    const { userId } = await auth()
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const user = await currentUser()
+    const userEmail = user?.primaryEmailAddress?.emailAddress || ''
     const adminEmails = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase())
-    if (!adminEmails.includes(user.email?.toLowerCase() || '')) {
+    if (!userEmail || !adminEmails.includes(userEmail.toLowerCase())) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
 
@@ -30,14 +31,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Booking ID required' }, { status: 400 })
     }
 
-    const admin = getSupabaseAdmin()
-    const { data, error: fetchError } = await admin
-      .from('stay_bookings')
-      .select('*')
-      .eq('id', id)
-      .single()
+    const sql = getSql()
+    const [data] = await sql`select * from stay_bookings where id = ${id}`.catch(() => [])
 
-    if (fetchError || !data) {
+    if (!data) {
       return NextResponse.json({ error: 'Booking not found' }, { status: 404 })
     }
 
@@ -47,17 +44,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Booking is not in pending status' }, { status: 400 })
     }
 
-    // Fetch seasonal rates from Supabase (falls back to hardcoded defaults)
+    // Fetch seasonal rates from the database (falls back to hardcoded defaults)
     const rates = await getSeasonalRates()
     const { nights, totalAmount, depositAmount } = calculateStayTotal(booking.check_in, booking.check_out, rates)
 
     // Update status to awaiting_payment
-    const { error: updateError } = await admin
-      .from('stay_bookings')
-      .update({ status: 'awaiting_payment' })
-      .eq('id', id)
-
-    if (updateError) {
+    try {
+      await sql`update stay_bookings set status = 'awaiting_payment' where id = ${id}`
+    } catch (updateError) {
       console.error('Update error:', updateError)
       return NextResponse.json({ error: 'Failed to update booking' }, { status: 500 })
     }
@@ -107,7 +101,7 @@ export async function POST(request: Request) {
       preheader: `Payment requested: ${booking.name} — €${depositAmount} deposit.`,
       eyebrow: 'Payment Requested',
       title: `${booking.room_name}`,
-      intro: `Payment request sent by ${user.email}.`,
+      intro: `Payment request sent by ${userEmail}.`,
       details: {
         heading: 'Booking Details',
         rows: [

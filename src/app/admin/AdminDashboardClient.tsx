@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { createBrowserClient } from '@supabase/ssr'
+import { useClerk } from '@clerk/nextjs'
 
 interface Booking {
   id: number
@@ -54,10 +54,7 @@ export default function AdminDashboardClient({
   const [bookingFilter, setBookingFilter] = useState<'upcoming' | 'past' | 'all'>('upcoming')
   const [reservationFilter, setReservationFilter] = useState<'upcoming' | 'past' | 'all'>('upcoming')
 
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  const { signOut } = useClerk()
 
   const showToast = useCallback((message: string, type: ToastType) => {
     setToast({ message, type })
@@ -65,9 +62,7 @@ export default function AdminDashboardClient({
   }, [])
 
   async function handleLogout() {
-    await supabase.auth.signOut()
-    router.push('/admin/login')
-    router.refresh()
+    await signOut({ redirectUrl: '/admin/login' })
   }
 
   async function requestPayment(id: number) {

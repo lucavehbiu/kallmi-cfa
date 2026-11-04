@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import Mailjet from 'node-mailjet'
-import { supabase } from '@/lib/supabase'
+import { getSql } from '@/lib/db'
 import { getBookedDates } from '@/lib/google-calendar'
 import { renderEmail } from '@/lib/email-template'
 
@@ -86,28 +86,17 @@ export async function POST(request: NextRequest) {
       console.error('Availability check failed (proceeding with booking):', availErr)
     }
 
-    // Insert into Supabase (graceful degradation - don't block email if this fails)
+    // Insert into the database (graceful degradation - don't block email if this fails)
     try {
-      const { error: dbError } = await supabase
-        .from('stay_bookings')
-        .insert({
-          name,
-          email,
-          phone,
-          room_id: roomId,
-          room_name: roomName,
-          guests: parseInt(guests) || 1,
-          check_in: checkIn,
-          check_out: checkOut,
-          special_requests: specialRequests || null,
-          status: 'pending',
-        })
-
-      if (dbError) {
-        console.error('Supabase insert error (stay_bookings):', dbError)
-      }
+      const sql = getSql()
+      await sql`
+        insert into stay_bookings
+               (name, email, phone, room_id, room_name, guests, check_in, check_out, special_requests, status)
+        values (${name}, ${email}, ${phone}, ${roomId}, ${roomName}, ${parseInt(guests) || 1},
+                ${checkIn}, ${checkOut}, ${specialRequests || null}, 'pending')
+      `
     } catch (dbErr) {
-      console.error('Supabase connection error (stay_bookings):', dbErr)
+      console.error('Database insert error (stay_bookings):', dbErr)
     }
 
     // Format dates for display
