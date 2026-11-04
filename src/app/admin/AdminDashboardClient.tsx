@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useClerk } from '@clerk/nextjs'
 
 interface Booking {
-  id: number
+  id: string
   name: string
   email: string
   phone: string
@@ -23,7 +23,7 @@ interface Booking {
 }
 
 interface Reservation {
-  id: number
+  id: string
   name: string
   email: string
   phone: string
@@ -48,7 +48,7 @@ export default function AdminDashboardClient({
 }) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'bookings' | 'reservations'>('bookings')
-  const [loadingId, setLoadingId] = useState<number | null>(null)
+  const [loadingId, setLoadingId] = useState<string | null>(null)
   const [loadingAction, setLoadingAction] = useState<string | null>(null)
   const [toast, setToast] = useState<{ message: string; type: ToastType } | null>(null)
   const [bookingFilter, setBookingFilter] = useState<'upcoming' | 'past' | 'all'>('upcoming')
@@ -65,7 +65,7 @@ export default function AdminDashboardClient({
     await signOut({ redirectUrl: '/admin/login' })
   }
 
-  async function requestPayment(id: number) {
+  async function requestPayment(id: string) {
     setLoadingId(id)
     setLoadingAction('requesting')
     try {
@@ -89,7 +89,7 @@ export default function AdminDashboardClient({
     }
   }
 
-  async function confirmBooking(id: number) {
+  async function confirmBooking(id: string) {
     setLoadingId(id)
     setLoadingAction('confirming')
     try {
@@ -113,7 +113,7 @@ export default function AdminDashboardClient({
     }
   }
 
-  async function confirmReservation(id: number) {
+  async function confirmReservation(id: string) {
     setLoadingId(id)
     setLoadingAction('confirming')
     try {
@@ -173,7 +173,7 @@ export default function AdminDashboardClient({
     return `${displayHour}:${minutes} ${ampm}`
   }
 
-  function isLoading(id: number, action: string) {
+  function isLoading(id: string, action: string) {
     return loadingId === id && loadingAction === action
   }
 

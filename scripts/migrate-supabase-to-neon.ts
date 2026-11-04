@@ -27,23 +27,20 @@ const sql = neon(DATABASE_URL)
 
 type Row = Record<string, unknown>
 
-const TABLES: { name: string; key: string; columns: string[]; identity: boolean }[] = [
+const TABLES: { name: string; key: string; columns: string[] }[] = [
   {
     name: 'stay_bookings',
     key: 'id',
-    identity: true,
     columns: ['id', 'name', 'email', 'phone', 'room_id', 'room_name', 'guests', 'check_in', 'check_out', 'special_requests', 'status', 'created_at'],
   },
   {
     name: 'restaurant_reservations',
     key: 'id',
-    identity: true,
     columns: ['id', 'name', 'email', 'phone', 'reservation_date', 'reservation_time', 'guests', 'special_requests', 'status', 'created_at'],
   },
   {
     name: 'seasonal_rates',
     key: 'month',
-    identity: false,
     columns: ['month', 'rate', 'created_at'],
   },
 ]
@@ -77,13 +74,6 @@ async function neonCount(table: string): Promise<number> {
 async function migrateTable(t: (typeof TABLES)[number]) {
   const rows = await fetchAll(t.name, t.key)
 
-  if (t.identity) {
-    const bad = rows.find((r) => !Number.isInteger(Number(r[t.key])))
-    if (bad) {
-      throw new Error(`${t.name}: id ${String(bad[t.key])} is not an integer; db/schema.sql expects bigint ids.`)
-    }
-  }
-
   let inserted = 0
   for (const row of rows) {
     // Only copy known columns; columns missing on the Supabase side fall back to Neon defaults.
@@ -94,13 +84,6 @@ async function migrateTable(t: (typeof TABLES)[number]) {
       cols.map((c) => row[c]),
     )
     inserted += result.length
-  }
-
-  if (t.identity) {
-    // Move the identity sequence past the copied ids so new inserts don't collide.
-    await sql.query(
-      `select setval(pg_get_serial_sequence('${t.name}', '${t.key}'), coalesce((select max(${t.key}) from ${t.name}), 0) + 1, false)`,
-    )
   }
 
   console.log(`${t.name}: fetched ${rows.length}, inserted ${inserted}, skipped ${rows.length - inserted} (already present)`)
