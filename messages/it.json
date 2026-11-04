@@ -483,7 +483,14 @@
     "errorAgeConfirm": "Dovete confermare che tutti gli ospiti hanno almeno 13 anni",
     "bookingSuccess": "Richiesta di prenotazione inviata! Attendete la conferma — il nostro team vi rispondera a breve.",
     "bookingError": "Invio della richiesta di prenotazione non riuscito",
-    "bookingGenericError": "Si e verificato un errore. Riprovate."
+    "bookingGenericError": "Si e verificato un errore. Riprovate.",
+    "calendarHintAll": "Disponibilita di entrambe le camere",
+    "calendarHintRoom": "Disponibilita della vostra camera",
+    "legendRoomFree": "Camera libera",
+    "legendRoomTaken": "Camera occupata",
+    "bookingPanelTitle": "Il vostro soggiorno",
+    "bookingPanelFrom": "da {price} / notte",
+    "pickNightsHint": "Scegliete le notti di arrivo e partenza nel calendario."
   },
   "Restaurant": {
     "heroBadge": "Cucina Mediterranea",

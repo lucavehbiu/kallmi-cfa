@@ -483,7 +483,14 @@
     "errorAgeConfirm": "You must confirm all guests are 13 or older",
     "bookingSuccess": "Booking request submitted! Please await confirmation — our team will get back to you shortly.",
     "bookingError": "Failed to submit booking request",
-    "bookingGenericError": "An error occurred. Please try again."
+    "bookingGenericError": "An error occurred. Please try again.",
+    "calendarHintAll": "Showing availability for both rooms",
+    "calendarHintRoom": "Showing availability for your room",
+    "legendRoomFree": "Room free",
+    "legendRoomTaken": "Room taken",
+    "bookingPanelTitle": "Your stay",
+    "bookingPanelFrom": "from {price} / night",
+    "pickNightsHint": "Choose your check-in and check-out nights on the calendar."
   },
   "Restaurant": {
     "heroBadge": "Mediterranean Cuisine",

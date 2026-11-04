@@ -483,7 +483,14 @@
     "errorAgeConfirm": "Duhet të konfirmoni që të gjithë mysafirët janë 13 vjeç e lart",
     "bookingSuccess": "Kërkesa për rezervim u dërgua! Ju lutem prisni konfirmimin — ekipi ynë do t'ju kontaktojë së shpejti.",
     "bookingError": "Dështoi dërgimi i kërkesës për rezervim",
-    "bookingGenericError": "Ndodhi një gabim. Ju lutem provoni përsëri."
+    "bookingGenericError": "Ndodhi një gabim. Ju lutem provoni përsëri.",
+    "calendarHintAll": "Disponueshmëria për të dyja dhomat",
+    "calendarHintRoom": "Disponueshmëria për dhomën tuaj",
+    "legendRoomFree": "Dhomë e lirë",
+    "legendRoomTaken": "Dhomë e zënë",
+    "bookingPanelTitle": "Qëndrimi juaj",
+    "bookingPanelFrom": "nga {price} / natë",
+    "pickNightsHint": "Zgjidhni netët e mbërritjes dhe largimit në kalendar."
   },
   "Restaurant": {
     "heroBadge": "Kuzhinë Mesdhetare",

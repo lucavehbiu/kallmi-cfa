@@ -120,17 +120,27 @@ function getNightlyRateForDay(date: Date): number {
 
 function PricedDayButton({ day, modifiers, children, ...props }: DayButtonProps) {
   const isOutside = modifiers.outside
-  const isDisabled = modifiers.disabled
+  // Bookable nights start tomorrow; earlier cells show the number only
+  const tomorrow = new Date()
+  tomorrow.setHours(0, 0, 0, 0)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  const showDetails = !isOutside && day.date >= tomorrow
   const price = getNightlyRateForDay(day.date)
 
   return (
-    <button {...props} style={{ ...props.style, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', padding: '2px 0' }}>
+    <button {...props} style={{ ...props.style, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', padding: '2px 0', gap: '1px' }}>
       <span style={{ lineHeight: 1.2, fontSize: '0.875rem', fontWeight: modifiers.today ? 600 : 400 }}>
         {children}
       </span>
-      {!isOutside && !isDisabled && (
-        <span style={{ fontSize: '0.6rem', lineHeight: 1, color: 'var(--color-brand-olive)', opacity: 0.8, marginTop: '1px' }}>
+      {showDetails && !modifiers.fullyBooked && (
+        <span style={{ fontSize: '0.6rem', lineHeight: 1, color: 'var(--color-brand-olive)', opacity: 0.8 }}>
           {formatDayPrice(price)}
+        </span>
+      )}
+      {showDetails && (
+        <span className="kallmi-room-pills" aria-hidden="true">
+          <span className={`kallmi-room-pill${modifiers.westBooked ? ' is-booked' : ''}`}>W</span>
+          <span className={`kallmi-room-pill${modifiers.eastBooked ? ' is-booked' : ''}`}>E</span>
         </span>
       )}
     </button>
@@ -180,24 +190,31 @@ export default function Accommodations() {
   }, [displayMonth])
 
   // Compute disabled dates and "limited" dates based on room selection and booked data
-  const { disabledDates, limitedDates, fullyBookedDates } = useMemo(() => {
+  const { disabledDates, limitedDates, fullyBookedDates, westBookedDates, eastBookedDates } = useMemo(() => {
     const selectedIds = formData.roomId.split(',').filter(Boolean)
-    if (selectedIds.length === 0) return { disabledDates: [], limitedDates: [], fullyBookedDates: [] }
-
     const disabled: Date[] = []
     const limited: Date[] = []
     const fullyBooked: Date[] = []
+    const westBooked: Date[] = []
+    const eastBooked: Date[] = []
     const isBothRooms = selectedIds.length === 2
+    const noRoom = selectedIds.length === 0
 
     for (const [dateStr, roomIds] of Object.entries(bookedDates)) {
       const bothBooked = roomIds.includes('1') && roomIds.includes('2')
       const oneBooked = roomIds.includes('1') || roomIds.includes('2')
       const dateObj = new Date(dateStr + 'T12:00:00')
 
+      if (roomIds.includes('1')) westBooked.push(dateObj)
+      if (roomIds.includes('2')) eastBooked.push(dateObj)
+
       if (bothBooked) {
         // Both rooms booked on this date — fully booked, always disabled
         fullyBooked.push(dateObj)
         disabled.push(dateObj)
+      } else if (noRoom) {
+        // No room chosen yet: the day markers show which room is free, nothing else is blocked
+        continue
       } else if (isBothRooms && oneBooked) {
         // User wants both rooms but only one is available — block it
         disabled.push(dateObj)
@@ -211,7 +228,7 @@ export default function Accommodations() {
         }
       }
     }
-    return { disabledDates: disabled, limitedDates: limited, fullyBookedDates: fullyBooked }
+    return { disabledDates: disabled, limitedDates: limited, fullyBookedDates: fullyBooked, westBookedDates: westBooked, eastBookedDates: eastBooked }
   }, [formData.roomId, bookedDates])
 
   // Sync DayPicker range to form data
@@ -615,7 +632,7 @@ export default function Accommodations() {
 
       {/* Reservation Section */}
       <Section background="secondary" spacing="lg" id="booking-section">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <SectionHeader
             overline={t('reservationsOverline')}
             title={t('reservationsTitle')}
@@ -624,72 +641,106 @@ export default function Accommodations() {
           />
 
           <FadeIn animation="slide-up" delay={0.2}>
-            <Card variant="elevated" className="p-8 mt-12 booking-section">
-              {submitMessage && (
-                <div
-                  className="mb-6 p-4 rounded-xl"
-                  style={{
-                    backgroundColor: submitMessage.type === 'success' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-                    color: submitMessage.type === 'success' ? '#15803d' : '#dc2626'
-                  }}
-                >
-                  {submitMessage.text}
+            <form
+              onSubmit={handleSubmit}
+              className="booking-section mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_380px] gap-6 lg:gap-10 items-start font-sans"
+            >
+              {/* Calendar column */}
+              <Card variant="elevated" padding="none" className="p-4 sm:p-6 lg:p-8">
+                <div className="flex items-baseline justify-between gap-4 mb-4">
+                  <span className="text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>
+                    {t('selectDates')}
+                  </span>
+                  <span className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                    {formData.roomId ? t('calendarHintRoom') : t('calendarHintAll')}
+                  </span>
                 </div>
-              )}
 
-              <form onSubmit={handleSubmit} className="space-y-4 font-sans">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder={t('yourName')}
-                    required
-                    className="input-field"
+                <div className="kallmi-calendar-wrapper">
+                  <DayPicker
+                    mode="range"
+                    selected={dateRange}
+                    onSelect={(range) => {
+                      setDateRange(range)
+                      setFormErrors(prev => ({ ...prev, checkIn: '', checkOut: '' }))
+                    }}
+                    month={displayMonth}
+                    onMonthChange={setDisplayMonth}
+                    disabled={[
+                      { before: new Date(new Date().setDate(new Date().getDate() + 1)) },
+                      ...disabledDates
+                    ]}
+                    excludeDisabled
+                    numberOfMonths={1}
+                    showOutsideDays
+                    modifiers={{
+                      booked: disabledDates,
+                      fullyBooked: fullyBookedDates,
+                      limited: limitedDates,
+                      westBooked: westBookedDates,
+                      eastBooked: eastBookedDates
+                    }}
+                    modifiersClassNames={{
+                      booked: 'kallmi-booked-day',
+                      fullyBooked: 'kallmi-fully-booked-day',
+                      limited: 'kallmi-limited-day'
+                    }}
+                    components={{ DayButton: PricedDayButton }}
                   />
-                  <div>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder={t('emailAddress')}
-                      required
-                      className={`input-field ${formErrors.email ? 'border-red-400 focus:border-red-400' : ''}`}
-                    />
-                    {formErrors.email && <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>}
+                  {loadingAvailability && (
+                    <p className="text-xs text-center mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
+                      {t('loadingAvailability')}
+                    </p>
+                  )}
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                    <span className="flex items-center gap-1.5">
+                      <span className="kallmi-room-pill" aria-hidden="true">W</span>
+                      <span className="kallmi-room-pill" aria-hidden="true">E</span>
+                      {t('legendRoomFree')}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="kallmi-room-pill is-booked" aria-hidden="true">W</span>
+                      {t('legendRoomTaken')}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: 'rgba(139, 115, 85, 0.15)', border: '1px solid rgba(139,115,85,0.4)' }} />
+                      {t('legendSelected')}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="inline-block w-3 h-3 rounded-sm bg-red-100 border border-red-200" />
+                      {t('legendBooked')}
+                    </span>
                   </div>
                 </div>
+                {formErrors.checkIn && <p className="text-red-500 text-xs mt-2">{formErrors.checkIn}</p>}
+                {formErrors.checkOut && <p className="text-red-500 text-xs mt-2">{formErrors.checkOut}</p>}
+              </Card>
 
-                <div>
-                  <div className="flex gap-2">
-                    <select
-                      name="countryCode"
-                      value={formData.countryCode}
-                      onChange={handleInputChange}
-                      className="select-field"
-                      style={{ width: '160px', minWidth: '160px', backgroundPosition: 'right 0.5rem center' }}
+              {/* Booking panel */}
+              <aside className="lg:sticky lg:top-24">
+                <Card variant="elevated" padding="none" className="p-5 sm:p-6 space-y-4">
+                  <div className="flex items-baseline justify-between border-b pb-3" style={{ borderColor: 'var(--color-border-light)' }}>
+                    <h3 className="font-serif text-xl tracking-wide" style={{ color: 'var(--color-text-primary)' }}>
+                      {t('bookingPanelTitle')}
+                    </h3>
+                    <span className="text-xs uppercase tracking-[0.18em]" style={{ color: 'var(--color-brand-olive)' }}>
+                      {t('bookingPanelFrom', { price: formatPrice(Math.min(...Object.values(DEFAULT_RATES))) })}
+                    </span>
+                  </div>
+
+                  {submitMessage && (
+                    <div
+                      className="p-3 rounded-lg text-sm"
+                      style={{
+                        backgroundColor: submitMessage.type === 'success' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                        color: submitMessage.type === 'success' ? '#15803d' : '#dc2626'
+                      }}
                     >
-                      {COUNTRY_CODES.map(cc => (
-                        <option key={cc.code} value={cc.code}>{cc.label}</option>
-                      ))}
-                    </select>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder={t('phoneNumber')}
-                      required
-                      className={`input-field flex-1 ${formErrors.phone ? 'border-red-400 focus:border-red-400' : ''}`}
-                    />
-                  </div>
-                  {formErrors.phone && <p className="text-red-500 text-xs mt-1">{formErrors.phone}</p>}
-                </div>
+                      {submitMessage.text}
+                    </div>
+                  )}
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
                     <select
                       name="roomId"
                       value={formData.roomId}
@@ -703,187 +754,164 @@ export default function Accommodations() {
                       ))}
                       <option value={rooms.map(r => r.id).join(',')}>{t('bothRooms')}</option>
                     </select>
-                  </div>
-                  <div>
-                    <select
-                      name="guests"
-                      value={formData.guests}
-                      onChange={handleInputChange}
-                      required
-                      className="select-field"
-                    >
-                      <option value="">{t('numberOfGuests')}</option>
-                      <option value="1">{t('guest', { count: 1 })}</option>
-                      <option value="2">{t('guest', { count: 2 })}</option>
-                      {getMaxGuests() >= 3 && <option value="3">{t('guest', { count: 3 })}</option>}
-                      {getMaxGuests() >= 4 && <option value="4">{t('guest', { count: 4 })}</option>}
-                    </select>
-                    {formData.roomId && (
-                      <p className="text-xs mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
-                        {t('maxGuests', { max: getMaxGuests(), roomType: formData.roomId.includes(',') ? t('maxGuestsBothRooms') : t('maxGuestsOneRoom') })}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Date Picker */}
-                <div>
-                  <label
-                    className="block text-sm font-medium mb-2"
-                    style={{ color: 'var(--color-text-secondary)' }}
-                  >
-                    {t('selectDates')}
-                  </label>
-                  {!formData.roomId ? (
-                    <div
-                      className="p-6 rounded-xl text-center text-sm"
-                      style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-tertiary)' }}
-                    >
-                      {t('selectRoomFirst')}
-                    </div>
-                  ) : (
-                    <div className="kallmi-calendar-wrapper">
-                      <DayPicker
-                        mode="range"
-                        selected={dateRange}
-                        onSelect={(range) => {
-                          setDateRange(range)
-                          setFormErrors(prev => ({ ...prev, checkIn: '', checkOut: '' }))
-                        }}
-                        month={displayMonth}
-                        onMonthChange={setDisplayMonth}
-                        disabled={[
-                          { before: new Date(new Date().setDate(new Date().getDate() + 1)) },
-                          ...disabledDates
-                        ]}
-                        excludeDisabled
-                        numberOfMonths={1}
-                        showOutsideDays
-                        modifiers={{
-                          booked: disabledDates,
-                          fullyBooked: fullyBookedDates,
-                          limited: limitedDates
-                        }}
-                        modifiersClassNames={{
-                          booked: 'kallmi-booked-day',
-                          fullyBooked: 'kallmi-fully-booked-day',
-                          limited: 'kallmi-limited-day'
-                        }}
-                        components={{ DayButton: PricedDayButton }}
-                      />
-                      {loadingAvailability && (
-                        <p className="text-xs text-center mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
-                          {t('loadingAvailability')}
+                    <div>
+                      <select
+                        name="guests"
+                        value={formData.guests}
+                        onChange={handleInputChange}
+                        required
+                        className="select-field"
+                      >
+                        <option value="">{t('numberOfGuests')}</option>
+                        <option value="1">{t('guest', { count: 1 })}</option>
+                        <option value="2">{t('guest', { count: 2 })}</option>
+                        {getMaxGuests() >= 3 && <option value="3">{t('guest', { count: 3 })}</option>}
+                        {getMaxGuests() >= 4 && <option value="4">{t('guest', { count: 4 })}</option>}
+                      </select>
+                      {formData.roomId && (
+                        <p className="text-xs mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
+                          {t('maxGuests', { max: getMaxGuests(), roomType: formData.roomId.includes(',') ? t('maxGuestsBothRooms') : t('maxGuestsOneRoom') })}
                         </p>
                       )}
-                      <div className="flex flex-wrap items-center gap-3 mt-2 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
-                        <span className="flex items-center gap-1">
-                          <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: 'rgba(139, 115, 85, 0.15)' }} />
-                          {t('legendSelected')}
+                    </div>
+                  </div>
+
+                  {/* Dates summary */}
+                  <div className="grid grid-cols-2 divide-x rounded-lg border" style={{ borderColor: 'var(--color-border-light)' }}>
+                    <div className="p-3">
+                      <div className="text-[10px] uppercase tracking-[0.16em]" style={{ color: 'var(--color-text-tertiary)' }}>{t('checkInLabel')}</div>
+                      <div className="text-sm mt-0.5" style={{ color: 'var(--color-text-primary)' }}>
+                        {dateRange?.from ? dateRange.from.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '—'}
+                      </div>
+                    </div>
+                    <div className="p-3" style={{ borderColor: 'var(--color-border-light)' }}>
+                      <div className="text-[10px] uppercase tracking-[0.16em]" style={{ color: 'var(--color-text-tertiary)' }}>{t('checkOutLabel')}</div>
+                      <div className="text-sm mt-0.5" style={{ color: 'var(--color-text-primary)' }}>
+                        {dateRange?.to ? dateRange.to.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '—'}
+                      </div>
+                    </div>
+                  </div>
+                  {!dateRange?.from && (
+                    <p className="text-xs -mt-2" style={{ color: 'var(--color-text-tertiary)' }}>{t('pickNightsHint')}</p>
+                  )}
+
+                  {/* Price Estimate */}
+                  {loadingPrice && (
+                    <div className="p-3 rounded-lg text-center text-sm" style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}>
+                      {t('calculatingPrice')}
+                    </div>
+                  )}
+                  {priceEstimate && !loadingPrice && (
+                    <div className="p-3 rounded-lg space-y-1" style={{ backgroundColor: 'rgba(139, 115, 85, 0.08)' }}>
+                      <div className="flex justify-between items-baseline">
+                        <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+                          {t('nightCount', { count: priceEstimate.nights })}
+                          {formData.roomId.includes(',') && ` · ${t('perRoom')}`}
                         </span>
-                        <span className="flex items-center gap-1">
-                          <span className="inline-block w-3 h-3 rounded-sm bg-red-100 border border-red-200" />
-                          {t('legendBooked')}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: '#fef3c7', border: '1px solid #fcd34d' }} />
-                          {t('legendLimited')}
+                        <span className="text-xl font-light" style={{ color: 'var(--color-brand-olive)' }}>
+                          {formatPrice(priceEstimate.totalAmount)}
                         </span>
                       </div>
-                      {dateRange?.from && (
-                        <div className="flex gap-4 mt-3 text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                          <span>
-                            <strong>{t('checkInLabel')}</strong>{' '}
-                            {dateRange.from.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                          </span>
-                          {dateRange.to && (
-                            <span>
-                              <strong>{t('checkOutLabel')}</strong>{' '}
-                              {dateRange.to.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                            </span>
-                          )}
-                        </div>
+                      {formData.roomId.includes(',') && (
+                        <p className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
+                          {t('totalBothRooms', { price: formatPrice(priceEstimate.totalAmount * 2) })}
+                        </p>
                       )}
                     </div>
                   )}
-                  {formErrors.checkIn && <p className="text-red-500 text-xs mt-1">{formErrors.checkIn}</p>}
-                  {formErrors.checkOut && <p className="text-red-500 text-xs mt-1">{formErrors.checkOut}</p>}
-                </div>
 
-                {/* Price Estimate */}
-                {loadingPrice && (
-                  <div className="p-4 rounded-xl text-center text-sm" style={{ backgroundColor: 'var(--color-surface-tertiary)', color: 'var(--color-text-secondary)' }}>
-                    {t('calculatingPrice')}
-                  </div>
-                )}
-                {priceEstimate && !loadingPrice && (
-                  <div className="p-4 rounded-xl space-y-2" style={{ backgroundColor: 'rgba(139, 115, 85, 0.08)' }}>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>
-                        {t('nightCount', { count: priceEstimate.nights })}
-                      </span>
-                      <span className="text-lg font-light" style={{ color: 'var(--color-brand-olive)' }}>
-                        {formatPrice(priceEstimate.totalAmount)}
-                        {formData.roomId.includes(',') && ` ${t('perRoom')}`}
-                      </span>
-                    </div>
-                    <div className="flex flex-wrap gap-x-4 gap-y-1">
-                      {priceEstimate.breakdown.map((b, i) => (
-                        <span key={i} className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
-                          {b.date}: {formatPrice(b.rate)}
-                        </span>
-                      ))}
-                    </div>
-                    {formData.roomId.includes(',') && (
-                      <p className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
-                        {t('totalBothRooms', { price: formatPrice(priceEstimate.totalAmount * 2) })}
-                      </p>
-                    )}
-                  </div>
-                )}
-
-                <textarea
-                  name="specialRequests"
-                  value={formData.specialRequests}
-                  onChange={handleInputChange}
-                  placeholder={t('specialRequests')}
-                  className="textarea-field"
-                />
-
-                <div>
-                  <label className="flex items-start gap-3 cursor-pointer group">
+                  <div className="space-y-3 pt-1">
                     <input
-                      type="checkbox"
-                      name="ageConfirm"
-                      checked={formData.ageConfirm}
+                      type="text"
+                      name="name"
+                      value={formData.name}
                       onChange={handleInputChange}
-                      className="mt-1 rounded border-gray-300 text-[#8B7355] focus:ring-[#8B7355]"
+                      placeholder={t('yourName')}
+                      required
+                      className="input-field"
                     />
-                    <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                      {t('ageConfirmText')}
-                    </span>
-                  </label>
-                  {formErrors.ageConfirm && <p className="text-red-500 text-xs mt-1 ml-7">{formErrors.ageConfirm}</p>}
-                </div>
+                    <div>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder={t('emailAddress')}
+                        required
+                        className={`input-field ${formErrors.email ? 'border-red-400 focus:border-red-400' : ''}`}
+                      />
+                      {formErrors.email && <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>}
+                    </div>
+                    <div>
+                      <div className="flex gap-2">
+                        <select
+                          name="countryCode"
+                          value={formData.countryCode}
+                          onChange={handleInputChange}
+                          className="select-field"
+                          style={{ width: '120px', minWidth: '120px', backgroundPosition: 'right 0.5rem center' }}
+                        >
+                          {COUNTRY_CODES.map(cc => (
+                            <option key={cc.code} value={cc.code}>{cc.label}</option>
+                          ))}
+                        </select>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          placeholder={t('phoneNumber')}
+                          required
+                          className={`input-field flex-1 ${formErrors.phone ? 'border-red-400 focus:border-red-400' : ''}`}
+                        />
+                      </div>
+                      {formErrors.phone && <p className="text-red-500 text-xs mt-1">{formErrors.phone}</p>}
+                    </div>
+                    <textarea
+                      name="specialRequests"
+                      value={formData.specialRequests}
+                      onChange={handleInputChange}
+                      placeholder={t('specialRequests')}
+                      rows={2}
+                      className="textarea-field"
+                    />
+                  </div>
 
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  variant="primary"
-                  fullWidth
-                  size="lg"
-                >
-                  {isSubmitting ? t('submitting') : t('requestBooking')}
-                </Button>
-              </form>
+                  <div>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        name="ageConfirm"
+                        checked={formData.ageConfirm}
+                        onChange={handleInputChange}
+                        className="mt-1 rounded border-gray-300 text-[#8B7355] focus:ring-[#8B7355]"
+                      />
+                      <span className="text-xs leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
+                        {t('ageConfirmText')}
+                      </span>
+                    </label>
+                    {formErrors.ageConfirm && <p className="text-red-500 text-xs mt-1 ml-7">{formErrors.ageConfirm}</p>}
+                  </div>
 
-              <p className="mt-6 text-center text-caption">
-                {t('bookingConfirmation')}
-                <br />
-                {t('bookingContact')}{' '}
-                <span style={{ color: 'var(--color-brand-olive)' }}>reservations@kallmibukur.al</span>
-              </p>
-            </Card>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    variant="primary"
+                    fullWidth
+                    size="lg"
+                  >
+                    {isSubmitting ? t('submitting') : t('requestBooking')}
+                  </Button>
+
+                  <p className="text-center text-xs leading-relaxed" style={{ color: 'var(--color-text-tertiary)' }}>
+                    {t('bookingConfirmation')}
+                    <br />
+                    {t('bookingContact')}{' '}
+                    <span style={{ color: 'var(--color-brand-olive)' }}>reservations@kallmibukur.al</span>
+                  </p>
+                </Card>
+              </aside>
+            </form>
           </FadeIn>
         </div>
       </Section>

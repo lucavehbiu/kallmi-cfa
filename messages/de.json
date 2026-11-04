@@ -483,7 +483,14 @@
     "errorAgeConfirm": "Sie müssen bestätigen, dass alle Gäste mindestens 13 Jahre alt sind",
     "bookingSuccess": "Buchungsanfrage gesendet! Bitte warten Sie auf die Bestätigung — unser Team wird sich in Kürze bei Ihnen melden.",
     "bookingError": "Buchungsanfrage konnte nicht gesendet werden",
-    "bookingGenericError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    "bookingGenericError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "calendarHintAll": "Verfügbarkeit beider Zimmer",
+    "calendarHintRoom": "Verfügbarkeit Ihres Zimmers",
+    "legendRoomFree": "Zimmer frei",
+    "legendRoomTaken": "Zimmer belegt",
+    "bookingPanelTitle": "Ihr Aufenthalt",
+    "bookingPanelFrom": "ab {price} / Nacht",
+    "pickNightsHint": "Wählen Sie An- und Abreise im Kalender."
   },
   "Restaurant": {
     "heroBadge": "Mediterrane Kuche",
