@@ -178,6 +178,19 @@ export default function Accommodations() {
   const [bookedDates, setBookedDates] = useState<Record<string, string[]>>({})
   const [loadingAvailability, setLoadingAvailability] = useState(false)
 
+  // The header's "Book Now" links to /stay#booking-section. This component is
+  // loaded with next/dynamic, so the browser's own hash scroll fires before the
+  // section exists; scroll to it once mounted, and again on later hash clicks.
+  useEffect(() => {
+    const scrollToBooking = () => {
+      if (window.location.hash !== '#booking-section') return
+      document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })
+    }
+    scrollToBooking()
+    window.addEventListener('hashchange', scrollToBooking)
+    return () => window.removeEventListener('hashchange', scrollToBooking)
+  }, [])
+
   // Fetch availability when month or room changes
   useEffect(() => {
     const monthStr = `${displayMonth.getFullYear()}-${String(displayMonth.getMonth() + 1).padStart(2, '0')}`
@@ -631,7 +644,7 @@ export default function Accommodations() {
       </Section>
 
       {/* Reservation Section */}
-      <Section background="secondary" spacing="lg" id="booking-section">
+      <Section background="secondary" spacing="lg" id="booking-section" className="scroll-mt-20">
         <div className="max-w-6xl mx-auto">
           <SectionHeader
             overline={t('reservationsOverline')}

@@ -110,6 +110,18 @@ export function Header() {
               </Link>
             ))}
 
+            {/* Book Now — one booking form lives on /stay; every page links to it */}
+            <Link
+              href="/stay#booking-section"
+              className={buttonClasses({
+                variant: scrolled ? 'primary' : 'primary-on-dark',
+                size: 'sm',
+                className: 'whitespace-nowrap',
+              })}
+            >
+              {t('bookNow')}
+            </Link>
+
             {/* Language Switcher */}
             <LanguageSwitcher scrolled={scrolled} />
 
@@ -169,6 +181,13 @@ export function Header() {
           onClick={(e) => e.stopPropagation()}
         >
           <nav className="px-6 py-5">
+            <Link
+              href="/stay#booking-section"
+              onClick={() => setIsOpen(false)}
+              className={buttonClasses({ variant: 'primary-on-dark', size: 'md', fullWidth: true, className: 'mb-4' })}
+            >
+              {t('bookNow')}
+            </Link>
             <ul className="divide-y divide-white/[0.06]">
               {navItems.map((item, index) => {
                 const active = pathname === item.href
