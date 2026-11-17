@@ -9,6 +9,7 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 const FORMATS = {
   bottle: { file: 'olive-oil-label.html', vol: '500', unit: 'ml' },
@@ -39,4 +40,13 @@ const FORMATS = {
   await sheets[1].screenshot({ path: path.join(out, `${name}-back-proof.png`) });
 
   await browser.close();
+
+  // Press version for the printer: outlined text + trim/bleed boxes (see press.py).
+  // Needs Ghostscript and pypdf: apt-get install ghostscript && pip install pypdf
+  try {
+    execFileSync('python3', [path.join(__dirname, 'press.py'),
+      path.join(out, `${name}-print.pdf`), path.join(out, `${name}-PRESS.pdf`), '3']);
+  } catch (e) {
+    console.warn('Skipped press PDF:', e.message);
+  }
 })();
