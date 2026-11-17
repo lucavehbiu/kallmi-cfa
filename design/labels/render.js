@@ -4,7 +4,7 @@
 //
 // Usage:
 //   node design/labels/render.js                          → bottle, 500 ml
-//   node design/labels/render.js bottle 750 2025          → bottle, 750 ml, harvest 2025
+//   node design/labels/render.js bottle 750 2027          → bottle, 750 ml, harvest 2027
 //   node design/labels/render.js tin                      → 3 l tin
 const { chromium } = require('playwright');
 const fs = require('fs');
@@ -20,7 +20,7 @@ const FORMATS = {
   const fmt = FORMATS[process.argv[2] || 'bottle'];
   if (!fmt) throw new Error(`format must be one of: ${Object.keys(FORMATS).join(', ')}`);
   const vol = process.argv[3] || fmt.vol;
-  const harvest = process.argv[4] || '2024';
+  const harvest = process.argv[4] || '2026';
   const src = 'file://' + path.join(__dirname, fmt.file);
   const name = `kallmi-oil-${vol}${fmt.unit}`;
   const out = path.join(__dirname, 'out');
