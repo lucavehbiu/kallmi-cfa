@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<title>Kallmi Oil — 3 l Tin Labels</title>
+<!--
+  Kallmi Oil 3 l tin labels, front + back. Same system as the bottle label
+  (olive-oil-label.html), opened up for the wide face of the tin.
+
+  Tin: rectangular 3 l olive-oil tin, assumed ~165 × 105 × 250 mm.
+  Label on each wide face, clear of the rolled seams and the top shoulder.
+  Trim 120 × 170 mm (same die front and back), 3 mm bleed → 126 × 176 mm.
+  MEASURE THE TIN before ordering: the wide face minus ~20 mm each side.
+
+  Legal: 1169/2011 Annex IX — over 1 l, quantity figures at least 6 mm tall;
+  ℮ at least 3 mm; mandatory text 1.2 mm x-height (Jost 7.4 pt) → 8.5 pt used.
+
+  Render: node design/labels/render.js tin
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:wght@300..600&display=block" rel="stylesheet">
+<style>
+  :root {
+    --black: #141311;
+    --ink: #1A1814;
+    --cream: #F8F5EF;
+    --gold: #C4A862;
+    --gold-print: #A88B45;
+    --muted-dark: #B8B4AC;
+    --muted-light: #5C584F;
+    --hair: #D4CFC4;
+
+    --display: "Bodoni Moda", "Didot", serif;
+    --ui: "Jost", "Futura", sans-serif;
+    --legal: 9pt;
+
+    --trim-w: 120mm;
+    --trim-h: 170mm;
+    --bleed: 3mm;
+    --safe: 5mm;
+  }
+  @page { size: 126mm 176mm; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #d9d6cf; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .sheet {
+    position: relative;
+    width: calc(var(--trim-w) + 2 * var(--bleed));
+    height: calc(var(--trim-h) + 2 * var(--bleed));
+    overflow: hidden;
+    break-after: page;
+  }
+  .sheet:last-child { break-after: auto; }
+  .label {
+    position: absolute; inset: var(--bleed);
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+  }
+  .guide { display: none; position: absolute; pointer-events: none; }
+  body.proof .guide { display: block; }
+  .guide.trim { inset: var(--bleed); outline: 0.25mm solid #e5007e; }
+  .guide.safe { inset: calc(var(--bleed) + var(--safe)); outline: 0.25mm dashed #00a0e3; }
+
+  .e-mark { height: 4.2mm; width: auto; vertical-align: 0; margin-left: 1mm; }
+
+  /* ---------- FRONT ---------- */
+  .front { background: var(--black); color: var(--cream); }
+  .front .label { padding: 17mm 14mm 14mm; }
+  .front .frame {
+    position: absolute; inset: calc(var(--bleed) + 6mm);
+    border: 0.35mm solid var(--gold);
+  }
+  .front .frame::after {
+    content: ""; position: absolute; inset: 1.4mm;
+    border: 0.15mm solid rgba(196, 168, 98, .55);
+  }
+  .front .sun { width: 40mm; height: 40mm; }
+  .front .wordmark { width: 66mm; margin-top: 7mm; }
+  .front .place {
+    font: 400 7pt/1 var(--ui); letter-spacing: .42em; padding-left: .42em;
+    color: var(--gold); margin-top: 3mm;
+  }
+  .front .place.est { margin-top: 1.8mm; color: var(--muted-dark); text-transform: uppercase; }
+  .front .mid { margin: auto 0; display: flex; flex-direction: column; align-items: center; }
+  .front .rule { width: 14mm; border-top: 0.3mm solid var(--gold); margin-bottom: 6mm; }
+  .front .name { font: italic 400 30pt/1 var(--display); font-variation-settings: "opsz" 72; }
+  .front .name-sub {
+    font: 500 10pt/1 var(--ui); letter-spacing: .4em; padding-left: .4em;
+    color: var(--gold); text-transform: uppercase; margin-top: 4mm;
+  }
+  .front .name-sq { font: 300 11pt/1.2 var(--ui); color: var(--muted-dark); margin-top: 3.6mm; }
+
+  .front .foot {
+    width: 100%; display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .front .meta {
+    text-align: left; font: 400 6.4pt/1.7 var(--ui); letter-spacing: .26em;
+    text-transform: uppercase; color: var(--muted-dark);
+  }
+  .front .meta b { font-weight: 500; color: var(--cream); }
+  /* over 1 l → figures ≥ 6 mm. Jost lining figures ≈ 0.70 em → 26 pt ≈ 6.4 mm */
+  .front .vol { font: 400 26pt/0.8 var(--ui); color: var(--cream); white-space: nowrap; }
+  .front .vol small { font-size: 18pt; margin-left: 1.2mm; }
+
+  /* ---------- BACK ---------- */
+  .back { background: var(--cream); color: var(--ink); }
+  .back .label { padding: 10mm 9mm 9mm; text-align: left; align-items: stretch; }
+  .back .top { display: flex; align-items: center; gap: 4mm; }
+  .back .top .sun { width: 14mm; height: 14mm; flex: none; }
+  .back .top .story { font: italic 400 11pt/1.25 var(--display); font-variation-settings: "opsz" 24; }
+  .back .sig {
+    font: 500 5.6pt/1 var(--ui); letter-spacing: .32em; text-transform: uppercase;
+    color: var(--gold-print); margin-top: 1.6mm;
+  }
+  .back hr { border: 0; border-top: 0.2mm solid var(--hair); margin: 4.5mm 0; }
+
+  .back .legal { font: 400 var(--legal)/1.3 var(--ui); }
+  .back .legal b { font-weight: 600; }
+  .back .en { color: var(--muted-light); }
+  .back .legal p + p { margin-top: 1.6mm; }
+
+  .back .cols { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 6mm; }
+  .back h4 { font: 600 var(--legal)/1.2 var(--ui); margin-bottom: 1mm; }
+  .back table { border-collapse: collapse; width: 100%; font: 400 var(--legal)/1.2 var(--ui); }
+  .back th, .back td { padding: .45mm 0; border-bottom: 0.12mm solid var(--hair); vertical-align: baseline; }
+  .back th { font-weight: 400; text-align: left; }
+  .back td { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .back th.sub { padding-left: 2.4mm; }
+  .back .gap { margin-top: 3.6mm; }
+
+  .back .bottom {
+    margin-top: auto; padding-top: 4mm; display: flex; justify-content: space-between;
+    align-items: flex-end; gap: 6mm;
+  }
+  .back .web {
+    font: 500 6pt/1 var(--ui); letter-spacing: .24em; text-transform: uppercase;
+    color: var(--gold-print); margin-top: 2.4mm;
+  }
+  /* GS1 100 % magnification: 37.3 mm wide incl. quiet zones */
+  .back .ean { width: 37.3mm; height: 20mm; flex: none; }
+</style>
+</head>
+<body>
+
+<!-- ================= FRONT ================= -->
+<section class="sheet front">
+  <div class="frame"></div>
+  <div class="label">
+    <img class="sun" src="../../public/kallmi-sun.svg" alt="">
+    <img class="wordmark" src="wordmark-cream.svg" alt="Kallmi">
+    <div class="place">Durrës · Albania</div>
+    <div class="place est">Est. 2004</div>
+    <div class="mid">
+      <div class="rule"></div>
+      <div class="name">Extra Virgin</div>
+      <div class="name-sub">Olive Oil</div>
+      <div class="name-sq">Vaj ulliri ekstra i virgjër</div>
+    </div>
+    <div class="foot">
+      <div class="meta">Cold pressed<br>Harvest <b data-harvest>2024</b></div>
+      <div class="vol"><span data-ml>3</span><small>l<svg class="e-mark" viewBox="88 -34 1060 1130" aria-label="℮"><path transform="matrix(1 0 0 -1 0 1062)" fill="currentColor" d="M619 -34Q461 -34 341.0 38.5Q221 111 154.5 242.5Q88 374 88 531Q88 702 158.0 830.0Q228 958 350.0 1027.0Q472 1096 619 1096Q770 1096 892.0 1025.5Q1014 955 1081.0 826.0Q1148 697 1148 531H321V175Q371 121 452.5 86.0Q534 51 619 51Q751 51 841.5 103.0Q932 155 1014 285L1086 243Q990 90 880.5 28.0Q771 -34 619 -34ZM917 616V893Q866 946 784.5 978.5Q703 1011 617 1011Q438 1011 321 894V616Z"/></svg></small></div>
+    </div>
+  </div>
+  <div class="guide trim"></div><div class="guide safe"></div>
+</section>
+
+<!-- ================= BACK ================= -->
+<section class="sheet back">
+  <div class="label">
+    <div class="top">
+      <img class="sun" src="../../public/kallmi-sun.svg" alt="">
+      <div>
+        <p class="story">Pressed from our own olive trees on the hills of Kallm, above the Adriatic.</p>
+        <div class="sig">Kallmi Estate · Est. 2004</div>
+      </div>
+    </div>
+    <hr>
+
+    <div class="legal">
+      <p><b>Vaj ulliri ekstra i virgjër:</b> vaj ulliri i kategorisë superiore, i përftuar drejtpërdrejt nga ullinjtë dhe vetëm me mjete mekanike.
+        <span class="en">Extra virgin olive oil: superior category olive oil obtained directly from olives and solely by mechanical means.</span></p>
+    </div>
+    <hr>
+
+    <div class="cols">
+      <div class="legal">
+        <p><b>Shtypur në të ftohtë</b> <span class="en">/ Cold&nbsp;pressed</span></p>
+        <p><b>Origjina</b> <span class="en">/ Origin</span>: Shqipëri <span class="en">/ Albania</span></p>
+        <p>Ruajeni në vend të freskët e të errët, larg dritës dhe nxehtësisë. <span class="en">Store in a cool, dark place, away from light and heat.</span></p>
+
+      </div>
+
+      <div>
+        <h4>Vlerat ushqyese / 100&nbsp;ml <span class="en">Nutrition</span></h4>
+        <table>
+          <tr><th>Energjia <span class="en">/ Energy</span></th><td>3389 kJ</td></tr>
+          <tr><th></th><td>824 kcal</td></tr>
+          <tr><th>Yndyrna <span class="en">/ Fat</span></th><td>91.5 g</td></tr>
+          <tr><th class="sub">të ngopura <span class="en">/ saturates</span></th><td>13.0 g</td></tr>
+          <tr><th>Karbohidrate <span class="en">/ Carbohydrate</span></th><td>0 g</td></tr>
+          <tr><th class="sub">sheqerna <span class="en">/ sugars</span></th><td>0 g</td></tr>
+          <tr><th>Proteina <span class="en">/ Protein</span></th><td>0 g</td></tr>
+          <tr><th>Kripë <span class="en">/ Salt</span></th><td>0 g</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SAMPLE VALUES: typical for Albanian Kalinjot EVOO, NOT lab results.
+         Replace with the lab report before printing for sale. Acidity may only
+         be printed with peroxide, waxes and UV (K232/K270), same type size. -->
+    <p class="legal gap"><b>Analiza</b> <span class="en">/ Analysis</span>: aciditeti&nbsp;0.28&nbsp;% · peroksidet&nbsp;7.2&nbsp;meq&nbsp;O₂/kg · dyllrat&nbsp;96&nbsp;mg/kg · K232&nbsp;1.86 · K270&nbsp;0.15</p>
+
+    <div class="bottom">
+      <div class="legal">
+        <p>Skadenca <span class="en">/ Best before</span>: 01.2027<br>Loti <span class="en">/ Lot</span>: L24-01</p>
+        <p>Prodhuar dhe paketuar nga <span class="en">/ Produced &amp; packed by</span>:<br>Kallmi Estate, Kallm, Durrës, Shqipëri</p>
+        <div class="web">kallmibukur.al</div>
+      </div>
+      <!-- PLACEHOLDER barcode on GS1's in-store prefix. Use a separate GTIN
+           from the bottle: every pack size needs its own number. -->
+      <svg class="ean" data-ean="2001234567906" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+  </div>
+  <div class="guide trim"></div><div class="guide safe"></div>
+</section>
+
+<script src="label-shared.js"></script>
+</body>
+</html>
