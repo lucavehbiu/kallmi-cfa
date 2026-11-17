@@ -19,12 +19,12 @@
     "newsletterPlaceholder": "Inserisci la tua email",
     "subscribe": "Iscriviti",
     "address": "Durazzo, Albania",
-    "description": "Una tenuta olivicola a conduzione familiare a Durazzo, Albania, che produce olio extravergine d'oliva premium da oltre un secolo."
+    "description": "Una tenuta olivicola a conduzione familiare a Durazzo, Albania, che produce olio extravergine d'oliva premium dal 2004."
   },
   "Metadata": {
     "home": {
       "title": "Kallmi Estate | Olio d'Oliva Albanese Premium",
-      "description": "Scoprite il miglior olio extravergine d'oliva dall'Albania. Raccolto a mano, spremuto a freddo e lavorato con secoli di tradizione a Durazzo."
+      "description": "Scoprite il miglior olio extravergine d'oliva dall'Albania. Raccolto a mano, spremuto a freddo e lavorato a Durazzo dal 2004."
     },
     "restaurant": {
       "title": "Ristorante",
@@ -44,7 +44,7 @@
     },
     "ourStory": {
       "title": "La Nostra Storia",
-      "description": "Scoprite il patrimonio di Kallmi Estate, un uliveto familiare a Durazzo, Albania. Quattro generazioni di maestria olivicola dal 1920."
+      "description": "Scoprite la storia di Kallmi Estate, un uliveto familiare a Durazzo, Albania, che produce olio d'oliva premium dal 2004."
     },
     "contact": {
       "title": "Contattaci",
@@ -74,14 +74,14 @@
     "close": "Chiudi"
   },
   "Hero": {
-    "badge": "Da Generazioni",
+    "badge": "Dal 2004",
     "subtitle": "Dove uliveti centenari incontrano il Mare Adriatico",
     "cta": "Esplora la Tenuta"
   },
   "FAQ": {
     "home": {
       "q1": "Cos'è Kallmi Estate?",
-      "a1": "Kallmi Estate è una tenuta olivicola a conduzione familiare a Durazzo, Albania, che produce olio extravergine d'oliva premium da oltre un secolo. La tenuta offre anche un ristorante farm-to-table, alloggi di lusso e glamping tra antichi uliveti con vista sul Mare Adriatico.",
+      "a1": "Kallmi Estate è una tenuta olivicola a conduzione familiare a Durazzo, Albania, che produce olio extravergine d'oliva premium dal 2004. La tenuta offre anche un ristorante farm-to-table, alloggi di lusso e glamping tra antichi uliveti con vista sul Mare Adriatico.",
       "q2": "Dove si trova Kallmi Estate?",
       "a2": "Kallmi Estate si trova nella zona di Kallm a Durazzo, Albania, a circa 30 minuti dall'Aeroporto Internazionale di Tirana. La tenuta affaccia sul Mare Adriatico ed è circondata da uliveti centenari.",
       "q3": "Quali prodotti offre Kallmi Estate?",
@@ -122,7 +122,7 @@
   },
   "LandingHero": {
     "badge": "Il Gioiello Nascosto dell'Albania",
-    "description": "Quattro generazioni di passione hanno coltivato questa terra sacra, creando il gioiello nascosto dell'Albania. Scoprite cibo gustoso e natura incontaminata",
+    "description": "La passione di una famiglia coltiva questa terra dal 2004, creando il gioiello nascosto dell'Albania. Scoprite cibo gustoso e natura incontaminata",
     "cta1": "Prenota una Camera",
     "cta2": "Cena con Noi",
     "cta3": "Shop",
@@ -152,7 +152,8 @@
     "ctaBook": "Prenota una Camera",
     "ctaDine": "Cena con Noi",
     "ctaShop": "Acquista il Nostro Olio d'Oliva",
-    "ctaPlan": "Pianifica la Tua Visita"
+    "ctaPlan": "Pianifica la Tua Visita",
+    "estateGrown": "Della Tenuta"
   },
   "RestaurantSnippet": {
     "overline": "Esperienza Culinaria",
@@ -328,39 +329,39 @@
     "pay": "Paga {amount}"
   },
   "OurStory": {
-    "heroBadge": "Quattro Generazioni di Eccellenza",
+    "heroBadge": "Di Famiglia dal 2004",
     "heroTitle": "La Nostra",
     "heroTitleAccent": "Storia",
-    "heroDescription1": "Un ",
-    "heroDescriptionAccent1": "secolo di tradizione",
+    "heroDescription1": "Una ",
+    "heroDescriptionAccent1": "tradizione di famiglia",
     "heroDescription2": ", una vita di passione e la ricerca eterna dell'",
     "heroDescriptionAccent2": "oro liquido",
     "infoYears": "20+ Anni",
     "infoLocation": "Durazzo, Albania",
-    "infoGeneration": "4a Generazione",
+    "infoGeneration": "A Conduzione Familiare",
     "heritageOverline": "Durazzo, Albania",
     "heritageTitle": "Il Nostro",
     "heritageTitleAccent": "Patrimonio",
-    "heritageText1": "Adagiato sulle colline baciate dal sole di Durazzo, Albania, Kallmi Estate è una testimonianza dell'arte della produzione di olio d'oliva da oltre un secolo.",
+    "heritageText1": "Adagiato sulle colline baciate dal sole di Durazzo, Albania, Kallmi Estate si dedica all'arte della produzione di olio d'oliva dal 2004.",
     "heritageText2": "Piantarono i primi ulivi che sarebbero diventati il nostro patrimonio.",
     "heritageText3": "Oggi, continuiamo a onorare la loro saggezza mantenendo i metodi tradizionali abbracciando le tecniche moderne.",
-    "milestone1Year": "1920",
-    "milestone1Event": "Inizia l'Eredità Familiare",
-    "milestone2Year": "2004",
-    "milestone2Event": "Fondazione della Tenuta",
-    "milestone3Year": "2007",
-    "milestone3Event": "Apertura del Ristorante",
-    "milestone4Year": "2025",
-    "milestone4Event": "Patrimonio Fiorente",
+    "milestone1Year": "2004",
+    "milestone1Event": "Fondazione della Tenuta",
+    "milestone2Year": "2007",
+    "milestone2Event": "Apertura del Ristorante",
+    "milestone3Year": "2025",
+    "milestone3Event": "Patrimonio Fiorente",
+    "milestone4Year": "2026",
+    "milestone4Event": "Nuova Identità",
     "imageBadgeEst": "Fond. 2004",
     "imageBadgeHeritage": "Patrimonio Albanese",
-    "imageBadgeYears": "100+ Anni",
+    "imageBadgeYears": "20+ Anni",
     "imageBadgeTradition": "Di Tradizione",
     "valuesOverline": "Principi Fondamentali",
     "valuesTitle": "I Nostri Valori",
     "valuesSubtitle": "I principi senza tempo che guidano ogni goccia di oro liquido che creiamo",
     "valueTraditionTitle": "Tradizione",
-    "valueTraditionDesc": "Preserviamo metodi centenari tramandati di generazione in generazione.",
+    "valueTraditionDesc": "Preserviamo i metodi tradizionali della nostra terra, dal 2004.",
     "valueQualityTitle": "Qualità",
     "valueQualityDesc": "Dalla raccolta alla bottiglia, manteniamo i più alti standard di eccellenza.",
     "valueSustainabilityTitle": "Sostenibilità",
@@ -388,7 +389,7 @@
     "legacyQuoteAuthor": "-- La Famiglia Vehbiu"
   },
   "FooterFull": {
-    "brandDescription": "Quattro generazioni di passione nella produzione del miglior olio extravergine d'oliva albanese da antichi uliveti baciati dalla brezza adriatica.",
+    "brandDescription": "Una passione di famiglia dal 2004, nella produzione del miglior olio extravergine d'oliva albanese da antichi uliveti baciati dalla brezza adriatica.",
     "est": "Fond. 2004",
     "discover": "Scopri",
     "ourHeritage": "Il Nostro Patrimonio",

@@ -22,8 +22,8 @@ export function organizationSchema(locale: Locale) {
     url: BASE_URL,
     logo: 'https://storage.googleapis.com/kallmi/images/logo.webp',
     image: `${BASE_URL}/images/hero.webp`,
-    description: 'A family-owned olive estate in Durrës, Albania, producing premium extra virgin olive oil for over a century.',
-    foundingDate: '1920',
+    description: 'A family-owned olive estate in Durrës, Albania, producing premium extra virgin olive oil since 2004.',
+    foundingDate: '2004',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Durrës',

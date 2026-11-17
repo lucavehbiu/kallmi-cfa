@@ -19,12 +19,12 @@
     "newsletterPlaceholder": "Entrez votre email",
     "subscribe": "S'abonner",
     "address": "Durrës, Albanie",
-    "description": "Un domaine oléicole familial à Durrës, en Albanie, produisant une huile d'olive extra vierge premium depuis plus d'un siècle."
+    "description": "Un domaine oléicole familial à Durrës, en Albanie, produisant une huile d'olive extra vierge premium depuis 2004."
   },
   "Metadata": {
     "home": {
       "title": "Kallmi Estate | Huile d'Olive Albanaise Premium",
-      "description": "Découvrez la meilleure huile d'olive extra vierge d'Albanie. Récoltée à la main, pressée à froid et élaborée avec des siècles de tradition à Durrës."
+      "description": "Découvrez la meilleure huile d'olive extra vierge d'Albanie. Récoltée à la main, pressée à froid et élaborée à Durrës depuis 2004."
     },
     "restaurant": {
       "title": "Restaurant",
@@ -44,7 +44,7 @@
     },
     "ourStory": {
       "title": "Notre Histoire",
-      "description": "Découvrez le patrimoine de Kallmi Estate, une oliveraie familiale à Durrës, Albanie. Quatre générations d'artisanat oléicole depuis 1920."
+      "description": "Découvrez l'histoire de Kallmi Estate, une oliveraie familiale à Durrës, Albanie, qui produit une huile d'olive premium depuis 2004."
     },
     "contact": {
       "title": "Contactez-Nous",
@@ -74,14 +74,14 @@
     "close": "Fermer"
   },
   "Hero": {
-    "badge": "Depuis des Générations",
+    "badge": "Depuis 2004",
     "subtitle": "Où les oliveraies centenaires rencontrent la mer Adriatique",
     "cta": "Explorer le Domaine"
   },
   "FAQ": {
     "home": {
       "q1": "Qu'est-ce que Kallmi Estate ?",
-      "a1": "Kallmi Estate est un domaine oléicole familial à Durrës, en Albanie, produisant une huile d'olive extra vierge premium depuis plus d'un siècle. Le domaine propose également un restaurant farm-to-table, des hébergements de luxe et du glamping parmi d'anciennes oliveraies surplombant la mer Adriatique.",
+      "a1": "Kallmi Estate est un domaine oléicole familial à Durrës, en Albanie, produisant une huile d'olive extra vierge premium depuis 2004. Le domaine propose également un restaurant farm-to-table, des hébergements de luxe et du glamping parmi d'anciennes oliveraies surplombant la mer Adriatique.",
       "q2": "Où se trouve Kallmi Estate ?",
       "a2": "Kallmi Estate est situé dans la zone de Kallm à Durrës, en Albanie, à environ 30 minutes de l'aéroport international de Tirana. Le domaine surplombe la mer Adriatique et est entouré d'oliveraies centenaires.",
       "q3": "Quels produits propose Kallmi Estate ?",
@@ -122,7 +122,7 @@
   },
   "LandingHero": {
     "badge": "Le Joyau Caché de l'Albanie",
-    "description": "Quatre générations de passion ont cultivé cette terre sacrée, créant le joyau caché de l'Albanie. Découvrez une cuisine savoureuse et une nature brute",
+    "description": "La passion d'une famille cultive cette terre depuis 2004, créant le joyau caché de l'Albanie. Découvrez une cuisine savoureuse et une nature brute",
     "cta1": "Réservez une Chambre",
     "cta2": "Dînez Chez Nous",
     "cta3": "Boutique",
@@ -152,7 +152,8 @@
     "ctaBook": "Réservez une Chambre",
     "ctaDine": "Dînez Chez Nous",
     "ctaShop": "Achetez Notre Huile d'Olive",
-    "ctaPlan": "Planifiez Votre Visite"
+    "ctaPlan": "Planifiez Votre Visite",
+    "estateGrown": "Du Domaine"
   },
   "RestaurantSnippet": {
     "overline": "Expérience Culinaire",
@@ -328,39 +329,39 @@
     "pay": "Payer {amount}"
   },
   "OurStory": {
-    "heroBadge": "Quatre Générations d'Excellence",
+    "heroBadge": "Domaine Familial depuis 2004",
     "heroTitle": "Notre",
     "heroTitleAccent": "Histoire",
-    "heroDescription1": "Un ",
-    "heroDescriptionAccent1": "siècle de tradition",
+    "heroDescription1": "Une ",
+    "heroDescriptionAccent1": "tradition familiale",
     "heroDescription2": ", une vie de passion et la quête éternelle de l'",
     "heroDescriptionAccent2": "or liquide",
     "infoYears": "20+ Ans",
     "infoLocation": "Durrës, Albanie",
-    "infoGeneration": "4e Génération",
+    "infoGeneration": "Entreprise Familiale",
     "heritageOverline": "Durrës, Albanie",
     "heritageTitle": "Notre",
     "heritageTitleAccent": "Patrimoine",
-    "heritageText1": "Niché dans les collines baignées de soleil de Durrës, Albanie, Kallmi Estate témoigne de l'art de la fabrication de l'huile d'olive depuis plus d'un siècle.",
+    "heritageText1": "Niché dans les collines baignées de soleil de Durrës, Albanie, Kallmi Estate se consacre à l'art de l'huile d'olive depuis 2004.",
     "heritageText2": "Ils ont planté les premiers oliviers qui deviendraient notre patrimoine.",
     "heritageText3": "Aujourd'hui, nous continuons d'honorer leur sagesse en maintenant les méthodes traditionnelles tout en adoptant les techniques modernes.",
-    "milestone1Year": "1920",
-    "milestone1Event": "Début de l'Héritage Familial",
-    "milestone2Year": "2004",
-    "milestone2Event": "Fondation du Domaine",
-    "milestone3Year": "2007",
-    "milestone3Event": "Ouverture du Restaurant",
-    "milestone4Year": "2025",
-    "milestone4Event": "Patrimoine Florissant",
+    "milestone1Year": "2004",
+    "milestone1Event": "Fondation du Domaine",
+    "milestone2Year": "2007",
+    "milestone2Event": "Ouverture du Restaurant",
+    "milestone3Year": "2025",
+    "milestone3Event": "Patrimoine Florissant",
+    "milestone4Year": "2026",
+    "milestone4Event": "Nouvelle Identité",
     "imageBadgeEst": "Fond. 2004",
     "imageBadgeHeritage": "Patrimoine Albanais",
-    "imageBadgeYears": "100+ Ans",
+    "imageBadgeYears": "20+ Ans",
     "imageBadgeTradition": "De Tradition",
     "valuesOverline": "Principes Fondamentaux",
     "valuesTitle": "Nos Valeurs",
     "valuesSubtitle": "Les principes intemporels qui guident chaque goutte d'or liquide que nous créons",
     "valueTraditionTitle": "Tradition",
-    "valueTraditionDesc": "Nous préservons des méthodes centenaires transmises de génération en génération.",
+    "valueTraditionDesc": "Nous préservons les méthodes traditionnelles de notre terre, depuis 2004.",
     "valueQualityTitle": "Qualité",
     "valueQualityDesc": "De la récolte à la bouteille, nous maintenons les plus hauts standards d'excellence.",
     "valueSustainabilityTitle": "Durabilité",
@@ -388,7 +389,7 @@
     "legacyQuoteAuthor": "-- La Famille Vehbiu"
   },
   "FooterFull": {
-    "brandDescription": "Quatre générations de passion pour l'élaboration de la meilleure huile d'olive extra vierge d'Albanie, issue d'anciennes oliveraies caressées par la brise adriatique.",
+    "brandDescription": "Une passion familiale depuis 2004 pour l'élaboration de la meilleure huile d'olive extra vierge d'Albanie, issue d'anciennes oliveraies caressées par la brise adriatique.",
     "est": "Fond. 2004",
     "discover": "Découvrir",
     "ourHeritage": "Notre Patrimoine",

@@ -52,7 +52,7 @@ export default function LandingPage() {
                 {[
                   { number: '2004', label: t('established') },
                   { number: '20+', label: t('years') },
-                  { number: '4th', label: t('generation') }
+                  { number: '100%', label: t('estateGrown') }
                 ].map((stat, index) => (
                   <div
                     key={index}

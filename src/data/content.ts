@@ -57,7 +57,7 @@ export const features: Feature[] = [
   },
   {
     title: 'Family Legacy',
-    description: "Five generations of olive oil craftsmanship on Kallmi's pristine coast",
+    description: "Family olive oil craftsmanship on Kallmi's coast since 2004",
     image: 'https://storage.googleapis.com/kallmi/images/family-legacy.webp',
     blurDataURL: "data:image/jpeg;base64,/9j...",
     icon: HomeModernIcon,

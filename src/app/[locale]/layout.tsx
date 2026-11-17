@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     template: '%s | Kallmi Estate',
     default: 'Kallmi Estate | Premium Albanian Olive Oil'
   },
-  description: 'Experience the finest extra virgin olive oil from Albania\'s Kallmi Estate. Hand-harvested, cold-pressed, and crafted with centuries of tradition.',
+  description: 'Experience the finest extra virgin olive oil from Albania\'s Kallmi Estate. Hand-harvested, cold-pressed, and crafted in Durrës since 2004.',
   keywords: ['olive oil', 'albania', 'kallmi estate', 'premium', 'extra virgin', 'organic'],
   alternates: {
     canonical: 'https://www.kallmibukur.al',

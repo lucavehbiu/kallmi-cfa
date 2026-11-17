@@ -19,12 +19,12 @@
     "newsletterPlaceholder": "Vendos email-in tënd",
     "subscribe": "Abonohu",
     "address": "Durrës, Shqipëri",
-    "description": "Një prodhues familjar vaji ulliri në Durrës, Shqipëri, që prodhon vaj ulliri ekstra të virgjër premium për mbi një shekull."
+    "description": "Një prodhues familjar vaji ulliri në Durrës, Shqipëri, që prodhon vaj ulliri ekstra të virgjër premium që nga viti 2004."
   },
   "Metadata": {
     "home": {
       "title": "Kallmi Estate | Vaj Ulliri Premium Shqiptar",
-      "description": "Përjetoni vajin më të mirë ekstra të virgjër të ullirit nga Kallmi Estate në Shqipëri. I vjelë me dorë, i shtypur në të ftohtë dhe i punuar me tradita shekullore në Durrës."
+      "description": "Përjetoni vajin më të mirë ekstra të virgjër të ullirit nga Kallmi Estate në Shqipëri. I vjelë me dorë, i shtypur në të ftohtë dhe i punuar në Durrës që nga viti 2004."
     },
     "restaurant": {
       "title": "Restoranti",
@@ -44,7 +44,7 @@
     },
     "ourStory": {
       "title": "Historia Jonë",
-      "description": "Zbuloni trashëgiminë e Kallmi Estate, një ullishtë familjare në Durrës, Shqipëri. Katër breza mjeshtërie në prodhimin e vajit të ullirit që nga viti 1920."
+      "description": "Zbuloni historinë e Kallmi Estate, një ullishtë familjare në Durrës, Shqipëri, që prodhon vaj ulliri premium që nga viti 2004."
     },
     "contact": {
       "title": "Na Kontaktoni",
@@ -74,14 +74,14 @@
     "close": "Mbyll"
   },
   "Hero": {
-    "badge": "Që nga Breza",
+    "badge": "Që nga 2004",
     "subtitle": "Ku ullinjtë shekullore takojnë Detin Adriatik",
     "cta": "Eksploroni Fermën"
   },
   "FAQ": {
     "home": {
       "q1": "Çfarë është Kallmi Estate?",
-      "a1": "Kallmi Estate është një fermë familjare vaji ulliri në Durrës, Shqipëri, që prodhon vaj ulliri ekstra të virgjër premium për mbi një shekull. Ferma gjithashtu ka një restorant farm-to-table, akomodim luksoz dhe glamping mes ullishtave të lashta me pamje nga Deti Adriatik.",
+      "a1": "Kallmi Estate është një fermë familjare vaji ulliri në Durrës, Shqipëri, që prodhon vaj ulliri ekstra të virgjër premium që nga viti 2004. Ferma gjithashtu ka një restorant farm-to-table, akomodim luksoz dhe glamping mes ullishtave të lashta me pamje nga Deti Adriatik.",
       "q2": "Ku ndodhet Kallmi Estate?",
       "a2": "Kallmi Estate ndodhet në zonën e Kallmit në Durrës, Shqipëri, rreth 30 minuta nga Aeroporti Ndërkombëtar i Tiranës. Ferma ka pamje nga Deti Adriatik dhe është e rrethuar nga ullinj shekullore.",
       "q3": "Çfarë produktesh ofron Kallmi Estate?",
@@ -122,7 +122,7 @@
   },
   "LandingHero": {
     "badge": "Guri i Çmuar i Fshehur i Shqipërisë",
-    "description": "Katër breza pasioni kanë kultivuar këtë tokë të shenjtë, duke krijuar gurin e fshehur të Shqipërisë. Përjetoni ushqim të shijshëm dhe natyrë të paprekur",
+    "description": "Pasioni i një familjeje e ka kultivuar këtë tokë që nga viti 2004, duke krijuar gurin e fshehur të Shqipërisë. Përjetoni ushqim të shijshëm dhe natyrë të paprekur",
     "cta1": "Rezervoni një Dhomë",
     "cta2": "Darkoni me Ne",
     "cta3": "Dyqani",
@@ -152,7 +152,8 @@
     "ctaBook": "Rezervoni një Dhomë",
     "ctaDine": "Darkoni me Ne",
     "ctaShop": "Blini Vajin Tonë të Ullirit",
-    "ctaPlan": "Planifikoni Vizitën Tuaj"
+    "ctaPlan": "Planifikoni Vizitën Tuaj",
+    "estateGrown": "Nga Ferma Jonë"
   },
   "RestaurantSnippet": {
     "overline": "Përvojë Kulinare",
@@ -328,39 +329,39 @@
     "pay": "Paguaj {amount}"
   },
   "OurStory": {
-    "heroBadge": "Katër Breza Ekselence",
+    "heroBadge": "Familjare që nga 2004",
     "heroTitle": "Historia",
     "heroTitleAccent": "Jonë",
     "heroDescription1": "Një ",
-    "heroDescriptionAccent1": "shekull traditë",
+    "heroDescriptionAccent1": "traditë familjare",
     "heroDescription2": ", një jetë pasioni dhe ndjekja e përjetshme e",
     "heroDescriptionAccent2": " arit të lëngshëm",
     "infoYears": "20+ Vite",
     "infoLocation": "Durrës, Shqipëri",
-    "infoGeneration": "Brezi i 4-t",
+    "infoGeneration": "Pronë Familjare",
     "heritageOverline": "Durrës, Shqipëri",
     "heritageTitle": "Trashëgimia",
     "heritageTitleAccent": "Jonë",
-    "heritageText1": "E vendosur në kodrat e puthura nga dielli të Durrësit, Shqipëri, Kallmi Estate ka qenë një dëshmi e artit të prodhimit të vajit të ullirit për mbi një shekull.",
+    "heritageText1": "E vendosur në kodrat e puthura nga dielli të Durrësit, Shqipëri, Kallmi Estate i është përkushtuar artit të prodhimit të vajit të ullirit që nga viti 2004.",
     "heritageText2": "Ata mbollën ullinjtë e parë që do të bëheshin trashëgimia jonë.",
     "heritageText3": "Sot, ne vazhdojmë të nderojmë urtësinë e tyre duke ruajtur metodat tradicionale ndërsa përqafojmë teknikat moderne.",
-    "milestone1Year": "1920",
-    "milestone1Event": "Fillon Trashëgimia Familjare",
-    "milestone2Year": "2004",
-    "milestone2Event": "Themelohet Ferma",
-    "milestone3Year": "2007",
-    "milestone3Event": "Hapet Restoranti",
-    "milestone4Year": "2025",
-    "milestone4Event": "Trashëgimi e Lulëzuar",
+    "milestone1Year": "2004",
+    "milestone1Event": "Themelohet Ferma",
+    "milestone2Year": "2007",
+    "milestone2Event": "Hapet Restoranti",
+    "milestone3Year": "2025",
+    "milestone3Event": "Trashëgimi e Lulëzuar",
+    "milestone4Year": "2026",
+    "milestone4Event": "Identitet i Ri",
     "imageBadgeEst": "Them. 2004",
     "imageBadgeHeritage": "Trashëgimia e Shqipërisë",
-    "imageBadgeYears": "100+ Vite",
+    "imageBadgeYears": "20+ Vite",
     "imageBadgeTradition": "Traditë",
     "valuesOverline": "Parimet Themelore",
     "valuesTitle": "Vlerat Tona",
     "valuesSubtitle": "Parimet e përjetshme që udhëheqin çdo pikë ari të lëngshëm që krijojmë",
     "valueTraditionTitle": "Tradita",
-    "valueTraditionDesc": "Ne ruajmë metodat shekullore të trashëguara brez pas brezi.",
+    "valueTraditionDesc": "Ne ruajmë metodat tradicionale të tokës sonë që nga viti 2004.",
     "valueQualityTitle": "Cilësia",
     "valueQualityDesc": "Nga korrja deri në shishe, ne mbajmë standardet më të larta të ekselencës.",
     "valueSustainabilityTitle": "Qëndrueshmëria",
@@ -388,7 +389,7 @@
     "legacyQuoteAuthor": "-- Familja Vehbiu"
   },
   "FooterFull": {
-    "brandDescription": "Katër breza pasioni duke prodhuar vajin më të mirë ekstra të virgjër të ullirit në Shqipëri nga ullinjtë e lashtë të puthur nga flladi i Adriatikut.",
+    "brandDescription": "Një pasion familjar që nga viti 2004, duke prodhuar vajin më të mirë ekstra të virgjër të ullirit në Shqipëri nga ullinjtë e lashtë të puthur nga flladi i Adriatikut.",
     "est": "Them. 2004",
     "discover": "Zbuloni",
     "ourHeritage": "Trashëgimia Jonë",

@@ -19,12 +19,12 @@
     "newsletterPlaceholder": "E-Mail-Adresse eingeben",
     "subscribe": "Abonnieren",
     "address": "Durrës, Albanien",
-    "description": "Ein familiengeführtes Olivengut in Durrës, Albanien, das seit über einem Jahrhundert erstklassiges natives Olivenöl extra produziert."
+    "description": "Ein familiengeführtes Olivengut in Durrës, Albanien, das seit 2004 erstklassiges natives Olivenöl extra produziert."
   },
   "Metadata": {
     "home": {
       "title": "Kallmi Estate | Premium Albanisches Olivenöl",
-      "description": "Erleben Sie das feinste native Olivenöl extra aus Albanien. Handgeerntet, kaltgepresst und mit jahrhundertealter Tradition in Durrës hergestellt."
+      "description": "Erleben Sie das feinste native Olivenöl extra aus Albanien. Handgeerntet, kaltgepresst und seit 2004 in Durrës hergestellt."
     },
     "restaurant": {
       "title": "Restaurant",
@@ -44,7 +44,7 @@
     },
     "ourStory": {
       "title": "Unsere Geschichte",
-      "description": "Entdecken Sie das Erbe von Kallmi Estate, einem familiengeführten Olivenhain in Durrës, Albanien. Vier Generationen Olivenöl-Handwerkskunst seit 1920."
+      "description": "Entdecken Sie die Geschichte von Kallmi Estate, einem familiengeführten Olivenhain in Durrës, Albanien, der seit 2004 erstklassiges Olivenöl herstellt."
     },
     "contact": {
       "title": "Kontaktieren Sie Uns",
@@ -74,14 +74,14 @@
     "close": "Schließen"
   },
   "Hero": {
-    "badge": "Seit Generationen",
+    "badge": "Seit 2004",
     "subtitle": "Wo jahrhundertealte Olivenhaine auf die Adria treffen",
     "cta": "Das Gut Entdecken"
   },
   "FAQ": {
     "home": {
       "q1": "Was ist Kallmi Estate?",
-      "a1": "Kallmi Estate ist ein familiengeführtes Olivenöl-Gut in Durrës, Albanien, das seit über einem Jahrhundert erstklassiges natives Olivenöl extra produziert. Das Gut bietet auch ein Farm-to-Table-Restaurant, luxuriöse Unterkünfte und Glamping unter uralten Olivenbäumen mit Blick auf die Adria.",
+      "a1": "Kallmi Estate ist ein familiengeführtes Olivenöl-Gut in Durrës, Albanien, das seit 2004 erstklassiges natives Olivenöl extra produziert. Das Gut bietet auch ein Farm-to-Table-Restaurant, luxuriöse Unterkünfte und Glamping unter uralten Olivenbäumen mit Blick auf die Adria.",
       "q2": "Wo befindet sich Kallmi Estate?",
       "a2": "Kallmi Estate liegt im Gebiet Kallm in Durrës, Albanien, etwa 30 Minuten vom internationalen Flughafen Tirana entfernt. Das Gut blickt auf die Adria und ist von jahrhundertealten Olivenhainen umgeben.",
       "q3": "Welche Produkte bietet Kallmi Estate an?",
@@ -122,7 +122,7 @@
   },
   "LandingHero": {
     "badge": "Albaniens verborgenes Juwel",
-    "description": "Vier Generationen Leidenschaft haben dieses heilige Land kultiviert und Albaniens verborgenes Juwel geschaffen. Erleben Sie köstliches Essen und unberührte Natur",
+    "description": "Die Leidenschaft einer Familie kultiviert dieses Land seit 2004 und hat Albaniens verborgenes Juwel geschaffen. Erleben Sie köstliches Essen und unberührte Natur",
     "cta1": "Zimmer Buchen",
     "cta2": "Bei Uns Speisen",
     "cta3": "Shop",
@@ -152,7 +152,8 @@
     "ctaBook": "Zimmer Buchen",
     "ctaDine": "Bei Uns Speisen",
     "ctaShop": "Unser Olivenöl Kaufen",
-    "ctaPlan": "Planen Sie Ihren Besuch"
+    "ctaPlan": "Planen Sie Ihren Besuch",
+    "estateGrown": "Vom Gut"
   },
   "RestaurantSnippet": {
     "overline": "Kulinarisches Erlebnis",
@@ -328,39 +329,39 @@
     "pay": "Bezahlen {amount}"
   },
   "OurStory": {
-    "heroBadge": "Vier Generationen Exzellenz",
+    "heroBadge": "Familiengeführt seit 2004",
     "heroTitle": "Unsere",
     "heroTitleAccent": "Geschichte",
-    "heroDescription1": "Ein ",
-    "heroDescriptionAccent1": "Jahrhundert der Tradition",
+    "heroDescription1": "Eine ",
+    "heroDescriptionAccent1": "Familientradition",
     "heroDescription2": ", ein Leben voller Leidenschaft und das ewige Streben nach",
     "heroDescriptionAccent2": " flüssigem Gold",
     "infoYears": "20+ Jahre",
     "infoLocation": "Durrës, Albanien",
-    "infoGeneration": "4. Generation",
+    "infoGeneration": "Familiengeführt",
     "heritageOverline": "Durrës, Albanien",
     "heritageTitle": "Unser",
     "heritageTitleAccent": "Erbe",
-    "heritageText1": "Eingebettet in die sonnengeküssten Hügel von Durrës, Albanien, ist Kallmi Estate seit über einem Jahrhundert ein Zeugnis der Kunst der Olivenölherstellung.",
+    "heritageText1": "Eingebettet in die sonnengeküssten Hügel von Durrës, Albanien, widmet sich Kallmi Estate seit 2004 der Kunst der Olivenölherstellung.",
     "heritageText2": "Sie pflanzten die ersten Olivenbäume, die zu unserem Vermächtnis werden sollten.",
     "heritageText3": "Heute ehren wir ihre Weisheit weiterhin, indem wir traditionelle Methoden bewahren und gleichzeitig moderne Techniken einsetzen.",
-    "milestone1Year": "1920",
-    "milestone1Event": "Familienvermächtnis Beginnt",
-    "milestone2Year": "2004",
-    "milestone2Event": "Gut Gegründet",
-    "milestone3Year": "2007",
-    "milestone3Event": "Restaurant Eröffnet",
-    "milestone4Year": "2025",
-    "milestone4Event": "Blühendes Erbe",
+    "milestone1Year": "2004",
+    "milestone1Event": "Gut Gegründet",
+    "milestone2Year": "2007",
+    "milestone2Event": "Restaurant Eröffnet",
+    "milestone3Year": "2025",
+    "milestone3Event": "Blühendes Erbe",
+    "milestone4Year": "2026",
+    "milestone4Event": "Neue Identität",
     "imageBadgeEst": "Gegr. 2004",
     "imageBadgeHeritage": "Albaniens Erbe",
-    "imageBadgeYears": "100+ Jahre",
+    "imageBadgeYears": "20+ Jahre",
     "imageBadgeTradition": "Tradition",
     "valuesOverline": "Grundprinzipien",
     "valuesTitle": "Unsere Werte",
     "valuesSubtitle": "Die zeitlosen Prinzipien, die jeden Tropfen flüssiges Gold leiten, den wir schaffen",
     "valueTraditionTitle": "Tradition",
-    "valueTraditionDesc": "Wir bewahren jahrhundertealte Methoden, die über Generationen weitergegeben wurden.",
+    "valueTraditionDesc": "Wir bewahren die traditionellen Methoden unserer Region, seit 2004.",
     "valueQualityTitle": "Qualität",
     "valueQualityDesc": "Von der Ernte bis zur Flasche halten wir die höchsten Standards der Exzellenz ein.",
     "valueSustainabilityTitle": "Nachhaltigkeit",
@@ -388,7 +389,7 @@
     "legacyQuoteAuthor": "-- Die Familie Vehbiu"
   },
   "FooterFull": {
-    "brandDescription": "Vier Generationen Leidenschaft bei der Herstellung von Albaniens feinstem nativen Olivenöl extra aus uralten Hainen, geküsst von der adriatischen Brise.",
+    "brandDescription": "Eine Familienleidenschaft seit 2004: Albaniens feinstes natives Olivenöl extra aus uralten Hainen, geküsst von der adriatischen Brise.",
     "est": "Gegr. 2004",
     "discover": "Entdecken",
     "ourHeritage": "Unser Erbe",
