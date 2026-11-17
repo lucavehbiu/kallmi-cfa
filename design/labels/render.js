@@ -19,7 +19,7 @@ const path = require('path');
   await page.evaluate(() => document.fonts.ready);
   await page.pdf({
     path: path.join(out, `kallmi-oil-${ml}ml-print.pdf`),
-    width: '76mm', height: '106mm', printBackground: true, preferCSSPageSize: true,
+    width: '54mm', height: '146mm', printBackground: true, preferCSSPageSize: true,
   });
 
   await page.goto(`${src}?ml=${ml}&harvest=${harvest}&proof=1`, { waitUntil: 'networkidle' });
