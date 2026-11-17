@@ -5,6 +5,7 @@
 // Usage:
 //   node design/labels/render.js                          → bottle, 500 ml
 //   node design/labels/render.js bottle 750 2027          → bottle, 750 ml, harvest 2027
+//   node design/labels/render.js small                    → bottle, 250 ml
 //   node design/labels/render.js tin                      → 3 l tin
 const { chromium } = require('playwright');
 const fs = require('fs');
@@ -13,6 +14,7 @@ const { execFileSync } = require('child_process');
 
 const FORMATS = {
   bottle: { file: 'olive-oil-label.html', vol: '500', unit: 'ml' },
+  small:  { file: 'olive-oil-label-250.html', vol: '250', unit: 'ml' },
   tin:    { file: 'olive-oil-tin-3l.html', vol: '3',  unit: 'l'  },
 };
 
