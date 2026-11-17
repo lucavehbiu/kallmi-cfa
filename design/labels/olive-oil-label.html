@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kallmi Oil — Bottle Labels</title>
+<!--
+  Kallmi Oil bottle labels, front + back, built on the solar-disc brand kit
+  (tokens mirror src/app/globals.css --kallmi-*).
+
+  Trim 70 × 100 mm, 3 mm bleed on every side → 76 × 106 mm artboard.
+  Everything inside the dashed safe line (4 mm in from trim) is safe from the
+  die-cut. Render with: node design/labels/render.js
+  Change volume / harvest via the query string, e.g. ?ml=750&harvest=2025
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:wght@300..600&display=block" rel="stylesheet">
+<style>
+  :root {
+    --black: #141311;
+    --ink: #1A1814;
+    --cream: #F8F5EF;
+    --paper: #F2F0EB;
+    --gold: #C4A862;
+    --gold-print: #A88B45;
+    --muted-dark: #B8B4AC;
+    --muted-light: #5C584F;
+
+    --display: "Bodoni Moda", "Didot", serif;
+    --ui: "Jost", "Futura", sans-serif;
+
+    --trim-w: 70mm;
+    --trim-h: 100mm;
+    --bleed: 3mm;
+    --safe: 4mm;
+  }
+  @page { size: 76mm 106mm; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #d9d6cf; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .sheet {
+    position: relative;
+    width: calc(var(--trim-w) + 2 * var(--bleed));
+    height: calc(var(--trim-h) + 2 * var(--bleed));
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+  }
+  .sheet:last-child { page-break-after: auto; break-after: auto; }
+  /* the trimmed area */
+  .label {
+    position: absolute;
+    inset: var(--bleed);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  /* guides: shown on screen / proof only (body.proof) */
+  .guide { display: none; position: absolute; pointer-events: none; }
+  body.proof .guide { display: block; }
+  .guide.trim { inset: var(--bleed); outline: 0.2mm solid #e5007e; }
+  .guide.safe { inset: calc(var(--bleed) + var(--safe)); outline: 0.2mm dashed #00a0e3; }
+
+  /* ---------- FRONT ---------- */
+  .front { background: var(--black); color: var(--cream); }
+  .front .label { padding: 9mm 7.6mm 7.4mm; }
+  .front .frame {
+    position: absolute; inset: calc(var(--bleed) + 4.6mm);
+    border: 0.25mm solid var(--gold);
+  }
+  .front .frame::after {
+    content: ""; position: absolute; inset: 0.9mm;
+    border: 0.12mm solid rgba(196, 168, 98, .55);
+  }
+  .front .sun { width: 23mm; height: 23mm; }
+  .front .wordmark { width: 40mm; margin-top: 3.6mm; }
+  .front .est {
+    font: 400 4.2pt/1 var(--ui); letter-spacing: .42em; color: var(--gold);
+    margin-top: 1.6mm; padding-left: .42em;
+  }
+  .front .rule {
+    width: 10mm; height: 0; border-top: 0.2mm solid var(--gold);
+    margin: 0 0 3.6mm;
+  }
+  .front .mid { margin: auto 0; display: flex; flex-direction: column; align-items: center; }
+  .front .name {
+    font: italic 400 15.5pt/1 var(--display);
+    font-variation-settings: "opsz" 48;
+    letter-spacing: -.005em;
+  }
+  .front .name-sub {
+    font: 500 5.6pt/1 var(--ui); letter-spacing: .38em; padding-left: .38em;
+    color: var(--gold); text-transform: uppercase; margin-top: 2.2mm;
+  }
+  .front .name-sq {
+    font: 300 5pt/1 var(--ui); letter-spacing: .08em; color: var(--muted-dark);
+    margin-top: 2mm;
+  }
+  .front .foot {
+    width: 100%;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .front .meta {
+    text-align: left; font: 400 4.6pt/1.55 var(--ui); letter-spacing: .2em;
+    text-transform: uppercase; color: var(--muted-dark);
+  }
+  .front .meta b { font-weight: 500; color: var(--cream); }
+  /* EU 1169/2011 Annex IX: >200 ml–1000 ml → figures at least 4 mm tall.
+     Jost lining figures ≈ 0.70 em, so 16pt (5.64 mm) → ~4 mm digits. */
+  .front .vol {
+    font: 400 16pt/0.8 var(--ui); letter-spacing: .02em; color: var(--cream);
+    white-space: nowrap;
+  }
+  .front .vol small { font-size: 6pt; letter-spacing: .14em; margin-left: .6mm; }
+
+  /* ℮ drawn as an outline: Jost has no U+212E and a font fallback is machine-dependent */
+  /* 76/211/EEC: the ℮ must be at least 3 mm tall */
+  .e-mark { height: 3.1mm; width: auto; vertical-align: 0; margin-left: .8mm; }
+
+  /* ---------- BACK ---------- */
+  .back { background: var(--cream); color: var(--ink); }
+  .back .label { padding: 6.2mm 6mm 5.4mm; }
+  .back .sun { width: 8mm; height: 8mm; }
+  .back .story {
+    font: italic 400 7.8pt/1.34 var(--display);
+    font-variation-settings: "opsz" 18;
+    margin-top: 2.6mm; max-width: 52mm;
+  }
+  .back .sig {
+    font: 500 4.2pt/1 var(--ui); letter-spacing: .34em; padding-left: .34em;
+    text-transform: uppercase; color: var(--gold-print); margin-top: 2mm;
+  }
+  .back hr {
+    width: 100%; border: 0; border-top: 0.15mm solid #D4CFC4; margin: 2.8mm 0 2.4mm;
+  }
+  .back .legal {
+    font: 400 4.7pt/1.42 var(--ui); color: var(--ink); text-align: left; width: 100%;
+  }
+  .back .legal p + p { margin-top: 1.1mm; }
+  .back .legal .h {
+    font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: 4.4pt;
+  }
+  .back .sq { color: var(--muted-light); }
+
+  .back .row { display: flex; gap: 3mm; width: 100%; margin-top: 2.4mm; text-align: left; }
+  .back table {
+    border-collapse: collapse; font: 400 4.6pt/1.3 var(--ui); flex: 1 1 auto;
+  }
+  .back caption {
+    caption-side: top; text-align: left; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; font-size: 4.2pt; padding-bottom: .7mm;
+  }
+  .back th, .back td { padding: .35mm 0; border-bottom: 0.1mm solid #D4CFC4; }
+  .back th { font-weight: 400; text-align: left; }
+  .back td { text-align: right; font-variant-numeric: tabular-nums; }
+  .back th.sub { padding-left: 1.6mm; color: var(--muted-light); }
+
+  .back .side { flex: 0 0 22mm; display: flex; flex-direction: column; gap: 1.4mm; }
+  .back .stamp {
+    border: 0.12mm solid #B8B4AC; height: 4.6mm; padding: 0 1mm;
+    display: flex; align-items: center; font: 500 3.8pt/1 var(--ui);
+    letter-spacing: .14em; text-transform: uppercase; color: var(--muted-light);
+  }
+  .back .barcode {
+    height: 12.5mm; border: 0.12mm dashed #B8B4AC; display: flex;
+    align-items: center; justify-content: center; font: 400 3.8pt/1.2 var(--ui);
+    color: #8A8578; text-align: center;
+  }
+  .back .foot {
+    margin-top: auto; width: 100%; display: flex; justify-content: space-between;
+    align-items: flex-end; font: 400 4.3pt/1.4 var(--ui); text-align: left;
+  }
+  .back .foot .web { font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-print); }
+  .back .recycle { text-align: right; color: var(--muted-light); }
+</style>
+</head>
+<body>
+
+<!-- ================= FRONT ================= -->
+<section class="sheet front">
+  <div class="frame"></div>
+  <div class="label">
+    <img class="sun" src="../../public/kallmi-sun.svg" alt="">
+    <img class="wordmark" src="wordmark-cream.svg" alt="Kallmi">
+    <div class="est">Durrës · Albania</div>
+    <div class="mid">
+      <div class="rule"></div>
+      <div class="name">Extra Virgin</div>
+      <div class="name-sub">Olive Oil</div>
+      <div class="name-sq">Vaj ulliri ekstra i virgjër</div>
+    </div>
+    <div class="foot">
+      <div class="meta">Harvest <b data-harvest>2024</b><br>Estate grown</div>
+      <div class="vol"><span data-ml>500</span><small>ml <svg class="e-mark" viewBox="88 -34 1060 1130" aria-label="℮"><path transform="matrix(1 0 0 -1 0 1062)" fill="currentColor" d="M619 -34Q461 -34 341.0 38.5Q221 111 154.5 242.5Q88 374 88 531Q88 702 158.0 830.0Q228 958 350.0 1027.0Q472 1096 619 1096Q770 1096 892.0 1025.5Q1014 955 1081.0 826.0Q1148 697 1148 531H321V175Q371 121 452.5 86.0Q534 51 619 51Q751 51 841.5 103.0Q932 155 1014 285L1086 243Q990 90 880.5 28.0Q771 -34 619 -34ZM917 616V893Q866 946 784.5 978.5Q703 1011 617 1011Q438 1011 321 894V616Z"/></svg></small></div>
+    </div>
+  </div>
+  <div class="guide trim"></div><div class="guide safe"></div>
+</section>
+
+<!-- ================= BACK ================= -->
+<section class="sheet back">
+  <div class="label">
+    <img class="sun" src="../../public/kallmi-sun.svg" alt="">
+    <p class="story">Pressed from our own olive trees on the hills of Kallm, above the Adriatic, by a family that has never let them go.</p>
+    <div class="sig">Kallmi Estate</div>
+    <hr>
+    <div class="legal">
+      <p><span class="h">Extra virgin olive oil.</span> Superior category olive oil obtained directly from olives and solely by mechanical means.
+        <span class="sq">Vaj ulliri i kategorisë superiore, i përftuar drejtpërdrejt nga ullinjtë dhe vetëm me mjete mekanike.</span></p>
+      <p><span class="h">Origin:</span> Albania / Shqipëri. &nbsp;Store in a cool, dark place, away from heat and light. <span class="sq">Ruajeni në vend të freskët e të errët.</span></p>
+    </div>
+    <div class="row">
+      <table>
+        <caption>Nutrition · per 100 ml</caption>
+        <tr><th>Energy</th><td>3389 kJ / 824 kcal</td></tr>
+        <tr><th>Fat</th><td>91.5 g</td></tr>
+        <tr><th class="sub">of which saturates</th><td>13.0 g</td></tr>
+        <tr><th>Carbohydrate</th><td>0 g</td></tr>
+        <tr><th class="sub">of which sugars</th><td>0 g</td></tr>
+        <tr><th>Protein</th><td>0 g</td></tr>
+        <tr><th>Salt</th><td>0 g</td></tr>
+      </table>
+      <div class="side">
+        <div class="stamp">Best before</div>
+        <div class="stamp">Lot</div>
+        <div class="barcode">EAN-13<br>barcode</div>
+      </div>
+    </div>
+    <div class="foot">
+      <div>Produced &amp; bottled by Kallmi Estate<br>Kallm, Durrës, Albania<br><span class="web">kallmibukur.al</span></div>
+      <div class="recycle">Glass bottle<br>Please recycle</div>
+    </div>
+  </div>
+  <div class="guide trim"></div><div class="guide safe"></div>
+</section>
+
+<script>
+  const q = new URLSearchParams(location.search);
+  if (q.has('ml')) document.querySelectorAll('[data-ml]').forEach(e => e.textContent = q.get('ml'));
+  if (q.has('harvest')) document.querySelectorAll('[data-harvest]').forEach(e => e.textContent = q.get('harvest'));
+  if (q.has('proof')) document.body.classList.add('proof');
+</script>
+</body>
+</html>
