@@ -17,10 +17,10 @@ const FORMATS = {
   bottle:  { file: 'olive-oil-label.html',     vol: '500', unit: 'ml' },
   small:   { file: 'olive-oil-label-250.html', vol: '250', unit: 'ml' },
   tin:     { file: 'olive-oil-tin-3l.html',    vol: '3',   unit: 'l'  },
-  // The tin's back goes on its narrow side: the 500 ml back (same 48 × 140 die)
-  // with the tin's own placeholder GTIN.
+  // The tin's back goes on its narrow side: the 500 ml back layout at 48 × 170 mm
+  // (same height as the tin front), larger text, the tin's own placeholder GTIN.
   tinside: { file: 'olive-oil-label.html',     vol: '3',   unit: 'l', suffix: '-side',
-             extra: '&only=back&ean=2001234567906' },
+             extra: '&only=back&ean=2001234567906&h=170&legal=8.4pt' },
 };
 
 (async () => {

@@ -6,6 +6,21 @@
   if (q.has('ean')) document.querySelectorAll('svg[data-ean]').forEach(e => e.dataset.ean = q.get('ean'));
   if (q.get('only') === 'back') document.querySelectorAll('.sheet.front').forEach(e => e.remove());
 
+  // ?h=170 → taller trim (mm), ?legal=8.5pt → larger mandatory text. Used by the
+  // 3 l tin side label, which reuses the 500 ml back at the tin front's height.
+  if (q.has('h') || q.has('legal')) {
+    const root = document.documentElement.style, css = getComputedStyle(document.documentElement);
+    if (q.has('legal')) root.setProperty('--legal', q.get('legal'));
+    if (q.has('h')) {
+      const mm = v => parseFloat(css.getPropertyValue(v));
+      const w = mm('--trim-w') + 2 * mm('--bleed'), h = +q.get('h') + 2 * mm('--bleed');
+      root.setProperty('--trim-h', q.get('h') + 'mm');
+      const page = document.createElement('style');
+      page.textContent = `@page { size: ${w}mm ${h}mm; margin: 0; }`;
+      document.head.appendChild(page);
+    }
+  }
+
   // EAN-13 → SVG bars. Fixes the check digit, so any 12-digit stem works.
   function ean13(svg) {
     const stem = svg.dataset.ean.slice(0, 12);
