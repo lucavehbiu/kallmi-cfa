@@ -77,29 +77,29 @@
     content: ""; position: absolute; inset: 0.8mm;
     border: 0.12mm solid rgba(196, 168, 98, .55);
   }
-  .front .sun { width: 27mm; height: 27mm; }
+  .front .sun { width: 25mm; height: 25mm; }
   .front .wordmark { width: 34mm; margin-top: 5mm; }
   .front .place {
-    font: 400 4.4pt/1 var(--ui); letter-spacing: .4em; padding-left: .4em;
-    color: var(--gold); margin-top: 1.7mm;
+    font: 400 5.6pt/1 var(--ui); letter-spacing: .32em; padding-left: .32em;
+    color: var(--gold); margin-top: 2mm;
   }
-  .front .place.est { margin-top: 1.2mm; color: var(--muted-dark); text-transform: uppercase; }
+  .front .place.est { margin-top: 1.5mm; color: var(--muted-dark); text-transform: uppercase; }
   .front .mid { margin: auto 0; display: flex; flex-direction: column; align-items: center; }
   .front .rule { width: 8mm; border-top: 0.2mm solid var(--gold); margin-bottom: 3.6mm; }
   .front .name {
-    font: italic 400 15pt/1 var(--display); font-variation-settings: "opsz" 48;
+    font: italic 400 17pt/1 var(--display); font-variation-settings: "opsz" 48;
   }
   .front .name-sub {
-    font: 500 5.6pt/1 var(--ui); letter-spacing: .36em; padding-left: .36em;
-    color: var(--gold); text-transform: uppercase; margin-top: 2.2mm;
+    font: 500 7pt/1 var(--ui); letter-spacing: .32em; padding-left: .32em;
+    color: var(--gold); text-transform: uppercase; margin-top: 2.6mm;
   }
   /* Albanian sales name is mandatory in Albania → legal size */
   .front .name-sq {
-    font: 300 var(--legal)/1.15 var(--ui); color: var(--muted-dark); margin-top: 2.4mm;
+    font: 300 9pt/1.15 var(--ui); color: var(--muted-dark); margin-top: 2.8mm;
   }
   .front .foot { display: flex; flex-direction: column; align-items: center; gap: 2.6mm; }
   .front .meta {
-    font: 400 4.4pt/1.6 var(--ui); letter-spacing: .26em; padding-left: .26em;
+    font: 400 5.6pt/1.55 var(--ui); letter-spacing: .22em; padding-left: .22em;
     text-transform: uppercase; color: var(--muted-dark);
   }
   .front .meta b { font-weight: 500; color: var(--cream); }
@@ -137,6 +137,14 @@
   .back .ean-wrap { flex: none; width: 13.4mm; height: 29.8mm; position: relative; }
   .back .ean { position: absolute; width: 29.8mm; height: 13.4mm; left: 50%; top: 50%;
     transform: translate(-50%, -50%) rotate(-90deg); }
+  /* Back on black like the front. Barcode keeps its white box: scanners need
+     dark bars on a light ground. Small reversed type gets weight 430 so it
+     doesn't close up when ink spreads into the black. */
+  .back { background: var(--black); color: var(--cream); }
+  .back .en { color: var(--muted-dark); }
+  .back hr, .back th, .back td { border-color: rgba(196, 168, 98, .32); }
+  .back .web { color: var(--gold); }
+  .back .legal, .back table, .back .dates { font-weight: 430; }
 </style>
 </head>
 <body>

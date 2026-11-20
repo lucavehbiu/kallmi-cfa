@@ -3,6 +3,8 @@
   if (q.has('ml')) document.querySelectorAll('[data-ml]').forEach(e => e.textContent = q.get('ml'));
   if (q.has('harvest')) document.querySelectorAll('[data-harvest]').forEach(e => e.textContent = q.get('harvest'));
   if (q.has('proof')) document.body.classList.add('proof');
+  if (q.has('ean')) document.querySelectorAll('svg[data-ean]').forEach(e => e.dataset.ean = q.get('ean'));
+  if (q.get('only') === 'back') document.querySelectorAll('.sheet.front').forEach(e => e.remove());
 
   // EAN-13 → SVG bars. Fixes the check digit, so any 12-digit stem works.
   function ean13(svg) {

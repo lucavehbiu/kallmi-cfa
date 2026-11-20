@@ -1,21 +1,26 @@
-// Renders a label HTML file to a print PDF (front + back, page size and
-// bleed come from the file's @page rule) and PNG proofs with trim (magenta)
-// and safe-zone (cyan) guides.
+// Renders a label HTML file to a print PDF (page size and bleed come from the
+// file's @page rule) and PNG proofs with trim (magenta) and safe-zone (cyan)
+// guides, then a PRESS PDF for the printer (see press.py).
 //
 // Usage:
-//   node design/labels/render.js                          → bottle, 500 ml
-//   node design/labels/render.js bottle 750 2027          → bottle, 750 ml, harvest 2027
-//   node design/labels/render.js small                    → bottle, 250 ml
-//   node design/labels/render.js tin                      → 3 l tin
+//   node design/labels/render.js                  → bottle 500 ml, front + back
+//   node design/labels/render.js bottle 750 2027  → bottle 750 ml, harvest 2027
+//   node design/labels/render.js small            → bottle 250 ml, front + back
+//   node design/labels/render.js tin              → 3 l tin, front (wide face)
+//   node design/labels/render.js tinside          → 3 l tin, back (narrow side)
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 
 const FORMATS = {
-  bottle: { file: 'olive-oil-label.html', vol: '500', unit: 'ml' },
-  small:  { file: 'olive-oil-label-250.html', vol: '250', unit: 'ml' },
-  tin:    { file: 'olive-oil-tin-3l.html', vol: '3',  unit: 'l'  },
+  bottle:  { file: 'olive-oil-label.html',     vol: '500', unit: 'ml' },
+  small:   { file: 'olive-oil-label-250.html', vol: '250', unit: 'ml' },
+  tin:     { file: 'olive-oil-tin-3l.html',    vol: '3',   unit: 'l'  },
+  // The tin's back goes on its narrow side: the 500 ml back (same 48 × 140 die)
+  // with the tin's own placeholder GTIN.
+  tinside: { file: 'olive-oil-label.html',     vol: '3',   unit: 'l', suffix: '-side',
+             extra: '&only=back&ean=2001234567906' },
 };
 
 (async () => {
@@ -24,26 +29,27 @@ const FORMATS = {
   const vol = process.argv[3] || fmt.vol;
   const harvest = process.argv[4] || '2026';
   const src = 'file://' + path.join(__dirname, fmt.file);
-  const name = `kallmi-oil-${vol}${fmt.unit}`;
+  const query = `?ml=${vol}&harvest=${harvest}${fmt.extra || ''}`;
+  const name = `kallmi-oil-${vol}${fmt.unit}${fmt.suffix || ''}`;
   const out = path.join(__dirname, 'out');
   fs.mkdirSync(out, { recursive: true });
 
   const browser = await chromium.launch();
   const page = await browser.newPage({ deviceScaleFactor: 4 });
 
-  await page.goto(`${src}?ml=${vol}&harvest=${harvest}`, { waitUntil: 'networkidle' });
+  await page.goto(src + query, { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
   await page.pdf({ path: path.join(out, `${name}-print.pdf`), printBackground: true, preferCSSPageSize: true });
 
-  await page.goto(`${src}?ml=${vol}&harvest=${harvest}&proof=1`, { waitUntil: 'networkidle' });
+  await page.goto(src + query + '&proof=1', { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
-  const sheets = await page.$$('.sheet');
-  await sheets[0].screenshot({ path: path.join(out, `${name}-front-proof.png`) });
-  await sheets[1].screenshot({ path: path.join(out, `${name}-back-proof.png`) });
+  for (const sheet of await page.$$('.sheet')) {
+    const side = await sheet.evaluate(e => (e.classList.contains('front') ? 'front' : 'back'));
+    await sheet.screenshot({ path: path.join(out, `${name}-${side}-proof.png`) });
+  }
 
   await browser.close();
 
-  // Press version for the printer: outlined text + trim/bleed boxes (see press.py).
   // Needs Ghostscript and pypdf: apt-get install ghostscript && pip install pypdf
   try {
     execFileSync('python3', [path.join(__dirname, 'press.py'),
