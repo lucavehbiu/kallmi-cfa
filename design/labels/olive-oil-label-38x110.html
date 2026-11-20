@@ -2,21 +2,24 @@
 <html lang="sq">
 <head>
 <meta charset="utf-8">
-<title>Kallmi Oil — Bottle Labels</title>
+<title>Kallmi Oil — 500 / 750 ml Labels</title>
 <!--
   Kallmi Oil bottle labels, front + back, built on the solar-disc brand kit
   (tokens mirror src/app/globals.css --kallmi-*).
 
-  Bottle: Marasca 500 ml (square, ~56.5 mm faces with rounded corners), the
-  bottle in the shop photo. One label per face, so max ~50 mm wide.
-  Trim 48 × 140 mm (same die front and back), 3 mm bleed → 54 × 146 mm artboard.
-  Keep everything inside the dashed safe line (3 mm in from trim).
+  Bottles: Marasca 500 ml and 750 ml — one label for both, same die.
+  Trim 38 × 110 mm (front and back), 3 mm bleed → 44 × 116 mm artboard.
+  Tested on a real 500 ml bottle and approved; 750 ml approved too.
+  Keep everything inside the dashed safe line (2.5 mm in from trim).
 
-  Legibility: mandatory info needs a 1.2 mm x-height (EU 1169/2011 Art. 13,
-  mirrored in Albanian law). Jost x-height = 0.46 em → 7.4 pt minimum.
-  Every mandatory line below uses --legal (7.5 pt) or larger.
+  KNOWN GAP: back text is 6 pt (0.9 mm x-height). On 500/750 bottles the
+  largest surface is over 80 cm², so EU 1169/2011 Art. 13 / Albanian law ask
+  for a 1.2 mm x-height (Jost 7.4 pt). Kept at 6 pt because it was tested and
+  approved; a compliant back needs a taller back label (see the chat notes).
+  Volume figures (≥ 4 mm) and ℮ (≥ 3 mm) are compliant.
 
-  Render: node design/labels/render.js [ml] [harvest]
+  Render: node design/labels/render.js bottle   (500 ml)
+          node design/labels/render.js big      (750 ml)
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,14 +37,14 @@
 
     --display: "Bodoni Moda", "Didot", serif;
     --ui: "Jost", "Futura", sans-serif;
-    --legal: 7.5pt;
+    --legal: 6pt;
 
-    --trim-w: 48mm;
-    --trim-h: 140mm;
+    --trim-w: 38mm;
+    --trim-h: 110mm;
     --bleed: 3mm;
-    --safe: 3mm;
+    --safe: 2.5mm;
   }
-  @page { size: 54mm 146mm; margin: 0; }
+  @page { size: 44mm 116mm; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { background: #d9d6cf; }
   body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -68,74 +71,76 @@
 
   /* ---------- FRONT ---------- */
   .front { background: var(--black); color: var(--cream); }
-  .front .label { padding: 11mm 5.4mm 9mm; }
+  .front .label { padding: 8mm 4.2mm 6.8mm; }
   .front .frame {
-    position: absolute; inset: calc(var(--bleed) + 3.4mm);
-    border: 0.25mm solid var(--gold);
+    position: absolute; inset: calc(var(--bleed) + 2.8mm);
+    border: 0.22mm solid var(--gold);
   }
   .front .frame::after {
-    content: ""; position: absolute; inset: 0.8mm;
+    content: ""; position: absolute; inset: 0.7mm;
     border: 0.12mm solid rgba(196, 168, 98, .55);
   }
-  .front .sun { width: 25mm; height: 25mm; }
-  .front .wordmark { width: 34mm; margin-top: 5mm; }
+  .front .sun { width: 19mm; height: 19mm; }
+  .front .wordmark { width: 27mm; margin-top: 3.6mm; }
   .front .place {
-    font: 400 5.6pt/1 var(--ui); letter-spacing: .32em; padding-left: .32em;
-    color: var(--gold); margin-top: 2mm;
+    font: 400 4.9pt/1 var(--ui); letter-spacing: .28em; padding-left: .28em;
+    color: var(--gold); margin-top: 1.7mm;
   }
-  .front .place.est { margin-top: 1.5mm; color: var(--muted-dark); text-transform: uppercase; }
+  .front .place.est { margin-top: 1.2mm; color: var(--muted-dark); text-transform: uppercase; }
   .front .mid { margin: auto 0; display: flex; flex-direction: column; align-items: center; }
-  .front .rule { width: 8mm; border-top: 0.2mm solid var(--gold); margin-bottom: 3.6mm; }
+  .front .rule { width: 7mm; border-top: 0.2mm solid var(--gold); margin-bottom: 2.8mm; }
   .front .name {
-    font: italic 400 17pt/1 var(--display); font-variation-settings: "opsz" 48;
+    font: italic 400 13.5pt/1 var(--display); font-variation-settings: "opsz" 36;
   }
   .front .name-sub {
-    font: 500 7pt/1 var(--ui); letter-spacing: .32em; padding-left: .32em;
-    color: var(--gold); text-transform: uppercase; margin-top: 2.6mm;
+    font: 500 6pt/1 var(--ui); letter-spacing: .3em; padding-left: .3em;
+    color: var(--gold); text-transform: uppercase; margin-top: 2.2mm;
   }
   /* Albanian sales name is mandatory in Albania → legal size */
   .front .name-sq {
-    font: 300 9pt/1.15 var(--ui); color: var(--muted-dark); margin-top: 2.8mm;
+    font: 300 7.6pt/1.15 var(--ui); color: var(--muted-dark); margin-top: 2.3mm;
   }
-  .front .foot { display: flex; flex-direction: column; align-items: center; gap: 2.6mm; }
+  .front .foot { display: flex; flex-direction: column; align-items: center; gap: 2mm; }
   .front .meta {
-    font: 400 5.6pt/1.55 var(--ui); letter-spacing: .22em; padding-left: .22em;
+    font: 400 4.9pt/1.55 var(--ui); letter-spacing: .2em; padding-left: .2em;
     text-transform: uppercase; color: var(--muted-dark);
   }
   .front .meta b { font-weight: 500; color: var(--cream); }
   /* 1169/2011 Annex IX: 200 ml–1 l → figures at least 4 mm tall (16 pt Jost ≈ 4 mm) */
   .front .vol { font: 400 16pt/0.8 var(--ui); color: var(--cream); white-space: nowrap; }
-  .front .vol small { font-size: 8pt; letter-spacing: .1em; margin-left: .5mm; }
+  .front .vol small { font-size: 7pt; letter-spacing: .1em; margin-left: .5mm; }
 
   /* ---------- BACK ---------- */
   .back { background: var(--cream); color: var(--ink); }
-  .back .label { padding: 5.2mm 3.8mm 4.4mm; text-align: left; align-items: stretch; }
-  .back .top { display: flex; align-items: center; gap: 2mm; }
-  .back .top .sun { width: 7mm; height: 7mm; flex: none; }
-  .back .top .story { font: italic 400 6.8pt/1.22 var(--display); font-variation-settings: "opsz" 14; }
+  .back .label { padding: 3.4mm 3mm 3.4mm; text-align: left; align-items: stretch; }
+  .back .sun-sm { width: 5mm; height: 5mm; align-self: center; }
+  .back .top { display: flex; align-items: center; gap: 1.6mm; }
+  .back .top .sun { width: 5.5mm; height: 5.5mm; flex: none; }
+  .back .top .story { font: italic 400 5.6pt/1.2 var(--display); font-variation-settings: "opsz" 14; }
 
   .back .legal { font: 400 var(--legal)/1.24 var(--ui); }
   .back .legal b { font-weight: 600; }
   .back .en { color: var(--muted-light); }
-  .back .blk { margin-top: 2.2mm; }
-  .back hr { border: 0; border-top: 0.15mm solid var(--hair); margin: 2.4mm 0 0; }
+  .back .blk { margin-top: 1.3mm; }
+  .back hr { border: 0; border-top: 0.15mm solid var(--hair); margin: 1.9mm 0 0; }
 
   .back table { border-collapse: collapse; width: 100%; font: 400 var(--legal)/1.2 var(--ui); }
   .back caption { caption-side: top; text-align: left; font-weight: 600; padding-bottom: .5mm; }
   .back th, .back td { padding: .25mm 0; border-bottom: 0.1mm solid var(--hair); vertical-align: baseline; }
   .back th { font-weight: 400; text-align: left; }
   .back td { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .back th.sub { padding-left: 1.8mm; }
+  .back th.sub { padding-left: 1.4mm; }
 
-  .back .bottom { margin-top: auto; padding-top: 2.4mm; display: flex; align-items: flex-end; justify-content: space-between; gap: 2mm; }
+  .back .bottom { margin-top: auto; padding-top: 1.2mm; display: flex; align-items: flex-end; justify-content: space-between; gap: 2mm; }
   .back .dates { font: 400 var(--legal)/1.3 var(--ui); }
   .back .web {
-    font: 500 4.6pt/1 var(--ui); letter-spacing: .2em; text-transform: uppercase;
-    color: var(--gold-print); margin-top: 1.4mm;
+    font: 500 3.9pt/1 var(--ui); letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold-print); margin-top: 1.1mm;
   }
-  /* GS1 80 % magnification: 29.8 mm incl. quiet zones, turned 90° to fit the narrow face */
-  .back .ean-wrap { flex: none; width: 13.4mm; height: 29.8mm; position: relative; }
-  .back .ean { position: absolute; width: 29.8mm; height: 13.4mm; left: 50%; top: 50%;
+  /* GS1 80 % magnification: 29.8 mm incl. quiet zones, turned 90°; bars truncated
+     to ~9 mm to fit (fine for hand scanners, tell the printer it is intentional) */
+  .back .ean-wrap { flex: none; width: 10.4mm; height: 29.8mm; position: relative; }
+  .back .ean { position: absolute; width: 29.8mm; height: 10.4mm; left: 50%; top: 50%;
     transform: translate(-50%, -50%) rotate(-90deg); }
   /* Back on black like the front. Barcode keeps its white box: scanners need
      dark bars on a light ground. Small reversed type gets weight 430 so it
@@ -174,16 +179,12 @@
 <!-- ================= BACK ================= -->
 <section class="sheet back">
   <div class="label">
-    <div class="top">
-      <img class="sun" src="../../public/kallmi-sun.svg" alt="">
-      <p class="story">From our own trees in Kallm, above the Adriatic.</p>
-    </div>
+    <img class="sun-sm" src="../../public/kallmi-sun.svg" alt="">
 
     <div class="legal blk">
       <p><b>Vaj ulliri ekstra i virgjër:</b> vaj ulliri i kategorisë superiore, i përftuar drejtpërdrejt nga ullinjtë dhe vetëm me mjete mekanike.</p>
     </div>
     <div class="legal blk">
-      <p><b>Shtypur në të ftohtë</b> <span class="en">/ Cold&nbsp;pressed</span></p>
       <p><b>Origjina</b> <span class="en">/ Origin</span>: Shqipëri</p>
       <p>Ruajeni në vend të freskët e të errët. <span class="en">Store cool and dark.</span></p>
     </div>
@@ -196,7 +197,7 @@
     <p class="legal blk"><b>Analiza</b> <span class="en">/ Analysis</span>: aciditeti&nbsp;0.28&nbsp;%, peroksidet 7.2&nbsp;meq&nbsp;O₂/kg, dyllrat 96&nbsp;mg/kg, K232&nbsp;1.86, K270&nbsp;0.15.</p>
 
     <table class="blk">
-      <caption>Vlerat ushqyese / 100 ml <span class="en">Nutrition</span></caption>
+      <caption>Vlerat ushqyese / 100&nbsp;ml</caption>
       <tr><th>Energjia <span class="en">/ Energy</span></th><td>3389 kJ</td></tr>
       <tr><th></th><td>824 kcal</td></tr>
       <tr><th>Yndyrna <span class="en">/ Fat</span></th><td>91.5 g</td></tr>

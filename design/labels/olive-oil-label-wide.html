@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<title>Kallmi Oil — Wide Label Base</title>
+<!--
+  WIDE LABEL BASE. Was the 48 × 140 mm 500 ml label; the 500 ml now uses
+  the tested 38 × 110 mm label (olive-oil-label-38x110.html). This layout is
+  still the base for the 3 l tin side label (render.js "tinside", 48 × 170).
+
+  Bottle: Marasca 500 ml (square, ~56.5 mm faces with rounded corners), the
+  bottle in the shop photo. One label per face, so max ~50 mm wide.
+  Trim 48 × 140 mm (same die front and back), 3 mm bleed → 54 × 146 mm artboard.
+  Keep everything inside the dashed safe line (3 mm in from trim).
+
+  Legibility: mandatory info needs a 1.2 mm x-height (EU 1169/2011 Art. 13,
+  mirrored in Albanian law). Jost x-height = 0.46 em → 7.4 pt minimum.
+  Every mandatory line below uses --legal (7.5 pt) or larger.
+
+  Render: node design/labels/render.js [ml] [harvest]
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:wght@300..600&display=block" rel="stylesheet">
+<style>
+  :root {
+    --black: #141311;
+    --ink: #1A1814;
+    --cream: #F8F5EF;
+    --gold: #C4A862;
+    --gold-print: #A88B45;
+    --muted-dark: #B8B4AC;
+    --muted-light: #5C584F;
+    --hair: #D4CFC4;
+
+    --display: "Bodoni Moda", "Didot", serif;
+    --ui: "Jost", "Futura", sans-serif;
+    --legal: 7.5pt;
+
+    --trim-w: 48mm;
+    --trim-h: 140mm;
+    --bleed: 3mm;
+    --safe: 3mm;
+  }
+  @page { size: 54mm 146mm; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #d9d6cf; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .sheet {
+    position: relative;
+    width: calc(var(--trim-w) + 2 * var(--bleed));
+    height: calc(var(--trim-h) + 2 * var(--bleed));
+    overflow: hidden;
+    break-after: page;
+  }
+  .sheet:last-child { break-after: auto; }
+  .label {
+    position: absolute; inset: var(--bleed);
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+  }
+  .guide { display: none; position: absolute; pointer-events: none; }
+  body.proof .guide { display: block; }
+  .guide.trim { inset: var(--bleed); outline: 0.2mm solid #e5007e; }
+  .guide.safe { inset: calc(var(--bleed) + var(--safe)); outline: 0.2mm dashed #00a0e3; }
+
+  /* ℮ drawn as an outline (Jost has no U+212E). 76/211/EEC: at least 3 mm tall. */
+  .e-mark { height: 3.1mm; width: auto; vertical-align: 0; margin-left: .7mm; }
+
+  /* ---------- FRONT ---------- */
+  .front { background: var(--black); color: var(--cream); }
+  .front .label { padding: 11mm 5.4mm 9mm; }
+  .front .frame {
+    position: absolute; inset: calc(var(--bleed) + 3.4mm);
+    border: 0.25mm solid var(--gold);
+  }
+  .front .frame::after {
+    content: ""; position: absolute; inset: 0.8mm;
+    border: 0.12mm solid rgba(196, 168, 98, .55);
+  }
+  .front .sun { width: 25mm; height: 25mm; }
+  .front .wordmark { width: 34mm; margin-top: 5mm; }
+  .front .place {
+    font: 400 5.6pt/1 var(--ui); letter-spacing: .32em; padding-left: .32em;
+    color: var(--gold); margin-top: 2mm;
+  }
+  .front .place.est { margin-top: 1.5mm; color: var(--muted-dark); text-transform: uppercase; }
+  .front .mid { margin: auto 0; display: flex; flex-direction: column; align-items: center; }
+  .front .rule { width: 8mm; border-top: 0.2mm solid var(--gold); margin-bottom: 3.6mm; }
+  .front .name {
+    font: italic 400 17pt/1 var(--display); font-variation-settings: "opsz" 48;
+  }
+  .front .name-sub {
+    font: 500 7pt/1 var(--ui); letter-spacing: .32em; padding-left: .32em;
+    color: var(--gold); text-transform: uppercase; margin-top: 2.6mm;
+  }
+  /* Albanian sales name is mandatory in Albania → legal size */
+  .front .name-sq {
+    font: 300 9pt/1.15 var(--ui); color: var(--muted-dark); margin-top: 2.8mm;
+  }
+  .front .foot { display: flex; flex-direction: column; align-items: center; gap: 2.6mm; }
+  .front .meta {
+    font: 400 5.6pt/1.55 var(--ui); letter-spacing: .22em; padding-left: .22em;
+    text-transform: uppercase; color: var(--muted-dark);
+  }
+  .front .meta b { font-weight: 500; color: var(--cream); }
+  /* 1169/2011 Annex IX: 200 ml–1 l → figures at least 4 mm tall (16 pt Jost ≈ 4 mm) */
+  .front .vol { font: 400 16pt/0.8 var(--ui); color: var(--cream); white-space: nowrap; }
+  .front .vol small { font-size: 8pt; letter-spacing: .1em; margin-left: .5mm; }
+
+  /* ---------- BACK ---------- */
+  .back { background: var(--cream); color: var(--ink); }
+  .back .label { padding: 5.2mm 3.8mm 4.4mm; text-align: left; align-items: stretch; }
+  .back .top { display: flex; align-items: center; gap: 2mm; }
+  .back .top .sun { width: 7mm; height: 7mm; flex: none; }
+  .back .top .story { font: italic 400 6.8pt/1.22 var(--display); font-variation-settings: "opsz" 14; }
+
+  .back .legal { font: 400 var(--legal)/1.24 var(--ui); }
+  .back .legal b { font-weight: 600; }
+  .back .en { color: var(--muted-light); }
+  .back .blk { margin-top: 2.2mm; }
+  .back hr { border: 0; border-top: 0.15mm solid var(--hair); margin: 2.4mm 0 0; }
+
+  .back table { border-collapse: collapse; width: 100%; font: 400 var(--legal)/1.2 var(--ui); }
+  .back caption { caption-side: top; text-align: left; font-weight: 600; padding-bottom: .5mm; }
+  .back th, .back td { padding: .25mm 0; border-bottom: 0.1mm solid var(--hair); vertical-align: baseline; }
+  .back th { font-weight: 400; text-align: left; }
+  .back td { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .back th.sub { padding-left: 1.8mm; }
+
+  .back .bottom { margin-top: auto; padding-top: 2.4mm; display: flex; align-items: flex-end; justify-content: space-between; gap: 2mm; }
+  .back .dates { font: 400 var(--legal)/1.3 var(--ui); }
+  .back .web {
+    font: 500 4.6pt/1 var(--ui); letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold-print); margin-top: 1.4mm;
+  }
+  /* GS1 80 % magnification: 29.8 mm incl. quiet zones, turned 90° to fit the narrow face */
+  .back .ean-wrap { flex: none; width: 13.4mm; height: 29.8mm; position: relative; }
+  .back .ean { position: absolute; width: 29.8mm; height: 13.4mm; left: 50%; top: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg); }
+  /* Back on black like the front. Barcode keeps its white box: scanners need
+     dark bars on a light ground. Small reversed type gets weight 430 so it
+     doesn't close up when ink spreads into the black. */
+  .back { background: var(--black); color: var(--cream); }
+  .back .en { color: var(--muted-dark); }
+  .back hr, .back th, .back td { border-color: rgba(196, 168, 98, .32); }
+  .back .web { color: var(--gold); }
+  .back .legal, .back table, .back .dates { font-weight: 430; }
+</style>
+</head>
+<body>
+
+<!-- ================= FRONT ================= -->
+<section class="sheet front">
+  <div class="frame"></div>
+  <div class="label">
+    <img class="sun" src="../../public/kallmi-sun.svg" alt="">
+    <img class="wordmark" src="wordmark-cream.svg" alt="Kallmi">
+    <div class="place">Durrës · Albania</div>
+    <div class="place est">Est. 2004</div>
+    <div class="mid">
+      <div class="rule"></div>
+      <div class="name">Extra Virgin</div>
+      <div class="name-sub">Olive Oil</div>
+      <div class="name-sq">Vaj ulliri<br>ekstra i virgjër</div>
+    </div>
+    <div class="foot">
+      <div class="meta">Cold pressed<br>Harvest <b data-harvest>2026</b></div>
+      <div class="vol"><span data-ml>500</span><small>ml<svg class="e-mark" viewBox="88 -34 1060 1130" aria-label="℮"><path transform="matrix(1 0 0 -1 0 1062)" fill="currentColor" d="M619 -34Q461 -34 341.0 38.5Q221 111 154.5 242.5Q88 374 88 531Q88 702 158.0 830.0Q228 958 350.0 1027.0Q472 1096 619 1096Q770 1096 892.0 1025.5Q1014 955 1081.0 826.0Q1148 697 1148 531H321V175Q371 121 452.5 86.0Q534 51 619 51Q751 51 841.5 103.0Q932 155 1014 285L1086 243Q990 90 880.5 28.0Q771 -34 619 -34ZM917 616V893Q866 946 784.5 978.5Q703 1011 617 1011Q438 1011 321 894V616Z"/></svg></small></div>
+    </div>
+  </div>
+  <div class="guide trim"></div><div class="guide safe"></div>
+</section>
+
+<!-- ================= BACK ================= -->
+<section class="sheet back">
+  <div class="label">
+    <div class="top">
+      <img class="sun" src="../../public/kallmi-sun.svg" alt="">
+      <p class="story">From our own trees in Kallm, above the Adriatic.</p>
+    </div>
+
+    <div class="legal blk">
+      <p><b>Vaj ulliri ekstra i virgjër:</b> vaj ulliri i kategorisë superiore, i përftuar drejtpërdrejt nga ullinjtë dhe vetëm me mjete mekanike.</p>
+    </div>
+    <div class="legal blk">
+      <p><b>Shtypur në të ftohtë</b> <span class="en">/ Cold&nbsp;pressed</span></p>
+      <p><b>Origjina</b> <span class="en">/ Origin</span>: Shqipëri</p>
+      <p>Ruajeni në vend të freskët e të errët. <span class="en">Store cool and dark.</span></p>
+    </div>
+    <hr>
+
+    <!-- SAMPLE VALUES: typical for Albanian Kalinjot EVOO, NOT lab results.
+         Replace with the lab report before printing for sale. Acidity may
+         only be printed together with peroxide, waxes and UV (K232/K270),
+         same type size (EU 2022/2104). -->
+    <p class="legal blk"><b>Analiza</b> <span class="en">/ Analysis</span>: aciditeti&nbsp;0.28&nbsp;%, peroksidet 7.2&nbsp;meq&nbsp;O₂/kg, dyllrat 96&nbsp;mg/kg, K232&nbsp;1.86, K270&nbsp;0.15.</p>
+
+    <table class="blk">
+      <caption>Vlerat ushqyese / 100 ml <span class="en">Nutrition</span></caption>
+      <tr><th>Energjia <span class="en">/ Energy</span></th><td>3389 kJ</td></tr>
+      <tr><th></th><td>824 kcal</td></tr>
+      <tr><th>Yndyrna <span class="en">/ Fat</span></th><td>91.5 g</td></tr>
+      <tr><th class="sub">të ngopura <span class="en">/ sat.</span></th><td>13.0 g</td></tr>
+      <tr><th>Karbohidrate <span class="en">/ Carb.</span></th><td>0 g</td></tr>
+      <tr><th class="sub">sheqerna <span class="en">/ sugars</span></th><td>0 g</td></tr>
+      <tr><th>Proteina <span class="en">/ Protein</span></th><td>0 g</td></tr>
+      <tr><th>Kripë <span class="en">/ Salt</span></th><td>0 g</td></tr>
+    </table>
+
+    <div class="bottom">
+      <div class="dates legal">
+        <div>Mirë të konsumohet para <span class="en">/ Best before</span> 01.01.2028</div>
+        <div>Loti <span class="en">/ Lot</span> L26-01</div>
+        <div style="margin-top:1.4mm">Prodhuar nga <span class="en">/ by</span><br>Kallmi Estate, Kallm, Durrës, Shqipëri</div>
+        <div class="web">kallmibukur.al</div>
+      </div>
+      <!-- PLACEHOLDER barcode: 200… is GS1's in-store prefix, so it cannot
+           collide with a real product. Swap for the GS1 Albania number. -->
+      <div class="ean-wrap"><svg class="ean" data-ean="2001234567890" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"></svg></div>
+    </div>
+  </div>
+  <div class="guide trim"></div><div class="guide safe"></div>
+</section>
+
+<script src="label-shared.js"></script>
+</body>
+</html>

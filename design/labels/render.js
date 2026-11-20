@@ -15,16 +15,17 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 
 const FORMATS = {
-  bottle:  { file: 'olive-oil-label.html',     vol: '500', unit: 'ml' },
-  small:   { file: 'olive-oil-label-250.html', vol: '250', unit: 'ml' },
-  // Marasca 750 ml (~60 × 60 × 297 mm): the 500 ml layout at 52 × 150 mm,
-  // same legal rules (200 ml–1 l), its own placeholder GTIN.
-  big:     { file: 'olive-oil-label.html',     vol: '750', unit: 'ml',
-             extra: '&w=52&h=150&legal=8.3pt&ean=2001234567913' },
-  tin:     { file: 'olive-oil-tin-3l.html',    vol: '3',   unit: 'l'  },
-  // The tin's back goes on its narrow side: the 500 ml back layout at 48 × 170 mm
+  // 500 and 750 ml share the 38 × 110 mm label tested on a real 500 ml bottle:
+  // one die, identical backs, only the volume and the placeholder GTIN differ.
+  bottle:  { file: 'olive-oil-label-38x110.html', vol: '500', unit: 'ml' },
+  big:     { file: 'olive-oil-label-38x110.html', vol: '750', unit: 'ml',
+             extra: '&ean=2001234567913' },
+  // 250 ml: the same label scaled to the smaller bottle, 32 × 90 mm.
+  small:   { file: 'olive-oil-label-250.html',    vol: '250', unit: 'ml' },
+  tin:     { file: 'olive-oil-tin-3l.html',       vol: '3',   unit: 'l'  },
+  // The tin's back goes on its narrow side: the wide back layout at 48 × 170 mm
   // (same height as the tin front), larger text, the tin's own placeholder GTIN.
-  tinside: { file: 'olive-oil-label.html',     vol: '3',   unit: 'l', suffix: '-side',
+  tinside: { file: 'olive-oil-label-wide.html',   vol: '3',   unit: 'l', suffix: '-side',
              extra: '&only=back&ean=2001234567906&h=170&legal=8.4pt' },
 };
 
